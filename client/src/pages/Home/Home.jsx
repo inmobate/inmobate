@@ -1,5 +1,7 @@
 import styles from "./Home.module.css";
 
+import demo from "../../assets/demo.jpg";
+
 const Home = () => {
   return (
     <div className={styles["container"]}>
@@ -7,43 +9,110 @@ const Home = () => {
         <div className={styles["nav_container"]}>
           <div className={styles["logo"]}>INMOBATE</div>
           <div className={styles["nav_items"]}>
-            <div className={styles["nav_item"]}>Sale</div>
-            <div className={styles["nav_item"]}>Rental</div>
+            <div className={styles["nav_item"]}>Comprar</div>
+            <div className={styles["nav_item"]}>Alquilar</div>
+            <div className={styles["nav_item"]}>Vender</div>
             <div className={styles["nav_item"]}>Sing In</div>
           </div>
         </div>
       </nav>
       <main>
         <section className={styles["section_banner"]}>
-          <h1>El Inmueble que buscás, está más cerca de lo que pensás…</h1>
+          <h1>Tu Portal Inmobiliario</h1>
         </section>
         <section className={styles["section_filter"]}>
           <div className={styles["container_filter"]}>
-            <form>
-              <input type="text" />
-              <button>Search</button>
+            <div className={styles["buttons_filter"]}>
+              <button>Comprar</button>
+              <button>Alquilar</button>
+              <button>Vender</button>
+            </div>
+            <form className={styles["form_filter"]}>
+              <select>
+                <option value="">Tipo de propiedad</option>
+                <option value="">Casas</option>
+                <option value="">Departamento</option>
+                <option value="">Chalets</option>
+                <option value="">Duplex</option>
+                <option value="">Terrenos</option>
+              </select>
+              <input type="text" placeholder="Elegi tu lugar" />
+              <button>Mas opciones</button>
+              <button>Buscar</button>
             </form>
-            <div>Filter</div>
-            <div>Filter</div>
           </div>
         </section>
         <section className={styles["section_cards"]}>
           <div className={styles["container_cards"]}>
             <div className={styles["card"]}>
-              <div className={styles["container_card"]}>
-                <div className={styles[""]}>
-                  <img src="" alt="" />
-                </div>
-              </div>
-              <div className={styles["container_info"]}>
-                <div className={styles["info"]}>Informacion</div>
-              </div>
+              <img src={demo} alt="" />
+              <div>Card</div>
+            </div>{" "}
+            <div className={styles["card"]}>
+              <img src={demo} alt="" />
+              <div>Card</div>
             </div>
-            <div className={styles["card"]}>Card</div>
-            <div className={styles["card"]}>Card</div>
-            <div className={styles["card"]}>Card</div>
-            <div className={styles["card"]}>Card</div>
-            <div className={styles["card"]}>Card</div>
+            <div className={styles["card"]}>
+              <img src={demo} alt="" />
+              <div>Card</div>
+            </div>
+            <div className={styles["card"]}>
+              <img src={demo} alt="" />
+              <div>Card</div>
+            </div>
+            <div className={styles["card"]}>
+              <img src={demo} alt="" />
+              <div>Card</div>
+            </div>
+            <div className={styles["card"]}>
+              <img src={demo} alt="" />
+              <div>Card</div>
+            </div>
+          </div>
+          <button>Ver mas Propiedades Destacadas</button>
+        </section>
+        <section className={styles["section_hiw"]}>
+          <div className={styles["hiw_title"]}>
+            <h2>¿Cómo funciona?</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <div className={styles["hiw_items"]}>
+            <div className={styles["hiw_item"]}>
+              <div className={styles["hiw_svg"]}>SVG</div>
+              <h2>Crear una cuenta.</h2>
+              <p>
+                There are many variations of passages of Lorem Ipsum available,
+                but the majority have Ipsum available. propiedad.
+              </p>
+            </div>
+            <div className={styles["hiw_item"]}>
+              <div className={styles["hiw_svg"]}>SVG</div>
+              <h2>Encontrar y buscar propiedad.</h2>
+              <p>
+                There are many variations of passages of Lorem Ipsum available,
+                but the majority have Ipsum available.
+              </p>
+            </div>
+            <div className={styles["hiw_item"]}>
+              <div className={styles["hiw_svg"]}>SVG</div>
+              <h2>Reservar su propiedad.</h2>
+              <p>
+                There are many variations of passages of Lorem Ipsum available,
+                but the majority have Ipsum available.
+              </p>
+            </div>
+          </div>
+        </section>
+        <section className={styles["section_looking"]}>
+          <div className={styles["title_looking"]}>
+            <h2>¿Buscando la casa de sus sueños?</h2>
+            <p>
+              Podemos ayudarlo a hacer realidad su sueño de tener una casa
+              nueva.
+            </p>
+          </div>
+          <div className={styles["button_looking"]}>
+            <button>Explora Propiedades</button>
           </div>
         </section>
       </main>

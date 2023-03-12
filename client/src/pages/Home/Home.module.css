@@ -4,7 +4,6 @@
 }
 
 .nav {
-  padding: 0.5rem 1rem 0.5rem 1rem;
   position: fixed;
   top: 0;
   left: 0;
@@ -12,12 +11,9 @@
 }
 
 .nav_container {
-  padding: 0.5rem;
-  border-radius: 5px;
+  padding: 1em;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
   background: #ffff;
 }
 
@@ -37,60 +33,143 @@ main {
 }
 .section_banner,
 .section_filter,
-.section_cards {
+.section_cards,
+.section_hiw {
   min-width: 100%;
 }
 
 .section_banner {
-  min-height: 40vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url(http://zonainmobiliaria.com.ar/wp-content/uploads/2016/04/front.jpg);
+  background: url("../../assets/demo.jpg");
   background-size: cover;
   background-position: center center;
 }
 
 .section_banner h1 {
-  font-size: 3rem;
+  font-size: 3em;
   font-weight: bold;
   color: #ffff;
 }
 
 .section_filter {
-  min-height: 30vh;
+  min-height: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
 }
 
 .container_filter {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.buttons_filter {
+  display: flex;
+  justify-content: center;
+}
+
+.form_filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1em;
 }
 
 .section_cards {
+  min-height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .container_cards {
-  max-width: 80%;
+  max-width: 60%;
+  border: 1px solid #ddd;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 20px;
+  overflow-x: auto;
+  gap: 1em;
+}
+
+.container_cards::-webkit-scrollbar {
+  height: 0.5em;
+}
+
+.container_cards::-webkit-scrollbar-thumb {
+  background-color: #555;
 }
 
 .card {
-  max-width: 400px;
-  width: 400px;
-  max-height: 500px;
-  height: 500px;
+  min-width: 290px;
+  height: 300px;
+  background: #ddd;
+}
+
+.card img {
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(#e66465, #9198e5);
+  display: flex;
+  align-items: top;
+  justify-content: right;
+}
+
+.section_hiw {
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.hiw_items {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 5em;
+}
+
+.hiw_item {
+  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+
+.hiw_svg {
+  width: 5em;
+  height: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+}
+
+.section_looking {
+  padding: 0 2em;
+  min-height: 20vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.title_looking {
+}
+
+.button_looking {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 footer {
