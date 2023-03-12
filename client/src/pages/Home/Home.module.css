@@ -1,0 +1,102 @@
+.container {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.nav {
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.nav_container {
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background: #ffff;
+}
+
+.nav_items {
+  display: flex;
+  gap: 10px;
+}
+
+.nav_item {
+}
+
+.nav_item:hover {
+  text-decoration: underline;
+}
+
+main {
+}
+.section_banner,
+.section_filter,
+.section_cards {
+  min-width: 100%;
+}
+
+.section_banner {
+  min-height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url(http://zonainmobiliaria.com.ar/wp-content/uploads/2016/04/front.jpg);
+  background-size: cover;
+  background-position: center center;
+}
+
+.section_banner h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ffff;
+}
+
+.section_filter {
+  min-height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.container_filter {
+  display: flex;
+  gap: 20px;
+}
+
+.section_cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container_cards {
+  max-width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  max-width: 400px;
+  width: 400px;
+  max-height: 500px;
+  height: 500px;
+}
+
+footer {
+  min-height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
