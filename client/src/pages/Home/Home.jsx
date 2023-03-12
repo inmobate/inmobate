@@ -46,27 +46,27 @@ const Home = () => {
           <div className={styles["container_cards"]}>
             <div className={styles["card"]}>
               <img src={demo} alt="" />
-              <div>Card</div>
+              <div>Detail</div>
             </div>{" "}
             <div className={styles["card"]}>
               <img src={demo} alt="" />
-              <div>Card</div>
+              <div>Detail</div>
             </div>
             <div className={styles["card"]}>
               <img src={demo} alt="" />
-              <div>Card</div>
+              <div>Detail</div>
             </div>
             <div className={styles["card"]}>
               <img src={demo} alt="" />
-              <div>Card</div>
+              <div>Detail</div>
             </div>
             <div className={styles["card"]}>
               <img src={demo} alt="" />
-              <div>Card</div>
+              <div>Detail</div>
             </div>
             <div className={styles["card"]}>
               <img src={demo} alt="" />
-              <div>Card</div>
+              <div>Detail</div>
             </div>
           </div>
           <button>Ver mas Propiedades Destacadas</button>
@@ -111,12 +111,14 @@ const Home = () => {
               nueva.
             </p>
           </div>
-          <div className={styles["button_looking"]}>
-            <button>Explora Propiedades</button>
+          <div>
+            <button className={styles["button_looking"]}>
+              Explora Propiedades
+            </button>
           </div>
         </section>
       </main>
-      <footer>
+      <footer className={styles["footer"]}>
         <h1>INMOBATE</h1>
         <p>© INMOBATE REAL STATE - All rights reserved.</p>
       </footer>
