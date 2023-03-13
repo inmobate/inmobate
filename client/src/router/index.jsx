@@ -6,6 +6,8 @@ import NotFound from "../pages/NotFound/NotFound";
 
 import Home from "../pages/Home/Home";
 
+import Login from "../pages/Login/Login";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -16,6 +18,7 @@ export const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      { path: "/login", element: <Login /> },
     ],
   },
 ]);
