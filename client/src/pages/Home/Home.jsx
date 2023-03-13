@@ -9,7 +9,7 @@ const Home = () => {
     <div className={styles["container"]}>
       <nav className={styles["nav"]}>
         <div className={styles["nav_container"]}>
-          <div className={styles["logo"]}>INMOBATE</div>
+          <div className={styles["logo"]}>INMOVATE</div>
           <div className={styles["nav_items"]}>
             <Link>
               <div className={styles["nav_item"]}>Comprar</div>
