@@ -1,29 +1,23 @@
 import styled from "styled-components";
 
-import Navbar from "../components/Navbar";
+import { useGetCharactersQuery } from "../app/api/experimental";
 
-import Cards from "../components/Cards";
-
-import Footer from "../components/Footer";
+import Card from "../components/Card";
 
 const Home = () => {
+  const { data, error, isLoading } = useGetCharactersQuery();
+
   return (
-    <Container>
+    <div>
       <header>
-        <Navbar />
+        <nav>Navbar</nav>
       </header>
-      <main>
-        <Cards />
+      <main style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}>
+        {data && data.results.map((el) => <Card key={el.id} property={el} />)}
       </main>
-      <footer>
-        <Footer />
-      </footer>
-    </Container>
+      <footer></footer>
+    </div>
   );
 };
-
-const Container = styled.div`
-  min-height: 200vh;
-`;
 
 export default Home;
