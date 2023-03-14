@@ -10,6 +10,8 @@ import Home from "../pages/Home";
 
 import Detail from "../pages/Detail";
 
+import PropertiesForm from "../pages/PropertiesForm";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -25,8 +27,12 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/detail",
+        path: "/detail:id",
         element: <Detail />,
+      },
+      {
+        path: "/add",
+        element: <PropertiesForm />,
       },
     ],
   },

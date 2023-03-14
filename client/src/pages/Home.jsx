@@ -1,23 +1,50 @@
 import styled from "styled-components";
 
-import { useGetCharactersQuery } from "../app/api/experimental";
+import Navbar from "../components/Navbar";
 
-import Card from "../components/Card";
+import Filters from "../components/Filters";
+
+import Cards from "../components/Cards";
+
+import Footerbar from "../components/Footerbar";
 
 const Home = () => {
-  const { data, error, isLoading } = useGetCharactersQuery();
-
   return (
-    <div>
-      <header>
-        <nav>Navbar</nav>
-      </header>
-      <main style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}>
-        {data && data.results.map((el) => <Card key={el.id} property={el} />)}
-      </main>
-      <footer></footer>
-    </div>
+    <Container>
+      <Header>
+        <Navbar />
+        <Filters />
+      </Header>
+      <Main>
+        <Cards />
+      </Main>
+      <Footer>
+        <Footerbar />
+      </Footer>
+    </Container>
   );
 };
+
+const Container = styled.div``;
+
+const Header = styled.header`
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+`;
+
+const Main = styled.main`
+  height: 100%;
+`;
+
+const Footer = styled.footer`
+  min-width: 100%;
+  height: auto;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+`;
 
 export default Home;
