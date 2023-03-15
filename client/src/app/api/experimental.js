@@ -1,5 +1,4 @@
-import axios from "axios";
-import { createApi } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const experimental = createApi({
   reducerPath: "experimental",
@@ -9,13 +8,10 @@ export const experimental = createApi({
   tagTypes: ["characters"],
   endpoints: (builder) => ({
     getCharacters: builder.query({
-      queryFn: async () => {
-        const response = await axios.get(
-          "https://rickandmortyapi.com/api/character"
-        );
-        return response.data;
-      },
+      query: () => ({ url: "/character" }),
       providesTags: ["characters"],
     }),
   }),
 });
+
+export const { useGetCharactersQuery } = experimental;
