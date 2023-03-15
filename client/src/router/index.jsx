@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/detail",
+        path: "/detail/:id",
         element: <Detail />,
       },
       {
@@ -64,6 +64,7 @@ export const router = createBrowserRouter([
         path: "/addproperty/step6",
         element: <Step6 />,
       },
+
     ],
   },
 ]);
