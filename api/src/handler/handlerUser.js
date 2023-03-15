@@ -6,6 +6,7 @@ const postUsers = (req,res) => {
     res.status(200).json({mensaje:"creamos nuevos usuarios"})
 }
 
+
 const postComentarios = (req,res) => {
     res.status(200).json({mensaje:"en esta ruta los usuarios crean sus todos los comentarios"})
 }

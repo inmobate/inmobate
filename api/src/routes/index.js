@@ -5,7 +5,6 @@ const multer  = require('multer');
 const {allUsers,postUsers,allComentarios,postPublications,
     allPublications,allProperty, allSale,allBooking} = require('../handler/handlerUser.js');
 
-
 const router = Router();
 
 router.get('/users', allUsers)
