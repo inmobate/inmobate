@@ -1,4 +1,4 @@
-import styles from "./Detail.module.css";
+import styled from "styled-components";
 
 const Detail = () => {
   return <div>Detail</div>;
