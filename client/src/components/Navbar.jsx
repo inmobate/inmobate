@@ -11,7 +11,7 @@ const Navbar = () => {
         <Brand>INMOVATE</Brand>
         <Searchbar />
         <Items>
-          <Link to="/add">
+          <Link to="/addproperty">
             <Item>Publica</Item>
           </Link>
           <Link>

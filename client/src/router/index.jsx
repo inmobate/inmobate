@@ -64,7 +64,6 @@ export const router = createBrowserRouter([
         path: "/addproperty/step6",
         element: <Step6 />,
       },
-
     ],
   },
 ]);
