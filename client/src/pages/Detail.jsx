@@ -1,10 +1,22 @@
 import styled from "styled-components";
 
+import "swiper/css";
+
+import "swiper/css/navigation";
+
+import "swiper/css/pagination";
+
 import { useParams } from "react-router-dom";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import { Navigation, Pagination } from "swiper";
 
 import { useGetPropertiesIdQuery } from "../app/api/propertiesId";
 
 import Navbar from "../components/Navbar";
+
+import Footerbar from "../components/Footerbar";
 
 const Detail = () => {
   const { id } = useParams();
@@ -15,81 +27,100 @@ const Detail = () => {
 
   return (
     <Container>
-      <header>
+      <Header>
         <Navbar />
-      </header>
+      </Header>
       <Main>
+        <div>Habitación de hotel en AAR</div>
         <div>
-          <Tittle>Habitación de hotel en AAR</Tittle>
-          <Detail1>
-            <div>⭐️⭐️⭐️⭐️</div>
-            <div>Pichincha, Ecuador</div>
-          </Detail1>
-          <Gallery>
+          <div>⭐️⭐️⭐️⭐️</div>
+          <div>Pichincha, Ecuador</div>
+        </div>
+
+        <Swiper
+          modules={[Navigation, Pagination]}
+          navigation
+          pagination={{
+            dynamicBullets: true,
+          }}
+        >
+          <SwiperSlide>
             <img
-              src="https://a0.muscache.com/im/pictures/miso/Hosting-48287927/original/ecae28bb-ac88-4f3d-83cd-96ba6c50c997.jpeg?im_w=720"
+              src="https://a0.muscache.com/im/pictures/miso/Hosting-48287927/original/ecae28bb-ac88-4f3d-83cd-96ba6c50c997.jpeg"
               alt=""
               width="300px"
             />
-            <Images>
-              <img src="" alt="Imagen 2" />
-              <img src="" alt="Imagen 3" />
-              <img src="" alt="Imagen 4" />
-              <img src="" alt="Imagen 5" />
-            </Images>
-          </Gallery>
-          <Details>
-            <div>House</div>
-            <div>Habitacion:5</div>
-            <div>Baños: 1</div>
-          </Details>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="https://a0.muscache.com/im/pictures/miso/Hosting-47726590/original/073089b8-d783-47df-bcda-e636bdb0d0a9.jpeg"
+              alt=""
+              width="300px"
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="https://a0.muscache.com/im/pictures/miso/Hosting-47726590/original/00c22a7a-e160-47df-8432-c83d2c3675e3.jpeg"
+              alt=""
+              width="300px"
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="https://a0.muscache.com/im/pictures/miso/Hosting-47726590/original/4ffbd84b-4741-44cc-905b-47ca193da6ca.jpeg"
+              alt=""
+              width="300px"
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="https://a0.muscache.com/im/pictures/miso/Hosting-47726590/original/e2cc2fa4-caed-46c3-b787-3911e7c77b4f.jpeg"
+              alt=""
+              width="300px"
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="https://a0.muscache.com/im/pictures/miso/Hosting-47726590/original/2124c6c2-239a-454d-9445-1d8d4f010757.jpeg"
+              alt=""
+              width="300px"
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="https://a0.muscache.com/im/pictures/miso/Hosting-47726590/original/a122ba99-0100-4fea-bee6-2023f862eee2.jpeg"
+              alt=""
+              width="300px"
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="https://a0.muscache.com/im/pictures/miso/Hosting-47726590/original/41f5d314-658b-4495-a9e5-3cfb55c50542.jpeg"
+              alt=""
+              width="300px"
+            />
+          </SwiperSlide>
+        </Swiper>
 
-          {/* <div>{data.tittle}</div>
-        <div>{data.rating}</div>
-        <div>{(data.city, data.country)}</div>
-        <div>{data.picture}</div>
-        <div>{data.type}</div> */}
+        <div>
+          <div>House</div>
+          <div>Habitacion:5</div>
+          <div>Baños: 1</div>
         </div>
       </Main>
 
-      <Footer></Footer>
+      <Footer>
+        <Footerbar />
+      </Footer>
     </Container>
   );
 };
 
 const Container = styled.div``;
 
-const Main = styled.main`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
+const Header = styled.header``;
 
-const Tittle = styled.div`
-  display: flex;
-`;
-
-const Detail1 = styled.div`
-  display: flex;
-`;
-
-const Gallery = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const Images = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-`;
-
-const Details = styled.div`
-  display: flex;
-`;
+const Main = styled.main``;
 
 const Footer = styled.footer``;
 
