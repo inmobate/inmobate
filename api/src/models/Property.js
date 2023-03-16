@@ -5,11 +5,11 @@ sequelize.define(
     "Property",
     {
     id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
+        autoIncrement: true
     },
-    descrition:{
+    description:{
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -39,6 +39,13 @@ sequelize.define(
     },
     title:{
         type: DataTypes.STRING,
+<<<<<<< HEAD
+=======
+        allowNull: false
+    },
+    picture:{
+        type: DataTypes.ARRAY(DataTypes.STRING),
+>>>>>>> c87b0e03dc41282d926702868a70d234c9c6a5ec
         allowNull: false
     }
 },
