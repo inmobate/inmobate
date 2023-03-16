@@ -31,7 +31,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User,Sale,Publication,Comentario,Booking,Property } = sequelize.models;
+const { User, Sale, Publication, Comment, Booking, Property } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -44,11 +44,11 @@ Booking.belongsTo(User,{as: "autor_res"})
 Sale.hasMany(Booking,{as:"reservas", foreignKey :"autor_venId"})
 Booking.belongsTo(Sale,{as:"autor_ven"})
 
-Publication.hasMany(Comentario,{foreignKey:"publicId"})
-Comentario.belongsTo(Publication,{as:"public"})
+Publication.hasMany(Comment,{foreignKey:"publicId"})
+Comment.belongsTo(Publication,{as:"public"})
 
-User.hasMany(Comentario,{foreignKey:"autor_comiId"})
-Comentario.belongsTo(User,{as:"autor_comi"})
+User.hasMany(Comment,{foreignKey:"autor_comiId"})
+Comment.belongsTo(User,{as:"autor_comi"})
 
 Booking.hasOne(Property,{as:"propiedades",foreignKey:"bookinId"})
 Property.belongsTo(Booking,{as:"reservas",foreignKey:"bookinId"})
@@ -61,3 +61,4 @@ module.exports = {
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
   Op
 };
+

@@ -1,18 +1,84 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setLocation } from "../../app/slices/propertyToAdd";
+import { BottomBar, Container, ContentColum, Form } from "./styles";
 
 const Step3 = () => {
-    const navigate = useNavigate();
-  return (
-    <div>
-      <h2>¿Dónde queda tu espacio?</h2>
-      <p>
-        Solo vamos a compartir tu dirección con los huéspedes luego de que hagan
-        la reserva.
-      </p>
-      <input type="text" name="location" />
+  const { location } = useSelector((state) => state.propertyToAdd);
 
-      <button onClick={() => navigate("/addproperty/step4")}>Siguente</button>
-    </div>
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  function handleChange(e) {
+    dispatch(
+      setLocation({
+        ...location,
+        [e.name]: e.value,
+      })
+    );
+  }
+
+  return (
+    <Container>
+      <ContentColum>
+        <h2>¿Dónde queda tu espacio?</h2>
+        <p>
+          Solo vamos a compartir tu dirección con los huéspedes luego de que
+          hagan la reserva.
+        </p>
+        <Form>
+          <input
+            type="text"
+            name="street"
+            placeholder="calle"
+            value={location.street}
+            onChange={(e) => handleChange(e.target)}
+          />
+          <input
+            type="text"
+            name="floor"
+            placeholder="piso/dpto"
+            value={location.floor}
+            onChange={(e) => handleChange(e.target)}
+          />
+          <input
+            type="text"
+            name="city"
+            placeholder="ciudad"
+            value={location.city}
+            onChange={(e) => handleChange(e.target)}
+          />
+          <input
+            type="text"
+            name="state"
+            placeholder="provincia/estado"
+            value={location.state}
+            onChange={(e) => handleChange(e.target)}
+          />
+          <input
+            type="text"
+            name="country"
+            placeholder="pais o region"
+            value={location.country}
+            onChange={(e) => handleChange(e.target)}
+          />
+          <input
+            type="number"
+            name="postalCode"
+            placeholder="codigo postal"
+            value={location.postalCode}
+            onChange={(e) => handleChange(e.target)}
+          />
+        </Form>
+      </ContentColum>
+
+      <BottomBar>
+        <button onClick={() => navigate("/addproperty/step2")}>Atras</button>
+
+        <button onClick={() => navigate("/addproperty/step4")}>Siguente</button>
+      </BottomBar>
+    </Container>
   );
 };
 

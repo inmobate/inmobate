@@ -14,11 +14,11 @@ sequelize.define(
         type: DataTypes.BOOLEAN,
         allowNull:false
     },
-    descrition:{
+    description:{
         type: DataTypes.STRING,
         allowNull:false
     },
-    pinture:{
+    picture:{
         type: DataTypes.STRING,
         allowNull:false
     },

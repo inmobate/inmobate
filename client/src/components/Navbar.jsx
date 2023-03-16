@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { Link } from "react-router-dom";
+
 import Searchbar from "./Searchbar";
 
 const Navbar = () => {
@@ -9,8 +11,12 @@ const Navbar = () => {
         <Brand>INMOVATE</Brand>
         <Searchbar />
         <Items>
-          <div>Publica</div>
-          <div>Login</div>
+          <Link to="/addproperty">
+            <Item>Publica</Item>
+          </Link>
+          <Link>
+            <Item>Login</Item>
+          </Link>
         </Items>
       </Elements>
     </Nav>
@@ -18,15 +24,11 @@ const Navbar = () => {
 };
 
 const Nav = styled.nav`
-  min-width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  background: #ffff;
 `;
 
 const Elements = styled.div`
-  padding: 1em;
+  padding: 2em 1em;
   display: flex;
   justify-content: space-between;
 `;
@@ -37,5 +39,7 @@ const Items = styled.div`
   display: flex;
   gap: 1em;
 `;
+
+const Item = styled.div``;
 
 export default Navbar;
