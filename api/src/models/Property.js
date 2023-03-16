@@ -5,11 +5,11 @@ sequelize.define(
     "Property",
     {
     id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
+        autoIncrement: true
     },
-    descrition:{
+    description:{
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -45,12 +45,12 @@ sequelize.define(
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    zona:{
+    title:{
         type: DataTypes.STRING,
         allowNull: false
     },
-    title:{
-        type: DataTypes.STRING,
+    picture:{
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false
     }
 },

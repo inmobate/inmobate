@@ -1,3 +1,27 @@
+
+
+const{Property}=require('../db')
+
+
+
+const allProperty = async (req,res) => {
+    const datos = await Property.findAll()
+    try {
+        res.status(200).json(datos)
+    } catch (error) {
+        res.status(404).json({error:menssage})
+    }
+}
+
+
+
+
+
+
+
+
+
+
 const allUsers = (req,res) => {
     res.status(200).json({mensaje:"en esta ruta veremos todos los usuarios"})
 }
@@ -21,9 +45,6 @@ const postPublications = (req,res) => {
     res.status(200).json({mensaje:"en esta ruta creamos las publicaciones"})
 }
 
-const allProperty = (req,res) => {
-    res.status(200).json({mensaje:"en esta ruta veremos todos las propiedades"})
-}
 
 const allSale = (req,res) => {
     res.status(200).json({mensaje:"en esta ruta veremos todos las ventas"})
