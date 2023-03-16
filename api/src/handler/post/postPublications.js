@@ -1,6 +1,6 @@
 const { Publication } = require("../../db");
 
-const newPostPublication = async (id, active, description, picture, public_data, rating, title, favorite) => {
+const newPostPublication = async ( autor, active, description, picture, public_data, title) => {
   try {
     /*     
     User.hasMany(Publication,{foreignKey:"autorId"});
@@ -12,10 +12,8 @@ const newPostPublication = async (id, active, description, picture, public_data,
         description, 
         picture, 
         public_data, 
-        rating, 
         title, 
-        favorite,
-        autor: id_user,
+        autor
       },
       {
         include: [

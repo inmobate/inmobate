@@ -1,6 +1,36 @@
 const newPostUser = require("./post/postUsers.js");
 const newPostComment = require("./post/postComments.js");
 const newPostPublication = require("./post/postPublications.js")
+const{Property,Type,Service}=require('../db')
+
+
+
+const allProperty = async (req,res) => {
+    const datos = await Property.findAll()
+    try {
+        res.status(200).json(datos)
+    } catch (error) {
+        res.status(400).json({Error:error.menssage})
+    }
+}
+
+const allType = async (req,res) => {
+    const tipos = await Type.findAll()
+    try {
+        res.status(200).json(tipos)
+    } catch (error) {
+        res.status(400).json({Error:error.menssage})
+    }
+}
+
+const allServicios = async (req,res) => {
+    const servicios = await Service.findAll()
+    try {
+        res.status(200).json(servicios)
+    } catch (error) {
+        res.status(400).json({Error:error.menssage})
+    }
+}
 
 
 const allUsers = (req,res) => {
@@ -11,7 +41,7 @@ const postUsers = (req,res) => {
     const { name, lastName, email, password } = req.body
     try {
         const newPost = newPostUser(name, lastName, email, password)
-        res.status(200).send(newPost)
+        res.status(200).json(newPost)
     } catch (error) {
         res.status(400).json({Error: error.message})
     }
@@ -36,18 +66,17 @@ const allPublications = (req,res) => {
 }
 
 const postPublications = (req,res) => {
-    const { active, description, picture, public_data, rating, title, favorite } = req.body
+    const { active, description, picture, public_data, autor, title } = req.body
     try {
-        const newPublication = newPostPublication(active, description, picture, public_data, rating, title, favorite)
-        res.status(200).send(newPublication)
+        const newPublication = newPostPublication(active, description, picture, 
+            public_data, title, autor)
+        res.status(200).json(newPublication)
     } catch (error) {
         res.status(400).json({Error: error.message})
     }
 }
 
-const allProperty = (req,res) => {
-    res.status(200).json({mensaje:"en esta ruta veremos todos las propiedades"})
-}
+
 
 const allSale = (req,res) => {
     res.status(200).json({mensaje:"en esta ruta veremos todos las ventas"})
@@ -65,5 +94,8 @@ module.exports = {
     postUsers,
     postPublications,
     allSale,
-    allBooking
+    allBooking,
+    allType,
+    allServicios
 }
+

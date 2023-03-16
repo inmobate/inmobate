@@ -25,10 +25,6 @@ sequelize.define(
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    garage:{
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
     city:{
         type: DataTypes.STRING,
         allowNull: false
@@ -37,16 +33,8 @@ sequelize.define(
         type: DataTypes.STRING,
         allowNull: false
     },
-    wifi:{
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
     room:{
         type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    zona:{
-        type: DataTypes.STRING,
         allowNull: false
     },
     title:{
