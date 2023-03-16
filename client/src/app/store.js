@@ -14,6 +14,7 @@ export default configureStore({
     [propertiesId.reducerPath]: propertiesId.reducer,
     propertyToAdd: propertyToAdd.reducer,
   },
+
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       experimental.middleware,
