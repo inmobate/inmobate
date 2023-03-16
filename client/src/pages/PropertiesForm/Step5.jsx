@@ -1,6 +1,6 @@
 import { servicesDb } from "./db";
 import { useNavigate } from "react-router-dom";
-import { setServicesAction } from "../../app/slices/propertyToAdd/action";
+import { setServices } from "../../app/slices/propertyToAdd";
 import { BottomBar, Container, ContentColum, FlexGrap, Type } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,9 +12,9 @@ const Step5 = () => {
 
   function handleClick(service) {
     if (services.includes(service)) {
-      dispatch(setServicesAction(services.filter((el) => el !== service)));
+      dispatch(setServices(services.filter((el) => el !== service)));
     } else {
-      dispatch(setServicesAction([...services, service]));
+      dispatch(setServices([...services, service]));
     }
   }
 

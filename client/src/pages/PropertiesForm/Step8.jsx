@@ -1,7 +1,7 @@
 import { BottomBar, Container, ContentColum, FlexGrap, Type } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setPriceAction } from "../../app/slices/propertyToAdd/action";
+import { setPrice } from "../../app/slices/propertyToAdd";
 
 const Step8 = () => {
   const { price } = useSelector((state) => state.propertyToAdd);
@@ -15,13 +15,9 @@ const Step8 = () => {
         <h2>Ahora, fijá tu precio</h2>
         <p>Podés cambiarlo cuando quieras.</p>
         <div>
-          <button onClick={() => dispatch(setPriceAction(price - 100))}>
-            -
-          </button>
+          <button onClick={() => dispatch(setPrice(price - 100))}>-</button>
           <input type="number" value={price} />
-          <button onClick={() => dispatch(setPriceAction(price + 100))}>
-            +
-          </button>
+          <button onClick={() => dispatch(setPrice(price + 100))}>+</button>
         </div>
         <p>por noche</p>
       </ContentColum>

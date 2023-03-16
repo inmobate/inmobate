@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setTypeRoomAction } from "../../app/slices/propertyToAdd/action";
+import { setTypeRoom } from "../../app/slices/propertyToAdd";
 import { BottomBar, Container, Content, ContentColum, Section } from "./styles";
 
 const Step2 = () => {
@@ -10,18 +10,13 @@ const Step2 = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  function handleNext(roomType) {
-    dispatch(setTypeRoomAction(roomType));
-    navigate("/addproperty/step3");
-  }
-
   return (
     <Container>
       <ContentColum>
         <h2>¿Qué tipo de alojamiento ofrecés a los huéspedes?</h2>
         <div>
           <Section
-            onClick={() => dispatch(setTypeRoomAction("alojamiento entero"))}
+            onClick={() => dispatch(setTypeRoom("alojamiento entero"))}
             style={
               roomType === "alojamiento entero"
                 ? { border: "1px solid grey" }
@@ -34,7 +29,7 @@ const Step2 = () => {
             </p>
           </Section>
           <Section
-            onClick={() => dispatch(setTypeRoomAction("habitacion privada"))}
+            onClick={() => dispatch(setTypeRoom("habitacion privada"))}
             style={
               roomType === "habitacion privada"
                 ? { border: "1px solid grey" }
@@ -48,7 +43,7 @@ const Step2 = () => {
             </p>
           </Section>
           <Section
-            onClick={() => dispatch(setTypeRoomAction("habitacion compartida"))}
+            onClick={() => dispatch(setTypeRoom("habitacion compartida"))}
             style={
               roomType === "habitacion compartida"
                 ? { border: "1px solid grey" }

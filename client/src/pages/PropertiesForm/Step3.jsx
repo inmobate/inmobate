@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setLocationAction } from "../../app/slices/propertyToAdd/action";
+import { setLocation } from "../../app/slices/propertyToAdd";
 import { BottomBar, Container, ContentColum, Form } from "./styles";
 
 const Step3 = () => {
@@ -12,16 +12,11 @@ const Step3 = () => {
 
   function handleChange(e) {
     dispatch(
-      setLocationAction({
+      setLocation({
         ...location,
         [e.name]: e.value,
       })
     );
-  }
-
-  function handleNext(location) {
-    dispatch(setLocationAction(location));
-    navigate("/addproperty/step4");
   }
 
   return (
@@ -81,7 +76,7 @@ const Step3 = () => {
       <BottomBar>
         <button onClick={() => navigate("/addproperty/step2")}>Atras</button>
 
-        <button onClick={() => handleNext(location)}>Siguente</button>
+        <button onClick={() => navigate("/addproperty/step4")}>Siguente</button>
       </BottomBar>
     </Container>
   );
