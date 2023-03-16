@@ -12,7 +12,7 @@ const Cards = () => {
   return (
     <Container>
       {data &&
-        data?.results.map((el) => (
+        data?.map((el) => (
           <Link to={`/detail/${el.id}`} key={el.id}>
             <Card key={el.id} property={el} />
           </Link>

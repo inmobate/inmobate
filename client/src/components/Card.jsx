@@ -12,18 +12,12 @@ const Data = [
 ];
 
 const Card = ({ property }) => {
-  const {
-    image /* photo */,
-    name /* title */,
-    gender /* detail */,
-    id /* price */,
-  } = property;
+  const { photo, city, country } = property;
   return (
     <Container>
-      <img src={image /* photo */} alt="" />
-      <div>{name /* title */}</div>
-      <div>{gender /* detail */}</div>
-      <div>${id /*price  */}</div>
+      <img src={photo} alt="" width="300px" height="300px" />
+      <div>{city}</div>
+      <div>{country}</div>
     </Container>
   );
 };
