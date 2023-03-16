@@ -1,10 +1,12 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-/* slices(global states) */
-import { propertyToAdd } from "./slices/propertyToAdd/index.js";
+
 /* api */
 import { experimental } from "./api/experimental.js";
 
 import { propertiesId } from "./api/propertiesId.js";
+
+/* slices(global states) */
+import { propertyToAdd } from "./slices/propertyToAdd/index.js";
 
 export default configureStore({
   reducer: {

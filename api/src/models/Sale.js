@@ -14,11 +14,11 @@ sequelize.define(
         type: DataTypes.STRING,
         allowNull: false,
     },
-    sele_date:{
+    sale_date:{
         type: DataTypes.DATEONLY,
         allowNull: false,
     },
-    total_mount_sell:{
+    total_amount_sell:{
         type: DataTypes.INTEGER,
         allowNull: false,
     }
