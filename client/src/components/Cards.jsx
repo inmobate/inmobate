@@ -26,7 +26,7 @@ const Container = styled.section`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1em;
+  gap: 2em;
 `;
 
 export default Cards;

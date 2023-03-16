@@ -8,7 +8,7 @@ const NotFound = () => {
 
   return (
     <Container>
-      <Title>404</Title>
+      <Title>NO BRO TE CONFUNDISTE</Title>
       <Text>Page not found</Text>
       {error && <ErrorText>{error.statusText || error.message}</ErrorText>}
     </Container>
