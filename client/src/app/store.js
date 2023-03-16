@@ -1,7 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 
 /* api */
-import { experimental } from "./api/experimental.js";
+import { properties } from "./api/properties.js";
 
 import { propertiesId } from "./api/propertiesId.js";
 
@@ -10,14 +10,14 @@ import { propertyToAdd } from "./slices/propertyToAdd/index.js";
 
 export default configureStore({
   reducer: {
-    [experimental.reducerPath]: experimental.reducer,
+    [properties.reducerPath]: properties.reducer,
     [propertiesId.reducerPath]: propertiesId.reducer,
     propertyToAdd: propertyToAdd.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
-      experimental.middleware,
+      properties.middleware,
       propertiesId.middleware
     ),
 });
