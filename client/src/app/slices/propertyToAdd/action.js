@@ -7,6 +7,9 @@ import {
   setBeds,
   setBathrooms,
   setServices,
+  setDescription,
+  setTitle,
+  setPrice,
 } from "./index";
 
 export const setTypeAction = (type) => (dispatch) => {
@@ -39,4 +42,16 @@ export const setBathroomsAction = (bathrooms) => (dispatch) => {
 
 export const setServicesAction = (services) => (dispatch) => {
   dispatch(setServices(services));
+};
+
+export const setDescriptionAction = (description) => (dispatch) => {
+  dispatch(setDescription(description));
+};
+
+export const setTitleAction = (title) => (dispatch) => {
+  dispatch(setTitle(title));
+};
+
+export const setPriceAction = (price) => (dispatch) => {
+  dispatch(setPrice(price));
 };

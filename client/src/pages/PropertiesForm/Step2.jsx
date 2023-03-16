@@ -5,8 +5,8 @@ import { setTypeRoomAction } from "../../app/slices/propertyToAdd/action";
 import { BottomBar, Container, Content, ContentColum, Section } from "./styles";
 
 const Step2 = () => {
-  const propertyToAddValue = useSelector((state) => state.propertyToAdd);
-  const [roomType, setRoomType] = useState(propertyToAddValue.roomType);
+  const { roomType } = useSelector((state) => state.propertyToAdd);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -21,7 +21,7 @@ const Step2 = () => {
         <h2>¿Qué tipo de alojamiento ofrecés a los huéspedes?</h2>
         <div>
           <Section
-            onClick={() => setRoomType("alojamiento entero")}
+            onClick={() => dispatch(setTypeRoomAction("alojamiento entero"))}
             style={
               roomType === "alojamiento entero"
                 ? { border: "1px solid grey" }
@@ -34,7 +34,7 @@ const Step2 = () => {
             </p>
           </Section>
           <Section
-            onClick={() => setRoomType("habitacion privada")}
+            onClick={() => dispatch(setTypeRoomAction("habitacion privada"))}
             style={
               roomType === "habitacion privada"
                 ? { border: "1px solid grey" }
@@ -48,7 +48,7 @@ const Step2 = () => {
             </p>
           </Section>
           <Section
-            onClick={() => setRoomType("habitacion compartida")}
+            onClick={() => dispatch(setTypeRoomAction("habitacion compartida"))}
             style={
               roomType === "habitacion compartida"
                 ? { border: "1px solid grey" }
@@ -65,8 +65,9 @@ const Step2 = () => {
       </ContentColum>
       <BottomBar>
         <button onClick={() => navigate("/addproperty/step1")}>Atras</button>
-        <span>{roomType}</span>
-        <button onClick={() => handleNext(roomType)}>Siguiente</button>
+        <button onClick={() => navigate("/addproperty/step3")}>
+          Siguiente
+        </button>
       </BottomBar>
     </Container>
   );

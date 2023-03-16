@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setTypeAction } from "../../app/slices/propertyToAdd/action";
@@ -13,16 +12,10 @@ import {
 } from "./styles";
 
 const Step1 = () => {
-  const propertyToAddValue = useSelector((state) => state.propertyToAdd);
-  const [type, setType] = useState(propertyToAddValue.type);
+  const { type } = useSelector((state) => state.propertyToAdd);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
-
-  function handleNext(type) {
-    navigate("/addproperty/step2");
-    dispatch(setTypeAction(type));
-  }
 
   return (
     <Container>
@@ -33,7 +26,7 @@ const Step1 = () => {
             {types.map((el) => (
               <Type
                 key={el.id}
-                onClick={() => setType(el.type)}
+                onClick={() => dispatch(setTypeAction(el.type))}
                 style={type === el.type ? { border: "1px solid grey" } : null}
               >
                 {el.type}
@@ -45,8 +38,7 @@ const Step1 = () => {
 
       <BottomBar>
         <button onClick={() => navigate("/addproperty")}>Atras</button>
-        <span>{type}</span>
-        <button onClick={() => handleNext(type)}>Siguente</button>
+        <button onClick={() => navigate("/addproperty/step2")}>Siguente</button>
       </BottomBar>
     </Container>
   );

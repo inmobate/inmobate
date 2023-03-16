@@ -9,8 +9,7 @@ import {
 import { BottomBar, Container, ContentColum } from "./styles";
 
 const Step4 = () => {
-  const propertyToAddValue = useSelector((state) => state.propertyToAdd);
-  const { travellers, rooms, bathrooms, beds } = propertyToAddValue;
+  const { travellers, rooms, bathrooms, beds } = useSelector((state) => state.propertyToAdd);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

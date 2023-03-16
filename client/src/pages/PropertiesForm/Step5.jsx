@@ -5,13 +5,17 @@ import { BottomBar, Container, ContentColum, FlexGrap, Type } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 
 const Step5 = () => {
-  const propertyToAddValue = useSelector((state) => state.propertyToAdd);
-  const { services } = propertyToAddValue;
+  const { services } = useSelector((state) => state.propertyToAdd);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   function handleClick(service) {
-    dispatch(setServicesAction([...services, service]));
+    if (services.includes(service)) {
+      dispatch(setServicesAction(services.filter((el) => el !== service)));
+    } else {
+      dispatch(setServicesAction([...services, service]));
+    }
   }
 
   return (

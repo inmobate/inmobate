@@ -5,16 +5,18 @@ import { setLocationAction } from "../../app/slices/propertyToAdd/action";
 import { BottomBar, Container, ContentColum, Form } from "./styles";
 
 const Step3 = () => {
-  const propertyToAddValue = useSelector((state) => state.propertyToAdd);
-  const [location, setLocation] = useState(propertyToAddValue.location);
+  const { location } = useSelector((state) => state.propertyToAdd);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   function handleChange(e) {
-    setLocation({
-      ...location,
-      [e.name]: e.value,
-    });
+    dispatch(
+      setLocationAction({
+        ...location,
+        [e.name]: e.value,
+      })
+    );
   }
 
   function handleNext(location) {

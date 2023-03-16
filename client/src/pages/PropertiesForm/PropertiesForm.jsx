@@ -26,7 +26,6 @@ const PropertiesForm = () => {
             width={400}
             playsInline
             autoPlay
-            loop
           ></video>
         </div>
       </Content>
