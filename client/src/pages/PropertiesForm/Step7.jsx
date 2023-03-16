@@ -1,9 +1,6 @@
 import { BottomBar, Container, Content, ContentColum } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setDescriptionAction,
-  setTitleAction,
-} from "../../app/slices/propertyToAdd/action";
+import { setDescription, setTitle } from "../../app/slices/propertyToAdd";
 import { useNavigate } from "react-router-dom";
 
 const Step7 = () => {
@@ -25,14 +22,14 @@ const Step7 = () => {
           type="text"
           value={title}
           onChange={(e) => {
-            dispatch(setTitleAction(e.target.value));
+            dispatch(setTitle(e.target.value));
           }}
         />
         <h2>Y tambien una descripcion</h2>
         <p>Contá qué hace que tu espacio sea especial.</p>
         <textarea
           onChange={(e) => {
-            dispatch(setDescriptionAction(e.target.value));
+            dispatch(setDescription(e.target.value));
           }}
           cols="30"
           rows="10"

@@ -1,19 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  setBathroomsAction,
-  setBedsAction,
-  setRoomsAction,
-  setTravellersAction,
-} from "../../app/slices/propertyToAdd/action";
+  setBathrooms,
+  setBeds,
+  setRooms,
+  setTravellers,
+} from "../../app/slices/propertyToAdd";
 import { BottomBar, Container, ContentColum } from "./styles";
 
 const Step4 = () => {
-  const { travellers, rooms, bathrooms, beds } = useSelector((state) => state.propertyToAdd);
+  const { travellers, rooms, bathrooms, beds } = useSelector(
+    (state) => state.propertyToAdd
+  );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
 
   return (
     <Container>
@@ -29,7 +30,7 @@ const Step4 = () => {
               <button
                 disabled={travellers <= 0}
                 onClick={() => {
-                  dispatch(setTravellersAction(travellers - 1));
+                  dispatch(setTravellers(travellers - 1));
                 }}
               >
                 -
@@ -37,7 +38,7 @@ const Step4 = () => {
               <span>{travellers}</span>
               <button
                 onClick={() => {
-                  dispatch(setTravellersAction(travellers + 1));
+                  dispatch(setTravellers(travellers + 1));
                 }}
               >
                 +
@@ -50,7 +51,7 @@ const Step4 = () => {
               <button
                 disabled={rooms <= 0}
                 onClick={() => {
-                  dispatch(setRoomsAction(rooms - 1));
+                  dispatch(setRooms(rooms - 1));
                 }}
               >
                 -
@@ -58,7 +59,7 @@ const Step4 = () => {
               <span>{rooms}</span>
               <button
                 onClick={() => {
-                  dispatch(setRoomsAction(rooms + 1));
+                  dispatch(setRooms(rooms + 1));
                 }}
               >
                 +
@@ -71,7 +72,7 @@ const Step4 = () => {
               <button
                 disabled={beds <= 0}
                 onClick={() => {
-                  dispatch(setBedsAction(beds - 1));
+                  dispatch(setBeds(beds - 1));
                 }}
               >
                 -
@@ -79,7 +80,7 @@ const Step4 = () => {
               <span>{beds}</span>
               <button
                 onClick={() => {
-                  dispatch(setBedsAction(beds + 1));
+                  dispatch(setBeds(beds + 1));
                 }}
               >
                 +
@@ -92,7 +93,7 @@ const Step4 = () => {
               <button
                 disabled={bathrooms <= 0}
                 onClick={() => {
-                  dispatch(setBathroomsAction(bathrooms - 1));
+                  dispatch(setBathrooms(bathrooms - 1));
                 }}
               >
                 -
@@ -100,7 +101,7 @@ const Step4 = () => {
               <span>{bathrooms}</span>
               <button
                 onClick={() => {
-                  dispatch(setBathroomsAction(bathrooms + 1));
+                  dispatch(setBathrooms(bathrooms + 1));
                 }}
               >
                 +
@@ -111,7 +112,9 @@ const Step4 = () => {
       </ContentColum>
       <BottomBar>
         <button onClick={() => navigate("/addproperty/step3")}>Atras</button>
-        <button onClick={() => navigate("/addproperty/step5")}>Siguiente</button>
+        <button onClick={() => navigate("/addproperty/step5")}>
+          Siguiente
+        </button>
       </BottomBar>
     </Container>
   );

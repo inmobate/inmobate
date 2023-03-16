@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setTypeAction } from "../../app/slices/propertyToAdd/action";
+import { setType } from "../../app/slices/propertyToAdd";
 import { types } from "./db";
 import {
   BottomBar,
@@ -26,7 +26,7 @@ const Step1 = () => {
             {types.map((el) => (
               <Type
                 key={el.id}
-                onClick={() => dispatch(setTypeAction(el.type))}
+                onClick={() => dispatch(setType(el.type))}
                 style={type === el.type ? { border: "1px solid grey" } : null}
               >
                 {el.type}

@@ -6,7 +6,7 @@ import { properties } from "./api/properties.js";
 import { propertiesId } from "./api/propertiesId.js";
 
 /* slices(global states) */
-import { propertyToAdd } from "./slices/propertyToAdd/index.js";
+import { propertyToAdd } from "./slices/propertyToAdd";
 
 export default configureStore({
   reducer: {
