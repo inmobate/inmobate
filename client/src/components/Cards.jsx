@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 
-import { useGetCharactersQuery } from "../app/api/experimental";
+import { useGetPropertiesQuery } from "../app/api/properties";
 
 import Card from "../components/Card";
 
 const Cards = () => {
-  const { data, error, isLoading } = useGetCharactersQuery();
+  const { data, error, isLoading } = useGetPropertiesQuery();
 
   return (
     <Container>

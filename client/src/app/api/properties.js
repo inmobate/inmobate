@@ -1,17 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const experimental = createApi({
-  reducerPath: "experimental",
+export const properties = createApi({
+  reducerPath: "properties",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000",
   }),
-  tagTypes: ["characters"],
   endpoints: (builder) => ({
-    getCharacters: builder.query({
-      query: () => ({ url: "/properties" }),
-      providesTags: ["characters"],
+    getProperties: builder.query({
+      query: () => "/properties",
     }),
   }),
 });
 
-export const { useGetCharactersQuery } = experimental;
+export const { useGetPropertiesQuery } = properties;

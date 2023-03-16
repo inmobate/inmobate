@@ -21,7 +21,9 @@ const Detail = () => {
       <Header>
         <Navbar />
       </Header>
-      <Main></Main>
+      <Main>
+        <div>{data.title}</div>
+      </Main>
 
       <Footer>
         <Footerbar />
