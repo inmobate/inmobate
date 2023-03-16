@@ -3,7 +3,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
 sequelize.define(
-    "Comentario",
+    "Comment",
     {
     id: {
         type: DataTypes.UUID,
@@ -11,7 +11,7 @@ sequelize.define(
         defaultValue: DataTypes.UUIDV4,
     },
     content:{
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
     }
 },
