@@ -13,7 +13,7 @@ router.get('/comentarios', allComentarios)
 router.get('/publication', allPublications)
 router.get('/sale',allSale)
 router.get('/booking',allBooking)
-router.post('/user', postUsers)
+router.post('/users', postUsers)
 router.post('/comentarios', allComentarios)
 router.post('/publication', postPublications)
 
