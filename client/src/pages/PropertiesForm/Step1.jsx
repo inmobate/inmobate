@@ -1,12 +1,23 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setTypeAction } from "../../app/slices/propertyToAdd/action";
 import { types } from "./db";
+import {
+  BottomBar,
+  Container,
+  Content,
+  FlexCenter,
+  FlexGrap,
+  Type,
+} from "./styles";
 
 const Step1 = () => {
+  const propertyToAddValue = useSelector((state) => state.propertyToAdd);
+  const [type, setType] = useState(propertyToAddValue.type);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const propertyToAddValue = useSelector((state) => state.propertyToAdd);
+  
 
   function handleNext(type) {
     navigate("/addproperty/step2");
@@ -14,16 +25,30 @@ const Step1 = () => {
   }
 
   return (
-    <div>
-      {
-        console.log(propertyToAddValue)
-      }
-      <h2>¿Cuál de estas opciones describe mejor tu espacio?</h2>
-      {types.map((el) => (
-        <span>{el.type}</span>
-      ))}
-      <button onClick={() => handleNext("hola")}>Siguente</button>
-    </div>
+    <Container>
+      <Content>
+        <FlexCenter>
+          <h2>¿Cuál de estas opciones describe mejor tu espacio?</h2>
+          <FlexGrap>
+            {types.map((el) => (
+              <Type
+                key={el.id}
+                onClick={() => setType(el.type)}
+                style={type === el.type ? { border: "1px solid grey" } : null}
+              >
+                {el.type}
+              </Type>
+            ))}
+          </FlexGrap>
+        </FlexCenter>
+      </Content>
+
+      <BottomBar>
+        <button onClick={() => navigate("/addproperty")}>Atras</button>
+        <span>{type}</span>
+        <button onClick={() => handleNext(type)}>Siguente</button>
+      </BottomBar>
+    </Container>
   );
 };
 
