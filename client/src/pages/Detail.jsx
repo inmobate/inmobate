@@ -19,10 +19,28 @@ const Detail = () => {
         <Navbar />
       </header>
       <main>
-        <div>{data.name /* title */}</div>
-        <img src={data.image /* photo */} alt="" />
-        <div>{data.gender /* detail */}</div>
-        <div>${data.id /*price  */}</div>
+        <div>Habitación de hotel en AAR</div>
+        <div>⭐️⭐️⭐️⭐️</div>
+        <div>Pichincha, Ecuador</div>
+        <div>
+          <img
+            src="https://a0.muscache.com/im/pictures/miso/Hosting-48287927/original/ecae28bb-ac88-4f3d-83cd-96ba6c50c997.jpeg?im_w=720"
+            alt=""
+          />
+          <img src="" alt="Imagen 2" />
+          <img src="" alt="Imagen 3" />
+          <img src="" alt="Imagen 4" />
+          <img src="" alt="Imagen 5" />
+        </div>
+        <div>House</div>
+        <div>Habitacion:5</div>
+        <div>Baños: 1</div>
+
+        {/* <div>{data.tittle}</div>
+        <div>{data.rating}</div>
+        <div>{(data.city, data.country)}</div>
+        <div>{data.picture}</div>
+        <div>{data.type}</div> */}
       </main>
     </Container>
   );
