@@ -31,7 +31,7 @@ export const types = [
   },
   {
     id: 7,
-    type: "casa rodante",
+    type: "isla",
     icon: "",
   },
   {
@@ -51,7 +51,7 @@ export const types = [
   },
 ];
 
-export const services = [
+export const servicesDb = [
   {
     id: 1,
     service: "WiFi",
