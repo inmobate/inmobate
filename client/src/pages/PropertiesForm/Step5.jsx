@@ -7,17 +7,23 @@ import { useDispatch, useSelector } from "react-redux";
 const Step5 = () => {
   const { services } = useSelector((state) => state.propertyToAdd);
 
+  const storage = JSON.parse(
+    localStorage.getItem("persist:root")
+  ).propertyToAdd;
+  const storageServices = services || JSON.parse(storage).services;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   function handleClick(service) {
     if (services.includes(service)) {
-      dispatch(setServices(services.filter((el) => el !== service)));
+      dispatch(setServices(storageServices.filter((el) => el !== service)));
     } else {
-      dispatch(setServices([...services, service]));
+      dispatch(setServices([...storageServices, service]));
     }
   }
 
+  console.log(JSON.parse(storage).services);
   return (
     <Container>
       <ContentColum>
@@ -32,7 +38,7 @@ const Step5 = () => {
                 onClick={() => handleClick(el.service)}
                 key={el.id}
                 style={
-                  services.includes(el.service)
+                  storageServices.includes(el.service)
                     ? { border: "1px solid grey" }
                     : null
                 }
