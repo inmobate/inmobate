@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 const newPostUser = require("./post/postUsers.js");
 const newPostComment = require("./post/postComments.js");
 const newPostPublication = require("./post/postPublications.js")
 const{Property,Type,Service}=require('../db')
-=======
-
-
-const{Property}=require('../db')
->>>>>>> c87b0e03dc41282d926702868a70d234c9c6a5ec
-
 
 
 const allProperty = async (req,res) => {
@@ -16,7 +9,6 @@ const allProperty = async (req,res) => {
     try {
         res.status(200).json(datos)
     } catch (error) {
-<<<<<<< HEAD
         res.status(400).json({Error:error.menssage})
     }
 }
@@ -36,24 +28,10 @@ const allServicios = async (req,res) => {
         res.status(200).json(servicios)
     } catch (error) {
         res.status(400).json({Error:error.menssage})
-=======
         res.status(404).json({error:menssage})
->>>>>>> c87b0e03dc41282d926702868a70d234c9c6a5ec
     }
 }
 
-
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-
-
->>>>>>> c87b0e03dc41282d926702868a70d234c9c6a5ec
 const allUsers = (req,res) => {
     res.status(200).json({mensaje:"en esta ruta veremos todos los usuarios"})
 }
@@ -96,12 +74,6 @@ const postPublications = (req,res) => {
         res.status(400).json({Error: error.message})
     }
 }
-
-<<<<<<< HEAD
-
-=======
->>>>>>> c87b0e03dc41282d926702868a70d234c9c6a5ec
-
 const allSale = (req,res) => {
     res.status(200).json({mensaje:"en esta ruta veremos todos las ventas"})
 }
