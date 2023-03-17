@@ -2,7 +2,7 @@ const newPostUser = require("./post/postUsers.js");
 const newPostComment = require("./post/postComments.js");
 const newPostPublication = require("./post/postPublications.js")
 const newPostBooking = require("./post/postBooking")
-const UpdateUser = require("./put/UpdateUser.js")
+const updateUser = require("./put/UpdateUser.js")
 const updatePublication = require("./put/updatePublication.js")
 const bookingDelete = require("./delete/deleteBooking.js")
 const{Property,Type,Service}=require('../db')
@@ -63,7 +63,7 @@ const postUsers = async (req,res) => {
 const putUsers = async (req,res) => {
     const { id, name, lastName, email, password } = req.body
     try {
-        const updateuser = await UpdateUser(id, name, lastName, email, password)
+        const updateuser = await updateUser(id, name, lastName, email, password)
         res.status(200).send(updateuser)
     } catch (error) {
         res.status(400).json({Error: error.message})
@@ -100,9 +100,9 @@ const allPublications = async (req,res) => {
 }
 
 const postPublications = async (req,res) => {
-    const { active, description, picture, public_data, rating, title, favorite } = req.body
+    const { active, description, picture, public_data, title, autor } = req.body
     try {
-        const newPublication = await newPostPublication(active, description, picture, public_data, rating, title, favorite)
+        const newPublication = await newPostPublication(active, description, picture, public_data, title, autor)
         res.status(200).send(newPublication)
     } catch (error) {
         res.status(400).json({Error: error.message})

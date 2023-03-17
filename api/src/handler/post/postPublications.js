@@ -1,7 +1,7 @@
 const { Publication, User} = require("../../db");
 
 const newPostPublication = async ( active, description, picture, public_data, title, autor ) => {
-  try {
+  try { 
     if (!active || !description || !picture || !public_data || !title || !autor){
       throw new Error ("Information incomplete") 
     } 
