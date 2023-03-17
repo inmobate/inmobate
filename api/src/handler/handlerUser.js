@@ -1,11 +1,50 @@
 const newPostUser = require("./post/postUsers.js");
 const newPostComment = require("./post/postComments.js");
 const newPostPublication = require("./post/postPublications.js")
+const{Property,Type,Service}=require('../db')
+const {getUser} = require('../controller/controllerUsers');
+const {getComentario}  =require("../controller/controllerComment.js");
+const {getReservas} = require('../controller/controllerBooking')
+const {getPublication} = require('../controller/controllerpublicacion')
+const {getVentas} = require('../controller/controllerSale')
 const UpdateUser = require("./put/UpdateUser.js")
 const updatePublication = require("./put/updatePublication.js")
 
-const allUsers = (req,res) => {
-    res.status(200).json({mensaje:"en esta ruta veremos todos los usuarios"})
+const allProperty = async (req,res) => {
+    const datos = await Property.findAll()
+    try {
+        res.status(200).json(datos)
+    } catch (error) {
+        res.status(400).json({Error:error.menssage})
+    }
+}
+
+const allType = async (req,res) => {
+    const tipos = await Type.findAll()
+    try {
+        res.status(200).json(tipos)
+    } catch (error) {
+        res.status(400).json({Error:error.menssage})
+    }
+}
+
+const allServicios = async (req,res) => {
+    const servicios = await Service.findAll()
+    try {
+        res.status(200).json(servicios)
+    } catch (error) {
+        res.status(400).json({Error:error.menssage})
+        res.status(404).json({error:menssage})
+    }
+}
+
+const allUsers = async (req,res) => {
+    const users = await getUser()
+    try {
+        res.status(200).json({usuarrios :users})
+    } catch (error) {
+        res.status(400).json({Error:error.menssage})        
+    }
 }
 
 const postUsers = async (req,res) => {
@@ -42,8 +81,14 @@ const postComments = async (req,res) => {
     }
 }
 
-const allPublications = (req,res) => {
-    res.status(200).json({mensaje:"en esta ruta veremos todos las publicaciones"})
+const allPublications = async (req,res) => {
+    const publicacion = await getPublication()
+    try {
+        res.status(200).json({publi:publicacion})
+        
+    } catch (error) {
+        
+    }
 }
 
 const postPublications = async (req,res) => {
@@ -59,19 +104,30 @@ const postPublications = async (req,res) => {
 const putPublications = async (req,res) => {
     const { active, description, picture, public_data, title, autor } = req.body
     try {
-        const newPublication = await updatePublication(active, description, picture, public_data, title, autor)
+        const newPublication = newPostPublication(active, description, picture, public_data, rating, title, favorite)
         res.status(200).send(newPublication)
     } catch (error) {
         res.status(400).json({Error: error.message})
     }
 }
 
-const allProperty = (req,res) => {
-    res.status(200).json({mensaje:"en esta ruta veremos todos las propiedades"})
+
+const allReservas = async (req,res) => {
+    const reserva = await getReservas()
+    try {
+        res.status(200).json({booking:reserva})
+    } catch (error) {
+        res.status(400).json({Error: error.message})
+    }
 }
 
-const allSale = (req,res) => {
-    res.status(200).json({mensaje:"en esta ruta veremos todos las ventas"})
+const allSale = async (req,res) => {
+    const ventas = await getVentas()
+    try {
+        res.status(200).json({ventas:ventas})
+    } catch (error) {
+        res.status(400).json({Error: error.message}) 
+    }
 }
 const allBooking = (req,res) => {
     res.status(200).json({mensaje:"en esta ruta veremos todos las reservas"})
@@ -89,4 +145,8 @@ module.exports = {
     allProperty,
     allSale,
     allBooking,
+    allType,
+    allServicios,
+    allReservas,
 }
+

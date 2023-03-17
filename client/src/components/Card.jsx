@@ -1,33 +1,27 @@
 import styled from "styled-components";
 
-const Data = [
-  {
-    id: 1,
-    title: "Habitación de hotel en AAR",
-    photo:
-      "https://a0.muscache.com/im/pictures/miso/Hosting-48287927/original/ecae28bb-ac88-4f3d-83cd-96ba6c50c997.jpeg?im_w=720",
-    price: 21600,
-    detail: "Exclusiva Suite Boutique con Balcón en San Telmo",
-  },
-];
-
 const Card = ({ property }) => {
-  const {
-    image /* photo */,
-    name /* title */,
-    gender /* detail */,
-    id /* price */,
-  } = property;
+  const { photo, city, country, price, rating } = property;
   return (
     <Container>
-      <img src={image /* photo */} alt="" />
-      <div>{name /* title */}</div>
-      <div>{gender /* detail */}</div>
-      <div>${id /*price  */}</div>
+      <Image src={photo} alt="" width="250" height="250px" />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div>
+          <div>
+            {city}, {country}
+          </div>
+          <div>${price}</div>
+        </div>
+        <div>{rating.length}</div>
+      </div>
     </Container>
   );
 };
 
 const Container = styled.div``;
+
+const Image = styled.img`
+  border-radius: 1em;
+`;
 
 export default Card;

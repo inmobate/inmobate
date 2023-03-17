@@ -1,29 +1,54 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setTypeAction } from "../../app/slices/propertyToAdd/action";
+import { setType } from "../../app/slices/propertyToAdd";
 import { types } from "./db";
+import {
+  BottomBar,
+  Container,
+  Content,
+  FlexCenter,
+  FlexGrap,
+  Type,
+} from "./styles";
 
 const Step1 = () => {
+  const { type } = useSelector((state) => state.propertyToAdd);
+
+  const storage = JSON.parse(
+    localStorage.getItem("persist:root")
+  ).propertyToAdd;
+
+  const storageType = type || JSON.parse(storage).type;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const propertyToAddValue = useSelector((state) => state.propertyToAdd);
-
-  function handleNext(type) {
-    navigate("/addproperty/step2");
-    dispatch(setTypeAction(type));
-  }
 
   return (
-    <div>
-      {
-        console.log(propertyToAddValue)
-      }
-      <h2>¿Cuál de estas opciones describe mejor tu espacio?</h2>
-      {types.map((el) => (
-        <span>{el.type}</span>
-      ))}
-      <button onClick={() => handleNext("hola")}>Siguente</button>
-    </div>
+    <Container>
+      <Content>
+        <FlexCenter>
+          <h2>¿Cuál de estas opciones describe mejor tu espacio?</h2>
+          <FlexGrap>
+            {types.map((el) => (
+              <Type
+                key={el.id}
+                onClick={() => dispatch(setType(el.type))}
+                style={
+                  storageType === el.type ? { border: "1px solid grey" } : null
+                }
+              >
+                {el.type}
+              </Type>
+            ))}
+          </FlexGrap>
+        </FlexCenter>
+      </Content>
+
+      <BottomBar>
+        <button onClick={() => navigate("/addproperty")}>Atras</button>
+        <button onClick={() => navigate("/addproperty/step2")}>Siguente</button>
+      </BottomBar>
+    </Container>
   );
 };
 

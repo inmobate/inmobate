@@ -26,11 +26,10 @@ sequelize.define(
         type: DataTypes.DATE,
         allowNull:false
     },
-    
     title:{
         type: DataTypes.STRING,
         allowNull:false
-    },
+    }
     },
     {
     timestamps: false,
