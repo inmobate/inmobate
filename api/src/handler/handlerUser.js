@@ -53,7 +53,7 @@ const allUsers = async (req,res) => {
 const postUsers = async (req,res) => {
     const { name, lastName, email, password } = req.body
     try {
-        const newPost = newPostUser(name, lastName, email, password)
+        const newPost = await newPostUser(name, lastName, email, password)
         res.status(200).send(newPost)
     } catch (error) {
         res.status(400).json({Error: error.message})
@@ -63,7 +63,7 @@ const postUsers = async (req,res) => {
 const putUsers = async (req,res) => {
     const { id, name, lastName, email, password } = req.body
     try {
-        const updateuser = UpdateUser(id, name, lastName, email, password)
+        const updateuser = await UpdateUser(id, name, lastName, email, password)
         res.status(200).send(updateuser)
     } catch (error) {
         res.status(400).json({Error: error.message})
@@ -99,20 +99,20 @@ const allPublications = async (req,res) => {
     }
 }
 
-const postPublications = (req,res) => {
+const postPublications = async (req,res) => {
     const { active, description, picture, public_data, rating, title, favorite } = req.body
     try {
-        const newPublication = newPostPublication(active, description, picture, public_data, rating, title, favorite)
+        const newPublication = await newPostPublication(active, description, picture, public_data, rating, title, favorite)
         res.status(200).send(newPublication)
     } catch (error) {
         res.status(400).json({Error: error.message})
     }
 }
 
-const putPublications = (req,res) => {
+const putPublications = async (req,res) => {
     const { id, active, description, picture, public_data, rating, title, favorite } = req.body
     try {
-        const updatepublication = updatePublication( id, active, description, picture, public_data, rating, title, favorite)
+        const updatepublication = await updatePublication( id, active, description, picture, public_data, rating, title, favorite)
         res.status(200).send(updatepublication)
     } catch (error) {
         res.status(400).json({Error: error.message})
