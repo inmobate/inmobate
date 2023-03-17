@@ -1,14 +1,16 @@
 const newPostUser = require("./post/postUsers.js");
 const newPostComment = require("./post/postComments.js");
 const newPostPublication = require("./post/postPublications.js")
+const newPostBooking = require("./post/postBooking")
+const updateUser = require("./put/UpdateUser.js")
+const updatePublication = require("./put/updatePublication.js")
+const bookingDelete = require("./delete/deleteBooking.js")
 const{Property,Type,Service}=require('../db')
 const {getUser} = require('../controller/controllerUsers');
 const {getComentario}  =require("../controller/controllerComment.js");
 const {getReservas} = require('../controller/controllerBooking')
 const {getPublication} = require('../controller/controllerpublicacion')
 const {getVentas} = require('../controller/controllerSale')
-const UpdateUser = require("./put/UpdateUser.js")
-const updatePublication = require("./put/updatePublication.js")
 
 const allProperty = async (req,res) => {
     const datos = await Property.findAll()
@@ -55,27 +57,32 @@ const postUsers = async (req,res) => {
     } catch (error) {
         res.status(400).json({Error: error.message})
     }
-}
+} 
 
 const putUsers = async (req,res) => {
     const { id, name, lastName, email, password } = req.body
     try {
-        const newUser = await UpdateUser( id, name, lastName, email, password )
-        res.status(200).send(newUser)
+        const updateuser = await updateUser(id, name, lastName, email, password)
+        res.status(200).send(updateuser)
     } catch (error) {
         res.status(400).json({Error: error.message})
     }
-}
+} 
 
-const allComments = (req,res) => {
-    res.status(200).json({mensaje:"en esta ruta mostramos  todos los comentarios"})
+const allComments = async (req,res) => {
+    const comments = await getComentario()
+    try {
+        res.status(200).json({comentarios:comments})
+    } catch (error) {
+        res.status(400).json({Error: error.message})
+    }
 }
 
 const postComments = async (req,res) => {
     const { content, id_user, id_publication } = req.body
     try {
         const newComment = await newPostComment(content, id_user, id_publication)
-        res.status(200).send(newComment)
+        res.status(200).json(newComment)
     } catch (error) {
         res.status(400).json({Error: error.message})
     }
@@ -102,10 +109,18 @@ const postPublications = async (req,res) => {
 }
 
 const putPublications = async (req,res) => {
-    const { active, description, picture, public_data, title, autor } = req.body
+    const { id, active, description, picture, public_data, rating, title, favorite } = req.body
     try {
-        const newPublication = newPostPublication(active, description, picture, public_data, rating, title, favorite)
+        const newPublication = await updatePublication(active, description, picture, public_data, title, autor)
         res.status(200).send(newPublication)
+=========
+const postPublications = (req,res) => {
+    const { active, description, picture, public_data, autor, title } = req.body
+    try {
+        const newPublication = newPostPublication(active, description, picture, 
+            public_data, title, autor)
+        res.status(200).json(newPublication)
+>>>>>>>>> Temporary merge branch 2
     } catch (error) {
         res.status(400).json({Error: error.message})
     }
@@ -133,6 +148,26 @@ const allBooking = (req,res) => {
     res.status(200).json({mensaje:"en esta ruta veremos todos las reservas"})
 }
 
+const postBooking = async (req,res) => {
+    const { id, date_of_admission, departure_date, total_price, id_user, id_sale, id_property, } = req.body
+    try {
+        const newBooking = await newPostBooking( id, date_of_admission, departure_date, total_price, id_user, id_sale, id_property, )
+        res.status(200).json(newBooking)
+    } catch (error) {
+        res.status(400).json({Error: error.message})
+    }
+}
+
+const deleteBooking = async (req,res) => {
+    const { id } = req.body
+    try {
+        const bookingdelete = await bookingDelete( id )
+        res.status(200).json(bookingdelete)
+    } catch (error) {
+        res.status(400).json({Error: error.message})
+    }
+}
+
 module.exports = {
     allUsers,
     postUsers,
@@ -145,8 +180,11 @@ module.exports = {
     allProperty,
     allSale,
     allBooking,
+<<<<<<<<< Temporary merge branch 1
+}
+=========
     allType,
     allServicios,
-    allReservas,
+    allReservas
 }
 
