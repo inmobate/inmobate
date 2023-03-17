@@ -7,10 +7,10 @@ const allUsers = (req,res) => {
     res.status(200).json({mensaje:"en esta ruta veremos todos los usuarios"})
 }
 
-const postUsers = (req,res) => {
+const postUsers = async (req,res) => {
     const { name, lastName, email, password } = req.body
     try {
-        const newPost = newPostUser(name, lastName, email, password)
+        const newPost = await newPostUser(name, lastName, email, password)
         res.status(200).send(newPost)
     } catch (error) {
         res.status(400).json({Error: error.message})
@@ -21,10 +21,10 @@ const allComments = (req,res) => {
     res.status(200).json({mensaje:"en esta ruta mostramos  todos los comentarios"})
 }
 
-const postComments = (req,res) => {
-    const { content , id_user } = req.body
+const postComments = async (req,res) => {
+    const { content, id_user, id_publication } = req.body
     try {
-        const newComment = newPostComment(content, id_user)
+        const newComment = await newPostComment(content, id_user, id_publication)
         res.status(200).send(newComment)
     } catch (error) {
         res.status(400).json({Error: error.message})
@@ -35,10 +35,11 @@ const allPublications = (req,res) => {
     res.status(200).json({mensaje:"en esta ruta veremos todos las publicaciones"})
 }
 
-const postPublications = (req,res) => {
-    const { active, description, picture, public_data, rating, title, favorite } = req.body
+const postPublications = async (req,res) => {
+
+    const { active, description, picture, public_data, title, autor } = req.body
     try {
-        const newPublication = newPostPublication(active, description, picture, public_data, rating, title, favorite)
+        const newPublication = await newPostPublication(active, description, picture, public_data, title, autor)
         res.status(200).send(newPublication)
     } catch (error) {
         res.status(400).json({Error: error.message})

@@ -26,18 +26,11 @@ sequelize.define(
         type: DataTypes.DATE,
         allowNull:false
     },
-    rating:{
-        type: DataTypes.INTEGER,
-        allowNull:false
-    },
+    
     title:{
         type: DataTypes.STRING,
         allowNull:false
     },
-    favorite:{
-        type: DataTypes.BOOLEAN,
-        allowNull:false
-    }
     },
     {
     timestamps: false,
