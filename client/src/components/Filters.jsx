@@ -1,9 +1,36 @@
 import styled from "styled-components";
 
+import { useGetServicesQuery, useGetTypesQuery } from "../app/api/properties";
+
 const Filters = () => {
+  const {
+    data: services,
+    error: errorServices,
+    isLoading: loadingServices,
+  } = useGetServicesQuery();
+
+  const {
+    data: types,
+    error: errorTypes,
+    isLoading: loadingTypes,
+  } = useGetTypesQuery();
+
   return (
     <Filter>
-      <Elements>Filter</Elements>
+      <Elements>
+        {services &&
+          services?.map((el) => (
+            <span key={el.servicio}>
+              <span>{el.servicio}</span>
+            </span>
+          ))}
+        {types &&
+          types?.map((el) => (
+            <span key={el.type}>
+              <span>{el.type}</span>
+            </span>
+          ))}
+      </Elements>
     </Filter>
   );
 };

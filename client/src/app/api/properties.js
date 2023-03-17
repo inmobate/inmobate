@@ -9,7 +9,21 @@ export const properties = createApi({
     getProperties: builder.query({
       query: () => "/properties",
     }),
+    getPropertyById: builder.query({
+      query: (id) => `/properties/${id}`,
+    }),
+    getServices: builder.query({
+      query: () => "/services",
+    }),
+    getTypes: builder.query({
+      query: () => "/types",
+    }),
   }),
 });
 
-export const { useGetPropertiesQuery } = properties;
+export const {
+  useGetPropertiesQuery,
+  useGetPropertyByIdQuery,
+  useGetServicesQuery,
+  useGetTypesQuery,
+} = properties;

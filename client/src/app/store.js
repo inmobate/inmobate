@@ -4,8 +4,6 @@ import storage from "redux-persist/lib/storage";
 /* api */
 import { properties } from "./api/properties.js";
 
-import { propertiesId } from "./api/propertiesId.js";
-
 /* slices(global states) */
 import { propertyToAdd } from "./slices/propertyToAdd";
 
@@ -24,13 +22,9 @@ export default configureStore({
   reducer: {
     persistedReducer,
     [properties.reducerPath]: properties.reducer,
-    [propertiesId.reducerPath]: propertiesId.reducer,
     propertyToAdd: propertyToAdd.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }).concat(
-      properties.middleware,
-      propertiesId.middleware
-    ),
+    getDefaultMiddleware().concat(properties.middleware),
 });
