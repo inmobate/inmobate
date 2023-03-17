@@ -16,6 +16,20 @@ const Step9 = () => {
     price,
   } = useSelector((state) => state.propertyToAdd);
 
+  const storage = JSON.parse(
+    localStorage.getItem("persist:root")
+  ).propertyToAdd;
+  const storageType = type || JSON.parse(storage).type;
+  const storageRoomType = roomType || JSON.parse(storage).roomType;
+  const storageDescription = description || JSON.parse(storage).description;
+  const storageTitle = title || JSON.parse(storage).title;
+  const storageLocation = location || JSON.parse(storage).location;
+  const storageTravellers = travellers || JSON.parse(storage).travellers;
+  const storageRooms = rooms || JSON.parse(storage).rooms;
+  const storageBeds = beds || JSON.parse(storage).beds;
+  const storageBathrooms = bathrooms || JSON.parse(storage).bathrooms;
+  const storagePrice = price || JSON.parse(storage).price;
+
   const navigate = useNavigate();
 
   return (
@@ -25,34 +39,34 @@ const Step9 = () => {
           <h2>Solo queda confirmar los Datos</h2>
           <div>
             <div>
-              Estilo de la propiedad: <strong>{type}</strong>
+              Estilo de la propiedad: <strong>{storageType}</strong>
             </div>
             <div>
-              Tipo de hospedaje: <strong>{roomType}</strong>
+              Tipo de hospedaje: <strong>{storageRoomType}</strong>
             </div>
             <div>
-              Ubicacion: <strong>{location.street}</strong>
+              Ubicacion: <strong>{storageLocation.street}</strong>
             </div>
             <div>
-              Viajeros: <strong>{travellers}</strong>
+              Viajeros: <strong>{storageTravellers}</strong>
             </div>
             <div>
-              Habitaciones: <strong>{rooms}</strong>
+              Habitaciones: <strong>{storageRooms}</strong>
             </div>
             <div>
-              Cantidad de camas: <strong>{beds}</strong>
+              Cantidad de camas: <strong>{storageBeds}</strong>
             </div>
             <div>
-              Cantidad de baños: <strong>{bathrooms}</strong>
+              Cantidad de baños: <strong>{storageBathrooms}</strong>
             </div>
             <div>
-              Titulo: <strong>{title}</strong>
+              Titulo: <strong>{storageTitle}</strong>
             </div>
             <div>
-              Descripcion: <strong>{description}</strong>
+              Descripcion: <strong>{storageDescription}</strong>
             </div>
             <div>
-              Precio por noche: <strong>{price}</strong>
+              Precio por noche: <strong>{storagePrice}</strong>
             </div>
           </div>
         </FlexCenter>

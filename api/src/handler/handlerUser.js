@@ -2,6 +2,11 @@ const newPostUser = require("./post/postUsers.js");
 const newPostComment = require("./post/postComments.js");
 const newPostPublication = require("./post/postPublications.js")
 const{Property,Type,Service}=require('../db')
+const {getUser} = require('../controller/controllerUsers');
+const {getComentario}  =require("../controller/controllerComment.js");
+const {getReservas} = require('../controller/controllerBooking')
+const {getPublication} = require('../controller/controllerpublicacion')
+const {getVentas} = require('../controller/controllerSale')
 
 
 const allProperty = async (req,res) => {
@@ -32,8 +37,13 @@ const allServicios = async (req,res) => {
     }
 }
 
-const allUsers = (req,res) => {
-    res.status(200).json({mensaje:"en esta ruta veremos todos los usuarios"})
+const allUsers = async (req,res) => {
+    const users = await getUser()
+    try {
+        res.status(200).json({usuarrios :users})
+    } catch (error) {
+        res.status(400).json({Error:error.menssage})        
+    }
 }
 
 const postUsers = (req,res) => {
@@ -46,8 +56,13 @@ const postUsers = (req,res) => {
     }
 }
 
-const allComments = (req,res) => {
-    res.status(200).json({mensaje:"en esta ruta mostramos  todos los comentarios"})
+const allComments = async (req,res) => {
+    const comments = await getComentario()
+    try {
+        res.status(200).json({comentarios:comments})
+    } catch (error) {
+        res.status(400).json({Error: error.message})
+    }
 }
 
 const postComments = (req,res) => {
@@ -60,8 +75,14 @@ const postComments = (req,res) => {
     }
 }
 
-const allPublications = (req,res) => {
-    res.status(200).json({mensaje:"en esta ruta veremos todos las publicaciones"})
+const allPublications = async (req,res) => {
+    const publicacion = await getPublication()
+    try {
+        res.status(200).json({publi:publicacion})
+        
+    } catch (error) {
+        
+    }
 }
 
 const postPublications = (req,res) => {
@@ -74,8 +95,24 @@ const postPublications = (req,res) => {
         res.status(400).json({Error: error.message})
     }
 }
-const allSale = (req,res) => {
-    res.status(200).json({mensaje:"en esta ruta veremos todos las ventas"})
+
+
+const allReservas = async (req,res) => {
+    const reserva = await getReservas()
+    try {
+        res.status(200).json({booking:reserva})
+    } catch (error) {
+        res.status(400).json({Error: error.message})
+    }
+}
+
+const allSale = async (req,res) => {
+    const ventas = await getVentas()
+    try {
+        res.status(200).json({ventas:ventas})
+    } catch (error) {
+        res.status(400).json({Error: error.message}) 
+    }
 }
 const allBooking = (req,res) => {
     res.status(200).json({mensaje:"en esta ruta veremos todos las reservas"})
@@ -92,6 +129,7 @@ module.exports = {
     allSale,
     allBooking,
     allType,
-    allServicios
+    allServicios,
+    allReservas
 }
 

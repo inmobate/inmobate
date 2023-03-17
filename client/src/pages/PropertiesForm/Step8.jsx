@@ -6,6 +6,11 @@ import { setPrice } from "../../app/slices/propertyToAdd";
 const Step8 = () => {
   const { price } = useSelector((state) => state.propertyToAdd);
 
+  const storage = JSON.parse(
+    localStorage.getItem("persist:root")
+  ).propertyToAdd;
+  const storagePrice = price || JSON.parse(storage).price;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -16,7 +21,7 @@ const Step8 = () => {
         <p>Podés cambiarlo cuando quieras.</p>
         <div>
           <button onClick={() => dispatch(setPrice(price - 100))}>-</button>
-          <input type="number" value={price} />
+          <input type="number" value={storagePrice} />
           <button onClick={() => dispatch(setPrice(price + 100))}>+</button>
         </div>
         <p>por noche</p>
