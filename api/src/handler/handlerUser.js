@@ -58,7 +58,17 @@ const postUsers = async (req,res) => {
     } catch (error) {
         res.status(400).json({Error: error.message})
     }
-}
+} 
+
+const putUsers = async (req,res) => {
+    const { id, name, lastName, email, password } = req.body
+    try {
+        const updateuser = UpdateUser(id, name, lastName, email, password)
+        res.status(200).send(updateuser)
+    } catch (error) {
+        res.status(400).json({Error: error.message})
+    }
+} 
 
 const allComments = async (req,res) => {
     const comments = await getComentario()
@@ -94,6 +104,16 @@ const postPublications = (req,res) => {
     try {
         const newPublication = newPostPublication(active, description, picture, public_data, rating, title, favorite)
         res.status(200).send(newPublication)
+    } catch (error) {
+        res.status(400).json({Error: error.message})
+    }
+}
+
+const putPublications = (req,res) => {
+    const { id, active, description, picture, public_data, rating, title, favorite } = req.body
+    try {
+        const updatepublication = updatePublication( id, active, description, picture, public_data, rating, title, favorite)
+        res.status(200).send(updatepublication)
     } catch (error) {
         res.status(400).json({Error: error.message})
     }
@@ -152,6 +172,12 @@ module.exports = {
     putPublications,
     allProperty,
     allSale,
-    allBooking
+    allBooking,
+    postBooking,
+    deleteBooking,
+    allType,
+    allServicios,
+    allReservas,
+
 }
 

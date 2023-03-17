@@ -18,13 +18,13 @@ const newPostPublication = async ( active, description, picture, public_data, ti
         title,
       });
       
-       /* const findUser = await User.findAll({
+       const findUser = await User.findAll({
         where: {
           id: autor,
         },
       });
 
-      publication.addUser(findUser); */
+      publication.addUser(findUser);
 
     return publication;
   } catch (error) {
