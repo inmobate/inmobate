@@ -12,7 +12,9 @@ const {allUsers,
     allSale,
     allBooking,
     putUsers,
-    putPublications} = require('../handler/handlerUser.js');
+    putPublications,
+    postBooking,
+    deleteBooking} = require('../handler/handlerUser.js');
 
 const router = Router();
 
@@ -25,7 +27,10 @@ router.get('/booking',allBooking)
 router.post('/users', postUsers)
 router.post('/comments', postComments)
 router.post('/publication', postPublications)
+router.post('/booking',postBooking)
 router.put('/users', putUsers)
 router.put('/publication', putPublications)
+router.delete('/booking', deleteBooking)
+
 
 module.exports = router;
