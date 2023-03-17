@@ -13,6 +13,14 @@ const Step4 = () => {
     (state) => state.propertyToAdd
   );
 
+  const storage = JSON.parse(
+    localStorage.getItem("persist:root")
+  ).propertyToAdd;
+  const storageTravellers = travellers || JSON.parse(storage).travellers;
+  const storageRooms = rooms || JSON.parse(storage).rooms;
+  const storageBathrooms = bathrooms || JSON.parse(storage).bathrooms;
+  const storageBeds = beds || JSON.parse(storage).beds;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,17 +36,17 @@ const Step4 = () => {
             Viajeros
             <div>
               <button
-                disabled={travellers <= 0}
+                disabled={storageTravellers <= 0}
                 onClick={() => {
-                  dispatch(setTravellers(travellers - 1));
+                  dispatch(setTravellers(storageTravellers - 1));
                 }}
               >
                 -
               </button>
-              <span>{travellers}</span>
+              <span>{storageTravellers}</span>
               <button
                 onClick={() => {
-                  dispatch(setTravellers(travellers + 1));
+                  dispatch(setTravellers(storageTravellers + 1));
                 }}
               >
                 +
@@ -49,17 +57,17 @@ const Step4 = () => {
             Dormitorios
             <div>
               <button
-                disabled={rooms <= 0}
+                disabled={storageRooms <= 0}
                 onClick={() => {
-                  dispatch(setRooms(rooms - 1));
+                  dispatch(setRooms(storageRooms - 1));
                 }}
               >
                 -
               </button>
-              <span>{rooms}</span>
+              <span>{storageRooms}</span>
               <button
                 onClick={() => {
-                  dispatch(setRooms(rooms + 1));
+                  dispatch(setRooms(storageRooms + 1));
                 }}
               >
                 +
@@ -70,17 +78,17 @@ const Step4 = () => {
             Camas
             <div>
               <button
-                disabled={beds <= 0}
+                disabled={storageBeds <= 0}
                 onClick={() => {
-                  dispatch(setBeds(beds - 1));
+                  dispatch(setBeds(storageBeds - 1));
                 }}
               >
                 -
               </button>
-              <span>{beds}</span>
+              <span>{storageBeds}</span>
               <button
                 onClick={() => {
-                  dispatch(setBeds(beds + 1));
+                  dispatch(setBeds(storageBeds + 1));
                 }}
               >
                 +
@@ -91,17 +99,17 @@ const Step4 = () => {
             Baños
             <div>
               <button
-                disabled={bathrooms <= 0}
+                disabled={storageBathrooms <= 0}
                 onClick={() => {
-                  dispatch(setBathrooms(bathrooms - 1));
+                  dispatch(setBathrooms(storageBathrooms - 1));
                 }}
               >
                 -
               </button>
-              <span>{bathrooms}</span>
+              <span>{storageBathrooms}</span>
               <button
                 onClick={() => {
-                  dispatch(setBathrooms(bathrooms + 1));
+                  dispatch(setBathrooms(storageBathrooms + 1));
                 }}
               >
                 +

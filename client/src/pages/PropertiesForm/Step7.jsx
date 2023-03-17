@@ -7,20 +7,28 @@ const Step7 = () => {
   const { type, description, title } = useSelector(
     (state) => state.propertyToAdd
   );
+
+  const storage = JSON.parse(
+    localStorage.getItem("persist:root")
+  ).propertyToAdd;
+  const storageType = type || JSON.parse(storage).type;
+  const storageDescription = description || JSON.parse(storage).description;
+  const storageTitle = title || JSON.parse(storage).title;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   return (
     <Container>
       <ContentColum>
-        <h2>Ahora, ponele un título a tu {type}</h2>
+        <h2>Ahora, ponele un título a tu {storageType}</h2>
         <p>
           Los títulos cortos funcionan mejor. No te preocupes, podés modificarlo
           más adelante.
         </p>
         <input
           type="text"
-          value={title}
+          value={storageTitle}
           onChange={(e) => {
             dispatch(setTitle(e.target.value));
           }}
@@ -33,7 +41,7 @@ const Step7 = () => {
           }}
           cols="30"
           rows="10"
-          value={description}
+          value={storageDescription}
         ></textarea>
       </ContentColum>
 

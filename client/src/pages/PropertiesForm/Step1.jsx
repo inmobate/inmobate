@@ -14,6 +14,12 @@ import {
 const Step1 = () => {
   const { type } = useSelector((state) => state.propertyToAdd);
 
+  const storage = JSON.parse(
+    localStorage.getItem("persist:root")
+  ).propertyToAdd;
+
+  const storageType = type || JSON.parse(storage).type;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -27,7 +33,9 @@ const Step1 = () => {
               <Type
                 key={el.id}
                 onClick={() => dispatch(setType(el.type))}
-                style={type === el.type ? { border: "1px solid grey" } : null}
+                style={
+                  storageType === el.type ? { border: "1px solid grey" } : null
+                }
               >
                 {el.type}
               </Type>
