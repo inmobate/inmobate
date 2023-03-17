@@ -8,8 +8,9 @@ sequelize.define(
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
+        allowNull: false
     },
-    descrition:{
+    description:{
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -25,10 +26,6 @@ sequelize.define(
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    garage:{
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
     city:{
         type: DataTypes.STRING,
         allowNull: false
@@ -37,20 +34,16 @@ sequelize.define(
         type: DataTypes.STRING,
         allowNull: false
     },
-    wifi:{
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
     room:{
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    zona:{
+    title:{
         type: DataTypes.STRING,
         allowNull: false
     },
-    title:{
-        type: DataTypes.STRING,
+    pictures:{
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false
     }
 },

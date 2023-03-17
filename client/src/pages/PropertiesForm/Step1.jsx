@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setTypeAction } from "../../app/slices/propertyToAdd/action";
+import { setType } from "../../app/slices/propertyToAdd";
 import { types } from "./db";
 import {
   BottomBar,
@@ -14,6 +14,12 @@ import {
 const Step1 = () => {
   const { type } = useSelector((state) => state.propertyToAdd);
 
+  const storage = JSON.parse(
+    localStorage.getItem("persist:root")
+  ).propertyToAdd;
+
+  const storageType = type || JSON.parse(storage).type;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -26,8 +32,10 @@ const Step1 = () => {
             {types.map((el) => (
               <Type
                 key={el.id}
-                onClick={() => dispatch(setTypeAction(el.type))}
-                style={type === el.type ? { border: "1px solid grey" } : null}
+                onClick={() => dispatch(setType(el.type))}
+                style={
+                  storageType === el.type ? { border: "1px solid grey" } : null
+                }
               >
                 {el.type}
               </Type>

@@ -1,27 +1,27 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setLocationAction } from "../../app/slices/propertyToAdd/action";
+import { setLocation } from "../../app/slices/propertyToAdd";
 import { BottomBar, Container, ContentColum, Form } from "./styles";
 
 const Step3 = () => {
   const { location } = useSelector((state) => state.propertyToAdd);
+
+  const storage = JSON.parse(
+    localStorage.getItem("persist:root")
+  ).propertyToAdd;
+  const storageLocation = location || JSON.parse(storage).location;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   function handleChange(e) {
     dispatch(
-      setLocationAction({
+      setLocation({
         ...location,
         [e.name]: e.value,
       })
     );
-  }
-
-  function handleNext(location) {
-    dispatch(setLocationAction(location));
-    navigate("/addproperty/step4");
   }
 
   return (
@@ -37,42 +37,42 @@ const Step3 = () => {
             type="text"
             name="street"
             placeholder="calle"
-            value={location.street}
+            value={storageLocation.street}
             onChange={(e) => handleChange(e.target)}
           />
           <input
             type="text"
             name="floor"
             placeholder="piso/dpto"
-            value={location.floor}
+            value={storageLocation.floor}
             onChange={(e) => handleChange(e.target)}
           />
           <input
             type="text"
             name="city"
             placeholder="ciudad"
-            value={location.city}
+            value={storageLocation.city}
             onChange={(e) => handleChange(e.target)}
           />
           <input
             type="text"
             name="state"
             placeholder="provincia/estado"
-            value={location.state}
+            value={storageLocation.state}
             onChange={(e) => handleChange(e.target)}
           />
           <input
             type="text"
             name="country"
             placeholder="pais o region"
-            value={location.country}
+            value={storageLocation.country}
             onChange={(e) => handleChange(e.target)}
           />
           <input
             type="number"
             name="postalCode"
             placeholder="codigo postal"
-            value={location.postalCode}
+            value={storageLocation.postalCode}
             onChange={(e) => handleChange(e.target)}
           />
         </Form>
@@ -81,7 +81,7 @@ const Step3 = () => {
       <BottomBar>
         <button onClick={() => navigate("/addproperty/step2")}>Atras</button>
 
-        <button onClick={() => handleNext(location)}>Siguente</button>
+        <button onClick={() => navigate("/addproperty/step4")}>Siguente</button>
       </BottomBar>
     </Container>
   );

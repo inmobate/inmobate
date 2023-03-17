@@ -1,19 +1,28 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  setBathroomsAction,
-  setBedsAction,
-  setRoomsAction,
-  setTravellersAction,
-} from "../../app/slices/propertyToAdd/action";
+  setBathrooms,
+  setBeds,
+  setRooms,
+  setTravellers,
+} from "../../app/slices/propertyToAdd";
 import { BottomBar, Container, ContentColum } from "./styles";
 
 const Step4 = () => {
-  const { travellers, rooms, bathrooms, beds } = useSelector((state) => state.propertyToAdd);
+  const { travellers, rooms, bathrooms, beds } = useSelector(
+    (state) => state.propertyToAdd
+  );
+
+  const storage = JSON.parse(
+    localStorage.getItem("persist:root")
+  ).propertyToAdd;
+  const storageTravellers = travellers || JSON.parse(storage).travellers;
+  const storageRooms = rooms || JSON.parse(storage).rooms;
+  const storageBathrooms = bathrooms || JSON.parse(storage).bathrooms;
+  const storageBeds = beds || JSON.parse(storage).beds;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
 
   return (
     <Container>
@@ -27,17 +36,17 @@ const Step4 = () => {
             Viajeros
             <div>
               <button
-                disabled={travellers <= 0}
+                disabled={storageTravellers <= 0}
                 onClick={() => {
-                  dispatch(setTravellersAction(travellers - 1));
+                  dispatch(setTravellers(storageTravellers - 1));
                 }}
               >
                 -
               </button>
-              <span>{travellers}</span>
+              <span>{storageTravellers}</span>
               <button
                 onClick={() => {
-                  dispatch(setTravellersAction(travellers + 1));
+                  dispatch(setTravellers(storageTravellers + 1));
                 }}
               >
                 +
@@ -48,17 +57,17 @@ const Step4 = () => {
             Dormitorios
             <div>
               <button
-                disabled={rooms <= 0}
+                disabled={storageRooms <= 0}
                 onClick={() => {
-                  dispatch(setRoomsAction(rooms - 1));
+                  dispatch(setRooms(storageRooms - 1));
                 }}
               >
                 -
               </button>
-              <span>{rooms}</span>
+              <span>{storageRooms}</span>
               <button
                 onClick={() => {
-                  dispatch(setRoomsAction(rooms + 1));
+                  dispatch(setRooms(storageRooms + 1));
                 }}
               >
                 +
@@ -69,17 +78,17 @@ const Step4 = () => {
             Camas
             <div>
               <button
-                disabled={beds <= 0}
+                disabled={storageBeds <= 0}
                 onClick={() => {
-                  dispatch(setBedsAction(beds - 1));
+                  dispatch(setBeds(storageBeds - 1));
                 }}
               >
                 -
               </button>
-              <span>{beds}</span>
+              <span>{storageBeds}</span>
               <button
                 onClick={() => {
-                  dispatch(setBedsAction(beds + 1));
+                  dispatch(setBeds(storageBeds + 1));
                 }}
               >
                 +
@@ -90,17 +99,17 @@ const Step4 = () => {
             Baños
             <div>
               <button
-                disabled={bathrooms <= 0}
+                disabled={storageBathrooms <= 0}
                 onClick={() => {
-                  dispatch(setBathroomsAction(bathrooms - 1));
+                  dispatch(setBathrooms(storageBathrooms - 1));
                 }}
               >
                 -
               </button>
-              <span>{bathrooms}</span>
+              <span>{storageBathrooms}</span>
               <button
                 onClick={() => {
-                  dispatch(setBathroomsAction(bathrooms + 1));
+                  dispatch(setBathrooms(storageBathrooms + 1));
                 }}
               >
                 +
@@ -111,7 +120,9 @@ const Step4 = () => {
       </ContentColum>
       <BottomBar>
         <button onClick={() => navigate("/addproperty/step3")}>Atras</button>
-        <button onClick={() => navigate("/addproperty/step5")}>Siguiente</button>
+        <button onClick={() => navigate("/addproperty/step5")}>
+          Siguiente
+        </button>
       </BottomBar>
     </Container>
   );
