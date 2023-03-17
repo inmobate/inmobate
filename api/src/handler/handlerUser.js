@@ -1,7 +1,8 @@
 const newPostUser = require("./post/postUsers.js");
 const newPostComment = require("./post/postComments.js");
 const newPostPublication = require("./post/postPublications.js")
-
+const UpdateUser = require("./put/UpdateUser.js")
+const updatePublication = require("./put/updatePublication.js")
 
 const allUsers = (req,res) => {
     res.status(200).json({mensaje:"en esta ruta veremos todos los usuarios"})
@@ -12,6 +13,16 @@ const postUsers = async (req,res) => {
     try {
         const newPost = await newPostUser(name, lastName, email, password)
         res.status(200).send(newPost)
+    } catch (error) {
+        res.status(400).json({Error: error.message})
+    }
+}
+
+const putUsers = async (req,res) => {
+    const { id, name, lastName, email, password } = req.body
+    try {
+        const newUser = await UpdateUser( id, name, lastName, email, password )
+        res.status(200).send(newUser)
     } catch (error) {
         res.status(400).json({Error: error.message})
     }
@@ -36,10 +47,19 @@ const allPublications = (req,res) => {
 }
 
 const postPublications = async (req,res) => {
-
     const { active, description, picture, public_data, title, autor } = req.body
     try {
         const newPublication = await newPostPublication(active, description, picture, public_data, title, autor)
+        res.status(200).send(newPublication)
+    } catch (error) {
+        res.status(400).json({Error: error.message})
+    }
+}
+
+const putPublications = async (req,res) => {
+    const { active, description, picture, public_data, title, autor } = req.body
+    try {
+        const newPublication = await updatePublication(active, description, picture, public_data, title, autor)
         res.status(200).send(newPublication)
     } catch (error) {
         res.status(400).json({Error: error.message})
@@ -59,12 +79,14 @@ const allBooking = (req,res) => {
 
 module.exports = {
     allUsers,
-    postComments,
-    allComments,
-    allPublications,
-    allProperty,
     postUsers,
+    putUsers,
+    allComments,
+    postComments,
+    allPublications,
     postPublications,
+    putPublications,
+    allProperty,
     allSale,
-    allBooking
+    allBooking,
 }
