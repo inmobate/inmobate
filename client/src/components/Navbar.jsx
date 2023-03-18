@@ -23,6 +23,7 @@ const Navbar = () => {
 };
 
 const Nav = styled.nav`
+  padding: 0 3rem;
   background: #ffff;
 `;
 
@@ -30,12 +31,15 @@ const Elements = styled.div`
   padding: 2em 1em;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const Brand = styled.div``;
 
 const Items = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 1em;
 `;
 

@@ -13,7 +13,7 @@ const userButton = () => {
         <HiOutlineUserCircle size={25} />
       </div>
     
-      <MenuHidden style={active ? { display: "none" } : null} ref={refMenu}>
+      <MenuHidden style={!active ? { display: "none" } : null} ref={refMenu}>
         <Ul>
           <li>viajes</li>
           <li>favoritos</li>
