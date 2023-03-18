@@ -226,4 +226,5 @@ module.exports = {
   allType,
   allServicios,
   allReservas,
+  allPropertyById
 };
