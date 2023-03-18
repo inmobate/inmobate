@@ -1,6 +1,11 @@
 const newPostUser = require("./post/postUsers.js");
 const newPostComment = require("./post/postComments.js");
-const newPostPublication = require("./post/postPublications.js")
+const newPostPublication = require("./post/postPublications.js");
+const newPostProperty = require("./post/PostProperty");
+const newPostBooking = require("./post/postBooking");
+const updateUser = require("./put/UpdateUser.js");
+const updatePublication = require("./put/updatePublication.js");
+const bookingDelete = require("./delete/deleteBooking.js");
 const{Op,Property,Type,Service}=require('../db')
 const {getUser} = require('../controller/controllerUsers');
 const {getComentario}  =require("../controller/controllerComment.js");
@@ -8,11 +13,6 @@ const {getReservas} = require('../controller/controllerBooking')
 const {getPublication} = require('../controller/controllerpublicacion')
 const {getVentas} = require('../controller/controllerSale')
 const{propertyById}= require('../controller/controllerProperty')
-const newPostPublication = require("./post/postPublications.js");
-const newPostBooking = require("./post/postBooking");
-const updateUser = require("./put/UpdateUser.js");
-const updatePublication = require("./put/updatePublication.js");
-const bookingDelete = require("./delete/deleteBooking.js");
 const { Property, Type, Service } = require("../db");
 const { getUser } = require("../controller/controllerUsers");
 const { getComentario } = require("../controller/controllerComment.js");
@@ -63,6 +63,17 @@ const allPropertyById = async (req,res) => {
             res.status(400).json({Error:"error.id no esta"})
         }
 }
+
+const postProperty = async (req, res) => {
+    const {id, description, area, price, bathrooms, floor, country, city, province, address, postal_code, room, title, pictures, type, type_icon, service, service_icon } = req.body
+    try {
+        const newproperty = await newPostProperty (id, description, area, price, bathrooms, floor, country, city, province, address, postal_code, room, title, pictures, type, type_icon, service, service_icon )
+        res.status(200).json(newproperty)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
 
 const allServicios = async (req, res) => {
   const servicios = await Service.findAll();
@@ -226,5 +237,6 @@ module.exports = {
   allType,
   allServicios,
   allReservas,
-  allPropertyById
+  allPropertyById,
+  postProperty,
 };

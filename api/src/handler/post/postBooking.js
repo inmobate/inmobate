@@ -2,8 +2,7 @@ const { Booking, User, Sale} = require("../../db");
 
 const newPostBooking = async ( id, date_of_admission, departure_date, total_price, id_user, id_sale, id_property, ) => {
   try {
-    if ((!id, !date_of_admission, !departure_date, !total_price))
-      throw new Error("Incomplete information");
+    if ((!id, !date_of_admission, !departure_date, !total_price)) throw new Error("Incomplete information");
 
     const booking = await Booking.create({
       id,
