@@ -26,11 +26,28 @@ sequelize.define(
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    floor:{
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    country:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "Argentina"
+    },
     city:{
         type: DataTypes.STRING,
         allowNull: false
     },
+    province:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     address:{
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    postal_code:{
         type: DataTypes.STRING,
         allowNull: false
     },

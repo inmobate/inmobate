@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import Searchbar from "./Searchbar";
+import UserButton from "./UserButton";
 
 const Navbar = () => {
   return (
@@ -14,9 +15,7 @@ const Navbar = () => {
           <Link to="/addproperty">
             <Item>Publica</Item>
           </Link>
-          <Link>
-            <Item>Login</Item>
-          </Link>
+          <UserButton />
         </Items>
       </Elements>
     </Nav>
