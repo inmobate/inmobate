@@ -22,6 +22,7 @@ const Filters = () => {
           services?.map((el) => (
             <span key={el.servicio}>
               <span>{el.servicio}</span>
+              <span>{el.icono}</span>
             </span>
           ))}
         {types &&
