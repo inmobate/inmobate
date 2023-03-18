@@ -12,8 +12,8 @@ const userButton = () => {
         <HiMenu size={25} />
         <HiOutlineUserCircle size={25} />
       </div>
-    
-      <MenuHidden style={!active ? { display: "none" } : null} ref={refMenu}>
+
+      <MenuHidden style={active ? null : { display: "none" }} ref={refMenu}>
         <Ul>
           <li>viajes</li>
           <li>favoritos</li>
@@ -52,6 +52,7 @@ const MenuHidden = styled.div`
   border: 1px solid black;
   border-radius: 15px;
   box-shadow: 0 0 15px black;
+  z-index: 1;
 `;
 
 const Ul = styled.ul`
