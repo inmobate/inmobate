@@ -1,30 +1,30 @@
-const { Publication } = require("../../db");
+const { Publication, User } = require("../../db");
 
-const newPostPublication = async ( autor, active, description, picture, public_data, title) => {
-  try {
+const newPostPublication = async ( active, description, picture, public_data, title, autor ) => {
+  try { 
+    if (!active || !description || !picture || !public_data || !title || !autor){
+      throw new Error ("Information incomplete") 
+    } 
     /*     
     User.hasMany(Publication,{foreignKey:"autorId"});
     Publication.belongsTo(User,{as: "autor"})
  */
-
-    const publication = await Publication.create({
-        active, 
-        description, 
-        picture, 
-        public_data, 
-        title, 
-        autor
-      },
+    const publication = await Publication.create(
       {
-        include: [
-          {
-            association: {
-              as: "autor",
-            },
-          },
-        ],
-      }
-    );
+        active,
+        description,
+        picture,
+        public_data,
+        title,
+      });
+      
+       const findUser = await User.findAll({
+        where: {
+          id: autor,
+        },
+      });
+
+      publication.addUser(findUser);
 
     return publication;
   } catch (error) {
