@@ -2,11 +2,13 @@ const { Router } = require('express');
 // const multer  = require('multer');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-const {allUsers,postUsers,postPublications,allPublications,allProperty, allSale,allReservas,postComments,allType,allServicios,allComments} = require('../handler/handlerUser.js');
+const {allUsers,postUsers,postPublications,allPublications,allPropertyById,
+    allProperty, allSale,allReservas,postComments,allType,allServicios,allComments} = require('../handler/handlerUser.js');
 
 const router = Router();
 
 router.get('/property', allProperty)//lista
+router.get('/property/:id', allPropertyById)//lista
 router.post('/property')
 router.put('/property')
 

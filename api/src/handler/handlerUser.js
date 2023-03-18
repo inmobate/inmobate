@@ -1,21 +1,56 @@
 const newPostUser = require("./post/postUsers.js");
 const newPostComment = require("./post/postComments.js");
 const newPostPublication = require("./post/postPublications.js")
-const{Property,Type,Service}=require('../db')
+const{Op,Property,Type,Service}=require('../db')
 const {getUser} = require('../controller/controllerUsers');
 const {getComentario}  =require("../controller/controllerComment.js");
 const {getReservas} = require('../controller/controllerBooking')
 const {getPublication} = require('../controller/controllerpublicacion')
 const {getVentas} = require('../controller/controllerSale')
+const{propertyById}= require('../controller/controllerProperty')
 
 
 const allProperty = async (req,res) => {
     const datos = await Property.findAll()
-    try {
-        res.status(200).json(datos)
-    } catch (error) {
-        res.status(400).json({Error:error.menssage})
+    const {city,province}=req.query
+    if(city){
+        let propertyCity = await Property.findAll({
+            where:{
+                city:{[Op.iLike]: city}
+            }
+            //falta incluir los modelos servicios y tipos para cuando 
+            //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
+        })
+        try {
+        return res.status(200).json(propertyCity);
+        } catch (error) {
+            res.status(400).json({Error:error.menssage})
+        }
+    }else if(province){
+        let propertyProvince = await Property.findAll({
+            where:{
+                province:{[Op.iLike]: province}
+            }
+            //falta incluir los modelos servicios y tipos para cuando 
+            //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
+        })
+        try {
+        return res.status(200).json(propertyProvince);
+        } catch (error) {
+            res.status(400).json({Error:error.menssage})
+        }
     }
+    res.status(200).json(datos)
+}
+
+const allPropertyById = async (req,res) => {
+    const {id} = req.params
+        try {
+        const datos = await propertyById(id)
+            res.status(200).json(datos)
+        } catch (error) {
+            res.status(400).json({Error:"error.id no esta"})
+        }
 }
 
 const allType = async (req,res) => {
@@ -130,6 +165,7 @@ module.exports = {
     allBooking,
     allType,
     allServicios,
-    allReservas
+    allReservas,
+    allPropertyById
 }
 
