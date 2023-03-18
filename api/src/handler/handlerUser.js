@@ -67,7 +67,8 @@ const allPropertyById = async (req,res) => {
 }
 
 const postProperty = async (req, res) => {
-    const {id, description, area, price, bathrooms, floor, country, city, province, address, postal_code, room, title, pictures, type, type_icon, service, service_icon } = req.body
+    const {description, area, price, bathrooms, floor, country, city, province, address, postal_code, room, title, pictures, type, type_icon, service, service_icon } = req.body
+    const { id } = req.params
     try {
         const newproperty = await newPostProperty (id, description, area, price, bathrooms, floor, country, city, province, address, postal_code, room, title, pictures, type, type_icon, service, service_icon )
         res.status(200).json(newproperty)
@@ -243,6 +244,7 @@ module.exports = {
   allReservas,
   allPropertyById,
   postProperty,
+  putProperty,
   postSale,
 
 };

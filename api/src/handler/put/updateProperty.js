@@ -15,3 +15,4 @@ const updateProperty = async ( id, description, area, price, bathrooms, floor, c
         return { Error: error.message };
       }
 }
+module.exports = updateProperty;
