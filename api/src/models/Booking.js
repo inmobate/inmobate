@@ -11,11 +11,11 @@ sequelize.define(
         defaultValue: DataTypes.UUIDV4,
     },
     date_of_admission:{
-        type: DataTypes.DATE,
+        type: DataTypes.DATE(6),
         allowNull: false,
     },
     departure_date:{
-        type: DataTypes.DATE,
+        type: DataTypes.DATE(6),
         allowNull: false,
     },
     total_price:{

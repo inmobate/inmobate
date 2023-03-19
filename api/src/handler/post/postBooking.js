@@ -1,49 +1,32 @@
-const { Booking, User, Sale} = require("../../db");
+const { Booking, User } = require("../../db");
 
-const newPostBooking = async ( id, date_of_admission, departure_date, total_price, id_user, id_sale, id_property, ) => {
+
+const newPostBooking = async (date_of_admission, departure_date, total_price, id_user, id_property) => {
+/* 
+  Booking.hasOne(Property, { as: "propiedades", foreignKey: "bookinId" });
+  Property.belongsTo(Booking, { as: "reservas", foreignKey: "bookinId" });
+
+  User.hasMany(Booking,{ foreignKey: "autor_resId", sourceKey: "id" })
+  Booking.belongsTo(User,{ foreignKey: "autor_resId", targetKey: "id" })
+ */
   try {
-    if ((!id, !date_of_admission, !departure_date, !total_price)) throw new Error("Incomplete information");
+    if ((!date_of_admission || !departure_date || !total_price || !id_user)) throw new Error("Incomplete information");
 
     const booking = await Booking.create({
-      id,
       date_of_admission,
       departure_date,
       total_price,
-    });
+      autor_booId: id_user, // id del user que iso el booking
+      // id del sale que resulto de la venta
+     });
 
-    const findUser = await User.findAll({
-        where: {
-            id: id_user
-        }
-    })
-    const findSale = await Sale.findAll({
-        where: {
-            id: id_sale
-        }
-    })
-    const findProperty = await Property.findAll({
-        where: {
-            id: id_property
-        }
-    })
+    const findUser = await User.findOne({ where: { id: id_user}});
+    findUser.addBooking(booking);
 
-    booking.addUser(findUser);
-    booking.addSale(findSale);
-    booking.addProperty(findProperty);
-
+    return booking
   } catch (error) {
     return { error: error.message };
   }
 };
 
 module.exports = newPostBooking;
-/* 
-User.hasMany(Booking,{as: "reservas", foreignKey:"autor_resId"})
-Booking.belongsTo(User,{as: "autor_res"})
-
-Sale.hasMany(Booking,{as:"reservas", foreignKey :"autor_venId"})
-Booking.belongsTo(Sale,{as:"autor_ven"})
-
-Booking.hasOne(Property,{as:"propiedades",foreignKey:"bookinId"})
-Property.belongsTo(Booking,{as:"reservas",foreignKey:"bookinId"})
- */
