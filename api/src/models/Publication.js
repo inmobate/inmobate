@@ -23,12 +23,12 @@ module.exports = (sequelize) => {
       },
       public_data: {
         type: DataTypes.DATE,
-        allowNull:false
-    },
-    title:{
+        allowNull: false,
+      },
+      title: {
         type: DataTypes.STRING,
-        allowNull:false
-    }
+        allowNull: true,
+      },
     },
     {
       timestamps: false,
