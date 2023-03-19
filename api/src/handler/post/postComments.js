@@ -10,7 +10,6 @@ const newPostComment = async (content, id_user, id_publication) => {
         publicId: id_publication,
         autor_comiId: id_user
       });
-      console.log(comment);
 
       const findPublication = await Publication.findOne({where: {id: id_publication}});
       

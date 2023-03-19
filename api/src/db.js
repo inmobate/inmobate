@@ -42,15 +42,14 @@ Comment.belongsTo(Publication, { foreignKey: "publicId", targetKey: "id" });
 User.hasMany(Comment, { foreignKey: "autor_comiId", sourceKey: "id" });
 Comment.belongsTo(User, { foreignKey: "autor_comiId", targetKey: "id" });
 
+User.hasMany(Booking,{ foreignKey: "autor_booId", sourceKey: "id" })
+Booking.belongsTo(User,{ foreignKey: "autor_booId", targetKey: "id" })
 
-User.hasMany(Booking,{as: "reservas", foreignKey:"autor_resId"})
-Booking.belongsTo(User,{as: "autor_res"})
+Booking.hasOne(Property,{foreignKey:"autor_propId", sourceKey: "id"})
+Property.belongsTo(Booking,{foreignKey:"autor_propId", targetKey: "id" })
 
-Sale.hasMany(Booking,{as:"reservas", foreignKey :"autor_venId"})
-Booking.belongsTo(Sale,{as:"autor_ven"})
-
-Booking.hasOne(Property,{as:"propiedades",foreignKey:"bookinId"})
-Property.belongsTo(Booking,{as:"reservas",foreignKey:"bookinId"})
+Sale.hasMany(Booking,{ foreignKey: "autor_saleId", sourceKey: "id" })
+Booking.belongsTo(Sale,{ foreignKey: "autor_saleId", targetKey: "id" })
 
 Sale.hasOne(Property,{as:"propiedades",foreignKey:"saleId"})
 Property.belongsTo(Sale,{as:"ventas",foreignKey:"saleId"})

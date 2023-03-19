@@ -17,10 +17,10 @@ router.get('/type', alltype)//lista
 router.get('/servicio', allServicios)//lista
 
 router.get('/sale', allSale)//lista
-router.post('sale', postSale)
+router.post('/sale', postSale)
 
 router.get('/booking',allReservas)//lista
-router.post('/booking', postBooking)
+router.post('/:id_property/booking', postBooking)
 
 router.get('/users', allUsers)//lista
 router.post('/users', postUsers)//lista
@@ -32,7 +32,7 @@ router.delete("/comentarios", deleteComments)// no le voy a hacer, comentarlo al
 
 
 router.get('/publication', allPublications)//lista
-router.post('/publication', postPublications)// lista
+router.post('/:id_autor/publication', postPublications)// lista
 router.put('/publication', putPublications)
 
 module.exports = router;

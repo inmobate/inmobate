@@ -1,8 +1,8 @@
 const { Publication, User } = require("../../db");
 
-const newPostPublication = async ( active, description, picture, public_data, title, autor ) => {
+const newPostPublication = async ( active, description, picture, public_data, title, id_autor ) => {
   try { 
-    if (!active || !description || !picture || !public_data || !title || !autor) throw new Error ("Information incomplete") 
+    if (!active || !description || !picture || !public_data || !title ) throw new Error ("Information incomplete") 
          
     const publication = await Publication.create(
       {
@@ -11,10 +11,10 @@ const newPostPublication = async ( active, description, picture, public_data, ti
         picture,
         public_data,
         title,
-        autorId: autor  
+        autorId: id_autor,  
       });
       
-       const findUser = await User.findOne({where: {id: autor}});
+       const findUser = await User.findOne({where: {id: id_autor}});
       
       findUser.addPublication(publication);
 
