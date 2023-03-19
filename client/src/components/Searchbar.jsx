@@ -4,11 +4,13 @@ import { BiSearchAlt } from "react-icons/bi";
 import { useState } from "react";
 
 const Searchbar = () => {
-  const [location, setLocation] = useState();
+  const [location, setLocation] = useState("");
   const navigate = useNavigate();
 
   function handleSearch() {
-    navigate(`/search/${location}`)
+    if (location) {
+      navigate(`/search/${location}`);
+    }
   }
 
   return (

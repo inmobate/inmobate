@@ -27,18 +27,18 @@ const Filters = () => {
         modules={[Navigation]}
         navigation={true}
       >
-        {services &&
-          services?.map((el) => (
-            <SwiperSlide key={el.servicio}>
-              {el.icono}
-              {el.servicio}
-            </SwiperSlide>
-          ))}
         {types &&
           types?.map((el) => (
             <SwiperSlide key={el.type}>
               {el.icono}
               {el.type}
+            </SwiperSlide>
+          ))}
+        {services &&
+          services?.map((el) => (
+            <SwiperSlide key={el.servicio}>
+              {el.icono}
+              {el.servicio}
             </SwiperSlide>
           ))}
       </Swiper>

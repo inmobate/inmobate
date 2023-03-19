@@ -95,6 +95,7 @@ const Images = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
+  object-fit: fill;
 `;
 
 const Image = styled.img`
