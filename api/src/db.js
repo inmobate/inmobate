@@ -33,20 +33,21 @@ const { User, Sale, Publication, Comment, Booking, Property, Service, Type} = se
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-User.hasMany(Publication,{foreignKey:"autorId"});
-Publication.belongsTo(User,{as: "autor"})
+User.hasMany(Publication,{ foreignKey:"autorId", sourceKey: "id" });
+Publication.belongsTo(User, { foreignKey: "autorId", targetKey: "id" })
+
+Publication.hasMany(Comment, { foreignKey: "publicId", sourceKey: "id" });
+Comment.belongsTo(Publication, { foreignKey: "publicId", targetKey: "id" });
+
+User.hasMany(Comment, { foreignKey: "autor_comiId", sourceKey: "id" });
+Comment.belongsTo(User, { foreignKey: "autor_comiId", targetKey: "id" });
+
 
 User.hasMany(Booking,{as: "reservas", foreignKey:"autor_resId"})
 Booking.belongsTo(User,{as: "autor_res"})
 
 Sale.hasMany(Booking,{as:"reservas", foreignKey :"autor_venId"})
 Booking.belongsTo(Sale,{as:"autor_ven"})
-
-Publication.hasMany(Comment,{foreignKey:"publicId"})
-Comment.belongsTo(Publication,{as:"public"})
-
-User.hasMany(Comment,{foreignKey:"autor_comiId"})
-Comment.belongsTo(User,{as:"autor_comi"})
 
 Booking.hasOne(Property,{as:"propiedades",foreignKey:"bookinId"})
 Property.belongsTo(Booking,{as:"reservas",foreignKey:"bookinId"})

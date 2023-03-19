@@ -28,7 +28,8 @@ module.exports = (sequelize) => {
       allowNull: false,
       validate: { isAlphanumeric: true }
     }
-  }, {
+  },
+  {
     timestamps: false
   });
 };

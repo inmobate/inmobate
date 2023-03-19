@@ -8,19 +8,15 @@ const updateUser = require("./put/UpdateUser.js");
 const updatePublication = require("./put/updatePublication.js");
 const updateProperty = require("./put/updateProperty");
 const bookingDelete = require("./delete/deleteBooking.js");
-const{Op,Property,Type,Service}=require('../db')
+const{Op,Property,Service}=require('../db')
 const {getUser} = require('../controller/controllerUsers');
 const {getComentario}  =require("../controller/controllerComment.js");
 const {getReservas} = require('../controller/controllerBooking')
 const {getPublication} = require('../controller/controllerpublicacion')
 const {getVentas} = require('../controller/controllerSale')
 const{propertyById}= require('../controller/controllerProperty')
-const { Property, Type, Service } = require("../db");
-const { getUser } = require("../controller/controllerUsers");
-const { getComentario } = require("../controller/controllerComment.js");
-const { getReservas } = require("../controller/controllerBooking");
-const { getPublication } = require("../controller/controllerpublicacion");
-const { getVentas } = require("../controller/controllerSale");
+const {typeDb} = require ('../controller/controllerType')
+const CommentDelete = require("../handler/delete/deleteCommit.js") 
 
 
 const allProperty = async (req,res) => {
@@ -67,9 +63,10 @@ const allPropertyById = async (req,res) => {
 }
 
 const postProperty = async (req, res) => {
-    const {id, description, area, price, bathrooms, floor, country, city, province, address, postal_code, room, title, pictures, type, type_icon, service, service_icon } = req.body
+    const {description, area, price, bathrooms, floor, country, city, province, address, postal_code, room, title, pictures, type, service } = req.body
+    const { id } = req.params
     try {
-        const newproperty = await newPostProperty (id, description, area, price, bathrooms, floor, country, city, province, address, postal_code, room, title, pictures, type, type_icon, service, service_icon )
+        const newproperty = await newPostProperty (id, description, area, price, bathrooms, floor, country, city, province, address, postal_code, room, title, pictures, type, service )
         res.status(200).json(newproperty)
     } catch (error) {
         res.status(400).json({error: error.message})
@@ -77,9 +74,9 @@ const postProperty = async (req, res) => {
 }
 
 const putProperty = async (req, res) => {
-  const {id, description, area, price, bathrooms, floor, country, city, province, address, postal_code, room, title, pictures, type, type_icon, service, service_icon } = req.body
+  const {id, description, area, price, bathrooms, floor, country, city, province, address, postal_code, room, title, pictures, type, service } = req.body
     try {
-        const newproperty = await updateProperty(id, description, area, price, bathrooms, floor, country, city, province, address, postal_code, room, title, pictures, type, type_icon, service, service_icon )
+        const newproperty = await updateProperty(id, description, area, price, bathrooms, floor, country, city, province, address, postal_code, room, title, pictures, type, service )
         res.status(200).json(newproperty)
     } catch (error) {
         res.status(400).json({error: error.message})
@@ -136,10 +133,21 @@ const allComments = async (req, res) => {
 };
 
 const postComments = async (req, res) => {
-  const { content, id_user, id_publication } = req.body;
+  const { id_publication } = req.params
+  const { content, id_user } = req.body;
   try {
     const newComment = await newPostComment(content, id_user, id_publication);
     res.status(200).json(newComment);
+  } catch (error) {
+    res.status(400).json({ Error: error.message });
+  }
+};
+
+const deleteComments = async (req, res) => {
+  const { id } = req.body;
+  try {
+    const commentsdelete = await CommentDelete(id);
+    res.status(200).json(commentsdelete);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
@@ -162,11 +170,13 @@ const putPublications = async (req, res) => {
   }
 }
 
-  const postPublications = (req, res) => {
-    const { active, description, picture, public_data, autor, title } =
-      req.body;
+  const postPublications = async (req, res) => {
+    const { active, description, picture, public_data, title, autor} = req.body;
+
+    console.log(req.body);
     try {
-      const newPublication = newPostPublication( active, description, picture, public_data, title, autor );
+      const newPublication = await newPostPublication( active, description, picture, public_data, title, autor );
+      console.log(newPublication);
       res.status(200).json(newPublication);
     } catch (error) {
       res.status(400).json({ Error: error.message });
@@ -224,6 +234,15 @@ const putPublications = async (req, res) => {
     }
   };
 
+  const alltype = async (req, res) => {
+    const type = await typeDb();
+    try {
+      res.status(200).json(type);
+    } catch (error) {
+      res.status(400).json({ Error: error.message });
+    }
+  }
+
 module.exports = {
   allUsers,
   postUsers,
@@ -238,11 +257,12 @@ module.exports = {
   allBooking,
   postBooking,
   deleteBooking,
-  allType,
+  alltype,
   allServicios,
   allReservas,
   allPropertyById,
   postProperty,
+  putProperty,
   postSale,
-
+  deleteComments
 };
