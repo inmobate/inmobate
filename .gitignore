@@ -69,7 +69,8 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+api/.env
+api/package-lock.json
 .env.test
 
 
