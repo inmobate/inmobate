@@ -11,8 +11,17 @@ const Search = () => {
   const { data, error, isLoading } = useGetPropertiesQuery();
   const { filter } = useParams();
 
+  function transformString(string) {
+    return string
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
+
   useEffect(() => {
-    const properties = data.filter((p) => p.city == filter);
+    const properties = data.filter(
+      (p) => transformString(p.city) == transformString(filter)
+    );
     setFilterProperties(properties);
   }, [filter]);
 
