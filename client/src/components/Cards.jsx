@@ -2,17 +2,14 @@ import styled from "styled-components";
 
 import { Link } from "react-router-dom";
 
-import { useGetPropertiesQuery } from "../app/api/properties";
-
 import Card from "../components/Card";
 
-const Cards = () => {
-  const { data, error, isLoading } = useGetPropertiesQuery();
+const Cards = ({ properties }) => {
 
   return (
     <Container>
-      {data &&
-        data?.map((el) => (
+      {properties &&
+        properties?.map((el) => (
           <Link to={`/detail/${el.id}`} key={el.id}>
             <Card key={el.id} property={el} />
           </Link>

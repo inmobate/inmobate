@@ -10,7 +10,9 @@ const Step3 = () => {
   const storage = JSON.parse(
     localStorage.getItem("persist:root")
   ).propertyToAdd;
-  const storageLocation = location || JSON.parse(storage).location;
+  const storageLocation = Object.keys(location).length
+    ? location
+    : JSON.parse(storage).location;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
