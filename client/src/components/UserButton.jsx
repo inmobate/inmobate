@@ -1,33 +1,19 @@
 import styled from "styled-components";
 import { HiOutlineUserCircle, HiMenu } from "react-icons/hi";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 
 const userButton = () => {
   const refMenu = useRef(null);
   const [active, setActive] = useState(false);
 
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
-    // Devolver una función que elimina el manejador de eventos
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
-  const handleClickOutside = (event) => {
-    if (refMenu.current && !refMenu.current.contains(event.target)) {
-      setActive(false);
-    }
-  };
-
   return (
-    <UserButton ref={refMenu}>
+    <UserButton>
       <div onClick={() => setActive(!active)}>
         <HiMenu size={25} />
         <HiOutlineUserCircle size={25} />
       </div>
 
-      <MenuHidden style={active ? null : { display: "none" }} >
+      <MenuHidden style={active ? null : { display: "none" }} ref={refMenu}>
         <Ul>
           <li>viajes</li>
           <li>favoritos</li>
@@ -79,9 +65,6 @@ const Ul = styled.ul`
     margin-bottom: 0.2rem;
     font-size: 0.8rem;
     cursor: pointer;
-  }
-  li:hover{
-    text-decoration: underline;
   }
 `;
 

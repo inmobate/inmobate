@@ -21,11 +21,6 @@ const Searchbar = () => {
         onChange={(e) => {
           setLocation(e.target.value);
         }}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            handleSearch();
-          }
-        }}
       ></Input>
 
       <Button onClick={() => handleSearch(location)}>
