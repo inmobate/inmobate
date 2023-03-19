@@ -10,6 +10,8 @@ import Navbar from "../components/Navbar";
 
 import Cards from "../components/Cards";
 
+import Footerbar from "../components/Footerbar";
+
 const Search = () => {
   const [filterProperties, setFilterProperties] = useState();
 
@@ -24,14 +26,29 @@ const Search = () => {
 
   return (
     <Container>
-      <Navbar />
-      <Title>Resultados para {filter}:</Title>
-      <Cards properties={filterProperties} />
+      <Header>
+        <Navbar />
+      </Header>
+      <Main>
+        <Title>Resultados para {filter}:</Title>
+        <Cards properties={filterProperties} />
+      </Main>
+      <Footer>
+        <Footerbar />
+      </Footer>
     </Container>
   );
 };
 
 const Container = styled.div`
+  min-width: 100%;
+  height: 100vh;
+`;
+
+const Header = styled.header``;
+
+const Main = styled.main`
+  height: 100%;
   padding: 0 5rem;
   display: flex;
   flex-direction: column;
@@ -40,6 +57,14 @@ const Container = styled.div`
 
 const Title = styled.h2`
   margin: 3rem 0;
+`;
+
+const Footer = styled.footer`
+  min-width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 `;
 
 export default Search;

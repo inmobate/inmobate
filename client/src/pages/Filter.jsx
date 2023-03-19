@@ -9,7 +9,10 @@ import { useGetPropertiesQuery } from "../app/api/properties";
 import Navbar from "../components/Navbar";
 
 import Cards from "../components/Cards";
+
 import Filterbar from "../components/Filterbar";
+
+import Footerbar from "../components/Footerbar";
 
 const Filter = () => {
   const [filterProperties, setFilterProperties] = useState();
@@ -24,14 +27,33 @@ const Filter = () => {
   }, [filter]);
 
   return (
-    <Container>
-      <Navbar />
-      <Filterbar />
-      <Cards properties={filterProperties} />
-    </Container>
+    <>
+      <header>
+        <Navbar />
+        <Filterbar />
+      </header>
+      <Main>
+        <Cards properties={filterProperties} />
+      </Main>
+      <Footer>
+        <Footerbar />
+      </Footer>
+    </>
   );
 };
 
 const Container = styled.div``;
+
+const Main = styled.main`
+  height: 100%;
+`;
+
+const Footer = styled.footer`
+  min-width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+`;
 
 export default Filter;
