@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import Navbar from "../components/Navbar";
 
-import Filters from "../components/Filters";
+import Filterbar from "../components/Filterbar";
 
 import Cards from "../components/Cards";
 
@@ -17,10 +17,10 @@ const Home = () => {
     <Container>
       <Header>
         <Navbar />
-        <Filters />
+        <Filterbar />
       </Header>
       <Main>
-        <Cards properties={data}/>
+        <Cards properties={data} />
       </Main>
       <Footer>
         <Footerbar />

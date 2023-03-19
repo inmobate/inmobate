@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 
-import { properties, useGetPropertiesQuery } from "../app/api/properties";
+import { useGetPropertiesQuery } from "../app/api/properties";
 
 import Navbar from "../components/Navbar";
 
 import Cards from "../components/Cards";
+import Filterbar from "../components/Filterbar";
 
-const Search = () => {
+const Filter = () => {
   const [filterProperties, setFilterProperties] = useState();
 
   const { data, error, isLoading } = useGetPropertiesQuery();
@@ -18,28 +19,19 @@ const Search = () => {
   const { filter } = useParams();
 
   useEffect(() => {
-    const properties = data.filter((p) => p.city == filter);
+    const properties = data.filter((p) => p.type == filter);
     setFilterProperties(properties);
   }, [filter]);
 
   return (
     <Container>
       <Navbar />
-      <Title>Resultados para {filter}:</Title>
+      <Filterbar />
       <Cards properties={filterProperties} />
     </Container>
   );
 };
 
-const Container = styled.div`
-  padding: 0 5rem;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-`;
+const Container = styled.div``;
 
-const Title = styled.h2`
-  margin: 3rem 0;
-`;
-
-export default Search;
+export default Filter;
