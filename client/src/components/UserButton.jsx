@@ -1,9 +1,12 @@
 import styled from "styled-components";
+
 import { HiOutlineUserCircle, HiMenu } from "react-icons/hi";
+
 import { useRef, useState } from "react";
 
 const userButton = () => {
   const refMenu = useRef(null);
+
   const [active, setActive] = useState(false);
 
   return (

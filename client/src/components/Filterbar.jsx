@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
 const Filterbar = () => {
   const navigate = useNavigate();
+
+  const refMenu = useRef(null);
 
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -21,47 +23,38 @@ const Filterbar = () => {
     setMenuOpen(!menuOpen);
   };
   return (
-    <Contaiener>
-      <button onClick={() => handlerAll("home")}>Todos los alojamientos</button>
-      <button onClick={() => handlerFilter("house")} location="house">
+    <Container>
+      <Button onClick={() => handlerAll("home")}>Todos los alojamientos</Button>
+      <Button onClick={() => handlerFilter("house")} location="house">
         Vivienda
-      </button>
-      <button onClick={() => handlerFilter("department")} location="department">
+      </Button>
+      <Button onClick={() => handlerFilter("department")} location="department">
         Departamento
-      </button>
-      <button onClick={() => handlerFilter("hotel")} location="hotel">
+      </Button>
+      <Button onClick={() => handlerFilter("hotel")} location="hotel">
         Hotel
-      </button>
-      <button onClick={() => handlerFilter("guesthouse")} location="guesthouse">
+      </Button>
+      <Button onClick={() => handlerFilter("guesthouse")} location="guesthouse">
         Hostal
-      </button>
+      </Button>
 
       <button onClick={toggleMenu} className="icono-menu">
         Filtros
       </button>
       {menuOpen && (
-        <div style={{ position: "relative" }}>
-          <ul className="lista-menu">
-            <li>
-              <a href="#">Inicio</a>
-            </li>
-            <li>
-              <a href="#">Acerca</a>
-            </li>
-            <li>
-              <a href="#">Servicios</a>
-            </li>
-            <li>
-              <a href="#">Contacto</a>
-            </li>
-          </ul>
-        </div>
+        <FilterMenu onClick={toggleMenu}>
+          <Ul>
+            <li>Precio</li>
+            <li>Tipo de propiedad</li>
+            <button>Hola</button>
+          </Ul>
+        </FilterMenu>
       )}
-    </Contaiener>
+    </Container>
   );
 };
 
-const Contaiener = styled.div`
+const Container = styled.div`
   padding: 1em;
   display: flex;
   justify-content: center;
@@ -69,6 +62,27 @@ const Contaiener = styled.div`
   background: #ffff;
 `;
 
-const Button = styled.button``;
+const Button = styled.button`
+  cursor: pointer;
+`;
+
+const FilterMenu = styled.div`
+  width: 40%;
+  height: 60%;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 1em;
+  transform: translate(-50%, -50%);
+  background: coral;
+`;
+
+const Ul = styled.ul`
+  text-decoration: none;
+`;
 
 export default Filterbar;
