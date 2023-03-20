@@ -12,6 +12,11 @@ const Searchbar = () => {
       navigate(`/search/${location}`);
     }
   }
+  function handleKeyDown(e) {
+    if (e.keyCode === 13) {
+      handleSearch(location)
+    }
+  }
 
   return (
     <SearchBar>
@@ -21,6 +26,8 @@ const Searchbar = () => {
         onChange={(e) => {
           setLocation(e.target.value);
         }}
+        onKeyDown={handleKeyDown}
+
       ></Input>
 
       <Button onClick={() => handleSearch(location)}>

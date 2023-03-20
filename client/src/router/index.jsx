@@ -18,25 +18,16 @@ import Detail from "../pages/Detail";
 
 import Rent from "../pages/Rent";
 
-// import PropertiesForm from "../pages/PropertiesForm/PropertiesForm";
-
-// import Step1 from "../pages/PropertiesForm/Step1";
-
-// import Step2 from "../pages/PropertiesForm/Step2";
-
-// import Step3 from "../pages/PropertiesForm/Step3";
-
-// import Step4 from "../pages/PropertiesForm/Step4";
-
-// import Step5 from "../pages/PropertiesForm/Step5";
-
-// import Step6 from "../pages/PropertiesForm/Step6";
-
-// import Step7 from "../pages/PropertiesForm/Step7";
-
-// import Step8 from "../pages/PropertiesForm/Step8";
-
-// import Step9 from "../pages/PropertiesForm/Step9";
+import PropertiesForm from "../pages/PropertiesForm/PropertiesForm";
+import Step1 from "../pages/PropertiesForm/Step1";
+import Step2 from "../pages/PropertiesForm/Step2";
+import Step3 from "../pages/PropertiesForm/Step3";
+import Step4 from "../pages/PropertiesForm/Step4";
+import Step5 from "../pages/PropertiesForm/Step5";
+import Step6 from "../pages/PropertiesForm/Step6";
+import Step7 from "../pages/PropertiesForm/Step7";
+import Step8 from "../pages/PropertiesForm/Step8";
+import Step9 from "../pages/PropertiesForm/Step9";
 
 export const router = createBrowserRouter([
   {
@@ -72,46 +63,46 @@ export const router = createBrowserRouter([
         path: "/rent",
         element: <Rent />,
       },
-      // {
-      //   path: "/addproperty",
-      //   element: <PropertiesForm />,
-      // },
-      // {
-      //   path: "/addproperty/step1",
-      //   element: <Step1 />,
-      // },
-      // {
-      //   path: "/addproperty/step2",
-      //   element: <Step2 />,
-      // },
-      // {
-      //   path: "/addproperty/step3",
-      //   element: <Step3 />,
-      // },
-      // {
-      //   path: "/addproperty/step4",
-      //   element: <Step4 />,
-      // },
-      // {
-      //   path: "/addproperty/step5",
-      //   element: <Step5 />,
-      // },
-      // {
-      //   path: "/addproperty/step6",
-      //   element: <Step6 />,
-      // },
-      // {
-      //   path: "/addproperty/step7",
-      //   element: <Step7 />,
-      // },
-      // {
-      //   path: "/addproperty/step8",
-      //   element: <Step8 />,
-      // },
-      // {
-      //   path: "/addproperty/step9",
-      //   element: <Step9 />,
-      // },
+      {
+        path: "/addproperty",
+        element: <PropertiesForm />,
+      },
+      {
+        path: "/addproperty/step1",
+        element: <Step1 />,
+      },
+      {
+        path: "/addproperty/step2",
+        element: <Step2 />,
+      },
+      {
+        path: "/addproperty/step3",
+        element: <Step3 />,
+      },
+      {
+        path: "/addproperty/step4",
+        element: <Step4 />,
+      },
+      {
+        path: "/addproperty/step5",
+        element: <Step5 />,
+      },
+      {
+        path: "/addproperty/step6",
+        element: <Step6 />,
+      },
+      {
+        path: "/addproperty/step7",
+        element: <Step7 />,
+      },
+      {
+        path: "/addproperty/step8",
+        element: <Step8 />,
+      },
+      {
+        path: "/addproperty/step9",
+        element: <Step9 />,
+      },
     ],
   },
 ]);

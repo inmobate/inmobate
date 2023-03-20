@@ -22,6 +22,7 @@ const Container = styled.div``;
 
 const Image = styled.img`
   border-radius: 1em;
+  object-fit: cover;
 `;
 
 export default Card;
