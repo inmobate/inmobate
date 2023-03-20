@@ -20,9 +20,19 @@ const Search = () => {
   const { filter } = useParams();
 
   useEffect(() => {
-    const properties = data.filter((p) => p.city == filter);
-    setFilterProperties(properties);
-  }, [filter]);
+    if (data && filter) {
+      const normalizedFilter = filter
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+      const filteredProperties = data.filter((property) => {
+        const normalizedCity = property.city
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "");
+        return normalizedCity.toLowerCase() === normalizedFilter.toLowerCase();
+      });
+      setFilterProperties(filteredProperties);
+    }
+  }, [data, filter]);
 
   return (
     <Container>
@@ -30,7 +40,6 @@ const Search = () => {
         <Navbar />
       </Header>
       <Main>
-        <Title>Resultados para {filter}:</Title>
         <Cards properties={filterProperties} />
       </Main>
       <Footer>
@@ -53,10 +62,6 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   text-align: center;
-`;
-
-const Title = styled.h2`
-  margin: 3rem 0;
 `;
 
 const Footer = styled.footer`
