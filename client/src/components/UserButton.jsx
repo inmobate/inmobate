@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { HiOutlineUserCircle, HiMenu } from "react-icons/hi";
 
-import { useRefa, useState } from "react";
+import { useRef, useState } from "react";
 
 const userButton = () => {
   const refMenu = useRef(null);
