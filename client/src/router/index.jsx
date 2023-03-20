@@ -16,24 +16,17 @@ import FilterCombine from "../pages/FilterCombine";
 
 import Detail from "../pages/Detail";
 
+import Rent from "../pages/Rent";
+
 import PropertiesForm from "../pages/PropertiesForm/PropertiesForm";
-
 import Step1 from "../pages/PropertiesForm/Step1";
-
 import Step2 from "../pages/PropertiesForm/Step2";
-
 import Step3 from "../pages/PropertiesForm/Step3";
-
 import Step4 from "../pages/PropertiesForm/Step4";
-
 import Step5 from "../pages/PropertiesForm/Step5";
-
 import Step6 from "../pages/PropertiesForm/Step6";
-
 import Step7 from "../pages/PropertiesForm/Step7";
-
 import Step8 from "../pages/PropertiesForm/Step8";
-
 import Step9 from "../pages/PropertiesForm/Step9";
 
 export const router = createBrowserRouter([
@@ -65,6 +58,10 @@ export const router = createBrowserRouter([
       {
         path: "/filterCombine",
         element: <FilterCombine />,
+      },
+      {
+        path: "/rent",
+        element: <Rent />,
       },
       {
         path: "/addproperty",

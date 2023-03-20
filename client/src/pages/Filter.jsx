@@ -28,10 +28,10 @@ const Filter = () => {
 
   return (
     <>
-      <header>
+      <Header>
         <Navbar />
         <Filterbar />
-      </header>
+      </Header>
       <Main>
         <Cards properties={filterProperties} />
       </Main>
@@ -47,6 +47,8 @@ const Container = styled.div``;
 const Main = styled.main`
   height: 100%;
 `;
+
+const Header = styled.header``;
 
 const Footer = styled.footer`
   min-width: 100%;

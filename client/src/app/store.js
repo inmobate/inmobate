@@ -29,5 +29,7 @@ export default configureStore({
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(properties.middleware),
+    getDefaultMiddleware({ serializableCheck: false }).concat(
+      properties.middleware
+    ),
 });
