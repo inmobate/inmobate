@@ -14,7 +14,7 @@ const Navbar = () => {
         </Link>
         <Searchbar />
         <Items>
-          <Link to="/rent">
+          <Link to="/addProperty">
             <Item>Publica</Item>
           </Link>
           <UserButton />
