@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import Navbar from "../components/Navbar";
 
-import Filters from "../components/Filters";
+import Filterbar from "../components/Filterbar";
 
 import Cards from "../components/Cards";
 
@@ -17,10 +17,10 @@ const Home = () => {
     <Container>
       <Header>
         <Navbar />
-        <Filters />
+        <Filterbar />
       </Header>
       <Main>
-        <Cards properties={data}/>
+        <Cards properties={data} />
       </Main>
       <Footer>
         <Footerbar />
@@ -29,7 +29,10 @@ const Home = () => {
   );
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+  min-width: 100%;
+  min-height: 100vh;
+`;
 
 const Header = styled.header`
   position: sticky;
@@ -44,7 +47,6 @@ const Main = styled.main`
 
 const Footer = styled.footer`
   min-width: 100%;
-  height: auto;
   position: sticky;
   bottom: 0;
   left: 0;

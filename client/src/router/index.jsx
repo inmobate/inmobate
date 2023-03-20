@@ -8,19 +8,33 @@ import Landing from "../pages/Landing";
 
 import Home from "../pages/Home";
 
+import Search from "../pages/Search";
+
+import Filter from "../pages/Filter";
+
+import FilterCombine from "../pages/FilterCombine";
+
 import Detail from "../pages/Detail";
 
 import PropertiesForm from "../pages/PropertiesForm/PropertiesForm";
+
 import Step1 from "../pages/PropertiesForm/Step1";
+
 import Step2 from "../pages/PropertiesForm/Step2";
+
 import Step3 from "../pages/PropertiesForm/Step3";
+
 import Step4 from "../pages/PropertiesForm/Step4";
+
 import Step5 from "../pages/PropertiesForm/Step5";
+
 import Step6 from "../pages/PropertiesForm/Step6";
+
 import Step7 from "../pages/PropertiesForm/Step7";
+
 import Step8 from "../pages/PropertiesForm/Step8";
+
 import Step9 from "../pages/PropertiesForm/Step9";
-import Search from "../pages/Search";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +53,18 @@ export const router = createBrowserRouter([
       {
         path: "/detail/:id",
         element: <Detail />,
+      },
+      {
+        path: "/search/:filter",
+        element: <Search />,
+      },
+      {
+        path: "/filter/:filter",
+        element: <Filter />,
+      },
+      {
+        path: "/filterCombine",
+        element: <FilterCombine />,
       },
       {
         path: "/addproperty",
@@ -79,10 +105,6 @@ export const router = createBrowserRouter([
       {
         path: "/addproperty/step9",
         element: <Step9 />,
-      },
-      {
-        path: "/search/:filter",
-        element: <Search />,
       },
     ],
   },

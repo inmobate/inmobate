@@ -4,15 +4,17 @@ import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 
-import { properties, useGetPropertiesQuery } from "../app/api/properties";
+import { useGetPropertiesQuery } from "../app/api/properties";
 
 import Navbar from "../components/Navbar";
 
 import Cards from "../components/Cards";
 
+import Filterbar from "../components/Filterbar";
+
 import Footerbar from "../components/Footerbar";
 
-const Search = () => {
+const Filter = () => {
   const [filterProperties, setFilterProperties] = useState();
 
   const { data, error, isLoading } = useGetPropertiesQuery();
@@ -20,43 +22,30 @@ const Search = () => {
   const { filter } = useParams();
 
   useEffect(() => {
-    const properties = data.filter((p) => p.city == filter);
+    const properties = data.filter((p) => p.type == filter);
     setFilterProperties(properties);
   }, [filter]);
 
   return (
-    <Container>
-      <Header>
+    <>
+      <header>
         <Navbar />
-      </Header>
+        <Filterbar />
+      </header>
       <Main>
-        <Title>Resultados para {filter}:</Title>
         <Cards properties={filterProperties} />
       </Main>
       <Footer>
         <Footerbar />
       </Footer>
-    </Container>
+    </>
   );
 };
 
-const Container = styled.div`
-  min-width: 100%;
-  height: 100vh;
-`;
-
-const Header = styled.header``;
+const Container = styled.div``;
 
 const Main = styled.main`
   height: 100%;
-  padding: 0 5rem;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-`;
-
-const Title = styled.h2`
-  margin: 3rem 0;
 `;
 
 const Footer = styled.footer`
@@ -67,4 +56,4 @@ const Footer = styled.footer`
   right: 0;
 `;
 
-export default Search;
+export default Filter;

@@ -5,6 +5,8 @@ import storage from "redux-persist/lib/storage";
 import { properties } from "./api/properties.js";
 
 /* slices(global states) */
+import { filterCombine } from "./slices/filterCombine";
+
 import { propertyToAdd } from "./slices/propertyToAdd";
 
 const persistConfig = {
@@ -22,6 +24,7 @@ export default configureStore({
   reducer: {
     persistedReducer,
     [properties.reducerPath]: properties.reducer,
+    filterCombine: filterCombine.reducer,
     propertyToAdd: propertyToAdd.reducer,
   },
 

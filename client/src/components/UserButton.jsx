@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { HiOutlineUserCircle, HiMenu } from "react-icons/hi";
 import { useRef, useState, useEffect } from "react";
 
-const userButton = () => {
+const UserButton = () => {
   const refMenu = useRef(null);
   const [active, setActive] = useState(false);
 
@@ -21,13 +21,13 @@ const userButton = () => {
   };
 
   return (
-    <UserButton ref={refMenu}>
+    <Button ref={refMenu}>
       <div onClick={() => setActive(!active)}>
         <HiMenu size={25} />
         <HiOutlineUserCircle size={25} />
       </div>
 
-      <MenuHidden style={active ? null : { display: "none" }} >
+      <MenuHidden style={active ? null : { display: "none" }}>
         <Ul>
           <li>viajes</li>
           <li>favoritos</li>
@@ -39,11 +39,11 @@ const userButton = () => {
           <li>cerrar sesion</li>
         </Ul>
       </MenuHidden>
-    </UserButton>
+    </Button>
   );
 };
 
-const UserButton = styled.div`
+const Button = styled.div`
   border: 1px solid black;
   border-radius: 15px;
   padding: 0.2rem;
@@ -80,9 +80,9 @@ const Ul = styled.ul`
     font-size: 0.8rem;
     cursor: pointer;
   }
-  li:hover{
+  li:hover {
     text-decoration: underline;
   }
 `;
 
-export default userButton;
+export default UserButton;
