@@ -12,6 +12,8 @@ import Search from "../pages/Search";
 
 import Filter from "../pages/Filter";
 
+import FilterCombine from "../pages/FilterCombine";
+
 import Detail from "../pages/Detail";
 
 import PropertiesForm from "../pages/PropertiesForm/PropertiesForm";
@@ -59,6 +61,10 @@ export const router = createBrowserRouter([
       {
         path: "/filter/:filter",
         element: <Filter />,
+      },
+      {
+        path: "/filterCombine",
+        element: <FilterCombine />,
       },
       {
         path: "/addproperty",

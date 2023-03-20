@@ -4,7 +4,7 @@ export const filterCombine = createSlice({
   name: "filterCombine",
 
   initialState: {
-    filter: [],
+    filter: null,
   },
 
   reducers: {

@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 
+import { setFilter } from "../app/slices/filterCombine";
+
 import { useGetPropertiesQuery } from "../app/api/properties";
 
 const Filterbar = () => {
@@ -37,8 +39,18 @@ const Filterbar = () => {
     setMenuOpen(!menuOpen);
   };
 
-  const handlerConbine = () => {
-    // const filters =
+  const handlerConbine = (min, max, property) => {
+    const filterByPrice = data.filter((p) => {
+      return p.price >= min && p.price <= max;
+    });
+
+    const filterEnd = filterByPrice.filter((p) => {
+      return p.type === property;
+    });
+
+    dispatch(setFilter(filterEnd));
+
+    navigate("/filterCombine");
   };
 
   return (
@@ -85,13 +97,43 @@ const Filterbar = () => {
             <li>
               <div>Tipo de propiedad:</div>
               <div>
-                <button>Vivienda</button>
-                <button>Departamento</button>
-                <button>Hotel</button>
-                <button>Hostal</button>
+                <button
+                  onClick={() => {
+                    setProperty("house");
+                  }}
+                >
+                  Vivienda
+                </button>
+                <button
+                  onClick={() => {
+                    setProperty("department");
+                  }}
+                >
+                  Departamento
+                </button>
+                <button
+                  onClick={() => {
+                    setProperty("hotel");
+                  }}
+                >
+                  Hotel
+                </button>
+                <button
+                  onClick={() => {
+                    setProperty("guesthouse");
+                  }}
+                >
+                  Hostal
+                </button>
               </div>
             </li>
-            <ButtonFilter onClick={() => {}}>Filtrar</ButtonFilter>
+            <ButtonFilter
+              onClick={() => {
+                handlerConbine(min, max, property);
+              }}
+            >
+              Filtrar
+            </ButtonFilter>
           </Ul>
         </FilterMenu>
       )}
