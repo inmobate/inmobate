@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { HiOutlineUserCircle, HiMenu } from "react-icons/hi";
 import { useRef, useState, useEffect } from "react";
 
-const serButton = () => {
+const UserButton = () => {
   const refMenu = useRef(null);
   const [active, setActive] = useState(false);
 
@@ -21,7 +21,7 @@ const serButton = () => {
   };
 
   return (
-    <UserButton ref={refMenu}>
+    <Button ref={refMenu}>
       <div onClick={() => setActive(!active)}>
         <HiMenu size={25} />
         <HiOutlineUserCircle size={25} />
@@ -39,11 +39,11 @@ const serButton = () => {
           <li>cerrar sesion</li>
         </Ul>
       </MenuHidden>
-    </UserButton>
+    </Button>
   );
 };
 
-const UserButton = styled.div`
+const Button = styled.div`
   border: 1px solid black;
   border-radius: 15px;
   padding: 0.2rem;
@@ -85,4 +85,4 @@ const Ul = styled.ul`
   }
 `;
 
-export default userButton;
+export default UserButton;
