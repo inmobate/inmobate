@@ -29,7 +29,6 @@ const Detail = () => {
             <span> {data.country} - </span>
             <span>{data.direccion}</span>
           </div>
-
           <Gallery>
             <MainImage src={data.photo} alt="imagen" />
             <Images>
@@ -104,7 +103,8 @@ const Image = styled.img`
 `;
 
 const Footer = styled.footer`
-  position: sticky;
+  min-width: 100%;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;

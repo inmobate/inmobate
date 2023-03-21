@@ -12,7 +12,7 @@ export const propertyToAdd = createSlice({
     beds: 0,
     bathrooms: 0,
     services: [],
-    images: [],
+    images: "",
     title: "",
     description: "",
     price: 0,
@@ -52,10 +52,11 @@ export const propertyToAdd = createSlice({
     setPrice: (state, action) => {
       state.price = action.payload;
     },
+    setImage: (state, action) => {
+      state.images = action.payload;
+    },
   },
 });
-
-
 
 export const {
   setType,
@@ -69,4 +70,5 @@ export const {
   setDescription,
   setTitle,
   setPrice,
+  setImage,
 } = propertyToAdd.actions;

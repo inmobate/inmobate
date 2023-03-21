@@ -63,14 +63,13 @@ const allPropertyById = async (req,res) => {
 }
 
 const postProperty = async (req, res) => {
-    const {description, area, price, bathrooms, floor, country, city, province, address, postal_code, room, title, pictures, type, service } = req.body
-    const { id } = req.params
-    try {
-        const newproperty = await newPostProperty (id, description, area, price, bathrooms, floor, country, city, province, address, postal_code, room, title, pictures, type, service )
-        res.status(200).json(newproperty)
-    } catch (error) {
-        res.status(400).json({error: error.message})
-    }
+  const {description, area, price, bathrooms, floor, city, province, address, postal_code, room, title, pictures, type, service } = req.body
+  try {
+      const newproperty = await newPostProperty (description, area, price, bathrooms, floor, city, province, address, postal_code, room, title, pictures, type, service )
+      res.status(200).json(newproperty)
+  } catch (error) {
+      res.status(400).json({error: error.message})
+  }
 }
 
 const putProperty = async (req, res) => {
@@ -170,18 +169,17 @@ const putPublications = async (req, res) => {
   }
 }
 
-  const postPublications = async (req, res) => {
-    const { active, description, picture, public_data, title, autor} = req.body;
-
-    console.log(req.body);
-    try {
-      const newPublication = await newPostPublication( active, description, picture, public_data, title, autor );
-      console.log(newPublication);
-      res.status(200).json(newPublication);
-    } catch (error) {
-      res.status(400).json({ Error: error.message });
-    }
-  };
+const postPublications = async (req, res) => {
+  const { active, description, picture, public_data, title} = req.body;
+  const { id_autor } = req.params;
+  try {
+    const newPublication = await newPostPublication( active, description, picture, public_data, title, id_autor );
+    console.log(newPublication);
+    res.status(200).json(newPublication);
+  } catch (error) {
+    res.status(400).json({ Error: error.message });
+  }
+};
 
   const allReservas = async (req, res) => {
     const reserva = await getReservas();
@@ -210,14 +208,17 @@ const putPublications = async (req, res) => {
       res.status(400).json({ Error: error.message });
     }
   };
+
   const allBooking = (req, res) => {
     res.status(200).json({ mensaje: "en esta ruta veremos todos las reservas" });
   };
 
   const postBooking = async (req, res) => {
-    const { id, date_of_admission, departure_date, total_price, id_user, id_sale, id_property } = req.body;
+    const { id_property  } = req.params;
+    const { date_of_admission, departure_date, total_price, id_user } = req.body;
     try {
-      const newBooking = await newPostBooking( id, date_of_admission, departure_date, total_price, id_user, id_sale, id_property );
+      const newBooking = await newPostBooking( date_of_admission, departure_date, total_price, id_user, id_property );
+      console.log('newBooking',newBooking);
       res.status(200).json(newBooking);
     } catch (error) {
       res.status(400).json({ Error: error.message });

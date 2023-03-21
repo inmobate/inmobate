@@ -1,63 +1,231 @@
 {
   "services": [
-    { "servicio": "Wifi", "icono": "📶" },
-    { "servicio": "TV", "icono": "📺" },
-    { "servicio": "Aire acondicionado", "icono": "❄️" },
-    { "servicio": "Calefacción", "icono": "🔥" },
-    { "servicio": "Cocina", "icono": "🍳" },
-    { "servicio": "Desayuno", "icono": "🍳" },
-    { "servicio": "Jacuzzi", "icono": "🛁" },
-    { "servicio": "Piscina", "icono": "🏊" },
-    { "servicio": "Estacionamiento", "icono": "🅿️" },
-    { "servicio": "Gimnasio", "icono": "💪" },
-    { "servicio": "Mascotas permitidas", "icono": "🐶" },
-    { "servicio": "Vistas al mar", "icono": "🌊" },
-    { "servicio": "Chimenea", "icono": "🔥" },
-    { "servicio": "Jardín", "icono": "🌳" },
-    { "servicio": "Terraza", "icono": "🌅" },
-    { "servicio": "Baño privado", "icono": "🚽" },
-    { "servicio": "Transporte desde/hacia el aeropuerto", "icono": "🚖" },
-    { "servicio": "Lavandería", "icono": "🧺" },
-    { "servicio": "Permite fumar", "icono": "🚬" },
-    { "servicio": "Accesibilidad", "icono": "♿️" },
-    { "servicio": "Desayuno incluido", "icono": "🍳" },
-    { "servicio": "Servicio de habitaciones", "icono": "🛎️" },
-    { "servicio": "Servicio de limpieza", "icono": "🧹" },
-    { "servicio": "Spa", "icono": "💆" },
-    { "servicio": "Sauna", "icono": "🧖" }
+    {
+      "servicio": "Wifi",
+      "icono": "📶"
+    },
+    {
+      "servicio": "TV",
+      "icono": "📺"
+    },
+    {
+      "servicio": "Aire acondicionado",
+      "icono": "❄️"
+    },
+    {
+      "servicio": "Calefacción",
+      "icono": "🔥"
+    },
+    {
+      "servicio": "Cocina",
+      "icono": "🍳"
+    },
+    {
+      "servicio": "Desayuno",
+      "icono": "🍳"
+    },
+    {
+      "servicio": "Jacuzzi",
+      "icono": "🛁"
+    },
+    {
+      "servicio": "Piscina",
+      "icono": "🏊"
+    },
+    {
+      "servicio": "Estacionamiento",
+      "icono": "🅿️"
+    },
+    {
+      "servicio": "Gimnasio",
+      "icono": "💪"
+    },
+    {
+      "servicio": "Mascotas permitidas",
+      "icono": "🐶"
+    },
+    {
+      "servicio": "Vistas al mar",
+      "icono": "🌊"
+    },
+    {
+      "servicio": "Chimenea",
+      "icono": "🔥"
+    },
+    {
+      "servicio": "Jardín",
+      "icono": "🌳"
+    },
+    {
+      "servicio": "Terraza",
+      "icono": "🌅"
+    },
+    {
+      "servicio": "Baño privado",
+      "icono": "🚽"
+    },
+    {
+      "servicio": "Transporte desde/hacia el aeropuerto",
+      "icono": "🚖"
+    },
+    {
+      "servicio": "Lavandería",
+      "icono": "🧺"
+    },
+    {
+      "servicio": "Permite fumar",
+      "icono": "🚬"
+    },
+    {
+      "servicio": "Accesibilidad",
+      "icono": "♿️"
+    },
+    {
+      "servicio": "Desayuno incluido",
+      "icono": "🍳"
+    },
+    {
+      "servicio": "Servicio de habitaciones",
+      "icono": "🛎️"
+    },
+    {
+      "servicio": "Servicio de limpieza",
+      "icono": "🧹"
+    },
+    {
+      "servicio": "Spa",
+      "icono": "💆"
+    },
+    {
+      "servicio": "Sauna",
+      "icono": "🧖"
+    }
   ],
   "types": [
-    { "type": "Apartamento", "icono": "🏢" },
-    { "type": "Casa", "icono": "🏠" },
-    { "type": "Villa", "icono": "🏰" },
-    { "type": "Casa adosada", "icono": "🏘️" },
-    { "type": "Loft", "icono": "🏭" },
-    { "type": "Habitación privada", "icono": "🛌" },
-    { "type": "Habitación compartida", "icono": "🛌" },
-    { "type": "Cabaña", "icono": "🏡" },
-    { "type": "Castillo", "icono": "🏰" },
-    { "type": "Barco", "icono": "🛳️" },
-    { "type": "Iglú", "icono": "🏠" },
-    { "type": "Caravana", "icono": "🚐" },
-    { "type": "Casa de huéspedes", "icono": "🏠" },
-    { "type": "Bungalow", "icono": "🏡" },
-    { "type": "Ático", "icono": "🏢" },
-    { "type": "Chalé", "icono": "🏠" },
-    { "type": "Rancho", "icono": "🏡" },
-    { "type": "Departamento", "icono": "🏢" },
-    { "type": "Suite de hotel", "icono": "🏨" },
-    { "type": "Casa cueva", "icono": "🏠" },
-    { "type": "Granja", "icono": "🏡" },
-    { "type": "Lodge", "icono": "🏨" },
-    { "type": "Molino", "icono": "🏭" },
-    { "type": "Chalet alpino", "icono": "🏔️" },
-    { "type": "Casa de campo", "icono": "🏡" },
-    { "type": "Torre", "icono": "🗼" },
-    { "type": "Casa de vacaciones", "icono": "🏡" },
-    { "type": "Casa de playa", "icono": "🏖️" },
-    { "type": "Casa flotante", "icono": "🚣" },
-    { "type": "Departamento en complejo residencial", "icono": "🏢" },
-    { "type": "Apartotel", "icono": "🏢" }
+    {
+      "type": "Apartamento",
+      "icono": "🏢"
+    },
+    {
+      "type": "Casa",
+      "icono": "🏠"
+    },
+    {
+      "type": "Villa",
+      "icono": "🏰"
+    },
+    {
+      "type": "Casa adosada",
+      "icono": "🏘️"
+    },
+    {
+      "type": "Loft",
+      "icono": "🏭"
+    },
+    {
+      "type": "Habitación privada",
+      "icono": "🛌"
+    },
+    {
+      "type": "Habitación compartida",
+      "icono": "🛌"
+    },
+    {
+      "type": "Cabaña",
+      "icono": "🏡"
+    },
+    {
+      "type": "Castillo",
+      "icono": "🏰"
+    },
+    {
+      "type": "Barco",
+      "icono": "🛳️"
+    },
+    {
+      "type": "Iglú",
+      "icono": "🏠"
+    },
+    {
+      "type": "Caravana",
+      "icono": "🚐"
+    },
+    {
+      "type": "Casa de huéspedes",
+      "icono": "🏠"
+    },
+    {
+      "type": "Bungalow",
+      "icono": "🏡"
+    },
+    {
+      "type": "Ático",
+      "icono": "🏢"
+    },
+    {
+      "type": "Chalé",
+      "icono": "🏠"
+    },
+    {
+      "type": "Rancho",
+      "icono": "🏡"
+    },
+    {
+      "type": "Departamento",
+      "icono": "🏢"
+    },
+    {
+      "type": "Suite de hotel",
+      "icono": "🏨"
+    },
+    {
+      "type": "Casa cueva",
+      "icono": "🏠"
+    },
+    {
+      "type": "Granja",
+      "icono": "🏡"
+    },
+    {
+      "type": "Lodge",
+      "icono": "🏨"
+    },
+    {
+      "type": "Molino",
+      "icono": "🏭"
+    },
+    {
+      "type": "Chalet alpino",
+      "icono": "🏔️"
+    },
+    {
+      "type": "Casa de campo",
+      "icono": "🏡"
+    },
+    {
+      "type": "Torre",
+      "icono": "🗼"
+    },
+    {
+      "type": "Casa de vacaciones",
+      "icono": "🏡"
+    },
+    {
+      "type": "Casa de playa",
+      "icono": "🏖️"
+    },
+    {
+      "type": "Casa flotante",
+      "icono": "🚣"
+    },
+    {
+      "type": "Departamento en complejo residencial",
+      "icono": "🏢"
+    },
+    {
+      "type": "Apartotel",
+      "icono": "🏢"
+    }
   ],
   "properties": [
     {
@@ -175,7 +343,7 @@
       "detail": "CAÑITAS! Luminoso STUDIO en INCREÍBLE UBICACIÓN!",
       "country": "Ecuador",
       "city": "Puyo",
-      "type": "guest house",
+      "type": "guesthouse",
       "picture": [
         "https://a0.muscache.com/im/pictures/79b09530-1749-449c-a6b6-6de2b86fb962.jpg",
         "https://a0.muscache.com/im/pictures/eef52088-2b45-42a5-8af1-df69ad9a1c50.jpg",
@@ -305,7 +473,7 @@
       "detail": "⭐️🌈 Acogedor y moderno estudio🌈 ⭐️ con piscina 🏊🏼‍♂️ 🏊‍♀️",
       "country": "Argentina",
       "city": "Bariloche",
-      "type": "guest house",
+      "type": "guesthouse",
       "picture": [
         "https://a0.muscache.com/im/pictures/5b819f76-4424-4b7b-a75f-9f102ee6a3de.jpg?im_w=720",
         "https://a0.muscache.com/im/pictures/20399eda-e6d0-4068-a95c-7a7d3200b10e.jpg?im_w=1200",
@@ -331,7 +499,7 @@
       "detail": "Acogedor apartamento en el piso 11 con piscina en Palermo Center",
       "country": "España",
       "city": "Madrid",
-      "type": "guest house",
+      "type": "guesthouse",
       "picture": [
         "https://a0.muscache.com/im/pictures/58191917/f89ef5c6_original.jpg?im_w=960",
         "https://a0.muscache.com/im/pictures/58191546/8390566a_original.jpg?im_w=720",
@@ -409,7 +577,7 @@
       "detail": "Estudio de Diseño en Palermo Soho VI",
       "country": "España",
       "city": "San Sebastián",
-      "type": "guest house",
+      "type": "guesthouse",
       "picture": [
         "https://a0.muscache.com/im/pictures/miso/Hosting-651329495423191935/original/c4868c2c-8d9c-46b4-b92e-2866b6aeee17.jpeg?im_w=1200",
         "https://a0.muscache.com/im/pictures/miso/Hosting-651329495423191935/original/325f7905-dc67-40b1-8c09-153e55056d15.jpeg?im_w=720",
@@ -591,7 +759,7 @@
       "detail": "Studio único en Palermo Hollywood!",
       "country": "Paises bajos",
       "city": "Amsterdam",
-      "type": "guest house",
+      "type": "guesthouse",
       "picture": [
         "https://a0.muscache.com/im/pictures/60b0510e-9c60-412e-b6c2-b7f4cd5add75.jpg?im_w=1200",
         "https://a0.muscache.com/im/pictures/103938058/23d5f80a_original.jpg?im_w=1200",
@@ -773,7 +941,7 @@
       "detail": "Depto con estilo en Palermo p/4 personas c/piscina",
       "country": "Estados Unidos",
       "city": "Maryville",
-      "type": "guest house",
+      "type": "guesthouse",
       "picture": [
         "https://a0.muscache.com/im/pictures/67af0ed0-34e7-4c9d-868d-ee6b08cfa3f1.jpg?im_w=1200",
         "https://a0.muscache.com/im/pictures/777cd57b-9597-4ba7-ba51-49d54331ef7f.jpg?im_w=1200",
@@ -1520,7 +1688,7 @@
       "detail": "Departamento céntrico con Vista",
       "country": "Inglaterra",
       "city": "Birmingham",
-      "type": "guest house",
+      "type": "guesthouse",
       "picture": [
         "https://a0.muscache.com/im/pictures/1810b41d-1d24-42ce-94ce-7a02c00741a8.jpg?im_w=960",
         "https://a0.muscache.com/im/pictures/miso/Hosting-52980004/original/90dc7a92-8152-4c3d-8b48-64da047637a9.jpeg?im_w=1200",
@@ -1640,7 +1808,7 @@
       "detail": "Alquilo super habitación promo.",
       "country": "Brasil",
       "city": "Sao Paulo",
-      "type": "guest house",
+      "type": "guesthouse",
       "picture": [
         "https://a0.muscache.com/im/pictures/789b7666-ebec-4bf6-8a5f-511e3e82e275.jpg?im_w=1200",
         "https://a0.muscache.com/im/pictures/9f26e0b4-ce0d-419f-b105-24529e103ada.jpg?im_w=1200",
@@ -1760,7 +1928,7 @@
       "detail": "EXCELENTE MONOAMBIENTE A ESTRENAR!",
       "country": "Australia",
       "city": "Bright",
-      "type": "guest house",
+      "type": "guesthouse",
       "picture": [
         "https://a0.muscache.com/im/pictures/118a4079-43df-4e63-876b-12741da7626a.jpg?im_w=1200",
         "https://a0.muscache.com/im/pictures/80207e05-6197-46a7-a1dc-85116768d170.jpg?im_w=1200",
@@ -1880,7 +2048,7 @@
       "detail": "Monoambiente Equipado - Exclusiva zona residencial",
       "country": "Francia",
       "city": "La Rochelle",
-      "type": "guest house",
+      "type": "guesthouse",
       "picture": [
         "https://a0.muscache.com/im/pictures/ac1d6b3f-6c53-4585-84e9-b14734c26339.jpg?im_w=960",
         "https://a0.muscache.com/im/pictures/miso/Hosting-9911842/original/7bd2f482-1a16-4b50-89ae-56923697a43f.jpeg?im_w=1200",

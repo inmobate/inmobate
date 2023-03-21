@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Card from "../components/Card";
 
 const Cards = ({ properties }) => {
-
   return (
     <Container>
       {properties &&
@@ -19,6 +18,7 @@ const Cards = ({ properties }) => {
 };
 
 const Container = styled.section`
+  padding-bottom: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;

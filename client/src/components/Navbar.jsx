@@ -9,10 +9,12 @@ const Navbar = () => {
   return (
     <Nav>
       <Elements>
-        <Brand>INMOVATE</Brand>
+        <Link to="/home">
+          <Brand>INMOVATE</Brand>
+        </Link>
         <Searchbar />
         <Items>
-          <Link to="/addproperty">
+          <Link to="/addProperty">
             <Item>Publica</Item>
           </Link>
           <UserButton />

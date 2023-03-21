@@ -1,3 +1,11 @@
+:root {
+  --color1: #a33c7f;
+  --color2: #ba5497;
+  --color3: #d16db0;
+  --color4: #e885c8;
+  --color5: #ff9de0;
+}
+
 * {
   /* outline: 1px solid red; */
   box-sizing: 0;
