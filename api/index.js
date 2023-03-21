@@ -22,7 +22,6 @@ const { conn } = require('./src/db.js');
 const {property} = require('./src/controller/controllerProperty')
 const {typeDb}=require('./src/controller/controllerType')
 const {servicioDb} = require('./src/controller/controlerServicios')
-const { PORT } = process.env;
 
 
 
