@@ -1,36 +1,23 @@
-const { Comment } = require("../../db");
+const { Comment, User, Publication } = require("../../db");
 
-const newPostComment = async (content, id_user) => {
+const newPostComment = async (content, id_user, id_publication) => {
   try {
-    /*     
-    Publication.hasMany(Comment, { foreignKey: "publicId" });
-    Comment.belongsTo(Publication, { as: "public" });
-
-    User.hasMany(Comment, { foreignKey: "autor_comiId" });
-    Comment.belongsTo(User, { as: "autor_comi" });
- */
+    if (!content || !id_user || !id_publication) throw new Error("un nuevo post debe recibir: content, id_user y id_publication")
 
     const comment = await Comment.create(
       {
         content,
-        public: id_user,
-        autor_comi: id_user,
-      },
-      {
-        include: [
-          {
-            association: {
-              as: "public",
-            },
-          },
-          {
-            association: {
-              as: "autor_comi",
-            },
-          },
-        ],
-      }
-    );
+        publicId: id_publication,
+        autor_comiId: id_user
+      });
+      console.log(comment);
+
+      const findPublication = await Publication.findOne({where: {id: id_publication}});
+      
+      const findUser = await User.findOne({where: {id: id_user}});
+
+      findUser.addComment(comment);
+      findPublication.addComment(comment);
 
     return "Thanks for your comment";
   } catch (error) {

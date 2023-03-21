@@ -1,26 +1,44 @@
 const { Router } = require('express');
-const multer  = require('multer');
+// const multer  = require('multer');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-const {allUsers,postUsers,postPublications,
-    allPublications,allProperty, allSale,allBooking} = require('../handler/handlerUser.js');
-const {postComments,allType,allServicios} = require('../handler/handlerUser');
-//----------------------------------------------------------------
+const {allUsers,postUsers,postPublications,allPublications,allPropertyById,
+    allProperty, allSale,allReservas,postComments,allServicios,allComments, 
+    postProperty, postSale, postBooking, putUsers, putPublications, putProperty, alltype, deleteComments} = require('../handler/handlerUser.js');
+
 const {redirectHome, redirectLogin} = require('../middlewares/auth.js');
+const authTp = require('../handler/handlerAuthTp');
 const {passport, authenticate} = require('../passport.js');
 const jwt = require("jsonwebtoken");
+
 const router = Router();
 
-router.get('/property', allProperty)
-router.get('/type', allType)
-router.get('/servicio', allServicios)
-router.get('/users', allUsers)
-router.get('/publication', allPublications)
-router.get('/sale',allSale)
-router.get('/booking',allBooking)
-router.post('/users', postUsers)
-router.post('/comentarios',postComments)
-router.post('/publication', postPublications)
+router.get('/property', allProperty)//lista
+router.get('/property/:id', allPropertyById)//lista
+router.post('/property', postProperty)
+router.put('/property/:id', putProperty)
+
+router.get('/type', alltype)//lista
+router.get('/servicio', allServicios)//lista
+
+router.get('/sale', allSale)//lista
+router.post('sale', postSale)
+
+router.get('/booking',allReservas)//lista
+router.post('/booking', postBooking)
+
+router.get('/users', allUsers)//lista
+router.post('/users', postUsers)//lista
+router.put('/users', putUsers)//lista
+
+router.get("/comentarios", allComments)//lista
+router.post('/:id_publication/comentarios', postComments)//lista
+router.delete("/comentarios", deleteComments)// no le voy a hacer, comentarlo al grupo
+
+
+router.get('/publication', allPublications)//lista
+router.post('/publication', postPublications)// lista
+router.put('/publication', putPublications)
 //------------------------------Auth----------------------------------------------------------------
 
 
@@ -58,13 +76,13 @@ router.get('/login', redirectHome,  (req, res) => {
         <br/>
         <a href="/auth/facebook">Ingresar con Facebook</a>
       </form>
-      <a href='/register'>Registrarse</a>
+      <a href='/signup'>Registrarse</a>
     `)
   });
 router.post('/signup', redirectHome, (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, lastName, email, password } = req.body;
 
-    if(name && email && password) {
+    if(name && email && password && lastName ) {
         const exists = User.findAll(user => user.email === email);
         if(!exists) {
         const user = {
@@ -90,21 +108,25 @@ router.get('/auth/google/callback',
     res.redirect('/');
   });
   router.get('/auth/facebook',
-  passport.authenticate('facebook'),(req,res) => res.send(req.user));
+  passport.authenticate('facebook'));
 
 router.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { scope: ['email'] }, { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
+  passport.authenticate('facebook', { scope: ['email'] }, { failureRedirect: '/login' }),);
   router.post('/logout', function(req, res, next) {
     req.logout(function(err) {
       if (err) { return next(err); }
       res.redirect('/');
     });
   })
-
+  router.get('/home', redirectLogin, (req, res) => {
+    const user = users.find(user => user.id === req.session.userId);
+    
+    res.send(`
+      <h1>Bienvenido ${user.name}</h1>
+      <h4>${user.email}</h4>
+      <a href='/'>Inicio</a>
+    `)
+  });
 module.exports = router;
 
 //, 

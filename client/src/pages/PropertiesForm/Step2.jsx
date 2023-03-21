@@ -7,6 +7,11 @@ import { BottomBar, Container, Content, ContentColum, Section } from "./styles";
 const Step2 = () => {
   const { roomType } = useSelector((state) => state.propertyToAdd);
 
+  const storage = JSON.parse(
+    localStorage.getItem("persist:root")
+  ).propertyToAdd;
+  const storageRoomTipe = roomType || JSON.parse(storage).roomType;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -18,7 +23,7 @@ const Step2 = () => {
           <Section
             onClick={() => dispatch(setTypeRoom("alojamiento entero"))}
             style={
-              roomType === "alojamiento entero"
+              storageRoomTipe === "alojamiento entero"
                 ? { border: "1px solid grey" }
                 : null
             }
@@ -31,7 +36,7 @@ const Step2 = () => {
           <Section
             onClick={() => dispatch(setTypeRoom("habitacion privada"))}
             style={
-              roomType === "habitacion privada"
+              storageRoomTipe === "habitacion privada"
                 ? { border: "1px solid grey" }
                 : null
             }
@@ -45,7 +50,7 @@ const Step2 = () => {
           <Section
             onClick={() => dispatch(setTypeRoom("habitacion compartida"))}
             style={
-              roomType === "habitacion compartida"
+              storageRoomTipe === "habitacion compartida"
                 ? { border: "1px solid grey" }
                 : null
             }

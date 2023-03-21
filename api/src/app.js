@@ -28,7 +28,7 @@ server.use((req, res, next) => {
 server.use(session({ 
   secret: 'cats',
   resave: false, 
-  saveUninitialized: false,
+  saveUninitialized: true,
   /* genid: function(req) {
     return genuuid() // use UUIDs for session IDs
   }, */

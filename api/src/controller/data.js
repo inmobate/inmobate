@@ -24,7 +24,12 @@ let data =[
     area: 748,
     direccion: 'Av. Cabildo 7890, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Buenos Aires',
+    provincia: 'Buenos Aires',
+    address: 'Avenida Corrientes 5623',
+    codigo_postal: 'C1043AAD',
+    piso: 7
   },
   {
     id: 2,
@@ -51,7 +56,12 @@ let data =[
     area: 557,
     direccion: 'Calle Alvear 2345, Jujuy',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'La Plata',
+    provincia: 'Buenos Aires',
+    address: 'Calle 68 1245',
+    codigo_postal: 'B1900FWA',
+    piso: 6
   },
   {
     id: 3,
@@ -78,7 +88,12 @@ let data =[
     area: 720,
     direccion: 'Av. Gaona 1234, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Córdoba',
+    provincia: 'Córdoba',
+    address: 'Obispo Trejo 942',
+    codigo_postal: 'X5000AHG',
+    piso: 10
   },
   {
     id: 4,
@@ -104,7 +119,12 @@ let data =[
     area: 605,
     direccion: 'Calle Tucumán 9012, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Rosario',
+    provincia: 'Santa Fe',
+    address: 'Boulevard Oroño 90',
+    codigo_postal: 'S2000DBN',
+    piso: 2
   },
   {
     id: 5,
@@ -130,7 +150,12 @@ let data =[
     area: 796,
     direccion: 'Calle Cerrito 2345, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Mendoza',
+    provincia: 'Mendoza',
+    address: 'Avenida San Martín 1900',
+    codigo_postal: 'M5500EAF',
+    piso: 1
   },
   {
     id: 6,
@@ -156,7 +181,12 @@ let data =[
     area: 466,
     direccion: 'Av. Medrano 6789, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Salta',
+    provincia: 'Salta',
+    address: 'Calle Mitre 93',
+    codigo_postal: 'A4400AAL',
+    piso: 7
   },
   {
     id: 7,
@@ -182,7 +212,12 @@ let data =[
     area: 726,
     direccion: 'Av. Juan B. Justo 4567, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'San Juan',
+    provincia: 'San Juan',
+    address: 'Avenida España 5430',
+    codigo_postal: 'J5400COJ',
+    piso: 10
   },
   {
     id: 8,
@@ -208,7 +243,12 @@ let data =[
     area: 748,
     direccion: 'Calle Reconquista 345, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'San Luis',
+    provincia: 'San Luis',
+    address: 'Avenida Illia 8842',
+    codigo_postal: 'D5700ACD',
+    piso: 3
   },
   {
     id: 9,
@@ -234,7 +274,12 @@ let data =[
     area: 613,
     direccion: 'Av. Rivadavia 012, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Misiones',
+    provincia: 'Misiones',
+    address: 'Avenida Uruguay 1074',
+    codigo_postal: 'N3300CKF',
+    piso: 5
   },
   {
     id: 10,
@@ -260,7 +305,12 @@ let data =[
     area: 117,
     direccion: 'Av. Corrientes 1234, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Neuquén',
+    provincia: 'Neuquén',
+    address: 'Calle Santa Fe 1345',
+    codigo_postal: 'Q8300HBE',
+    piso: 4
   },
   {
     id: 11,
@@ -286,7 +336,12 @@ let data =[
     area: 607,
     direccion: 'Calle Boedo 567, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Chaco',
+    provincia: 'Chaco',
+    address: 'Calle Güemes 7541',
+    codigo_postal: 'H3500DHJ',
+    piso: 3
   },
   {
     id: 12,
@@ -312,7 +367,12 @@ let data =[
     area: 103,
     direccion: 'Calle Tucumán 9012, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Tierra del Fuego',
+    provincia: 'Tierra del Fuego',
+    address: 'Avenida San Martín 154',
+    codigo_postal: 'V9410BCJ',
+    piso: 2
   },
   {
     id: 13,
@@ -338,7 +398,12 @@ let data =[
     area: 771,
     direccion: 'Av. Luis María Campos 345, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Santa Cruz',
+    provincia: 'Santa Cruz',
+    address: 'Calle Roca 193',
+    codigo_postal: 'Z9400BCF',
+    piso: 2
   },
   {
     id: 14,
@@ -364,7 +429,12 @@ let data =[
     area: 557,
     direccion: 'Calle Tucumán 9012, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Catamarca',
+    provincia: 'Catamarca',
+    address: 'Calle Esquiú 294',
+    codigo_postal: 'K4700ADC',
+    piso: 10
   },
   {
     id: 15,
@@ -390,7 +460,12 @@ let data =[
     area: 447,
     direccion: 'Av. Callao 2345, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Chubut',
+    provincia: 'Chubut',
+    address: 'Avenida Roca 132',
+    codigo_postal: 'U9100BDF',
+    piso: 8
   },
   {
     id: 16,
@@ -416,7 +491,12 @@ let data =[
     area: 57,
     direccion: 'Calle Belgrano 4321, Salta',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'La Rioja',
+    provincia: 'La Rioja',
+    address: 'Calle San Nicolás 627',
+    codigo_postal: 'F5300ACK',
+    piso: 2
   },
   {
     id: 17,
@@ -442,7 +522,12 @@ let data =[
     area: 104,
     direccion: 'Av. San Juan 890, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Entre Ríos',
+    provincia: 'Entre Ríos',
+    address: 'Calle España 595',
+    codigo_postal: 'E3100CHF',
+    piso: 4
   },
   {
     id: 18,
@@ -468,7 +553,12 @@ let data =[
     area: 65,
     direccion: 'Av. Corrientes 1234, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Buenos Aires',
+    provincia: 'Buenos Aires',
+    address: 'Avenida Corrientes 123',
+    codigo_postal: 'C1043AAD',
+    piso: 7
   },
   {
     id: 19,
@@ -494,7 +584,12 @@ let data =[
     area: 464,
     direccion: 'Av. Congreso 012, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'La Plata',
+    provincia: 'Buenos Aires',
+    address: 'Calle 7 1245',
+    codigo_postal: 'B1900FWA',
+    piso: 1
   },
   {
     id: 20,
@@ -520,7 +615,12 @@ let data =[
     area: 764,
     direccion: 'Av. Santa Fe 678, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Córdoba',
+    provincia: 'Córdoba',
+    address: 'Obispo Trejo 242',
+    codigo_postal: 'X5000AHG',
+    piso: 1
   },
   {
     id: 21,
@@ -546,7 +646,12 @@ let data =[
     area: 950,
     direccion: 'Calle Reconquista 345, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Rosario',
+    provincia: 'Santa Fe',
+    address: 'Boulevard Oroño 690',
+    codigo_postal: 'S2000DBN',
+    piso: 4
   },
   {
     id: 22,
@@ -572,7 +677,12 @@ let data =[
     area: 828,
     direccion: 'Calle Juan Manuel de Rosas 901, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Mendoza',
+    provincia: 'Mendoza',
+    address: 'Avenida San Martín 1200',
+    codigo_postal: 'M5500EAF',
+    piso: 8
   },
   {
     id: 23,
@@ -598,7 +708,12 @@ let data =[
     area: 852,
     direccion: 'Av. Eduardo Madero 678, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Salta',
+    provincia: 'Salta',
+    address: 'Calle Mitre 23',
+    codigo_postal: 'A4400AAL',
+    piso: 5
   },
   {
     id: 24,
@@ -624,7 +739,12 @@ let data =[
     area: 457,
     direccion: 'Av. Eduardo Madero 678, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'San Juan',
+    provincia: 'San Juan',
+    address: 'Avenida España 430',
+    codigo_postal: 'J5400COJ',
+    piso: 8
   },
   {
     id: 25,
@@ -650,7 +770,12 @@ let data =[
     area: 886,
     direccion: 'Av. San Martín 5678, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'San Luis',
+    provincia: 'San Luis',
+    address: 'Avenida Illia 42',
+    codigo_postal: 'D5700ACD',
+    piso: 9
   },
   {
     id: 26,
@@ -676,7 +801,12 @@ let data =[
     area: 591,
     direccion: 'Calle Alvear 2345, Jujuy',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Misiones',
+    provincia: 'Misiones',
+    address: 'Avenida Uruguay 1174',
+    codigo_postal: 'N3300CKF',
+    piso: 2
   },
   {
     id: 27,
@@ -702,7 +832,12 @@ let data =[
     area: 139,
     direccion: 'Calle Nazca 678, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Neuquén',
+    provincia: 'Neuquén',
+    address: 'Calle Santa Fe 345',
+    codigo_postal: 'Q8300HBE',
+    piso: 1
   },
   {
     id: 28,
@@ -728,7 +863,12 @@ let data =[
     area: 504,
     direccion: 'Av. Corrientes 1234, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Chaco',
+    provincia: 'Chaco',
+    address: 'Calle Güemes 541',
+    codigo_postal: 'H3500DHJ',
+    piso: 4
   },
   {
     id: 29,
@@ -754,7 +894,12 @@ let data =[
     area: 449,
     direccion: 'Calle Honduras 6789, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Tierra del Fuego',
+    provincia: 'Tierra del Fuego',
+    address: 'Avenida San Martín 854',
+    codigo_postal: 'V9410BCJ',
+    piso: 10
   },
   {
     id: 30,
@@ -780,7 +925,12 @@ let data =[
     area: 491,
     direccion: 'Av. Luis María Campos 345, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Santa Cruz',
+    provincia: 'Santa Cruz',
+    address: 'Calle Roca 123',
+    codigo_postal: 'Z9400BCF',
+    piso: 3
   },
   {
     id: 31,
@@ -806,7 +956,12 @@ let data =[
     area: 686,
     direccion: 'Calle Jujuy 890, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Catamarca',
+    provincia: 'Catamarca',
+    address: 'Calle Esquiú 24',
+    codigo_postal: 'K4700ADC',
+    piso: 6
   },
   {
     id: 32,
@@ -832,7 +987,12 @@ let data =[
     area: 887,
     direccion: 'Av. Entre Ríos 1234, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Chubut',
+    provincia: 'Chubut',
+    address: 'Avenida Roca 12',
+    codigo_postal: 'U9100BDF',
+    piso: 6
   },
   {
     id: 33,
@@ -858,7 +1018,12 @@ let data =[
     area: 717,
     direccion: 'Calle Warnes 7890, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'La Rioja',
+    provincia: 'La Rioja',
+    address: 'Calle San Nicolás 27',
+    codigo_postal: 'F5300ACK',
+    piso: 1
   },
   {
     id: 34,
@@ -884,7 +1049,12 @@ let data =[
     area: 801,
     direccion: 'Av. San Juan 890, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Entre Ríos',
+    provincia: 'Entre Ríos',
+    address: 'Calle España 555',
+    codigo_postal: 'E3100CHF',
+    piso: 3
   },
   {
     id: 35,
@@ -910,7 +1080,12 @@ let data =[
     area: 796,
     direccion: 'Av. Álvarez Jonte 3456, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Buenos Aires',
+    provincia: 'Buenos Aires',
+    address: 'Avenida Corrientes 5623',
+    codigo_postal: 'C1043AAD',
+    piso: 10
   },
   {
     id: 36,
@@ -936,7 +1111,12 @@ let data =[
     area: 255,
     direccion: 'Av. Gaona 1234, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'La Plata',
+    provincia: 'Buenos Aires',
+    address: 'Calle 68 1245',
+    codigo_postal: 'B1900FWA',
+    piso: 6
   },
   {
     id: 37,
@@ -962,7 +1142,12 @@ let data =[
     area: 744,
     direccion: 'Av. Nazca 567, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Córdoba',
+    provincia: 'Córdoba',
+    address: 'Obispo Trejo 942',
+    codigo_postal: 'X5000AHG',
+    piso: 4
   },
   {
     id: 38,
@@ -988,7 +1173,12 @@ let data =[
     area: 354,
     direccion: 'Calle Boedo 567, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Rosario',
+    provincia: 'Santa Fe',
+    address: 'Boulevard Oroño 90',
+    codigo_postal: 'S2000DBN',
+    piso: 1
   },
   {
     id: 39,
@@ -1014,7 +1204,12 @@ let data =[
     area: 565,
     direccion: 'Calle Tucumán 9012, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Mendoza',
+    provincia: 'Mendoza',
+    address: 'Avenida San Martín 1900',
+    codigo_postal: 'M5500EAF',
+    piso: 6
   },
   {
     id: 40,
@@ -1040,7 +1235,12 @@ let data =[
     area: 497,
     direccion: 'Calle Florida 432, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Salta',
+    provincia: 'Salta',
+    address: 'Calle Mitre 93',
+    codigo_postal: 'A4400AAL',
+    piso: 2
   },
   {
     id: 41,
@@ -1066,7 +1266,12 @@ let data =[
     area: 951,
     direccion: 'Av. Juan B. Justo 4567, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'San Juan',
+    provincia: 'San Juan',
+    address: 'Avenida España 5430',
+    codigo_postal: 'J5400COJ',
+    piso: 9
   },
   {
     id: 42,
@@ -1092,7 +1297,12 @@ let data =[
     area: 358,
     direccion: 'Calle Montevideo 789, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'San Luis',
+    provincia: 'San Luis',
+    address: 'Avenida Illia 8842',
+    codigo_postal: 'D5700ACD',
+    piso: 1
   },
   {
     id: 43,
@@ -1118,7 +1328,12 @@ let data =[
     area: 682,
     direccion: 'Calle Lavalle 901, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Misiones',
+    provincia: 'Misiones',
+    address: 'Avenida Uruguay 1074',
+    codigo_postal: 'N3300CKF',
+    piso: 4
   },
   {
     id: 44,
@@ -1144,7 +1359,12 @@ let data =[
     area: 299,
     direccion: 'Av. Juan B. Justo 4567, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Neuquén',
+    provincia: 'Neuquén',
+    address: 'Calle Santa Fe 1345',
+    codigo_postal: 'Q8300HBE',
+    piso: 4
   },
   {
     id: 45,
@@ -1170,7 +1390,12 @@ let data =[
     area: 676,
     direccion: 'Calle San Martín 123, Tucumán',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Chaco',
+    provincia: 'Chaco',
+    address: 'Calle Güemes 7541',
+    codigo_postal: 'H3500DHJ',
+    piso: 6
   },
   {
     id: 46,
@@ -1196,7 +1421,12 @@ let data =[
     area: 328,
     direccion: 'Av. 9 de Julio 4567, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Tierra del Fuego',
+    provincia: 'Tierra del Fuego',
+    address: 'Avenida San Martín 154',
+    codigo_postal: 'V9410BCJ',
+    piso: 10
   },
   {
     id: 47,
@@ -1222,7 +1452,12 @@ let data =[
     area: 549,
     direccion: 'Calle Entre Ríos 789, Entre Ríos',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Santa Cruz',
+    provincia: 'Santa Cruz',
+    address: 'Calle Roca 193',
+    codigo_postal: 'Z9400BCF',
+    piso: 8
   },
   {
     id: 48,
@@ -1248,7 +1483,12 @@ let data =[
     area: 93,
     direccion: 'Av. Eduardo Madero 678, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Catamarca',
+    provincia: 'Catamarca',
+    address: 'Calle Esquiú 294',
+    codigo_postal: 'K4700ADC',
+    piso: 9
   },
   {
     id: 49,
@@ -1274,7 +1514,12 @@ let data =[
     area: 334,
     direccion: 'Calle Balcarce 123, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Chubut',
+    provincia: 'Chubut',
+    address: 'Avenida Roca 132',
+    codigo_postal: 'U9100BDF',
+    piso: 6
   },
   {
     id: 50,
@@ -1300,7 +1545,12 @@ let data =[
     area: 993,
     direccion: 'Av. Luis María Campos 345, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'La Rioja',
+    provincia: 'La Rioja',
+    address: 'Calle San Nicolás 627',
+    codigo_postal: 'F5300ACK',
+    piso: 6
   },
   {
     id: 51,
@@ -1326,7 +1576,12 @@ let data =[
     area: 947,
     direccion: 'Av. Corrientes 1234, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Entre Ríos',
+    provincia: 'Entre Ríos',
+    address: 'Calle España 595',
+    codigo_postal: 'E3100CHF',
+    piso: 3
   },
   {
     id: 52,
@@ -1352,7 +1607,12 @@ let data =[
     area: 194,
     direccion: 'Calle Cerrito 2345, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Buenos Aires',
+    provincia: 'Buenos Aires',
+    address: 'Avenida Corrientes 123',
+    codigo_postal: 'C1043AAD',
+    piso: 9
   },
   {
     id: 53,
@@ -1378,7 +1638,12 @@ let data =[
     area: 84,
     direccion: 'Calle San Martín 123, Tucumán',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'La Plata',
+    provincia: 'Buenos Aires',
+    address: 'Calle 7 1245',
+    codigo_postal: 'B1900FWA',
+    piso: 5
   },
   {
     id: 54,
@@ -1404,7 +1669,12 @@ let data =[
     area: 811,
     direccion: 'Av. Segurola 890, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Córdoba',
+    provincia: 'Córdoba',
+    address: 'Obispo Trejo 242',
+    codigo_postal: 'X5000AHG',
+    piso: 7
   },
   {
     id: 55,
@@ -1430,7 +1700,12 @@ let data =[
     area: 807,
     direccion: 'Av. Nazca 567, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Rosario',
+    provincia: 'Santa Fe',
+    address: 'Boulevard Oroño 690',
+    codigo_postal: 'S2000DBN',
+    piso: 4
   },
   {
     id: 56,
@@ -1455,7 +1730,12 @@ let data =[
     area: 319,
     direccion: 'Av. Callao 2345, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Mendoza',
+    provincia: 'Mendoza',
+    address: 'Avenida San Martín 1200',
+    codigo_postal: 'M5500EAF',
+    piso: 2
   },
   {
     id: 57,
@@ -1480,7 +1760,12 @@ let data =[
     area: 69,
     direccion: 'Calle Nuñez 123, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Salta',
+    provincia: 'Salta',
+    address: 'Calle Mitre 23',
+    codigo_postal: 'A4400AAL',
+    piso: 7
   },
   {
     id: 58,
@@ -1505,7 +1790,12 @@ let data =[
     area: 286,
     direccion: 'Av. Francisco Beiró 123, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'San Juan',
+    provincia: 'San Juan',
+    address: 'Avenida España 430',
+    codigo_postal: 'J5400COJ',
+    piso: 4
   },
   {
     id: 59,
@@ -1530,7 +1820,12 @@ let data =[
     area: 884,
     direccion: 'Av. Segurola 890, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'San Luis',
+    provincia: 'San Luis',
+    address: 'Avenida Illia 42',
+    codigo_postal: 'D5700ACD',
+    piso: 6
   },
   {
     id: 60,
@@ -1555,7 +1850,12 @@ let data =[
     area: 337,
     direccion: 'Av. Eduardo Madero 678, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Misiones',
+    provincia: 'Misiones',
+    address: 'Avenida Uruguay 1174',
+    codigo_postal: 'N3300CKF',
+    piso: 10
   },
   {
     id: 61,
@@ -1580,7 +1880,12 @@ let data =[
     area: 80,
     direccion: 'Calle Warnes 7890, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Neuquén',
+    provincia: 'Neuquén',
+    address: 'Calle Santa Fe 345',
+    codigo_postal: 'Q8300HBE',
+    piso: 10
   },
   {
     id: 62,
@@ -1605,7 +1910,12 @@ let data =[
     area: 121,
     direccion: 'Calle Bulnes 012, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Chaco',
+    provincia: 'Chaco',
+    address: 'Calle Güemes 541',
+    codigo_postal: 'H3500DHJ',
+    piso: 10
   },
   {
     id: 63,
@@ -1630,7 +1940,12 @@ let data =[
     area: 541,
     direccion: 'Av. San Francisco 901, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Tierra del Fuego',
+    provincia: 'Tierra del Fuego',
+    address: 'Avenida San Martín 854',
+    codigo_postal: 'V9410BCJ',
+    piso: 2
   },
   {
     id: 64,
@@ -1655,7 +1970,12 @@ let data =[
     area: 314,
     direccion: 'Calle Esmeralda 678, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Santa Cruz',
+    provincia: 'Santa Cruz',
+    address: 'Calle Roca 123',
+    codigo_postal: 'Z9400BCF',
+    piso: 3
   },
   {
     id: 65,
@@ -1680,7 +2000,12 @@ let data =[
     area: 997,
     direccion: 'Calle Venezuela 123, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Catamarca',
+    provincia: 'Catamarca',
+    address: 'Calle Esquiú 24',
+    codigo_postal: 'K4700ADC',
+    piso: 1
   },
   {
     id: 66,
@@ -1705,7 +2030,12 @@ let data =[
     area: 841,
     direccion: 'Av. Scalabrini Ortiz 9012, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Chubut',
+    provincia: 'Chubut',
+    address: 'Avenida Roca 12',
+    codigo_postal: 'U9100BDF',
+    piso: 4
   },
   {
     id: 67,
@@ -1730,7 +2060,12 @@ let data =[
     area: 160,
     direccion: 'Av. Córdoba 9012, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'La Rioja',
+    provincia: 'La Rioja',
+    address: 'Calle San Nicolás 27',
+    codigo_postal: 'F5300ACK',
+    piso: 6
   },
   {
     id: 68,
@@ -1755,7 +2090,12 @@ let data =[
     area: 520,
     direccion: 'Av. 9 de Julio 4567, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Entre Ríos',
+    provincia: 'Entre Ríos',
+    address: 'Calle España 555',
+    codigo_postal: 'E3100CHF',
+    piso: 8
   },
   {
     id: 69,
@@ -1780,7 +2120,12 @@ let data =[
     area: 651,
     direccion: 'Calle Sarmiento 456, La Pampa',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Tierra del Fuego',
+    provincia: 'Tierra del Fuego',
+    address: 'Avenida San Martín 854',
+    codigo_postal: 'V9410BCJ',
+    piso: 5
   },
   {
     id: 70,
@@ -1805,7 +2150,12 @@ let data =[
     area: 962,
     direccion: 'Av. Rivadavia 012, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Santa Cruz',
+    provincia: 'Santa Cruz',
+    address: 'Calle Roca 123',
+    codigo_postal: 'Z9400BCF',
+    piso: 6
   },
   {
     id: 71,
@@ -1830,7 +2180,12 @@ let data =[
     area: 65,
     direccion: 'Av. Corrientes 1234, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Catamarca',
+    provincia: 'Catamarca',
+    address: 'Calle Esquiú 24',
+    codigo_postal: 'K4700ADC',
+    piso: 2
   },
   {
     id: 72,
@@ -1855,7 +2210,12 @@ let data =[
     area: 650,
     direccion: 'Calle Jujuy 890, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Chubut',
+    provincia: 'Chubut',
+    address: 'Avenida Roca 12',
+    codigo_postal: 'U9100BDF',
+    piso: 2
   },
   {
     id: 73,
@@ -1880,7 +2240,12 @@ let data =[
     area: 527,
     direccion: 'Calle Warnes 7890, Buenos Aires',
     rating: '⭐️⭐️⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'La Rioja',
+    provincia: 'La Rioja',
+    address: 'Calle San Nicolás 27',
+    codigo_postal: 'F5300ACK',
+    piso: 8
   },
   {
     id: 74,
@@ -1905,7 +2270,12 @@ let data =[
     area: 73,
     direccion: 'Av. 9 de Julio 4567, Buenos Aires',
     rating: '⭐️⭐️⭐️',
-    activo: true
+    activo: true,
+    ciudad: 'Entre Ríos',
+    provincia: 'Entre Ríos',
+    address: 'Calle España 555',
+    codigo_postal: 'E3100CHF',
+    piso: 6
   }
 ]
 

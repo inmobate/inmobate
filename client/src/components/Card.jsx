@@ -1,17 +1,27 @@
 import styled from "styled-components";
 
 const Card = ({ property }) => {
-  const { photo, city, country, price } = property;
+  const { photo, city, country, price, rating } = property;
   return (
     <Container>
-      <img src={photo} alt="" width="300px" height="300px" />
-      <div>{city}</div>
-      <div>{country}</div>
-      <div>{price}</div>
+      <Image src={photo} alt="" width="250" height="250px" />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div>
+          <div>
+            {city}, {country}
+          </div>
+          <div>${price}</div>
+        </div>
+        <div>{rating.length}</div>
+      </div>
     </Container>
   );
 };
 
 const Container = styled.div``;
+
+const Image = styled.img`
+  border-radius: 1em;
+`;
 
 export default Card;

@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const bcrypt = require('bcrypt');
-const { User } = require('./db.js');
+const { authTp } = require('./handler/handlerAuthTp.js');
 const { 
     GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET, 
@@ -19,8 +19,25 @@ const {
 passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
-    }, async (email, password, done) => done(null, profile) ));
+    }, async (email, password, done) => {
+    try {
+        const user = await User.findOne({ where: { email } });
+        if (!user) {
+            return done(null, false);
+        }
 
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return done(null, false);
+        }
+    
+        return done(null, user);
+    } 
+    catch (error) {
+        console.error(error);
+        return done(error);
+    }
+}));
 
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,

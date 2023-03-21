@@ -7,6 +7,13 @@ import { BottomBar, Container, ContentColum, Form } from "./styles";
 const Step3 = () => {
   const { location } = useSelector((state) => state.propertyToAdd);
 
+  const storage = JSON.parse(
+    localStorage.getItem("persist:root")
+  ).propertyToAdd;
+  const storageLocation = Object.keys(location).length
+    ? location
+    : JSON.parse(storage).location;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -32,42 +39,42 @@ const Step3 = () => {
             type="text"
             name="street"
             placeholder="calle"
-            value={location.street}
+            value={storageLocation.street}
             onChange={(e) => handleChange(e.target)}
           />
           <input
             type="text"
             name="floor"
             placeholder="piso/dpto"
-            value={location.floor}
+            value={storageLocation.floor}
             onChange={(e) => handleChange(e.target)}
           />
           <input
             type="text"
             name="city"
             placeholder="ciudad"
-            value={location.city}
+            value={storageLocation.city}
             onChange={(e) => handleChange(e.target)}
           />
           <input
             type="text"
             name="state"
             placeholder="provincia/estado"
-            value={location.state}
+            value={storageLocation.state}
             onChange={(e) => handleChange(e.target)}
           />
           <input
             type="text"
             name="country"
             placeholder="pais o region"
-            value={location.country}
+            value={storageLocation.country}
             onChange={(e) => handleChange(e.target)}
           />
           <input
             type="number"
             name="postalCode"
             placeholder="codigo postal"
-            value={location.postalCode}
+            value={storageLocation.postalCode}
             onChange={(e) => handleChange(e.target)}
           />
         </Form>
