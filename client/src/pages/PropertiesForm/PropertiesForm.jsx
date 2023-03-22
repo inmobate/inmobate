@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { BottomBar, Container, Content, FlexCenter } from "./styles";
+import { BottomBar, Container, Content, FlexCenter, Button } from "./styles";
 
 const PropertiesForm = () => {
   const navigate = useNavigate();
@@ -15,9 +15,9 @@ const PropertiesForm = () => {
             habitación. Hacenos saber la ubicación y cuántos huéspedes pueden
             quedarse en el alojamiento.
           </p>
-          <button onClick={() => navigate("/addproperty/step1")}>
+          <Button onClick={() => navigate("/addproperty/step1")}>
             Siguiente
-          </button>
+          </Button>
         </FlexCenter>
         <div>
           <video
