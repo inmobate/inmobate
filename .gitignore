@@ -38,8 +38,8 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
-jspm_packages/
+api/node_modules/
+api/jspm_packages/
 
 # TypeScript v1 declaration files
 typings/
@@ -69,7 +69,8 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+api/.env
+api/package-lock.json
 .env.test
 
 
@@ -106,3 +107,28 @@ dist
 
 # package-lock.json
 package-lock.json
+# Logs
+client/*.log
+client/logs
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+client/pnpm-debug.log*
+client/lerna-debug.log*
+
+client/node_modules
+client/dist
+client/dist-ssr
+client/*.local
+client/package-lock.json
+
+# Editor directories and files
+client/.vscode/*
+client/!.vscode/extensions.json
+client/.idea
+client/.DS_Store
+client/*.suo
+client/*.ntvs*
+cleint*.njsproj
+client*.sln
+client*.sw?

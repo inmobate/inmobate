@@ -1,4 +1,4 @@
-const newPostUser = require("./post/postUsers.js");
+const signUp = require("./post/postUsers.js");
 const newPostComment = require("./post/postComments.js");
 const newPostPublication = require("./post/postPublications.js");
 const newPostProperty = require("./post/PostProperty.js");
@@ -105,8 +105,8 @@ const allUsers = async (req, res) => {
 const postUsers = async (req, res) => {
   const { name, lastName, email, password } = req.body;
   try {
-    const newPost = await newPostUser(name, lastName, email, password);
-    res.status(200).send(newPost);
+    const newPost = await signUp(name, lastName, email, password);
+    res.status(201).send(newPost);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
