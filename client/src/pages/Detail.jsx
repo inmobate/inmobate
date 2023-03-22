@@ -24,7 +24,6 @@ const Detail = () => {
         <Property>
           <Title>{data.title}</Title>
           <div>
-            {/* <span>{data.rating.length} - </span> */}
             <span>{data.city}, </span>
             <span> {data.country} - </span>
             <span>{data.direccion}</span>
@@ -40,7 +39,7 @@ const Detail = () => {
           </Gallery>
           <div>Alojamiento {data.type}.</div>
           <div>
-            {data.habitacion} dormitorios,{data.banos} baños
+            {data.room} dormitorios,{data.bathrooms} baños
           </div>
         </Property>
       </Main>
@@ -94,7 +93,7 @@ const Images = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  object-fit: fill;
+  object-fit: cover;
 `;
 
 const Image = styled.img`
