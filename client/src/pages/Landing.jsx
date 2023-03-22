@@ -10,7 +10,7 @@ const Landing = () => {
       <header></header>
       <main>
         <Banner>
-          <h1>INMOVATE</h1>
+          <h1>INMOBATE</h1>
           <Link to="/home">Ir a home</Link>
         </Banner>
         <AboutUs>
@@ -28,9 +28,9 @@ const Landing = () => {
           </div>
         </AboutUs>
       </main>
-      <footer>
+      <Footer>
         <Footerbar />
-      </footer>
+      </Footer>
     </Container>
   );
 };
@@ -51,6 +51,10 @@ const AboutUs = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+`;
+
+const Footer = styled.footer`
+  display: none;
 `;
 
 export default Landing;

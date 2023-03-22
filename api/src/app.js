@@ -23,6 +23,23 @@ server.use((req, res, next) => {
   next();
 });
 
+<<<<<<< HEAD
+=======
+// uso de session y passpport -----------------------
+server.use(session({ 
+  secret: 'cats',
+  resave: false, 
+  saveUninitialized: true,
+ /*   genid: function(req) {
+    return genuuid() // use UUIDs for session IDs
+  },  */
+
+}))
+server.use(passport.initialize());
+
+
+//--------------------------------------
+>>>>>>> ba4dd5d642deb4fbbf691b05a80f462f5ab13b26
 server.use('/', routes);
 
 // Error catching endware.

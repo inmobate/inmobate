@@ -1,14 +1,22 @@
 import styled from "styled-components";
 
+import "swiper/css";
+
 import { useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 
+import { HiAdjustments } from "react-icons/hi";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
 import { setFilter } from "../app/slices/filterCombine";
 
 import { useGetPropertiesQuery } from "../app/api/properties";
+
+import { useGetTypeQuery } from "../app/api/properties";
 
 const Filterbar = () => {
   const dispatch = useDispatch();
@@ -27,9 +35,11 @@ const Filterbar = () => {
 
   const { data, error, isLoading } = useGetPropertiesQuery();
 
-  const handlerAll = (location) => {
-    if (location) navigate(`/home`);
-  };
+  const {
+    data: dataType,
+    error: errorType,
+    isLoading: isLoadingType,
+  } = useGetTypeQuery();
 
   const handlerFilter = (location) => {
     if (location) navigate(`/filter/${location}`);
@@ -55,8 +65,14 @@ const Filterbar = () => {
 
   return (
     <Container>
-      <Button onClick={() => handlerAll("home")}>Todos los alojamientos</Button>
-      <Button onClick={() => handlerFilter("house")} location="house">
+      <Swiper slidesPerView={12} grabCursor={true}>
+        {dataType &&
+          dataType?.map((el) => (
+            <SwiperSlide key={el.id}>{el.name}</SwiperSlide>
+          ))}
+      </Swiper>
+
+      {/* <Button onClick={() => handlerFilter("house")} location="house">
         Vivienda
       </Button>
       <Button onClick={() => handlerFilter("department")} location="department">
@@ -67,8 +83,12 @@ const Filterbar = () => {
       </Button>
       <Button onClick={() => handlerFilter("guesthouse")} location="guesthouse">
         Hostal
+      </Button> */}
+      <Button onClick={toggleMenu}>
+        <HiAdjustments size={25} />
+        <div>Filtros</div>
       </Button>
-      <button onClick={toggleMenu}>Filtros</button>
+
       {menuOpen && (
         <FilterMenu>
           <Ul>
@@ -149,8 +169,19 @@ const Container = styled.div`
   background: #ffff;
 `;
 
-const Button = styled.button`
+const Button = styled.div`
+  padding: 0.5em 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.1em;
+  border-radius: 1em;
+  background: var(--color5);
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const FilterMenu = styled.div`

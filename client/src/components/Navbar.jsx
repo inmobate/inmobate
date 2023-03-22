@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import Searchbar from "./Searchbar";
+
 import UserButton from "./UserButton";
 
 const Navbar = () => {
@@ -10,7 +11,7 @@ const Navbar = () => {
     <Nav>
       <Elements>
         <Link to="/home">
-          <Brand>INMOVATE</Brand>
+          <Brand>INMOBATE</Brand>
         </Link>
         <Searchbar />
         <Items>
@@ -25,12 +26,12 @@ const Navbar = () => {
 };
 
 const Nav = styled.nav`
-  padding: 0 3rem;
+  /* padding: 0 3rem; */
   background: #ffff;
 `;
 
 const Elements = styled.div`
-  padding: 2em 1em;
+  padding: 1em;
   display: flex;
   justify-content: space-between;
   align-items: center;

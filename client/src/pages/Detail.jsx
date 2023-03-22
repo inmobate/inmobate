@@ -24,18 +24,18 @@ const Detail = () => {
         <Property>
           <Title>{data.title}</Title>
           <div>
-            <span>{data.rating.length} - </span>
+            {/* <span>{data.rating.length} - </span> */}
             <span>{data.city}, </span>
             <span> {data.country} - </span>
             <span>{data.direccion}</span>
           </div>
           <Gallery>
-            <MainImage src={data.photo} alt="imagen" />
+            <MainImage src={data.pictures[0]} alt="imagen" />
             <Images>
-              <Image src={data.picture[0]} alt="imagen" />
-              <Image src={data.picture[1]} alt="imagen" />
-              <Image src={data.picture[2]} alt="imagen" />
-              <Image src={data.picture[3]} alt="imagen" />
+              <Image src={data.pictures[1]} alt="imagen" />
+              <Image src={data.pictures[2]} alt="imagen" />
+              <Image src={data.pictures[3]} alt="imagen" />
+              <Image src={data.pictures[4]} alt="imagen" />
             </Images>
           </Gallery>
           <div>Alojamiento {data.type}.</div>
@@ -103,11 +103,7 @@ const Image = styled.img`
 `;
 
 const Footer = styled.footer`
-  min-width: 100%;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  display: none;
 `;
 
 export default Detail;
