@@ -29,13 +29,13 @@ server.use(session({
   secret: 'cats',
   resave: false, 
   saveUninitialized: true,
-  /* genid: function(req) {
+ /*   genid: function(req) {
     return genuuid() // use UUIDs for session IDs
-  }, */
+  },  */
 
-}));
+}))
 server.use(passport.initialize());
-server.use(passport.session());
+
 
 //--------------------------------------
 server.use('/', routes);
