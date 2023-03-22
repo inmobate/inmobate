@@ -2111,6 +2111,39 @@
       "area": 73,
       "direccion": "Av. 9 de Julio 4567, Buenos Aires",
       "rating": "⭐️⭐️⭐️"
+    },
+    {
+      "id": 75,
+      "title": "a",
+      "photo": "",
+      "price": 1400,
+      "detail": "a",
+      "country": "a",
+      "city": "a",
+      "type": "isla",
+      "picture": [],
+      "habitacion": 1,
+      "banos": 1,
+      "direccion": "a",
+      "roomType": "habitacion compartida",
+      "rating": "⭐️⭐️⭐️⭐️",
+      "beds": 1
+    },
+    {
+      "id": 76,
+      "title": "asd",
+      "price": 1000,
+      "detail": "asd",
+      "country": "asd",
+      "city": "asd",
+      "type": "castillo",
+      "picture": [],
+      "habitacion": 4,
+      "banos": 3,
+      "direccion": "asd",
+      "roomType": "habitacion privada",
+      "rating": "⭐️⭐️⭐️⭐️",
+      "beds": 3
     }
   ]
 }

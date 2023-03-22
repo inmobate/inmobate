@@ -2,15 +2,17 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setTypeRoom } from "../../app/slices/propertyToAdd";
-import { BottomBar, Container, Content, ContentColum, Section } from "./styles";
+import {
+  BottomBar,
+  Container,
+  Content,
+  ContentColum,
+  Section,
+  Button,
+} from "./styles";
 
 const Step2 = () => {
   const { roomType } = useSelector((state) => state.propertyToAdd);
-
-  const storage = JSON.parse(
-    localStorage.getItem("persist:root")
-  ).propertyToAdd;
-  const storageRoomTipe = roomType || JSON.parse(storage).roomType;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,7 +25,7 @@ const Step2 = () => {
           <Section
             onClick={() => dispatch(setTypeRoom("alojamiento entero"))}
             style={
-              storageRoomTipe === "alojamiento entero"
+              roomType === "alojamiento entero"
                 ? { border: "1px solid grey" }
                 : null
             }
@@ -36,7 +38,7 @@ const Step2 = () => {
           <Section
             onClick={() => dispatch(setTypeRoom("habitacion privada"))}
             style={
-              storageRoomTipe === "habitacion privada"
+              roomType === "habitacion privada"
                 ? { border: "1px solid grey" }
                 : null
             }
@@ -50,7 +52,7 @@ const Step2 = () => {
           <Section
             onClick={() => dispatch(setTypeRoom("habitacion compartida"))}
             style={
-              storageRoomTipe === "habitacion compartida"
+              roomType === "habitacion compartida"
                 ? { border: "1px solid grey" }
                 : null
             }
@@ -64,10 +66,13 @@ const Step2 = () => {
         </div>
       </ContentColum>
       <BottomBar>
-        <button onClick={() => navigate("/addproperty/step1")}>Atras</button>
-        <button onClick={() => navigate("/addproperty/step3")}>
+        <Button onClick={() => navigate("/addproperty/step1")}>Atras</Button>
+        <Button
+          onClick={() => navigate("/addproperty/step3")}
+          disabled={!roomType}
+        >
           Siguiente
-        </button>
+        </Button>
       </BottomBar>
     </Container>
   );

@@ -1,4 +1,4 @@
-import { BottomBar, Container, Content, ContentColum } from "./styles";
+import { BottomBar, Container, Button, ContentColum } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { setDescription, setTitle } from "../../app/slices/propertyToAdd";
 import { useNavigate } from "react-router-dom";
@@ -8,27 +8,25 @@ const Step7 = () => {
     (state) => state.propertyToAdd
   );
 
-  const storage = JSON.parse(
-    localStorage.getItem("persist:root")
-  ).propertyToAdd;
-  const storageType = type || JSON.parse(storage).type;
-  const storageDescription = description || JSON.parse(storage).description;
-  const storageTitle = title || JSON.parse(storage).title;
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  function handleDisable() {
+    if (description && title) return false;
+    return true;
+  }
 
   return (
     <Container>
       <ContentColum>
-        <h2>Ahora, ponele un título a tu {storageType}</h2>
+        <h2>Ahora, ponele un título a tu {type}</h2>
         <p>
           Los títulos cortos funcionan mejor. No te preocupes, podés modificarlo
           más adelante.
         </p>
         <input
           type="text"
-          value={storageTitle}
+          value={title}
           onChange={(e) => {
             dispatch(setTitle(e.target.value));
           }}
@@ -41,15 +39,18 @@ const Step7 = () => {
           }}
           cols="30"
           rows="10"
-          value={storageDescription}
+          value={description}
         ></textarea>
       </ContentColum>
 
       <BottomBar>
-        <button onClick={() => navigate("/addproperty/step6")}>Atras</button>
-        <button onClick={() => navigate("/addproperty/step8")}>
+        <Button onClick={() => navigate("/addproperty/step6")}>Atras</Button>
+        <Button
+          onClick={() => navigate("/addproperty/step8")}
+          disabled={handleDisable()}
+        >
           Siguiente
-        </button>
+        </Button>
       </BottomBar>
     </Container>
   );
