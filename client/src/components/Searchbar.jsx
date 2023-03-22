@@ -14,7 +14,7 @@ const Searchbar = () => {
   }
   function handleKeyDown(e) {
     if (e.keyCode === 13) {
-      handleSearch(location)
+      handleSearch(location);
     }
   }
 
@@ -27,7 +27,6 @@ const Searchbar = () => {
           setLocation(e.target.value);
         }}
         onKeyDown={handleKeyDown}
-
       ></Input>
 
       <Button onClick={() => handleSearch(location)}>
@@ -60,7 +59,7 @@ const Button = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-color: #fe257f;
+  background-color: var(--color5);
   cursor: pointer;
 `;
 
