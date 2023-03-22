@@ -3,20 +3,17 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const properties = createApi({
   reducerPath: "properties",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5000",
+    baseUrl: "https://inmovate.up.railway.app/",
   }),
   endpoints: (builder) => ({
     getProperties: builder.query({
-      query: () => "/properties",
+      query: () => "/property",
     }),
     getPropertyById: builder.query({
-      query: (id) => `/properties/${id}`,
+      query: (id) => `/property/${id}`,
     }),
-    getServices: builder.query({
-      query: () => "/services",
-    }),
-    getTypes: builder.query({
-      query: () => "/types",
+    getType: builder.query({
+      query: () => `/type`,
     }),
   }),
 });
@@ -24,6 +21,5 @@ export const properties = createApi({
 export const {
   useGetPropertiesQuery,
   useGetPropertyByIdQuery,
-  useGetServicesQuery,
-  useGetTypesQuery,
+  useGetTypeQuery,
 } = properties;

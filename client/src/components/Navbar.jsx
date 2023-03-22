@@ -26,7 +26,7 @@ const Navbar = () => {
 };
 
 const Nav = styled.nav`
-  padding: 0 3rem;
+  /* padding: 0 3rem; */
   background: #ffff;
 `;
 

@@ -63,7 +63,7 @@ const MenuHidden = styled.div`
   position: absolute;
   top: 3em;
   right: 0em;
-  z-index: 1;
+  z-index: 100;
 `;
 
 const Ul = styled.ul`

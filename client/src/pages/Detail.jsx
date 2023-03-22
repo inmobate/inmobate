@@ -24,18 +24,18 @@ const Detail = () => {
         <Property>
           <Title>{data.title}</Title>
           <div>
-            <span>{data.rating.length} - </span>
+            {/* <span>{data.rating.length} - </span> */}
             <span>{data.city}, </span>
             <span> {data.country} - </span>
             <span>{data.direccion}</span>
           </div>
           <Gallery>
-            <MainImage src={data.photo} alt="imagen" />
+            <MainImage src={data.pictures[0]} alt="imagen" />
             <Images>
-              <Image src={data.picture[0]} alt="imagen" />
-              <Image src={data.picture[1]} alt="imagen" />
-              <Image src={data.picture[2]} alt="imagen" />
-              <Image src={data.picture[3]} alt="imagen" />
+              <Image src={data.pictures[1]} alt="imagen" />
+              <Image src={data.pictures[2]} alt="imagen" />
+              <Image src={data.pictures[3]} alt="imagen" />
+              <Image src={data.pictures[4]} alt="imagen" />
             </Images>
           </Gallery>
           <div>Alojamiento {data.type}.</div>
