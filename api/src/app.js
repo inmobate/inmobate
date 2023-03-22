@@ -25,15 +25,15 @@ server.use((req, res, next) => {
 });
 
 // uso de session y passpport -----------------------
-/*server.use(session({ 
+server.use(session({ 
   secret: 'cats',
   resave: false, 
   saveUninitialized: true,
-   genid: function(req) {
+ /*   genid: function(req) {
     return genuuid() // use UUIDs for session IDs
-  }, 
+  },  */
 
-}));*/
+}))
 server.use(passport.initialize());
 
 
