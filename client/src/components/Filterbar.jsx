@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 
+import { HiAdjustments } from "react-icons/hi";
+
 import { setFilter } from "../app/slices/filterCombine";
 
 import { useGetPropertiesQuery } from "../app/api/properties";
@@ -68,7 +70,11 @@ const Filterbar = () => {
       <Button onClick={() => handlerFilter("guesthouse")} location="guesthouse">
         Hostal
       </Button>
-      <button onClick={toggleMenu}>Filtros</button>
+      <Button onClick={toggleMenu}>
+        <HiAdjustments size={25} />
+        <div>Filtros</div>
+      </Button>
+
       {menuOpen && (
         <FilterMenu>
           <Ul>
@@ -149,8 +155,19 @@ const Container = styled.div`
   background: #ffff;
 `;
 
-const Button = styled.button`
+const Button = styled.div`
+  padding: 0.5em 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.1em;
+  border-radius: 1em;
+  background: var(--color5);
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const FilterMenu = styled.div`
