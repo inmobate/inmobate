@@ -25,7 +25,7 @@ server.use((req, res, next) => {
 });
 
 // uso de session y passpport -----------------------
-/*server.use(session({ 
+server.use(session({ 
   secret: 'cats',
   resave: false, 
   saveUninitialized: true,
@@ -33,7 +33,7 @@ server.use((req, res, next) => {
     return genuuid() // use UUIDs for session IDs
   }, 
 
-}));*/
+}))
 server.use(passport.initialize());
 
 
