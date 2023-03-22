@@ -24,16 +24,6 @@ const Container = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2em;
-
-  @media screen and (max-width: 800px) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    & > * {
-      margin-bottom: 2em;
-    }
-  }
 `;
 
 export default Cards;
