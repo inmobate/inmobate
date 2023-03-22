@@ -5,8 +5,8 @@ const {data} = require('./data')
 const property = async () => {
   const properties = await Property.findAll()
   if(properties.length <= 0){
-    const info = data.map((e)=>{
-      return {
+    const info = data.forEach(async(e)=> {
+        let prop = {
           price : e.price,
           description : e.detail,
           bathrooms : e.banos,
@@ -19,9 +19,13 @@ const property = async () => {
           postal_code: e.codigo_postal,
           address : e.address,
           pictures : e.picture.map((e)=> e),
+          type: e.type
         }
+        await Property.create(p)
+      const category = await Type.findAll({where:{name:property.type}})
+      await Property.addType(category)
   })
-    await Property.bulkCreate(info)
+    
     return info 
   }
   return properties
