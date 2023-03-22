@@ -21,29 +21,19 @@ if (!localStorage.getItem("persist:root")) {
   localStorage.setItem("persist:root", JSON.stringify(structure));
 }
 
-const storageJson = JSON.parse(
+let storageJson = JSON.parse(
   localStorage.getItem("persist:root")
 ).propertyToAdd;
 
-const storage = JSON.parse(storageJson);
+if (typeof storageJson === "string") {
+  storageJson = JSON.parse(storageJson);
+}
+
 
 export const propertyToAdd = createSlice({
   name: "propertyToAdd",
 
-  initialState: {
-    type: storage.type,
-    roomType: storage.roomType,
-    location: storage.location,
-    travellers: storage.travellers,
-    rooms: storage.rooms,
-    beds: storage.beds,
-    bathrooms: storage.bathrooms,
-    services: storage.services,
-    images: storage.images,
-    title: storage.title,
-    description: storage.description,
-    price: storage.price,
-  },
+  initialState: storageJson,
 
   reducers: {
     setType: (state, action) => {
