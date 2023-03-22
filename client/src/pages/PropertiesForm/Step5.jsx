@@ -1,18 +1,18 @@
 import { servicesDb } from "./db";
 import { useNavigate } from "react-router-dom";
 import { setServices } from "../../app/slices/propertyToAdd";
-import { BottomBar, Container, ContentColum, FlexGrap, Type } from "./styles";
+import {
+  BottomBar,
+  Container,
+  ContentColum,
+  FlexGrap,
+  Type,
+  Button,
+} from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 
 const Step5 = () => {
   const { services } = useSelector((state) => state.propertyToAdd);
-
-/*   const storage = JSON.parse(
-    localStorage.getItem("persist:root")
-  ).propertyToAdd;
-  const storageServices = services.lenght
-    ? services
-    : JSON.parse(storage).services; */
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,7 +24,6 @@ const Step5 = () => {
       dispatch(setServices([...services, service]));
     }
   }
-
 
   return (
     <Container>
@@ -52,8 +51,13 @@ const Step5 = () => {
         </div>
       </ContentColum>
       <BottomBar>
-        <button onClick={() => navigate("/addproperty/step4")}>Atras</button>
-        <button onClick={() => navigate("/addproperty/step6")}>Siguente</button>
+        <Button onClick={() => navigate("/addproperty/step4")}>Atras</Button>
+        <Button
+          onClick={() => navigate("/addproperty/step6")}
+          disabled={!services.length}
+        >
+          Siguente
+        </Button>
       </BottomBar>
     </Container>
   );

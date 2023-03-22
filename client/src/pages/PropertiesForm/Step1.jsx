@@ -9,16 +9,11 @@ import {
   FlexCenter,
   FlexGrap,
   Type,
+  Button,
 } from "./styles";
 
 const Step1 = () => {
   const { type } = useSelector((state) => state.propertyToAdd);
-
-  const storage = JSON.parse(
-    localStorage.getItem("persist:root")
-  ).propertyToAdd;
-
-  const storageType = type || JSON.parse(storage).type;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,9 +28,7 @@ const Step1 = () => {
               <Type
                 key={el.id}
                 onClick={() => dispatch(setType(el.type))}
-                style={
-                  storageType === el.type ? { border: "1px solid grey" } : null
-                }
+                style={type === el.type ? { border: "1px solid grey" } : null}
               >
                 {el.type}
               </Type>
@@ -45,8 +38,10 @@ const Step1 = () => {
       </Content>
 
       <BottomBar>
-        <button onClick={() => navigate("/addproperty")}>Atras</button>
-        <button onClick={() => navigate("/addproperty/step2")}>Siguente</button>
+        <Button onClick={() => navigate("/addproperty")}>Atras</Button>
+        <Button onClick={() => navigate("/addproperty/step2")} disabled={!type}>
+          Siguente
+        </Button>
       </BottomBar>
     </Container>
   );
