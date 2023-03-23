@@ -1,31 +1,26 @@
 const{Property,Service,Type}=require('../db.js')
 const {data} = require('./data')
 
-
 const property = async () => {
   const properties = await Property.findAll()
   if(properties.length <= 0){
-    const info = data.forEach(async(e)=> {
-        let prop = {
-          price : e.price,
-          description : e.detail,
-          bathrooms : e.banos,
-          room : e.habitacion,
-          floor: e.piso,
-          title : e.title,
-          area : e.area,
-          city : e.ciudad,
-          province:e.provincia,
-          postal_code: e.codigo_postal,
-          address : e.address,
-          pictures : e.picture.map((e)=> e),
-          type: e.type
+    const info = data.map((e)=>{
+      return {
+        price : e.price,
+        description : e.detail,
+        bathrooms : e.banos,
+        room : e.habitacion,
+        floor: e.piso,
+        title : e.title,
+        area : e.area,
+        city : e.ciudad,
+        province:e.provincia,
+        postal_code: e.codigo_postal,
+        address : e.address,
+        pictures : e.picture.map((e)=> e)
         }
-        await Property.create(p)
-      const category = await Type.findAll({where:{name:property.type}})
-      await Property.addType(category)
   })
-    
+    await Property.bulkCreate(info)
     return info 
   }
   return properties
