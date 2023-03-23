@@ -1,0 +1,24 @@
+{
+  "description": "Hermoso apartamento ubicado en el centro de la ciudad. Totalmente amoblado y equipado para su comodidad.",
+  "area": 80,
+  "price": 20000,
+  "bathrooms": 50,
+  "floor": 50,
+  "city": "Buenos Aires",
+  "province": "Buenos Aires",
+  "address": "Avenida Corrientes 5623",
+  "postal_code": "C1043AAD",
+  "room": 50,
+  "title": "Habitación de hotel",
+  "pictures": [
+    "https://a0.muscache.com/im/pictures/miso/Hosting-47726590/original/073089b8-d783-47df-bcda-e636bdb0d0a9.jpeg",
+    "https://a0.muscache.com/im/pictures/miso/Hosting-47726590/original/00c22a7a-e160-47df-8432-c83d2c3675e3.jpeg",
+    "https://a0.muscache.com/im/pictures/miso/Hosting-47726590/original/4ffbd84b-4741-44cc-905b-47ca193da6ca.jpeg",
+    "https://a0.muscache.com/im/pictures/miso/Hosting-47726590/original/e2cc2fa4-caed-46c3-b787-3911e7c77b4f.jpeg",
+    "https://a0.muscache.com/im/pictures/miso/Hosting-47726590/original/2124c6c2-239a-454d-9445-1d8d4f010757.jpeg",
+    "https://a0.muscache.com/im/pictures/miso/Hosting-47726590/original/a122ba99-0100-4fea-bee6-2023f862eee2.jpeg",
+    "https://a0.muscache.com/im/pictures/miso/Hosting-47726590/original/41f5d314-658b-4495-a9e5-3cfb55c50542.jpeg"
+  ],
+  "type": "Apartmento",
+  "service": "WIFI"
+}

@@ -43,6 +43,7 @@ const Header = styled.header`
 
 const Main = styled.main`
   height: 100%;
+  padding: 1em;
 `;
 
 const Footer = styled.footer`

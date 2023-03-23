@@ -64,15 +64,16 @@ const Filterbar = () => {
   };
 
   return (
-    <Container>
-      <Swiper slidesPerView={12} grabCursor={true}>
-        {dataType &&
-          dataType?.map((el) => (
-            <SwiperSlide key={el.id}>{el.name}</SwiperSlide>
-          ))}
-      </Swiper>
+    <>
+      <Container>
+        <Swiper slidesPerView={12} grabCursor={true}>
+          {dataType &&
+            dataType?.map((el) => (
+              <SwiperSlide key={el.id}>{el.name}</SwiperSlide>
+            ))}
+        </Swiper>
 
-      {/* <Button onClick={() => handlerFilter("house")} location="house">
+        {/* <Button onClick={() => handlerFilter("house")} location="house">
         Vivienda
       </Button>
       <Button onClick={() => handlerFilter("department")} location="department">
@@ -84,80 +85,83 @@ const Filterbar = () => {
       <Button onClick={() => handlerFilter("guesthouse")} location="guesthouse">
         Hostal
       </Button> */}
-      <Button onClick={toggleMenu}>
-        <HiAdjustments size={25} />
-        <div>Filtros</div>
-      </Button>
 
-      {menuOpen && (
-        <FilterMenu>
-          <Ul>
-            <Close onClick={toggleMenu}>X</Close>
-            <li>
-              <div>Rango de precios:</div>
-              <div>
-                <Input
-                  type="number"
-                  min="0"
-                  placeholder="mínimo"
-                  onChange={(price) => {
-                    setMin(price.target.value);
-                  }}
-                />
-                <Input
-                  type="number"
-                  min="0"
-                  placeholder="máximo"
-                  onChange={(price) => {
-                    setMax(price.target.value);
-                  }}
-                />
-              </div>
-            </li>
-            <li>
-              <div>Tipo de propiedad:</div>
-              <div>
-                <button
-                  onClick={() => {
-                    setProperty("house");
-                  }}
-                >
-                  Vivienda
-                </button>
-                <button
-                  onClick={() => {
-                    setProperty("department");
-                  }}
-                >
-                  Departamento
-                </button>
-                <button
-                  onClick={() => {
-                    setProperty("hotel");
-                  }}
-                >
-                  Hotel
-                </button>
-                <button
-                  onClick={() => {
-                    setProperty("guesthouse");
-                  }}
-                >
-                  Hostal
-                </button>
-              </div>
-            </li>
-            <ButtonFilter
-              onClick={() => {
-                handlerConbine(min, max, property);
-              }}
-            >
-              Filtrar
-            </ButtonFilter>
-          </Ul>
-        </FilterMenu>
-      )}
-    </Container>
+        <Button onClick={toggleMenu}>
+          <HiAdjustments size={25} />
+          <div>Filtros</div>
+        </Button>
+
+        {menuOpen && (
+          <FilterMenu>
+            <Ul>
+              <Close onClick={toggleMenu}>X</Close>
+              <li>
+                <div>Rango de precios:</div>
+                <div>
+                  <Input
+                    type="number"
+                    min="0"
+                    placeholder="mínimo"
+                    onChange={(price) => {
+                      setMin(price.target.value);
+                    }}
+                  />
+                  <Input
+                    type="number"
+                    min="0"
+                    placeholder="máximo"
+                    onChange={(price) => {
+                      setMax(price.target.value);
+                    }}
+                  />
+                </div>
+              </li>
+              <li>
+                <div>Tipo de propiedad:</div>
+                <div>
+                  <button
+                    onClick={() => {
+                      setProperty("house");
+                    }}
+                  >
+                    Vivienda
+                  </button>
+                  <button
+                    onClick={() => {
+                      setProperty("department");
+                    }}
+                  >
+                    Departamento
+                  </button>
+                  <button
+                    onClick={() => {
+                      setProperty("hotel");
+                    }}
+                  >
+                    Hotel
+                  </button>
+                  <button
+                    onClick={() => {
+                      setProperty("guesthouse");
+                    }}
+                  >
+                    Hostal
+                  </button>
+                </div>
+              </li>
+              <ButtonFilter
+                onClick={() => {
+                  handlerConbine(min, max, property);
+                }}
+              >
+                Filtrar
+              </ButtonFilter>
+            </Ul>
+          </FilterMenu>
+        )}
+      </Container>
+      <hr />
+    </>
   );
 };
 
@@ -167,6 +171,7 @@ const Container = styled.div`
   justify-content: center;
   gap: 1em;
   background: #ffff;
+  color: #000;
 `;
 
 const Button = styled.div`
