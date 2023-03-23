@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 
 import Footerbar from "../components/Footerbar";
 
-import house from "../assets/house.svg";
+import houseError from "../assets/houseError.svg";
 
 const Detail = () => {
   const { id } = useParams();
@@ -34,28 +34,28 @@ const Detail = () => {
             <MainImage
               src={data.pictures[0]}
               alt="imagen"
-              onError={(e) => (e.target.src = `${house}`)}
+              onError={(e) => (e.target.src = `${houseError}`)}
             />
             <Images>
               <Image
                 src={data.pictures[1]}
                 alt="imagen"
-                onError={(e) => (e.target.src = `${house}`)}
+                onError={(e) => (e.target.src = `${houseError}`)}
               />
               <Image
                 src={data.pictures[2]}
                 alt="imagen"
-                onError={(e) => (e.target.src = `${house}`)}
+                onError={(e) => (e.target.src = `${houseError}`)}
               />
               <Image
                 src={data.pictures[3]}
                 alt="imagen"
-                onError={(e) => (e.target.src = `${house}`)}
+                onError={(e) => (e.target.src = `${houseError}`)}
               />
               <Image
                 src={data.pictures[4]}
                 alt="imagen"
-                onError={(e) => (e.target.src = `${house}`)}
+                onError={(e) => (e.target.src = `${houseError}`)}
               />
             </Images>
           </Gallery>
