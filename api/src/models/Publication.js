@@ -9,10 +9,6 @@ module.exports = (sequelize) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
       },
-      active: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-      },
       description: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -22,12 +18,17 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       public_data: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
       },
       title: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      soft_delete: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
     },
     {

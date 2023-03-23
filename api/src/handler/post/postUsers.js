@@ -1,6 +1,7 @@
 const { User } = require("../../db");
 const bcrypt = require("bcrypt");
 
+
 const signUp = async ( name, lastName, email, password ) => {
   const compare = await findOne({ where: { email: email } })
   if (!name, !lastName, !email, !password) throw new Error("Incomplete information")
@@ -21,4 +22,4 @@ const signUp = async ( name, lastName, email, password ) => {
   }
 };
 
-module.exports = {signUp};
+module.exports =  signUp;

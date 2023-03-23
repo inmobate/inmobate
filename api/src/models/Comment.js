@@ -1,17 +1,21 @@
 const { DataTypes } = require("sequelize");
 
-
 module.exports = (sequelize) => {
-sequelize.define(
+  sequelize.define(
     "Comment",
     {
-    content:{
+      content: {
         type: DataTypes.TEXT,
         allowNull: false,
-    }
-},
+      },
+      soft_delete: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+    },
     {
-    timestamps: false,
+      timestamps: false,
     }
-);
+  );
 };
