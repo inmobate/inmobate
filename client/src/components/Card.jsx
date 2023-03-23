@@ -1,12 +1,18 @@
 import styled from "styled-components";
 
+import house from "../assets/house.svg";
+
 const Card = ({ property }) => {
   const { pictures, city, country, price } = property;
 
   return (
     <Container>
       <ImageWrapper>
-        <Image src={pictures[0]} alt="imagen" />
+        <Image
+          src={pictures[0]}
+          alt="imagen"
+          onError={(e) => (e.target.src = `${house}`)}
+        />
       </ImageWrapper>
       <Details>
         <Location>

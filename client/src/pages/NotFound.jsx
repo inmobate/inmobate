@@ -11,7 +11,7 @@ const NotFound = () => {
       <Title></Title>
       <Text>
         <div>404</div>
-        <div>Page not found</div>
+        <div>Error al cargar la pagina</div>
       </Text>
       {error && <ErrorText>{error.statusText || error.message}</ErrorText>}
     </Container>
@@ -101,12 +101,16 @@ const Text = styled.p`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-  font-size: 2rem;
+  text-transform: uppercase;
+  font-size: 2em;
+  font-weight: bold;
+  color: #ffff;
 `;
 
 const ErrorText = styled(Text)`
-  color: red; // cambiar color a rojo en caso de error
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--color1);
 `;
 
 export default NotFound;

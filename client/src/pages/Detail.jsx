@@ -8,6 +8,8 @@ import Navbar from "../components/Navbar";
 
 import Footerbar from "../components/Footerbar";
 
+import house from "../assets/house.svg";
+
 const Detail = () => {
   const { id } = useParams();
 
@@ -29,12 +31,32 @@ const Detail = () => {
             <span>{data.direccion}</span>
           </div>
           <Gallery>
-            <MainImage src={data.pictures[0]} alt="imagen" />
+            <MainImage
+              src={data.pictures[0]}
+              alt="imagen"
+              onError={(e) => (e.target.src = `${house}`)}
+            />
             <Images>
-              <Image src={data.pictures[1]} alt="imagen" />
-              <Image src={data.pictures[2]} alt="imagen" />
-              <Image src={data.pictures[3]} alt="imagen" />
-              <Image src={data.pictures[4]} alt="imagen" />
+              <Image
+                src={data.pictures[1]}
+                alt="imagen"
+                onError={(e) => (e.target.src = `${house}`)}
+              />
+              <Image
+                src={data.pictures[2]}
+                alt="imagen"
+                onError={(e) => (e.target.src = `${house}`)}
+              />
+              <Image
+                src={data.pictures[3]}
+                alt="imagen"
+                onError={(e) => (e.target.src = `${house}`)}
+              />
+              <Image
+                src={data.pictures[4]}
+                alt="imagen"
+                onError={(e) => (e.target.src = `${house}`)}
+              />
             </Images>
           </Gallery>
           <div>Alojamiento {data.type}.</div>

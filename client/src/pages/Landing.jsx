@@ -11,7 +11,10 @@ const Landing = () => {
       <main>
         <Banner>
           <Title onS>INMOBATE</Title>
-          <Link to="/home">Alquila ya</Link>
+          <Link to="/home">
+            <Button class="btn">Alquila ya</Button>
+            {/* Alquila ya */}
+          </Link>
         </Banner>
         <AboutUs id="about-us">
           <div>Nosotros</div>
@@ -71,6 +74,56 @@ const Title = styled.div`
   font-family: "Righteous", cursive;
   font-size: 5em;
   color: #000;
+`;
+
+const Button = styled.div`
+  padding: 1em 2.5em;
+  position: relative;
+  border: none;
+  border-radius: 1em;
+  background: var(--color5);
+  color: var(--color1);
+  font-size: 1em;
+  font-weight: bold;
+  transition-property: all;
+  transition-duration: 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0px 14px 56px -11px var(--color4);
+    background: var(--color4);
+  }
+
+  &::before {
+    content: "";
+    height: 5px;
+    width: 5px;
+    position: absolute;
+    right: 2em;
+    bottom: 37%;
+    border-radius: 100px;
+    background: white;
+    animation: 0.5s both ease-in-out infinite;
+  }
+
+  &:hover::before {
+    animation-name: bounce_591;
+    transition: all 0.3s ease;
+  }
+
+  @keyframes bounce_591 {
+    0% {
+      bottom: 37%;
+    }
+
+    50% {
+      bottom: 70%;
+    }
+
+    100% {
+      bottom: 37%;
+    }
+  }
 `;
 
 const AboutUs = styled.div`
