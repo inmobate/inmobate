@@ -35,7 +35,7 @@ server.use(session({
   },  */
 
 }))
-server.use(passport.initialize());
+// server.use(passport.initialize());
 
 
 //--------------------------------------
