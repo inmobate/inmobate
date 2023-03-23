@@ -12,7 +12,7 @@ const Card = ({ property }) => {
         <Location>
           {city}, {country}
         </Location>
-        <Price>${price} / night</Price>
+        <Price>${price} / noche</Price>
       </Details>
     </Container>
   );
@@ -36,6 +36,7 @@ const Image = styled.img`
 
 const Details = styled.div`
   margin-top: 1em;
+  color: #000;
 `;
 
 const Location = styled.h3`
