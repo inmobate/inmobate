@@ -4,14 +4,14 @@ const bookingDelete = async (id) => {
   try {
     const delBooking = await Booking.destroy({
       where: {
-        id: id
+        id: id,
       },
     });
 
-    return delBooking;
+    return "Bookind Deleted";
   } catch (error) {
     return { error: error.message };
   }
 };
 
-module.exports = bookingDelete
+module.exports = bookingDelete;

@@ -1,71 +1,71 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-sequelize.define(
+  sequelize.define(
     "Property",
     {
-    id: {
+      id: {
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
-        allowNull: false
-    },
-    description:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    area:{
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    price:{
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    bathrooms:{
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    floor:{
-        type: DataTypes.INTEGER,
-        allowNull: true
-    },
-    country:{
+        allowNull: false,
+      },
+      description: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: "Argentina"
-    },
-    city:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    province:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    address:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    postal_code:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    room:{
+      },
+      area: {
         type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    title:{
+        allowNull: false,
+      },
+      price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      bathrooms: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      floor: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      country: {
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    pictures:{
+        allowNull: false,
+        defaultValue: "Argentina",
+      },
+      city: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      province: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      address: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      postal_code: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      room: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      pictures: {
         type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: false
-    }
-},
+        allowNull: false,
+      },
+    },
     {
-    timestamps: false,
+      timestamps: false,
     }
-);
+  );
 };

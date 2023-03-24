@@ -1,20 +1,31 @@
 const { Publication } = require("../../db");
 
-const updatePublication = async ( id, active, description, picture, public_data, title ) => {
+const updatePublication = async (
+  id,
+  description,
+  picture,
+  public_data,
+  title
+) => {
   try {
-    const findpublication = await Publication.findByPk(id);
-    if (!findpublication) throw new Error("Publication not found");
+    const findpubication = await Publication.findByPk(id);
+    if (!findpubication) throw new Error("Property not found");
     else {
-      const newPublication = await Publication.upsert({
-        id,
-        active,
-        description,
-        picture,
-        public_data,
-        title,
-      });
-      return newPublication
+      description
+        ? await Property.update({ description: description })
+        : findpubication.description;
+      picture
+        ? await Property.update({ picture: picture })
+        : findpubication.picture;
+      public_data
+        ? await Property.update({ public_data: public_data })
+        : findpubication.public_data;
+      title ? await Property.update({ title: title }) : findpubication.title;
     }
+
+    const newpubication = await Publication.findByPk(id);
+
+    return newpubication;
   } catch (error) {
     return { error: error.message };
   }

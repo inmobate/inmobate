@@ -1,17 +1,16 @@
 const { Comment } = require("../../db");
 
 const CommentDelete = async (id) => {
-  /* try {
-    const delBooking = await Booking.destroy({
+  try {
+    const deleteComment = await Comment.destroy({
       where: {
-        id: id
+        id: id,
       },
     });
-
-    return delBooking;
+    return "Comment deleted";
   } catch (error) {
     return { error: error.message };
-  } */
+  }
 };
 
-module.exports = CommentDelete
+module.exports = CommentDelete;
