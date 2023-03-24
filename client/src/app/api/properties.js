@@ -7,7 +7,7 @@ export const properties = createApi({
   }),
   endpoints: (builder) => ({
     getProperties: builder.query({
-      query: (page = 0, size = 18) => `/property?page=${page}&size=${size}`,
+      query: () => `/property`,
     }),
     getPropertyById: builder.query({
       query: (id) => `/property/${id}`,
