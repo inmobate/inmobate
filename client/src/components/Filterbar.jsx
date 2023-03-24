@@ -66,7 +66,7 @@ const Filterbar = () => {
   return (
     <>
       <Container>
-        <Swiper slidesPerView={12} grabCursor={true}>
+        <Swiper spaceBetween={50} slidesPerView={12} grabCursor={true}>
           {dataType &&
             dataType?.map((el) => (
               <SwiperSlide key={el.id}>{el.name}</SwiperSlide>

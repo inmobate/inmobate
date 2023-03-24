@@ -2,22 +2,24 @@ import styled from "styled-components";
 
 import { Link, useLocation } from "react-router-dom";
 
-import { HiHome } from "react-icons/hi";
-
 import Searchbar from "./Searchbar";
 
 import UserButton from "./UserButton";
 
+import house from "../assets/house.svg";
+
 const Navbar = () => {
   const location = useLocation();
-  const isHome = location.pathname !== "/profile";
+
+  const isHome =
+    location.pathname !== "/profile" && location.pathname !== "/reserves";
   return (
     <>
       <Nav>
         <Elements>
           <Link to="/home">
             <Brand>
-              <HiHome size={30} color={"var(--color5)"} />
+              <Img src={house} alt="imagen" />
               <Title>INMOBATE</Title>
             </Brand>
           </Link>
@@ -52,6 +54,10 @@ const Brand = styled.div`
   justify-content: center;
   align-items: center;
   color: #000;
+`;
+
+const Img = styled.img`
+  width: 2em;
 `;
 
 const Title = styled.div`

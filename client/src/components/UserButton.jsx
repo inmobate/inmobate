@@ -34,6 +34,9 @@ const UserButton = () => {
 
       <MenuHidden style={active ? null : { display: "none" }}>
         <Ul>
+          <Link to="/reserves">
+            <Li>Reservas</Li>
+          </Link>
           <Link to="/profile">
             <Li>Cuenta</Li>
           </Link>

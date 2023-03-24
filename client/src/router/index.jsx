@@ -26,6 +26,9 @@ import Step6 from "../pages/PropertiesForm/Step6";
 import Step7 from "../pages/PropertiesForm/Step7";
 import Step8 from "../pages/PropertiesForm/Step8";
 import Step9 from "../pages/PropertiesForm/Step9";
+
+import Reserves from "../pages/Reserves";
+
 import Profile from "../pages/Profile";
 
 export const router = createBrowserRouter([
@@ -97,6 +100,10 @@ export const router = createBrowserRouter([
       {
         path: "/addproperty/step9",
         element: <Step9 />,
+      },
+      {
+        path: "/reserves",
+        element: <Reserves />,
       },
       {
         path: "/profile",
