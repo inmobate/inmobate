@@ -8,11 +8,7 @@ import Cards from "../components/Cards";
 
 import Footerbar from "../components/Footerbar";
 
-import { useGetPropertiesQuery } from "../app/api/properties";
-
 const Home = () => {
-  const { data, error, isLoading } = useGetPropertiesQuery();
-
   return (
     <Container>
       <Header>
@@ -20,7 +16,7 @@ const Home = () => {
         <Filterbar />
       </Header>
       <Main>
-        <Cards properties={data} />
+        <Cards />
       </Main>
       <Footer>
         <Footerbar />

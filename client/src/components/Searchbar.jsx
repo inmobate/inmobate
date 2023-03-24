@@ -22,8 +22,8 @@ const Searchbar = () => {
     <>
       <SearchBar>
         <Input
-          type={Text}
-          placeholder={"Lugar deseado"}
+          type="text"
+          placeholder="Lugar deseado"
           onChange={(e) => {
             setLocation(e.target.value);
           }}
