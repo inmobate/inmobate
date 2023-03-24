@@ -283,15 +283,15 @@ const postPublications = async (req, res) => {
   }
 };
 
-const deletePublication = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const deletePublic = await publicationDelete(id);
-    res.status(200).json(deletePublic);
-  } catch (error) {
-    res.status(400).json({ Error: error.message });
-  }
-};
+// const deletePublication = async (req, res) => {
+//   const { id } = req.params;
+//   try {
+//     const deletePublic = await publicationDelete(id);
+//     res.status(200).json(deletePublic);
+//   } catch (error) {
+//     res.status(400).json({ Error: error.message });
+//   }
+// };
 
 const allReservas = async (req, res) => {
   const reserva = await getReservas();
