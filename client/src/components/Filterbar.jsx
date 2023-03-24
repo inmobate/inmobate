@@ -1,14 +1,22 @@
 import styled from "styled-components";
 
+import "swiper/css";
+
 import { useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 
+import { HiAdjustments } from "react-icons/hi";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
 import { setFilter } from "../app/slices/filterCombine";
 
 import { useGetPropertiesQuery } from "../app/api/properties";
+
+import { useGetTypeQuery } from "../app/api/properties";
 
 const Filterbar = () => {
   const dispatch = useDispatch();
@@ -27,9 +35,11 @@ const Filterbar = () => {
 
   const { data, error, isLoading } = useGetPropertiesQuery();
 
-  const handlerAll = (location) => {
-    if (location) navigate(`/home`);
-  };
+  const {
+    data: dataType,
+    error: errorType,
+    isLoading: isLoadingType,
+  } = useGetTypeQuery();
 
   const handlerFilter = (location) => {
     if (location) navigate(`/filter/${location}`);
@@ -54,9 +64,16 @@ const Filterbar = () => {
   };
 
   return (
-    <Container>
-      <Button onClick={() => handlerAll("home")}>Todos los alojamientos</Button>
-      <Button onClick={() => handlerFilter("house")} location="house">
+    <>
+      <Container>
+        <Swiper slidesPerView={12} grabCursor={true}>
+          {dataType &&
+            dataType?.map((el) => (
+              <SwiperSlide key={el.id}>{el.name}</SwiperSlide>
+            ))}
+        </Swiper>
+
+        {/* <Button onClick={() => handlerFilter("house")} location="house">
         Vivienda
       </Button>
       <Button onClick={() => handlerFilter("department")} location="department">
@@ -67,77 +84,84 @@ const Filterbar = () => {
       </Button>
       <Button onClick={() => handlerFilter("guesthouse")} location="guesthouse">
         Hostal
-      </Button>
-      <button onClick={toggleMenu}>Filtros</button>
-      {menuOpen && (
-        <FilterMenu>
-          <Ul>
-            <Close onClick={toggleMenu}>X</Close>
-            <li>
-              <div>Rango de precios:</div>
-              <div>
-                <Input
-                  type="number"
-                  min="0"
-                  placeholder="mínimo"
-                  onChange={(price) => {
-                    setMin(price.target.value);
-                  }}
-                />
-                <Input
-                  type="number"
-                  min="0"
-                  placeholder="máximo"
-                  onChange={(price) => {
-                    setMax(price.target.value);
-                  }}
-                />
-              </div>
-            </li>
-            <li>
-              <div>Tipo de propiedad:</div>
-              <div>
-                <button
-                  onClick={() => {
-                    setProperty("house");
-                  }}
-                >
-                  Vivienda
-                </button>
-                <button
-                  onClick={() => {
-                    setProperty("department");
-                  }}
-                >
-                  Departamento
-                </button>
-                <button
-                  onClick={() => {
-                    setProperty("hotel");
-                  }}
-                >
-                  Hotel
-                </button>
-                <button
-                  onClick={() => {
-                    setProperty("guesthouse");
-                  }}
-                >
-                  Hostal
-                </button>
-              </div>
-            </li>
-            <ButtonFilter
-              onClick={() => {
-                handlerConbine(min, max, property);
-              }}
-            >
-              Filtrar
-            </ButtonFilter>
-          </Ul>
-        </FilterMenu>
-      )}
-    </Container>
+      </Button> */}
+
+        <Button onClick={toggleMenu}>
+          <HiAdjustments size={25} />
+          <div>Filtros</div>
+        </Button>
+
+        {menuOpen && (
+          <FilterMenu>
+            <Ul>
+              <Close onClick={toggleMenu}>X</Close>
+              <li>
+                <div>Rango de precios:</div>
+                <div>
+                  <Input
+                    type="number"
+                    min="0"
+                    placeholder="mínimo"
+                    onChange={(price) => {
+                      setMin(price.target.value);
+                    }}
+                  />
+                  <Input
+                    type="number"
+                    min="0"
+                    placeholder="máximo"
+                    onChange={(price) => {
+                      setMax(price.target.value);
+                    }}
+                  />
+                </div>
+              </li>
+              <li>
+                <div>Tipo de propiedad:</div>
+                <div>
+                  <button
+                    onClick={() => {
+                      setProperty("house");
+                    }}
+                  >
+                    Vivienda
+                  </button>
+                  <button
+                    onClick={() => {
+                      setProperty("department");
+                    }}
+                  >
+                    Departamento
+                  </button>
+                  <button
+                    onClick={() => {
+                      setProperty("hotel");
+                    }}
+                  >
+                    Hotel
+                  </button>
+                  <button
+                    onClick={() => {
+                      setProperty("guesthouse");
+                    }}
+                  >
+                    Hostal
+                  </button>
+                </div>
+              </li>
+              <ButtonFilter
+                onClick={() => {
+                  handlerConbine(min, max, property);
+                }}
+              >
+                Filtrar
+              </ButtonFilter>
+            </Ul>
+          </FilterMenu>
+        )}
+      </Container>
+      <hr />
+    </>
   );
 };
 
@@ -147,10 +171,22 @@ const Container = styled.div`
   justify-content: center;
   gap: 1em;
   background: #ffff;
+  color: #000;
 `;
 
-const Button = styled.button`
+const Button = styled.div`
+  padding: 0.5em 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.1em;
+  border-radius: 1em;
+  background: var(--color5);
   cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const FilterMenu = styled.div`

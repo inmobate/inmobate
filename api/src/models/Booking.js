@@ -1,30 +1,29 @@
 const { DataTypes } = require("sequelize");
 
-
 module.exports = (sequelize) => {
-sequelize.define(
+  sequelize.define(
     "Booking",
     {
-    id: {
+      id: {
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
-    },
-    date_of_admission:{
-        type: DataTypes.DATE(6),
+      },
+      date_of_admission: {
+        type: DataTypes.DATE,
         allowNull: false,
-    },
-    departure_date:{
-        type: DataTypes.DATE(6),
+      },
+      departure_date: {
+        type: DataTypes.DATE,
         allowNull: false,
-    },
-    total_price:{
+      },
+      total_price: {
         type: DataTypes.INTEGER,
         allowNull: false,
-    }
-},
+      },
+    },
     {
-    timestamps: false,
+      timestamps: false,
     }
-);
+  );
 };

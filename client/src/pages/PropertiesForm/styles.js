@@ -44,7 +44,8 @@ export const BottomBar = styled.div`
   align-items: center;
   position: fixed;
   bottom: 0;
-  background-color: grey;
+  background-color: var(--color5);
+  box-shadow: 0 0 15px var(--color1);
 `;
 
 export const Type = styled.div`
@@ -65,6 +66,24 @@ export const Form = styled.form`
   justify-content: center;
   input {
     width: 300px;
-    margin-top: .5rem
+    margin-top: 0.5rem;
+  }
+`;
+
+export const Button = styled.button`
+  text-align: center;
+  width: 150px;
+  height: 40px;
+  background-color: var(--color2);
+  border: 5px solid var(--color1);
+  border-radius: 25px;
+  color: white;
+  font-weight: 800;
+  box-shadow: 0 0 15px var(--color1);
+  :disabled {
+    color: rgb(92, 92, 92);
+    background-color: rgb(186, 183, 183);
+    border-color: rgb(92, 92, 92);
+    box-shadow: 0 0 15px rgb(92, 92, 92);
   }
 `;

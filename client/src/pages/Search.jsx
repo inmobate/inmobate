@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
-import { useEffect, useState } from "react";
-
 import { useParams } from "react-router-dom";
 
-import { properties, useGetPropertiesQuery } from "../app/api/properties";
+import { useGetPropertiesByCityQuery } from "../app/api/properties";
 
 import Navbar from "../components/Navbar";
 
@@ -13,26 +11,8 @@ import Cards from "../components/Cards";
 import Footerbar from "../components/Footerbar";
 
 const Search = () => {
-  const [filterProperties, setFilterProperties] = useState();
-
-  const { data, error, isLoading } = useGetPropertiesQuery();
-
   const { filter } = useParams();
-
-  useEffect(() => {
-    if (data && filter) {
-      const normalizedFilter = filter
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-      const filteredProperties = data.filter((property) => {
-        const normalizedCity = property.city
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "");
-        return normalizedCity.toLowerCase() === normalizedFilter.toLowerCase();
-      });
-      setFilterProperties(filteredProperties);
-    }
-  }, [data, filter]);
+  const { data, error, isLoading } = useGetPropertiesByCityQuery(filter);
 
   return (
     <Container>
@@ -40,7 +20,8 @@ const Search = () => {
         <Navbar />
       </Header>
       <Main>
-        <Cards properties={filterProperties} />
+        {isLoading && <div>cargando...</div>}
+        <Cards properties={data} />
       </Main>
       <Footer>
         <Footerbar />
@@ -65,11 +46,7 @@ const Main = styled.main`
 `;
 
 const Footer = styled.footer`
-  min-width: 100%;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  display: none;
 `;
 
 export default Search;

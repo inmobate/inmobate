@@ -34,11 +34,7 @@ const Main = styled.main`
 `;
 
 const Footer = styled.footer`
-  min-width: 100%;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  display: none;
 `;
 
 export default FilterCombine;

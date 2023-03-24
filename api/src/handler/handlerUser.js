@@ -23,7 +23,7 @@ const { getVentas } = require("../controller/controllerSale");
 const { propertyById } = require("../controller/controllerProperty");
 const { typeDb } = require("../controller/controllerType");
 const CommentDelete = require("../handler/delete/deleteCommit.js");
-// const publicationDelete = require("../handler/delete/deletePublication.js");
+const publicationDelete = require("../handler/delete/deletePublication.js");
 const userDelete = require("../handler/delete/deleteUser.js");
 
 const allProperty = async (req, res) => {
@@ -73,7 +73,6 @@ const allProperty = async (req, res) => {
   }
   res.status(200).json(datos);
 };
-
 const allPropertyById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -283,15 +282,15 @@ const postPublications = async (req, res) => {
   }
 };
 
-// const deletePublication = async (req, res) => {
-//   const { id } = req.params;
-//   try {
-//     const deletePublic = await publicationDelete(id);
-//     res.status(200).json(deletePublic);
-//   } catch (error) {
-//     res.status(400).json({ Error: error.message });
-//   }
-// };
+const deletePublication = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletePublic = await publicationDelete(id);
+    res.status(200).json(deletePublic);
+  } catch (error) {
+    res.status(400).json({ Error: error.message });
+  }
+};
 
 const allReservas = async (req, res) => {
   const reserva = await getReservas();
@@ -401,6 +400,7 @@ const deleteAdmin = async (req, res) => {
     if (remove === "User") {
       const deleteuser = await userDelete(id);
       res.status(200).json(deleteuser);
+
     }
     if (remove === "Comments") {
       const commentsdelete = await CommentDelete(id);
@@ -437,7 +437,7 @@ module.exports = {
   putProperty,
   postSale,
   deleteComments,
-  // deletePublication,
+  deletePublication,
   deleteUser,
   getAdmin,
   deleteAdmin,

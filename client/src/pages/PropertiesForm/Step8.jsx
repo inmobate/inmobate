@@ -1,15 +1,10 @@
-import { BottomBar, Container, ContentColum, FlexGrap, Type } from "./styles";
+import { BottomBar, Container, ContentColum, Button, Type } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setPrice } from "../../app/slices/propertyToAdd";
 
 const Step8 = () => {
   const { price } = useSelector((state) => state.propertyToAdd);
-
-  const storage = JSON.parse(
-    localStorage.getItem("persist:root")
-  ).propertyToAdd;
-  const storagePrice = price || JSON.parse(storage).price;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,14 +16,16 @@ const Step8 = () => {
         <p>Podés cambiarlo cuando quieras.</p>
         <div>
           <button onClick={() => dispatch(setPrice(price - 100))}>-</button>
-          <input type="number" value={storagePrice} />
+          <input type="number" value={price} />
           <button onClick={() => dispatch(setPrice(price + 100))}>+</button>
         </div>
         <p>por noche</p>
       </ContentColum>
       <BottomBar>
-        <button onClick={() => navigate("/addproperty/step7")}>Atras</button>
-        <button onClick={() => navigate("/addproperty/step9")}>Siguente</button>
+        <Button onClick={() => navigate("/addproperty/step7")}>Atras</Button>
+        <Button onClick={() => navigate("/addproperty/step9")} dissable={price}>
+          Siguente
+        </Button>
       </BottomBar>
     </Container>
   );
