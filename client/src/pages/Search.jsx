@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 
-import { properties, useGetPropertiesQuery } from "../app/api/properties";
+import { useGetPropertiesQuery } from "../app/api/properties";
 
 import Navbar from "../components/Navbar";
 
