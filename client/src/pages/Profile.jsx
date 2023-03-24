@@ -1,56 +1,60 @@
 import styled from "styled-components";
+import Navbar from "../components/Navbar";
 
 const Profile = () => {
   return (
     <>
       <Header>
-        <Nav>
-          <Elements>
-            <Brand>INMOBATE</Brand>
-          </Elements>
-        </Nav>
+        <Navbar />
       </Header>
       <Main>
-        <Sidebar>
-          <div>Section</div>
-        </Sidebar>
-        <Menu>
-          <div>Menu</div>
-        </Menu>
+        <Options>
+          <Option>Información personal</Option>
+          <Option>Inicio de sesión y seguridad</Option>
+          <Option>Pagos y cobros</Option>
+          <Option>Impuestos</Option>
+          <Option>Notificaciones</Option>
+          <Option>Privacidad y uso compartido</Option>
+          <Option>Preferencias generales</Option>
+          <Option>Viajes de trabajo</Option>
+          <Option>Herramientas para anfitriones profesionales</Option>
+        </Options>
+        <div>¿Necesitás desactivar tu cuenta?</div>
+        <div>Resolver ahora</div>
       </Main>
-      <Footer></Footer>
+      <Footer>Footer</Footer>
     </>
   );
 };
 
 const Header = styled.header``;
 
-const Nav = styled.nav`
-  padding: 0 3rem;
-`;
-
-const Elements = styled.div`
-  padding: 1em;
-`;
-
-const Brand = styled.div``;
-
 const Main = styled.main`
-  width: 100%;
-  height: 100vh;
+  height: 100%;
+  padding: 1em;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1em;
 `;
 
-const Sidebar = styled.section`
-  width: 20em;
+const Options = styled.div`
+  height: 768px;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1em;
+  cursor: pointer;
+`;
+
+const Option = styled.div`
   border: 1px solid black;
+  border-radius: 1em;
 `;
 
-const Menu = styled.section`
-  width: 100%;
-  border: 1px solid black;
+const Footer = styled.footer`
+  display: none;
 `;
-
-const Footer = styled.footer``;
 
 export default Profile;
