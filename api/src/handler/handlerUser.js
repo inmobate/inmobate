@@ -47,9 +47,9 @@ const allProperty = async (req, res) => {
   if (city) {
     let propertyCity = await Property.findAll({
       where: {
-        city: { [Op.iLike]: city },
+        city: { [Op.iLike]: `%${city}%` },
       },
-      //falta incluir los modelos servicios y tipos para cuando
+      //falta incluir los modelos servicios y tipos para cuandos
       //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
     });
     try {
