@@ -437,7 +437,7 @@ module.exports = {
   putProperty,
   postSale,
   deleteComments,
-  deletePublication,
+  // deletePublication,
   deleteUser,
   getAdmin,
   deleteAdmin,
