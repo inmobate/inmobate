@@ -6,8 +6,9 @@ import Filterbar from "../components/Filterbar";
 
 import Cards from "../components/Cards";
 
-import Footerbar from "../components/Footerbar";
 import Infinite from "../components/InfiniteScroll";
+
+import Footerbar from "../components/Footerbar";
 
 const Home = () => {
   return (
