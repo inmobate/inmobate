@@ -9,14 +9,22 @@ const updatePublication = require("./put/updatePublication.js");
 const updateProperty = require("./put/updateProperty");
 const bookingDelete = require("./delete/deleteBooking.js");
 const { Op, Property, Service } = require("../db");
-const { getUser } = require("../controller/controllerUsers");
-const { getComentario } = require("../controller/controllerComment.js");
+const { getUser, getAllUser } = require("../controller/controllerUsers");
+const {
+  getComentario,
+  getAllComentario,
+} = require("../controller/controllerComment.js");
 const { getReservas } = require("../controller/controllerBooking");
-const { getPublication } = require("../controller/controllerpublicacion");
+const {
+  getPublication,
+  getAllPublication,
+} = require("../controller/controllerpublicacion");
 const { getVentas } = require("../controller/controllerSale");
 const { propertyById } = require("../controller/controllerProperty");
 const { typeDb } = require("../controller/controllerType");
 const CommentDelete = require("../handler/delete/deleteCommit.js");
+const publicationDelete = require("../handler/delete/deletePublication.js");
+const userDelete = require("../handler/delete/deleteUser.js");
 
 const allProperty = async (req, res) => {
   const datos = await Property.findAll();
@@ -117,8 +125,8 @@ const postProperty = async (req, res) => {
 };
 
 const putProperty = async (req, res) => {
+  const { id } = req.params;
   const {
-    id,
     description,
     area,
     price,
@@ -160,16 +168,6 @@ const putProperty = async (req, res) => {
   }
 };
 
-const allServicios = async (req, res) => {
-  const servicios = await Service.findAll();
-  try {
-    res.status(200).json(servicios);
-  } catch (error) {
-    res.status(400).json({ Error: error.menssage });
-    res.status(404).json({ error: menssage });
-  }
-};
-
 const allUsers = async (req, res) => {
   const users = await getUser();
   try {
@@ -199,6 +197,16 @@ const putUsers = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleteuser = await userDelete(id);
+    res.status(200).json(deleteuser);
+  } catch (error) {
+    res.status(400).json({ Error: error.message });
+  }
+};
+
 const allComments = async (req, res) => {
   const comments = await getComentario();
   try {
@@ -220,7 +228,7 @@ const postComments = async (req, res) => {
 };
 
 const deleteComments = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   try {
     const commentsdelete = await CommentDelete(id);
     res.status(200).json(commentsdelete);
@@ -233,14 +241,17 @@ const allPublications = async (req, res) => {
   const publicacion = await getPublication();
   try {
     res.status(200).json({ publi: publicacion });
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).json({ Error: error.message });
+  }
 };
 
 const putPublications = async (req, res) => {
-  const { active, description, picture, public_data, title, autor } = req.body;
+  const { description, picture, public_data, title, autor } = req.body;
+  const { id } = req.params;
   try {
     const newPublication = await updatePublication(
-      active,
+      id,
       description,
       picture,
       public_data,
@@ -267,6 +278,16 @@ const postPublications = async (req, res) => {
     );
     console.log(newPublication);
     res.status(200).json(newPublication);
+  } catch (error) {
+    res.status(400).json({ Error: error.message });
+  }
+};
+
+const deletePublication = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletePublic = await publicationDelete(id);
+    res.status(200).json(deletePublic);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
@@ -323,7 +344,7 @@ const postBooking = async (req, res) => {
 };
 
 const deleteBooking = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   try {
     const bookingdelete = await bookingDelete(id);
     res.status(200).json(bookingdelete);
@@ -338,6 +359,59 @@ const alltype = async (req, res) => {
     res.status(200).json(type);
   } catch (error) {
     res.status(400).json({ Error: error.message });
+  }
+};
+
+const allServicios = async (req, res) => {
+  const servicios = await Service.findAll();
+  try {
+    res.status(200).json(servicios);
+  } catch (error) {
+    res.status(400).json({ Error: error.menssage });
+    res.status(404).json({ error: menssage });
+  }
+};
+
+//------------------------------------------------------------------------------------------------------------------------------
+const getAdmin = async (req, res) => {
+  const { get } = req.query;
+  try {
+    if (get === "Users") {
+      const users = await getAllUser();
+      res.status(200).json({ Users: users });
+    }
+    if (get === "Comments") {
+      const comments = await getAllComentario();
+      res.status(200).json({ comentarios: comments });
+    }
+    if (get === "Publication") {
+      const publicacion = await getAllPublication();
+      res.status(200).json({ publi: publicacion });
+    }
+  } catch (error) {
+    res.status(404).json({ error: menssage });
+  }
+};
+
+const deleteAdmin = async (req, res) => {
+  const { remove } = req.query;
+  const { id } = req.params;
+
+  try {
+    if (remove === "User") {
+      const deleteuser = await userDelete(id);
+      res.status(200).json(deleteuser);
+    }
+    if (remove === "Comments") {
+      const commentsdelete = await CommentDelete(id);
+      res.status(200).json(commentsdelete);
+    }
+    if (remove === "Publication") {
+      const deletePublic = await publicationDelete(id);
+      res.status(200).json(deletePublic);
+    }
+  } catch (error) {
+    res.status(404).json({ error: menssage });
   }
 };
 
@@ -363,4 +437,8 @@ module.exports = {
   putProperty,
   postSale,
   deleteComments,
+  deletePublication,
+  deleteUser,
+  getAdmin,
+  deleteAdmin,
 };
