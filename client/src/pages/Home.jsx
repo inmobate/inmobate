@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { useGetPropertiesQuery } from "../app/api/properties";
-
 import Navbar from "../components/Navbar";
 
 import Filterbar from "../components/Filterbar";
@@ -11,7 +9,6 @@ import Cards from "../components/Cards";
 import Footerbar from "../components/Footerbar";
 
 const Home = () => {
-  const { data, error, isLoading } = useGetPropertiesQuery();
   return (
     <Container>
       <Header>
@@ -19,7 +16,7 @@ const Home = () => {
         <Filterbar />
       </Header>
       <Main>
-        <Cards properties={data} />
+        <Cards />
       </Main>
       <Footer>
         <Footerbar />
