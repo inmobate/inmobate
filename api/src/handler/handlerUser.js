@@ -39,7 +39,11 @@ const allProperty = async (req, res) => {
   if (city) {
     let propertyCity = await Property.findAll({
       where: {
-        city: { [Op.iLike]: `%${city}%` },
+        city: {
+          [Op.iLike]: `%${city
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")}%`,
+        },
       },
       //falta incluir los modelos servicios y tipos para cuando
       //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
