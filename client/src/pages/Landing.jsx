@@ -4,18 +4,13 @@ import { Link } from "react-router-dom";
 
 import Footerbar from "../components/Footerbar";
 
-import house from "../assets/house.svg";
-
 const Landing = () => {
   return (
     <Container>
       <header></header>
       <main>
         <Banner>
-          <Logo>
-            <Img src={house} alt="imagen" />
-            <Title onS>INMOBATE</Title>
-          </Logo>
+          <Title onS>INMOBATE</Title>
           <Link to="/home">
             <Button class="btn">Alquila ya</Button>
             {/* Alquila ya */}
@@ -73,14 +68,6 @@ const Banner = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 1em;
-`;
-
-const Logo = styled.div`
-  display: flex;
-`;
-
-const Img = styled.img`
-  width: 5em;
 `;
 
 const Title = styled.div`

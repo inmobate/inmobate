@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import houseError from "../assets/houseError.svg";
+import house from "../assets/house.svg";
 
 const Card = ({ property }) => {
   const { pictures, city, country, price } = property;
@@ -11,7 +11,7 @@ const Card = ({ property }) => {
         <Image
           src={pictures[0]}
           alt="imagen"
-          onError={(e) => (e.target.src = `${houseError}`)}
+          onError={(e) => (e.target.src = `${house}`)}
         />
       </ImageWrapper>
       <Details>
