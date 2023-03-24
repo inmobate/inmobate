@@ -23,7 +23,7 @@ const { getVentas } = require("../controller/controllerSale");
 const { propertyById } = require("../controller/controllerProperty");
 const { typeDb } = require("../controller/controllerType");
 const CommentDelete = require("../handler/delete/deleteCommit.js");
-const publicationDelete = require("../handler/delete/deletePublication.js");
+// const publicationDelete = require("../handler/delete/deletePublication.js");
 const userDelete = require("../handler/delete/deleteUser.js");
 
 const allProperty = async (req, res) => {
