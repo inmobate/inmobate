@@ -9,7 +9,7 @@ export const properties = createApi({
 
   endpoints: (builder) => ({
     getProperties: builder.query({
-      query: () => "/property",
+      query: (page = 0, size = 18) => `/property?page=${page}&size=${size}`,
     }),
 
     postProperties: builder.mutation({
