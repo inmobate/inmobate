@@ -49,7 +49,7 @@ const allProperty = async (req, res) => {
       where: {
         city: { [Op.iLike]: `%${city}%` },
       },
-      //falta incluir los modelos servicios y tipos para cuandos
+      //falta incluir los modelos servicios y tipos para cuando
       //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
     });
     try {
