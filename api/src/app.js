@@ -26,7 +26,6 @@ server.use((req, res, next) => {
   );
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
-<<<<<<< HEAD
 })
 server.use(express.urlencoded({ extended: true }));
 server.use(passport.initialize());
