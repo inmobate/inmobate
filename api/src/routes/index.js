@@ -6,10 +6,11 @@ const {allUsers,postUsers,postPublications,allPublications,allPropertyById,
     allProperty, allSale,allReservas,postComments,allServicios,allComments, 
     postProperty, postSale, postBooking, putUsers, putPublications, putProperty, alltype, deleteComments} = require('../handler/handlerUser.js');
 
-const {redirectHome, redirectLogin} = require('../middlewares/auth.js');
+//const {} = require('../middlewares/auth.js');
 const authTp = require('../handler/handlerAuthTp');
 const {passport, authenticate} = require('../passport.js');
 const jwt = require("jsonwebtoken");
+const { JWT_SECRET_KEY } = process.env 
 
 const router = Router();
 
@@ -60,11 +61,20 @@ router.get('/', (req, res) => {
     `)
 });
 
-router.post('/login', passport.authenticate('local'), (req, res) => {
-  res.json(req.user);
+router.post('/login', passport.authenticate('local', { session: false }), async (req, res) => {
+  try{    
+    let user=req.user;
+   //Crear el token JWT con los datos del usuario.
+    const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET_KEY,{expiresIn:"1d"})   
+     //Enviar respuesta al cliente con el access_token
+      return res.json({token})
+  }
+  catch(e){
+    return  res.status(500).json({error:"Ha ocurrido un error."})
+  }
 });
 
-router.get('/login', redirectHome,  (req, res) => {
+router.get('/login',   (req, res) => {
     res.send(`
       <h1>Iniciar sesión</h1>
       <form method='post' action='/login'>
@@ -79,7 +89,7 @@ router.get('/login', redirectHome,  (req, res) => {
       <a href='/signup'>Registrarse</a>
     `)
   });
-router.post('/signup', redirectHome, (req, res) => {
+router.post('/signup',  (req, res) => {
   const { name, lastName, email, password } = req.body;
 
     if(name && email && password && lastName ) {
@@ -87,6 +97,7 @@ router.post('/signup', redirectHome, (req, res) => {
         if(!exists) {
         const user = {
             name,
+            lastName,
             email,
             password
         }
@@ -97,28 +108,62 @@ router.post('/signup', redirectHome, (req, res) => {
 res.redirect('/signup')
 });
 
-router.get('/auth/google',
-  passport.authenticate('google', { scope: ['email','profile'] }), (req,res) => res.send(req.user),
-  );
+router.get('/auth/google',passport.authenticate('google', { scope: ['email','profile'] }));
 
-router.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/auth/failure' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
-  router.get('/auth/facebook',
-  passport.authenticate('facebook'));
+router.get('/auth/google/callback',passport.authenticate('google', { failureRedirect: '/login' }), (req,res ) => {
+  const user = req.user
+  payload = {
+    id:user.id,
+    email: user.email,
+    name: user.name,
+    lastName: user.lastName
+  }
+  token = jwt.sign( payload, process.env.JWT_SECRET_KEY, { expiresIn: '1d' })
 
-router.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { scope: ['email'] }, { failureRedirect: '/login' }),);
+  res.json({token})
+});
+router.get('/auth/facebook',passport.authenticate('facebook', { scope: ['email'] }), (req,res ) => {
+  const user = req.user
+  payload = {
+    id:user.id,
+    email: user.email,
+    name: user.name,
+    lastName: user.lastName
+  }
+  token = jwt.sign( payload, process.env.JWT_SECRET_KEY, { expiresIn: '1d' })
+
+  res.json({token})
+});
+
+router.get('/auth/facebook/callback',passport.authenticate('facebook', { scope: ['email'] }, { failureRedirect: '/login' })
+);
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   router.post('/logout', function(req, res, next) {
     req.logout(function(err) {
       if (err) { return next(err); }
       res.redirect('/');
     });
   })
-  router.get('/home', redirectLogin, (req, res) => {
+  router.get('/home',  (req, res) => {
     const user = users.find(user => user.id === req.session.userId);
     
     res.send(`

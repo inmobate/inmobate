@@ -1,33 +1,19 @@
-const { request } = require('express');
-const { User } = require('../db')
-const user = {}
+authenticateToken = require('../middlewares/auth.js')
 
-const authTp = (req, res) => {
-    user = req.user;
-    const payload = {
-            user: user.id,
-            username: user.displayName,
-            email: user.emails[0].value,
-        };
+const authTp = async (req, res) => {
     try {
-        const userDataQuery = JSON.stringify({
-            name: user.name.givenName,
-            lastName: user.name.familyName,
-            id: user.id,
-            email: user.email
-    });return userQuery
-    
-    
-    } catch (error) {
-        console.log(error.message);
-        return error.message;
-    }
-    
-GOOGLE_URL_SUCCESS_LOGIN_REDIRECT_LOCAL ?  res.redirect(`${GOOGLE_URL_SUCCESS_LOGIN_REDIRECT_LOCAL}${userDataQuery}`) : res.redirect(`${GOOGLE_URL_SUCCESS_LOGIN_REDIRECT_DEPLOY}${userDataQuery}`)
-    //let redirect = `http://localhost:3000/?user=`;
-
-    request.redirect("/home");
+        const user = req.user;
+        //Crear el token JWT con los datos del usuario.
+        const accessToken = jwt.sign(user.toJSON(), process.env.JWT_SECRET_KEY, {expiresIn:"15m"})   
+        //Enviar respuesta al cliente con el access_token
+        res.cookie("access_token", accessToken);
+        return  res.redirect("/")
+    } 
+    catch (error) {
+        return   res.status(500).json({ error: 'Ha ocurrido un error.' });
+        }
 }
+
 
 
 module.exports = { authTp } 
