@@ -9,6 +9,7 @@ import Filterbar from "../components/Filterbar";
 import Cards from "../components/Cards";
 
 import Footerbar from "../components/Footerbar";
+import Infinite from "../components/InfiniteScroll";
 
 const Home = () => {
   const { data, error, isLoading } = useGetPropertiesQuery();
@@ -20,7 +21,8 @@ const Home = () => {
         <Filterbar />
       </Header>
       <Main>
-        <Cards properties={data} />
+        {/* <Cards /> */}
+        <Infinite />
       </Main>
       <Footer>
         <Footerbar />

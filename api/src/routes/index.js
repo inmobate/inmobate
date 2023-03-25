@@ -31,7 +31,11 @@ const {
 const { redirectHome, redirectLogin } = require("../middlewares/auth.js");
 const authTp = require("../handler/handlerAuthTp");
 const { passport, authenticate } = require("../passport.js");
+//const {} = require('../middlewares/auth.js');
+const authTp = require('../handler/handlerAuthTp');
+const {passport, authenticate} = require('../passport.js');
 const jwt = require("jsonwebtoken");
+const { JWT_SECRET_KEY } = process.env 
 
 const router = Router();
 
@@ -90,12 +94,12 @@ router.get("/", (req, res) => {
     `);
 });
 
-router.post("/login", passport.authenticate("local"), (req, res) => {
+router.post('/login', passport.authenticate('local'), (req, res) => {
   res.json(req.user);
 });
 
-router.get("/login", redirectHome, (req, res) => {
-  res.send(`
+router.get('/login', redirectHome,  (req, res) => {
+    res.send(`
       <h1>Iniciar sesión</h1>
       <form method='post' action='/login'>
         <input type='email' name='email' placeholder='Email' required />
@@ -107,62 +111,51 @@ router.get("/login", redirectHome, (req, res) => {
         <a href="/auth/facebook">Ingresar con Facebook</a>
       </form>
       <a href='/signup'>Registrarse</a>
-    `);
-});
-router.post("/signup", redirectHome, (req, res) => {
+    `)
+  });
+router.post('/signup', redirectHome, (req, res) => {
   const { name, lastName, email, password } = req.body;
 
-  if (name && email && password && lastName) {
-    const exists = User.findAll((user) => user.email === email);
-    if (!exists) {
-      const user = {
-        name,
-        email,
-        password,
-      };
-      User.Create(user);
-      return res.redirect("/");
+    if(name && email && password && lastName ) {
+        const exists = User.findAll(user => user.email === email);
+        if(!exists) {
+        const user = {
+            name,
+            email,
+            password
+        }
+        User.Create(user)
+        return res.redirect('/');
+        }
     }
-  }
-  res.redirect("/signup");
+res.redirect('/signup')
 });
 
-router.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["email", "profile"] }),
-  (req, res) => res.send(req.user)
-);
+router.get('/auth/google',
+  passport.authenticate('google', { scope: ['email','profile'] }), (req,res) => res.send(req.user),
+  );
 
-router.get(
-  "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/auth/failure" }),
-  function (req, res) {
+router.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/auth/failure' }),
+  function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect("/");
-  }
-);
-router.get("/auth/facebook", passport.authenticate("facebook"));
-
-router.get(
-  "/auth/facebook/callback",
-  passport.authenticate(
-    "facebook",
-    { scope: ["email"] },
-    { failureRedirect: "/login" }
-  )
-);
-router.post("/logout", function (req, res, next) {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect("/");
+    res.redirect('/');
   });
-});
-router.get("/home", redirectLogin, (req, res) => {
-  const user = users.find((user) => user.id === req.session.userId);
+  router.get('/auth/facebook',
+  passport.authenticate('facebook'));
 
-  res.send(`
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { scope: ['email'] }, { failureRedirect: '/login' }),);
+  router.post('/logout', function(req, res, next) {
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      res.redirect('/');
+    });
+  })
+  router.get('/home', redirectLogin, (req, res) => {
+    const user = users.find(user => user.id === req.session.userId);
+    
+    res.send(`
       <h1>Bienvenido ${user.name}</h1>
       <h4>${user.email}</h4>
       <a href='/'>Inicio</a>
