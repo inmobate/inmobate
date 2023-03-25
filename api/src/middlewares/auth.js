@@ -1,30 +1,23 @@
-const session = require('express-session');
+const jwt = require("jsonwebtoken")
+const { JWT_SECRET_KEY } =process.env
 
-
-const redirectLogin = (req, res, next) => {
-
-    if(!req.session.userId) {
-        res.redirect('/login');
-    } else {
-        next();
+function authenticateToken(req, res, next) {
+    
+    
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    if (!token) {
+        return res.status(401).json({ message: 'You must be logged in to access this resource.' });
     }
+    
+    jwt.verify(token, JWT_SECRET_KEY, (err, user) => {
+        if (err || !user ||user.exp < Date.now() / 1000) {
+            // El token ha expirado
+            return  res.status(403).send("El token no es válido.")
+        }
+        req.user = user
+        next() 
+    })
 };
 
-const redirectHome = (req, res, next) => {
-
-    if(req.session.userId) {
-    res.redirect('/home');
-    } 
-    else {
-        next();
-    }
-};
-const isAuthenticated = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return next();
-    } else {
-        res.redirect('/login');
-    }
-};
-
-module.exports = { redirectLogin, redirectHome, isAuthenticated}
+module.exports={ authenticateToken }
