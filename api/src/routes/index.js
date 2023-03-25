@@ -1,11 +1,36 @@
-const { Router } = require('express');
+const { Router } = require("express");
 // const multer  = require('multer');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-const {allUsers,postUsers,postPublications,allPublications,allPropertyById,
-    allProperty, allSale,allReservas,postComments,allServicios,allComments, 
-    postProperty, postSale, postBooking, putUsers, putPublications, putProperty, alltype, deleteComments} = require('../handler/handlerUser.js');
+const {
+  allUsers,
+  postUsers,
+  postPublications,
+  allPublications,
+  allPropertyById,
+  allProperty,
+  allSale,
+  allReservas,
+  postComments,
+  allServicios,
+  allComments,
+  postProperty,
+  postSale,
+  postBooking,
+  putUsers,
+  putPublications,
+  putProperty,
+  alltype,
+  deleteComments,
+  deletePublication,
+  deleteUser,
+  getAdmin,
+  deleteAdmin,
+} = require("../handler/handlerUser.js");
 
+const { redirectHome, redirectLogin } = require("../middlewares/auth.js");
+const authTp = require("../handler/handlerAuthTp");
+const { passport, authenticate } = require("../passport.js");
 //const {} = require('../middlewares/auth.js');
 const authTp = require('../handler/handlerAuthTp');
 const {passport, authenticate} = require('../passport.js');
@@ -14,67 +39,66 @@ const { JWT_SECRET_KEY } = process.env
 
 const router = Router();
 
-router.get('/property', allProperty)//lista
-router.get('/property/:id', allPropertyById)//lista
-router.post('/property', postProperty)
-router.put('/property/:id', putProperty)
+router.get("/property", allProperty); //lista
+router.get("/property/:id", allPropertyById); //lista
+router.post("/property", postProperty);
+router.put("/property/:id", putProperty);
 
-router.get('/type', alltype)//lista
-router.get('/servicio', allServicios)//lista
+router.get("/type", alltype); //lista
+router.get("/servicio", allServicios); //lista
 
-router.get('/sale', allSale)//lista
-router.post('/sale', postSale)
+router.get("/sale", allSale); //lista
+router.post("/sale", postSale);
 
-router.get('/booking',allReservas)//lista
-router.post('/:id_property/booking', postBooking)
+router.get("/booking", allReservas); //lista
+router.post("/:id_property/booking", postBooking);
 
-router.get('/users', allUsers)//lista
-router.post('/users', postUsers)//lista
-router.put('/users', putUsers)//lista
+router.get("/users", allUsers); //lista
+router.post("/users", postUsers); //lista
+router.put("/users", putUsers); //lista
+router.delete("/:id/users", deleteUser); //lista
 
-router.get("/comentarios", allComments)//lista
-router.post('/:id_publication/comentarios', postComments)//lista
-router.delete("/comentarios", deleteComments)// no le voy a hacer, comentarlo al grupo
+router.get("/comentarios", allComments); //lista
+router.post("/:id_publication/comentarios", postComments); //lista
+router.delete("/:id/comentarios", deleteComments); // no le voy a hacer, comentarlo al grupo
 
+router.get("/publication", allPublications); //lista
+router.post("/:id_autor/publication", postPublications); // lista
+router.put("/publication", putPublications);
+router.delete("/:id/publication", deletePublication);
 
-router.get('/publication', allPublications)//lista
-router.post('/:id_autor/publication', postPublications)// lista
-router.put('/publication', putPublications)
+router.get("/admin/get?=", getAdmin);
+router.delete("/admin/remove?=/:id", deleteAdmin);
+
 //------------------------------Auth----------------------------------------------------------------
 
+const { User } = require("../db.js");
+router.get("/", (req, res) => {
+  const { userId } = req.session;
 
-const {User} = require('../db.js');
-router.get('/', (req, res) => {
-    const { userId } = req.session;
-  
-    res.send(`
+  res.send(`
       <h1>Bienvenidos a Inmovate!</h1>
-      ${userId ? `
+      ${
+        userId
+          ? `
         <a href='/home'>Perfil</a>
         <form method='post' action='/logout'>
           <button>Salir</button>
         </form>
-        ` : `
+        `
+          : `
         <a href='/login'>Ingresar</a>
         <a href='/register'>Registrarse</a>
-        `}
-    `)
+        `
+      }
+    `);
 });
 
-router.post('/login', passport.authenticate('local', { session: false }), async (req, res) => {
-  try{    
-    let user=req.user;
-   //Crear el token JWT con los datos del usuario.
-    const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET_KEY,{expiresIn:"1d"})   
-     //Enviar respuesta al cliente con el access_token
-      return res.json({token})
-  }
-  catch(e){
-    return  res.status(500).json({error:"Ha ocurrido un error."})
-  }
+router.post('/login', passport.authenticate('local'), (req, res) => {
+  res.json(req.user);
 });
 
-router.get('/login',   (req, res) => {
+router.get('/login', redirectHome,  (req, res) => {
     res.send(`
       <h1>Iniciar sesión</h1>
       <form method='post' action='/login'>
@@ -89,7 +113,7 @@ router.get('/login',   (req, res) => {
       <a href='/signup'>Registrarse</a>
     `)
   });
-router.post('/signup',  (req, res) => {
+router.post('/signup', redirectHome, (req, res) => {
   const { name, lastName, email, password } = req.body;
 
     if(name && email && password && lastName ) {
@@ -97,7 +121,6 @@ router.post('/signup',  (req, res) => {
         if(!exists) {
         const user = {
             name,
-            lastName,
             email,
             password
         }
@@ -108,70 +131,36 @@ router.post('/signup',  (req, res) => {
 res.redirect('/signup')
 });
 
-router.get('/auth/google',passport.authenticate('google', { scope: ['email','profile'] }));
+router.get('/auth/google',
+  passport.authenticate('google', { scope: ['email','profile'] }), (req,res) => res.send(req.user),
+  );
 
-router.get('/auth/google/callback',passport.authenticate('google', { failureRedirect: '/login' }), (req,res ) => {
-  const user = req.user
-  payload = {
-    id:user.id,
-    email: user.email,
-    name: user.name,
-    lastName: user.lastName
-  }
-  token = jwt.sign( payload, process.env.JWT_SECRET_KEY, { expiresIn: '1d' })
+router.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/auth/failure' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+  router.get('/auth/facebook',
+  passport.authenticate('facebook'));
 
-  res.json({token})
-});
-router.get('/auth/facebook',passport.authenticate('facebook', { scope: ['email'] }), (req,res ) => {
-  const user = req.user
-  payload = {
-    id:user.id,
-    email: user.email,
-    name: user.name,
-    lastName: user.lastName
-  }
-  token = jwt.sign( payload, process.env.JWT_SECRET_KEY, { expiresIn: '1d' })
-
-  res.json({token})
-});
-
-router.get('/auth/facebook/callback',passport.authenticate('facebook', { scope: ['email'] }, { failureRedirect: '/login' })
-);
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { scope: ['email'] }, { failureRedirect: '/login' }),);
   router.post('/logout', function(req, res, next) {
     req.logout(function(err) {
       if (err) { return next(err); }
       res.redirect('/');
     });
   })
-  router.get('/home',  (req, res) => {
+  router.get('/home', redirectLogin, (req, res) => {
     const user = users.find(user => user.id === req.session.userId);
     
     res.send(`
       <h1>Bienvenido ${user.name}</h1>
       <h4>${user.email}</h4>
       <a href='/'>Inicio</a>
-    `)
-  });
+    `);
+});
 module.exports = router;
 
-//, 
+//,

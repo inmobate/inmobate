@@ -1,4 +1,11 @@
-import { BottomBar, Container, Content, FlexCenter, Type } from "./styles";
+import {
+  BottomBar,
+  Container,
+  Content,
+  FlexCenter,
+  Type,
+  Button,
+} from "./styles";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -17,23 +24,6 @@ const Step9 = () => {
     services,
     images,
   } = useSelector((state) => state.propertyToAdd);
-
-  const storage = JSON.parse(
-    localStorage.getItem("persist:root")
-  ).propertyToAdd;
-  const storageType = type || JSON.parse(storage).type;
-  const storageRoomType = roomType || JSON.parse(storage).roomType;
-  const storageDescription = description || JSON.parse(storage).description;
-  const storageTitle = title || JSON.parse(storage).title;
-  const storageTravellers = travellers || JSON.parse(storage).travellers;
-  const storageRooms = rooms || JSON.parse(storage).rooms;
-  const storageBeds = beds || JSON.parse(storage).beds;
-  const storageBathrooms = bathrooms || JSON.parse(storage).bathrooms;
-  const storagePrice = price || JSON.parse(storage).price;
-  const storageImage = images || JSON.parse(storage).images;
-  const storageLocation = Object.keys(location).length
-    ? location
-    : JSON.parse(storage).location;
 
   const navigate = useNavigate();
 
@@ -64,34 +54,34 @@ const Step9 = () => {
           <h2>Solo queda confirmar los Datos</h2>
           <div>
             <div>
-              Estilo de la propiedad: <strong>{storageType}</strong>
+              Estilo de la propiedad: <strong>{type}</strong>
             </div>
             <div>
-              Tipo de hospedaje: <strong>{storageRoomType}</strong>
+              Tipo de hospedaje: <strong>{roomType}</strong>
             </div>
             <div>
-              Ubicacion: <strong>{storageLocation.street}</strong>
+              Ubicacion: <strong>{location.street}</strong>
             </div>
             <div>
-              Viajeros: <strong>{storageTravellers}</strong>
+              Viajeros: <strong>{travellers}</strong>
             </div>
             <div>
-              Habitaciones: <strong>{storageRooms}</strong>
+              Habitaciones: <strong>{rooms}</strong>
             </div>
             <div>
-              Cantidad de camas: <strong>{storageBeds}</strong>
+              Cantidad de camas: <strong>{beds}</strong>
             </div>
             <div>
-              Cantidad de baños: <strong>{storageBathrooms}</strong>
+              Cantidad de baños: <strong>{bathrooms}</strong>
             </div>
             <div>
-              Titulo: <strong>{storageTitle}</strong>
+              Titulo: <strong>{title}</strong>
             </div>
             <div>
-              Descripcion: <strong>{storageDescription}</strong>
+              Descripcion: <strong>{description}</strong>
             </div>
             <div>
-              Precio por noche: <strong>{storagePrice}</strong>
+              Precio por noche: <strong>{price}</strong>
             </div>
             <div>
               Servicios:
@@ -101,6 +91,7 @@ const Step9 = () => {
                 </strong>
               ))}
             </div>
+            <img src={images} alt="imagen de la propiedad" width={150} />
           </div>
         </FlexCenter>
         <div>
@@ -115,30 +106,30 @@ const Step9 = () => {
       </Content>
 
       <BottomBar>
-        <button onClick={() => navigate("/addproperty/step8")}>Atras</button>
-        <button
+        <Button onClick={() => navigate("/addproperty/step8")}>Atras</Button>
+        <Button
           onClick={() =>
             handleSubmit({
               id: null,
-              title: storageTitle,
-              photo: storageImage,
-              price: storagePrice,
-              detail: storageDescription,
-              country: storageLocation.country,
-              city: storageLocation.city,
-              type: storageType,
+              title: title,
+              photo: images,
+              price: price,
+              detail: description,
+              country: location.country,
+              city: location.city,
+              type: type,
               picture: [],
-              habitacion: storageRooms,
-              banos: storageBathrooms,
-              direccion: storageLocation.street,
-              roomType: storageRoomType,
+              habitacion: rooms,
+              banos: bathrooms,
+              direccion: location.street,
+              roomType: roomType,
               rating: "⭐️⭐️⭐️⭐️",
-              beds: storageBeds,
+              beds: beds,
             })
           }
         >
           Confirmar
-        </button>
+        </Button>
       </BottomBar>
     </Container>
   );

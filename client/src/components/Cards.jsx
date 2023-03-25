@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
+import { useState } from "react";
+
 import { Link } from "react-router-dom";
+
+import InfiniteScroll from "react-infinite-scroll-component";
+
+import { useGetPropertiesQuery } from "../app/api/properties";
 
 import Card from "../components/Card";
 
@@ -22,17 +28,8 @@ const Cards = ({ properties }) => {
 const Container = styled.section`
   width: 100%;
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2em;
-  justify-items: center;
-
-  @media screen and (max-width: 800px) {
-    display: flex;
-    /* justify-content: center; */
-    align-items: center;
-    flex-direction: column;
-  }
 `;
 
 export default Cards;

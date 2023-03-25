@@ -49,7 +49,7 @@ const UserButton = () => {
 const Button = styled.div`
   padding: 0.5em;
   position: relative;
-  border: 1px solid black;
+  border: 1px solid grey;
   border-radius: 15px;
   > div {
     display: flex;
@@ -72,14 +72,14 @@ const Ul = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-  outline: 1px solid black;
-  border: none;
+  border: 1px solid grey;
   border-radius: 1em;
   list-style: none;
   background: #ffff;
 `;
 
 const Li = styled.li`
+  color: #000;
   &:hover {
     text-decoration: underline;
   }

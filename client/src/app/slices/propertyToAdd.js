@@ -1,22 +1,39 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const propertyToAdd = createSlice({
-  name: "propertyToAdd",
-
-  initialState: {
+const structure = {
+  propertyToAdd: {
     type: "",
     roomType: "",
     location: {},
-    travellers: 0,
-    rooms: 0,
-    beds: 0,
-    bathrooms: 0,
+    travellers: 1,
+    rooms: 1,
+    beds: 1,
+    bathrooms: 1,
     services: [],
-    images: "",
+    image: "",
     title: "",
     description: "",
-    price: 0,
+    price: 1000,
   },
+};
+
+if (!localStorage.getItem("persist:root")) {
+  localStorage.setItem("persist:root", JSON.stringify(structure));
+}
+
+let storageJson = JSON.parse(
+  localStorage.getItem("persist:root")
+).propertyToAdd;
+
+if (typeof storageJson === "string") {
+  storageJson = JSON.parse(storageJson);
+}
+
+
+export const propertyToAdd = createSlice({
+  name: "propertyToAdd",
+
+  initialState: storageJson,
 
   reducers: {
     setType: (state, action) => {

@@ -1,33 +1,33 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { BottomBar, Container, Content, Button } from "./styles";
+import { uploadImage } from "./firebase";
+import { useDispatch } from "react-redux";
 import { setImage } from "../../app/slices/propertyToAdd";
-import { BottomBar, Container, Content, ContentColum } from "./styles";
 
 const Step6 = () => {
-  const { images } = useSelector((state) => state.propertyToAdd);
+  const [file, setFile] = useState(null);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const storage = JSON.parse(
-    localStorage.getItem("persist:root")
-  ).propertyToAdd;
-  const storageImage = images || JSON.parse(storage).images;
+  async function handleUpload(file) {
+    const url = await uploadImage(file);
+    dispatch(setImage(url));
+  }
 
   return (
     <Container>
       <Content>
-        <input
-          type="text"
-          value={storageImage}
-          onChange={(e) => dispatch(setImage(e.target.value))}
-        />
+        <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+        <Button onClick={() => handleUpload(file)}>Upload</Button>
       </Content>
 
       <BottomBar>
-        <button onClick={() => navigate("/addproperty/step5")}>Atras</button>
-        <button onClick={() => navigate("/addproperty/step7")}>
+        <Button onClick={() => navigate("/addproperty/step5")}>Atras</Button>
+        <Button onClick={() => navigate("/addproperty/step7")}>
           Siguiente
-        </button>
+        </Button>
       </BottomBar>
     </Container>
   );

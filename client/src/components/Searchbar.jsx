@@ -19,25 +19,26 @@ const Searchbar = () => {
   }
 
   return (
-    <SearchBar>
-      <Input
-        type={Text}
-        placeholder={"Lugar deseado"}
-        onChange={(e) => {
-          setLocation(e.target.value);
-        }}
-        onKeyDown={handleKeyDown}
-      ></Input>
-
-      <Button onClick={() => handleSearch(location)}>
-        <BiSearchAlt size={30} color={"white"} />
-      </Button>
-    </SearchBar>
+    <>
+      <SearchBar>
+        <Input
+          type="text"
+          placeholder="Lugar deseado"
+          onChange={(e) => {
+            setLocation(e.target.value);
+          }}
+          onKeyDown={handleKeyDown}
+        ></Input>
+        <Button onClick={() => handleSearch(location)}>
+          <BiSearchAlt size={30} color={"white"} />
+        </Button>
+      </SearchBar>
+    </>
   );
 };
 
 const SearchBar = styled.div`
-  padding: 0.3rem;
+  padding: 0.3em;
   display: flex;
   justify-content: space-evenly;
   gap: 0.2rem;
@@ -46,7 +47,7 @@ const SearchBar = styled.div`
 `;
 
 const Input = styled.input`
-  padding: 0.3rem;
+  padding: 0.3em;
   border-radius: 50px;
   border: none;
   text-align: center;
