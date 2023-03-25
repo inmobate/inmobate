@@ -70,26 +70,6 @@ router.delete("/admin/remove?=/:id", deleteAdmin);
 //------------------------------Auth----------------------------------------------------------------
 
 const { User } = require("../db.js");
-router.get("/", (req, res) => {
-  const { userId } = req.session;
-
-  res.send(`
-      <h1>Bienvenidos a Inmovate!</h1>
-      ${
-        userId
-          ? `
-        <a href='/home'>Perfil</a>
-        <form method='post' action='/logout'>
-          <button>Salir</button>
-        </form>
-        `
-          : `
-        <a href='/login'>Ingresar</a>
-        <a href='/register'>Registrarse</a>
-        `
-      }
-    `);
-});
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
   res.json(req.user);
@@ -149,15 +129,7 @@ router.get('/auth/facebook/callback',
       res.redirect('/');
     });
   })
-  router.get('/home', (req, res) => {
-    const user = users.find(user => user.id === req.session.userId);
-    
-    res.send(`
-      <h1>Bienvenido ${user.name}</h1>
-      <h4>${user.email}</h4>
-      <a href='/'>Inicio</a>
-    `);
-});
+
 module.exports = router;
 
 //,
