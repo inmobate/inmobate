@@ -29,29 +29,7 @@ server.use((req, res, next) => {
 })
 server.use(express.urlencoded({ extended: true }));
 server.use(passport.initialize());
-
-
-//--------------------------------------
-server.use('/', routes);
-=======
-});
-
-// uso de session y passpport -----------------------
-/* server.use(
-  session({
-    secret: "cats",
-    resave: false,
-    saveUninitialized: true,
-    //   genid: function(req) {
-    //return genuuid() // use UUIDs for session IDs
-  },  
-  })
-);
-// server.use(passport.initialize());
-
- */ //--------------------------------------
 server.use("/", routes);
->>>>>>> ed90455a2c5e1b3fa7a020292a9180f963ad6a89
 
 // Error catching endware.
 server.use((err, req, res, next) => {
