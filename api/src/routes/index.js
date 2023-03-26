@@ -167,6 +167,13 @@ router.get("/home", redirectLogin, (req, res) => {
       <h4>${user.email}</h4>
       <a href='/'>Inicio</a>
     `);
+
+  //____________________________________________________________________________________________________________________________
+
+  const nodemailer = require("nodemailer");
+  router.post("/send-email", (req, res) => {
+    console.log("Email enviado");
+  });
 });
 module.exports = router;
 
