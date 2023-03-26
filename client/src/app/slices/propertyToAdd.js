@@ -10,7 +10,7 @@ const structure = {
     beds: 1,
     bathrooms: 1,
     services: [],
-    image: "",
+    images: "",
     title: "",
     description: "",
     price: 1000,
