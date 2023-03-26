@@ -117,11 +117,9 @@ router.post('/signup',  (req, res) => {
 res.redirect('/signup')
 });
 
-router.get('/auth/google',
-  passport.authenticate('google', { scope: ['email','profile'] }));
+router.get('/auth/google', passport.authenticate('google', { scope: ['email','profile'] }));
 
-router.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/auth/failure' }), (req,res ) => {
+router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/auth/failure' }), (req,res ) => {
     const user = req.user
     payload = {
       id:user.id,
@@ -133,22 +131,21 @@ router.get('/auth/google/callback',
   
     res.json({token})
   });
-  router.get('/auth/facebook', passport.authenticate('facebook'),(req,res ) => {
-    const user = req.user
-    payload = {
-      id:user.id,
-      email: user.email,
-      name: user.name,
-      lastName: user.lastName
-    }
-    token = jwt.sign( payload, process.env.JWT_SECRET_KEY, { expiresIn: '1d' })
-  
-    res.json({token})
-  });
+  router.get('/auth/facebook', passport.authenticate('facebook'));
 
-router.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { scope: ['email'] }, { failureRedirect: '/login' }));
-  router.post('/logout', function(req, res, next) {
+router.get('/auth/facebook/callback', passport.authenticate('facebook', { scope: ['email'] }, { failureRedirect: '/login' }),(req,res ) => {
+  const user = req.user
+  payload = {
+    id:user.id,
+    email: user.email,
+    name: user.name,
+    lastName: user.lastName
+  }
+  token = jwt.sign( payload, process.env.JWT_SECRET_KEY, { expiresIn: '1d' })
+
+  res.json({token})
+});
+router.post('/logout', function(req, res, next) {
     req.logout(function(err) {
       if (err) { return next(err); }
       res.redirect('/');
