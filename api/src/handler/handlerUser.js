@@ -28,11 +28,26 @@ const userDelete = require("../handler/delete/deleteUser.js");
 
 const allProperty = async (req, res) => {
   const datos = await Property.findAll();
-  const { city, province } = req.query;
+  const { city, province, page = 0, size = 12 } = req.query;
+
+  if (page && size) {
+    let options = {
+      limit: +size,
+      offset: +page * +size,
+    };
+
+    const { count, rows } = await Property.findAndCountAll(options);
+
+    return res.json({
+      total: count,
+      properties: rows,
+    });
+  }
+
   if (city) {
     let propertyCity = await Property.findAll({
       where: {
-        city: { [Op.iLike]: city },
+        city: { [Op.iLike]: `%${city}%` },
       },
       //falta incluir los modelos servicios y tipos para cuando
       //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
@@ -58,7 +73,6 @@ const allProperty = async (req, res) => {
   }
   res.status(200).json(datos);
 };
-
 const allPropertyById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -386,6 +400,7 @@ const deleteAdmin = async (req, res) => {
     if (remove === "User") {
       const deleteuser = await userDelete(id);
       res.status(200).json(deleteuser);
+
     }
     if (remove === "Comments") {
       const commentsdelete = await CommentDelete(id);

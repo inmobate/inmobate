@@ -7,6 +7,7 @@ import Filterbar from "../components/Filterbar";
 import Cards from "../components/Cards";
 
 import Footerbar from "../components/Footerbar";
+import Infinite from "../components/InfiniteScroll";
 
 const Home = () => {
   return (
@@ -16,7 +17,8 @@ const Home = () => {
         <Filterbar />
       </Header>
       <Main>
-        <Cards />
+        {/* <Cards /> */}
+        <Infinite />
       </Main>
       <Footer>
         <Footerbar />
