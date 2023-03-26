@@ -42,7 +42,7 @@ router.post("/property", postProperty);
 router.put("/property/:id", putProperty);
 
 router.get("/type", alltype); //lista
-router.get("/servicio", allServicios); //lista
+router.get("/service", allServicios); //lista
 
 router.get("/sale", allSale); //lista
 router.post("/sale", postSale);
@@ -72,7 +72,16 @@ router.delete("/admin/remove?=/:id", deleteAdmin);
 const { User } = require("../db.js");
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
-  res.json(req.user);
+  try{    
+    let user=req.user;
+   //Crear el token JWT con los datos del usuario.
+    const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET_KEY,{expiresIn:"1d"})   
+     //Enviar respuesta al cliente con el access_token
+      return res.json({token})
+  }
+  catch(e){
+    return  res.status(500).json({error:"Ha ocurrido un error."})
+  }
 });
 
 router.get('/login',  (req, res) => {
@@ -109,20 +118,37 @@ res.redirect('/signup')
 });
 
 router.get('/auth/google',
-  passport.authenticate('google', { scope: ['email','profile'] }), (req,res) => res.send(req.user),
-  );
+  passport.authenticate('google', { scope: ['email','profile'] }));
 
 router.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/auth/failure' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
+  passport.authenticate('google', { failureRedirect: '/auth/failure' }), (req,res ) => {
+    const user = req.user
+    payload = {
+      id:user.id,
+      email: user.email,
+      name: user.name,
+      lastName: user.lastName
+    }
+    token = jwt.sign( payload, process.env.JWT_SECRET_KEY, { expiresIn: '1d' })
+  
+    res.json({token})
   });
   router.get('/auth/facebook',
   passport.authenticate('facebook'));
 
 router.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { scope: ['email'] }, { failureRedirect: '/login' }),);
+  passport.authenticate('facebook', { scope: ['email'] }, { failureRedirect: '/login' }),(req,res ) => {
+    const user = req.user
+    payload = {
+      id:user.id,
+      email: user.email,
+      name: user.name,
+      lastName: user.lastName
+    }
+    token = jwt.sign( payload, process.env.JWT_SECRET_KEY, { expiresIn: '1d' })
+  
+    res.json({token})
+  });
   router.post('/logout', function(req, res, next) {
     req.logout(function(err) {
       if (err) { return next(err); }
