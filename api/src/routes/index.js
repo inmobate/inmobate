@@ -27,7 +27,11 @@ const {
   getAdmin,
   deleteAdmin,
 } = require("../handler/handlerUser.js");
-
+const {
+  createOrden,
+  capturarOrden,
+  cancelarOrden,
+} = require("../metodo_de_pagos/paypal");
 const { redirectHome, redirectLogin } = require("../middlewares/auth.js");
 
 const {passport, authenticate} = require('../passport.js');
@@ -70,6 +74,7 @@ router.delete("/admin/remove?=/:id", deleteAdmin);
 //------------------------------Auth----------------------------------------------------------------
 
 const { User } = require("../db.js");
+
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
   res.json(req.user);
@@ -129,7 +134,13 @@ router.get('/auth/facebook/callback',
       res.redirect('/');
     });
   })
+//----------------------------------------paypal-----------------------------------
 
+router.post("/create-order/:id", createOrden);
+
+router.get("/capture-order", capturarOrden);
+
+router.get("/cancel-order", cancelarOrden);
 module.exports = router;
 
 //,
