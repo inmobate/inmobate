@@ -4,7 +4,8 @@ export const properties = createApi({
   reducerPath: "properties",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://inmovate.up.railway.app/",
+    baseUrl: "https://inmovate.onrender.com",
+    //baseUrl: "http://localhost:3001",
   }),
 
   endpoints: (builder) => ({
@@ -33,6 +34,10 @@ export const properties = createApi({
     getType: builder.query({
       query: () => `/type`,
     }),
+
+    getService: builder.query({
+      query: () => `/servicio`,
+    }),
   }),
 });
 
@@ -41,4 +46,5 @@ export const {
   useGetPropertyByIdQuery,
   useGetPropertiesByCityQuery,
   useGetTypeQuery,
+  useGetServiceQuery,
 } = properties;

@@ -29,10 +29,7 @@ const {
 } = require("../handler/handlerUser.js");
 
 const { redirectHome, redirectLogin } = require("../middlewares/auth.js");
-const authTp = require("../handler/handlerAuthTp");
-const { passport, authenticate } = require("../passport.js");
-//const {} = require('../middlewares/auth.js');
-const authTp = require('../handler/handlerAuthTp');
+
 const {passport, authenticate} = require('../passport.js');
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET_KEY } = process.env 
@@ -73,32 +70,12 @@ router.delete("/admin/remove?=/:id", deleteAdmin);
 //------------------------------Auth----------------------------------------------------------------
 
 const { User } = require("../db.js");
-router.get("/", (req, res) => {
-  const { userId } = req.session;
-
-  res.send(`
-      <h1>Bienvenidos a Inmovate!</h1>
-      ${
-        userId
-          ? `
-        <a href='/home'>Perfil</a>
-        <form method='post' action='/logout'>
-          <button>Salir</button>
-        </form>
-        `
-          : `
-        <a href='/login'>Ingresar</a>
-        <a href='/register'>Registrarse</a>
-        `
-      }
-    `);
-});
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
   res.json(req.user);
 });
 
-router.get('/login', redirectHome,  (req, res) => {
+router.get('/login',  (req, res) => {
     res.send(`
       <h1>Iniciar sesión</h1>
       <form method='post' action='/login'>
@@ -113,7 +90,7 @@ router.get('/login', redirectHome,  (req, res) => {
       <a href='/signup'>Registrarse</a>
     `)
   });
-router.post('/signup', redirectHome, (req, res) => {
+router.post('/signup',  (req, res) => {
   const { name, lastName, email, password } = req.body;
 
     if(name && email && password && lastName ) {
@@ -152,15 +129,7 @@ router.get('/auth/facebook/callback',
       res.redirect('/');
     });
   })
-  router.get('/home', redirectLogin, (req, res) => {
-    const user = users.find(user => user.id === req.session.userId);
-    
-    res.send(`
-      <h1>Bienvenido ${user.name}</h1>
-      <h4>${user.email}</h4>
-      <a href='/'>Inicio</a>
-    `);
-});
+
 module.exports = router;
 
 //,

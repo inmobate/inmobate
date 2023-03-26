@@ -26,7 +26,10 @@ const Step2 = () => {
             onClick={() => dispatch(setTypeRoom("alojamiento entero"))}
             style={
               roomType === "alojamiento entero"
-                ? { border: "1px solid grey" }
+                ? {
+                    border: "3px solid var(--color2)",
+                    borderRadius: "15px",
+                  }
                 : null
             }
           >
@@ -39,7 +42,10 @@ const Step2 = () => {
             onClick={() => dispatch(setTypeRoom("habitacion privada"))}
             style={
               roomType === "habitacion privada"
-                ? { border: "1px solid grey" }
+                ? {
+                    border: "3px solid var(--color2)",
+                    borderRadius: "15px",
+                  }
                 : null
             }
           >
@@ -53,7 +59,10 @@ const Step2 = () => {
             onClick={() => dispatch(setTypeRoom("habitacion compartida"))}
             style={
               roomType === "habitacion compartida"
-                ? { border: "1px solid grey" }
+                ? {
+                    border: "3px solid var(--color2)",
+                    borderRadius: "15px",
+                  }
                 : null
             }
           >

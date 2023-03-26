@@ -5,15 +5,17 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { HiOutlineUserCircle, HiMenu } from "react-icons/hi";
+import { useSelector } from "react-redux";
+import Login from "../pages/Login";
 
 const UserButton = () => {
   const refMenu = useRef(null);
-
+  const { logUser } = useSelector((state) => state.logUser);
   const [active, setActive] = useState(false);
+  const [login, setLogin] = useState(false);
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
-    // Devolver una función que elimina el manejador de eventos
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
@@ -27,23 +29,39 @@ const UserButton = () => {
 
   return (
     <Button ref={refMenu}>
+      {login && <Login active={login} setActive={setLogin} />}
       <div onClick={() => setActive(!active)}>
         <HiMenu size={25} />
         <HiOutlineUserCircle size={25} />
       </div>
-
       <MenuHidden style={active ? null : { display: "none" }}>
-        <Ul>
-          <Link to="/reserves">
-            <Li>Reservas</Li>
-          </Link>
-          <Link to="/profile">
-            <Li>Cuenta</Li>
-          </Link>
-          <hr />
-          <Li>Ayuda</Li>
-          <Li>Cerrar Sesion</Li>
-        </Ul>
+        {logUser ? (
+          <Ul>
+            <Link to="/reserves">
+              <Li>Reservas</Li>
+            </Link>
+            <Link to="/profile">
+              <Li>Cuenta</Li>
+            </Link>
+            <hr />
+            <Li>Ayuda</Li>
+            <Li>Cerrar Sesion</Li>
+          </Ul>
+        ) : (
+          <Ul>
+            <Li
+              onClick={() => {
+                setLogin(!login);
+                setActive(!active);
+              }}
+            >
+              Iniciar Sesion
+            </Li>
+            <Li>Registrarse</Li>
+            <hr />
+            <Li>Ayuda</Li>
+          </Ul>
+        )}
       </MenuHidden>
     </Button>
   );
