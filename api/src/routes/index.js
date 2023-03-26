@@ -133,18 +133,7 @@ router.get('/auth/google/callback', passport.authenticate('google', { failureRed
   });
   router.get('/auth/facebook',passport.authenticate('facebook', { scope: ['email'] }));
   
-  router.get('/auth/facebook/callback',passport.authenticate('facebook', { scope: ['email'] }, { failureRedirect: '/login' }),  (req,res ) => {
-    const user = req.user
-    payload = {
-      id:user.id,
-      email: user.email,
-      name: user.name,
-      lastName: user.lastName
-    }
-    token = jwt.sign( payload, process.env.JWT_SECRET_KEY, { expiresIn: '1d' })
-  
-    res.json({token})
-  });
+  router.get('/auth/facebook/callback',passport.authenticate('facebook', { scope: ['email'] }, { failureRedirect: '/login' }, { successRedirect: '/' }));
 
 router.post('/logout', function(req, res, next) {
     req.logout(function(err) {

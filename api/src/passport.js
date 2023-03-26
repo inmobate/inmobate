@@ -3,6 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { User } = require('./db.js');
 const { 
     GOOGLE_CLIENT_ID,
@@ -84,7 +85,14 @@ passport.use(new FacebookStrategy({
                 lastName
             });
         }
-        done(null, user);
+        payload = {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            lastName: user.lastName
+        }
+        token = jwt.sign( payload, process.env.JWT_SECRET_KEY, { expiresIn: '1d' })
+        done(null, token);
         } 
         catch (error) {
             done(error);
