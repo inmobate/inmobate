@@ -133,11 +133,7 @@ router.get('/auth/google/callback',
   
     res.json({token})
   });
-  router.get('/auth/facebook',
-  passport.authenticate('facebook'));
-
-router.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { scope: ['email'] }, { failureRedirect: '/login' }),(req,res ) => {
+  router.get('/auth/facebook', passport.authenticate('facebook'),(req,res ) => {
     const user = req.user
     payload = {
       id:user.id,
@@ -149,6 +145,9 @@ router.get('/auth/facebook/callback',
   
     res.json({token})
   });
+
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { scope: ['email'] }, { failureRedirect: '/login' }));
   router.post('/logout', function(req, res, next) {
     req.logout(function(err) {
       if (err) { return next(err); }
