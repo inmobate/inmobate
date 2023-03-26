@@ -73,7 +73,6 @@ const allProperty = async (req, res) => {
   }
   res.status(200).json(datos);
 };
-
 const allPropertyById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -401,6 +400,7 @@ const deleteAdmin = async (req, res) => {
     if (remove === "User") {
       const deleteuser = await userDelete(id);
       res.status(200).json(deleteuser);
+
     }
     if (remove === "Comments") {
       const commentsdelete = await CommentDelete(id);
