@@ -10,7 +10,7 @@ import Login from "../pages/Login";
 
 const UserButton = () => {
   const refMenu = useRef(null);
-  const { user } = useSelector((state) => state.user);
+  const { logUser } = useSelector((state) => state.logUser);
   const [active, setActive] = useState(false);
   const [login, setLogin] = useState(false);
 
@@ -36,7 +36,7 @@ const UserButton = () => {
       </div>
 
       <MenuHidden style={active ? null : { display: "none" }}>
-        {user ? (
+        {logUser ? (
           <Ul>
             <Link to="/profile">
               <Li>Cuenta</Li>

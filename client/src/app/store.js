@@ -9,7 +9,7 @@ import { filterCombine } from "./slices/filterCombine";
 
 import { propertyToAdd } from "./slices/propertyToAdd";
 
-import { user } from "./slices/user";
+import { logUser } from "./slices/logUser";
 
 const persistConfig = {
   key: "root",
@@ -18,7 +18,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   propertyToAdd: propertyToAdd.reducer,
-  user: user.reducer,
+  logUser: logUser.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -28,7 +28,7 @@ export default configureStore({
     persistedReducer,
     [properties.reducerPath]: properties.reducer,
     filterCombine: filterCombine.reducer,
-    user: user.reducer,
+    logUser: logUser.reducer,
     propertyToAdd: propertyToAdd.reducer,
   },
 

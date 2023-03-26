@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const filterCombine = createSlice({
+export const logUser = createSlice({
   name: "logUser",
 
   initialState: {
