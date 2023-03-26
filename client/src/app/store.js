@@ -9,6 +9,8 @@ import { filterCombine } from "./slices/filterCombine";
 
 import { propertyToAdd } from "./slices/propertyToAdd";
 
+import { user } from "./slices/user";
+
 const persistConfig = {
   key: "root",
   storage,
@@ -16,6 +18,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   propertyToAdd: propertyToAdd.reducer,
+  user: user.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -25,6 +28,7 @@ export default configureStore({
     persistedReducer,
     [properties.reducerPath]: properties.reducer,
     filterCombine: filterCombine.reducer,
+    user: user.reducer,
     propertyToAdd: propertyToAdd.reducer,
   },
 
