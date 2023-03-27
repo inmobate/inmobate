@@ -77,7 +77,7 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
    //Crear el token JWT con los datos del usuario.
     const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET_KEY,{expiresIn:"1d"})   
      //Enviar respuesta al cliente con el access_token
-      return res.json({token})
+      return res.json(token)
   }
   catch(e){
     return  res.status(500).json({error:"Ha ocurrido un error."})
@@ -119,7 +119,7 @@ res.redirect('/signup')
 
 router.get('/auth/google', passport.authenticate('google', { scope: ['email','profile'] }));
 
-router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/auth/failure' }), (req,res ) => {
+router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/auth/failure' },{ successRedirect: '/success' }), (req,res ) => {
     const user = req.user
     payload = {
       id:user.id,
@@ -131,28 +131,20 @@ router.get('/auth/google/callback', passport.authenticate('google', { failureRed
   
     res.json({token})
   });
-  router.get('/auth/facebook',passport.authenticate('facebook', { scope: ['email'] }), (req,res ) => {
-    const user = req.user
-    payload = {
-      id:user.id,
-      email: user.email,
-      name: user.name,
-      lastName: user.lastName
-    }
-    token = jwt.sign( payload, process.env.JWT_SECRET_KEY, { expiresIn: '1d' })
+  router.get('/auth/facebook',passport.authenticate('facebook', { scope: ['email'] }));
   
-    res.json({token})
-  });
-  
-  router.get('/auth/facebook/callback',passport.authenticate('facebook', { scope: ['email'] }, { failureRedirect: '/login' }));
-  
+  router.get('/facebook/callback',passport.authenticate('facebook', { scope: ['email'] }, 
+    { failureRedirect: '/login' }, 
+    { successRedirect: '/success' }
+  ));
+
 router.post('/logout', function(req, res, next) {
     req.logout(function(err) {
       if (err) { return next(err); }
       res.redirect('/');
     });
   })
-
+  router.get('/successes',(req,res) => res.json(req.token));
 module.exports = router;
 
 //,
