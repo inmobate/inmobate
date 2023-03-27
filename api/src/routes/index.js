@@ -28,7 +28,6 @@ const {
   deleteAdmin,
 } = require("../handler/handlerUser.js");
 
-const { redirectHome, redirectLogin } = require("../middlewares/auth.js");
 
 const {passport, authenticate} = require('../passport.js');
 const jwt = require("jsonwebtoken");
@@ -119,7 +118,7 @@ res.redirect('/signup')
 
 router.get('/auth/google', passport.authenticate('google', { scope: ['email','profile'] }));
 
-router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/auth/failure' }), (req,res ) => {
+router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res ) => {
     const user = req.user
     payload = {
       id:user.id,
@@ -129,7 +128,7 @@ router.get('/auth/google/callback', passport.authenticate('google', { failureRed
     }
     token = jwt.sign( payload, process.env.JWT_SECRET_KEY, { expiresIn: '1d' })
   
-    res.json(token)
+    res.json({token})
   });
   router.get('/auth/facebook',passport.authenticate('facebook', { scope: ['email'] }));
   
