@@ -119,7 +119,7 @@ res.redirect('/signup')
 
 router.get('/auth/google', passport.authenticate('google', { scope: ['email','profile'] }));
 
-router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/auth/failure' },{ successRedirect: '/success' }), (req,res ) => {
+router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/auth/failure' }), (req,res ) => {
     const user = req.user
     payload = {
       id:user.id,
