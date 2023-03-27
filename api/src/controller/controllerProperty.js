@@ -2,37 +2,31 @@ const{Property,Service,Type}=require('../db.js')
 const {data} = require('./data')
 
 const property = async () => {
- /*  const properties = await Property.findAll()
+  const properties = await Property.findAll()
   if(properties.length <= 0){
-    try{
-      for(const prop in data){
-        const property = await Property.create({
-          description : prop.detail,
-          area : prop.area,
-          price : prop.price,
-          bathrooms : prop.banos,
-          floor: prop.piso,
-          city : prop.ciudad,
-          province:prop.provincia,
-          address : prop.address,
-          postal_code: prop.codigo_postal,
-          room : prop.habitacion,
-          title : prop.title,
-          pictures : prop.picture
-        });
-        const types = await Type.findOne({where: {name: prop.type}});
-        await property.setProperty(types);
-      
-          const services = await Service.findAll({ where: { name:services}});
-          await property.addServicio(services);
+    const info = data.map((e)=> {
+        return {
+          price : e.price,
+          description : e.detail,
+          bathrooms : e.banos,
+          room : e.habitacion,
+          floor: e.piso,
+          title : e.title,
+          area : e.area,
+          city : e.ciudad,
+          province:e.provincia,
+          postal_code: e.codigo_postal,
+          address : e.address,
+          pictures : e.picture.map((e)=> e)
+          
+        }
         
-      }
-      console.log('se crearon correctamente')    
-    }
-    catch(error){
-      console.error('Error al agregar las propiedades:', error);
-    }
-  } */
+        
+  })
+  await Property.bulkCreate(info)
+  return info 
+  }
+  return properties
 }
 
 
