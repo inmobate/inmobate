@@ -14,4 +14,4 @@ export const logUser = createSlice({
   },
 });
 
-export const { setUser } = filterCombine.actions;
+export const { setUser } = logUser.actions;

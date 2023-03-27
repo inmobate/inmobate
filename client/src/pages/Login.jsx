@@ -29,28 +29,28 @@ const Login = ({ active, setActive }) => {
 
         <Form>
           <input
-            onChange={(e) => setInputs(e)}
+            onChange={(e) => handleChange(e)}
             type="text"
             value={inputs.name}
             name="name"
             placeholder="nombre"
           />
           <input
-            onChange={(e) => setInputs(e)}
+            onChange={(e) => handleChange(e)}
             type="text"
             value={inputs.lastname}
             name="lastname"
             placeholder="apellido"
           />
           <input
-            onChange={(e) => setInputs(e)}
+            onChange={(e) => handleChange(e)}
             type="text"
             value={inputs.email}
             name="email"
             placeholder="email"
           />
           <input
-            onChange={(e) => setInputs(e)}
+            onChange={(e) => handleChange(e)}
             type="text"
             value={inputs.password}
             name="password"
