@@ -8,7 +8,7 @@ const updateUser = require("./put/UpdateUser.js");
 const updatePublication = require("./put/updatePublication.js");
 const updateProperty = require("./put/updateProperty");
 const bookingDelete = require("./delete/deleteBooking.js");
-const { Op, Property, Service } = require("../db");
+const { Op, Property, Service, Type } = require("../db");
 const { getUser, getAllUser } = require("../controller/controllerUsers");
 const {
   getComentario,
@@ -27,7 +27,18 @@ const publicationDelete = require("../handler/delete/deletePublication.js");
 const userDelete = require("../handler/delete/deleteUser.js");
 
 const allProperty = async (req, res) => {
-  const datos = await Property.findAll();
+  const datos = await Property.findAll({
+    include: [
+      {
+        model: Service,
+        through: { attributes: [] },
+      },
+      {
+        model: Type,
+        through: { attributes: [] },
+      },
+    ],
+  });
   const { city, province, page = 0, size = 12 } = req.query;
 
   if (page && size) {
@@ -36,7 +47,19 @@ const allProperty = async (req, res) => {
       offset: +page * +size,
     };
 
-    const { count, rows } = await Property.findAndCountAll(options);
+    const { count, rows } = await Property.findAndCountAll({
+      options,
+      include: [
+        {
+          model: Service,
+          through: { attributes: [] },
+        },
+        {
+          model: Type,
+          through: { attributes: [] },
+        },
+      ],
+    });
 
     return res.json({
       total: count,
@@ -49,6 +72,16 @@ const allProperty = async (req, res) => {
       where: {
         city: { [Op.iLike]: `%${city}%` },
       },
+      include: [
+        {
+          model: Service,
+          through: { attributes: [] },
+        },
+        {
+          model: Type,
+          through: { attributes: [] },
+        },
+      ],
       //falta incluir los modelos servicios y tipos para cuando
       //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
     });
@@ -62,6 +95,16 @@ const allProperty = async (req, res) => {
       where: {
         province: { [Op.iLike]: province },
       },
+      include: [
+        {
+          model: Service,
+          through: { attributes: [] },
+        },
+        {
+          model: Type,
+          through: { attributes: [] },
+        },
+      ],
       //falta incluir los modelos servicios y tipos para cuando
       //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
     });
@@ -76,9 +119,23 @@ const allProperty = async (req, res) => {
 const allPropertyById = async (req, res) => {
   const { id } = req.params;
   try {
-    const datos = await propertyById(id);
+    const datos = await Property.findOne({
+      where: { id },
+      include: [
+        {
+          model: Service,
+          through: { attributes: [] },
+        },
+        {
+          model: Type,
+          through: { attributes: [] },
+        },
+      ],
+    });
+
     res.status(200).json(datos);
   } catch (error) {
+    console.log(error);
     res.status(400).json({ Error: "error.id no esta" });
   }
 };
@@ -400,7 +457,6 @@ const deleteAdmin = async (req, res) => {
     if (remove === "User") {
       const deleteuser = await userDelete(id);
       res.status(200).json(deleteuser);
-
     }
     if (remove === "Comments") {
       const commentsdelete = await CommentDelete(id);

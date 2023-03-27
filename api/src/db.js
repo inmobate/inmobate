@@ -57,8 +57,8 @@ Property.belongsTo(Sale,{as:"ventas",foreignKey:"saleId"})
 Property.belongsToMany(Service,{through:"servi_propiedad"});
 Service.belongsToMany(Property,{through:"servi_propiedad"});
 
-Type.hasMany(Property,{foreignKeys:"typePropertId"});
-Property.belongsTo(Type,{foreignKeys:"typePropert"})
+Property.belongsToMany(Type,{through:"type_propiedad"});
+Type.belongsToMany(Property,{through:"type_propiedad"});
 
 
 
