@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
       },
       area: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       price: {
         type: DataTypes.INTEGER,
@@ -63,6 +63,10 @@ module.exports = (sequelize) => {
         type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
       },
+      beds: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      }
     },
     {
       timestamps: false,

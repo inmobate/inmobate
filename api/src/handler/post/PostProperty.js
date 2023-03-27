@@ -17,24 +17,6 @@ const newPostProperty = async (
   service
 ) => {
   try {
-    if (
-      !description ||
-      !area ||
-      !price ||
-      !bathrooms ||
-      !floor ||
-      !city ||
-      !province ||
-      !address ||
-      !postal_code ||
-      !room ||
-      !title ||
-      !pictures ||
-      !type ||
-      !service
-    )
-      throw new Error("Incomplete information");
-
     const property = await Property.create({
       description,
       area,
@@ -48,11 +30,12 @@ const newPostProperty = async (
       room,
       title,
       pictures,
+      beds,
     });
-
-    await property.addService(service);
-    await property.addType(type);
-
+    console.log("1", property);
+    // await property.addService(service);
+   // await property.addType(type);
+    console.log("2", property);
     return property;
   } catch (error) {
     return { error: error.message };

@@ -47,19 +47,7 @@ const allProperty = async (req, res) => {
       offset: +page * +size,
     };
 
-    const { count, rows } = await Property.findAndCountAll({
-      options,
-      include: [
-        {
-          model: Service,
-          through: { attributes: [] },
-        },
-        {
-          model: Type,
-          through: { attributes: [] },
-        },
-      ],
-    });
+    const { count, rows } = await Property.findAndCountAll(options);
 
     return res.json({
       total: count,
@@ -156,7 +144,25 @@ const postProperty = async (req, res) => {
     pictures,
     type,
     service,
+    beds,
   } = req.body;
+  console.log({
+    description,
+    area,
+    price,
+    bathrooms,
+    floor,
+    city,
+    province,
+    address,
+    postal_code,
+    room,
+    title,
+    pictures,
+    type,
+    service,
+    beds,
+  });
   try {
     const newproperty = await newPostProperty(
       description,
@@ -172,7 +178,8 @@ const postProperty = async (req, res) => {
       title,
       pictures,
       type,
-      service
+      service,
+      beds
     );
     res.status(200).json(newproperty);
   } catch (error) {

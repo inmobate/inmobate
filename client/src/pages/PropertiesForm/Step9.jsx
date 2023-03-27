@@ -28,7 +28,7 @@ const Step9 = () => {
   const navigate = useNavigate();
 
   function handleSubmit(property) {
-    fetch("http://localhost:5000/properties", {
+    fetch("http://localhost:3001/property", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -110,20 +110,21 @@ const Step9 = () => {
         <Button
           onClick={() =>
             handleSubmit({
-              id: null,
-              title: title,
-              photo: images,
+              description: description,
+              area: 2000, //por ahora
               price: price,
-              detail: description,
-              country: location.country,
+              bathrooms: bathrooms,
+              floor: location.floor,
               city: location.city,
-              type: type,
-              picture: [],
+              province: location.province,
+              address: location.street,
+              //postal_code: location.postalCode,
+              room: rooms,
+              title: title,
+              pictures: [images],
+              type: roomType,
+              //services:
               habitacion: rooms,
-              banos: bathrooms,
-              direccion: location.street,
-              roomType: roomType,
-              rating: "⭐️⭐️⭐️⭐️",
               beds: beds,
             })
           }
