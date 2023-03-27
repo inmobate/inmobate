@@ -30,11 +30,11 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
-      country: {
+     /*  country: {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: "Argentina",
-      },
+      }, */
       city: {
         type: DataTypes.STRING,
         allowNull: false,
