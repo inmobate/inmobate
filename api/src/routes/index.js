@@ -132,6 +132,7 @@ router.get("/home", redirectLogin, (req, res) => {
       <a href='/'>Inicio</a>
     `);
 });
+
 module.exports = router;
 
 //,

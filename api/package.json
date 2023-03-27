@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon -l",
-    "test": "jest --detectOpenHandles",
-    "test_moca": "jest -w ./tests/**/*.spec.js"
+    "start": "src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "author": "Henry",
   "license": "ISC",

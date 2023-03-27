@@ -8,7 +8,7 @@ const updateUser = require("./put/UpdateUser.js");
 const updatePublication = require("./put/updatePublication.js");
 const updateProperty = require("./put/updateProperty");
 const bookingDelete = require("./delete/deleteBooking.js");
-const { Op, Property, Service } = require("../db");
+const { Op, Property, Service, User } = require("../db");
 const { getUser, getAllUser } = require("../controller/controllerUsers");
 const {
   getComentario,
@@ -25,6 +25,7 @@ const { typeDb } = require("../controller/controllerType");
 const CommentDelete = require("../handler/delete/deleteCommit.js");
 const publicationDelete = require("../handler/delete/deletePublication.js");
 const userDelete = require("../handler/delete/deleteUser.js");
+const transporter = require("./nodemailer.js");
 
 const allProperty = async (req, res) => {
   const datos = await Property.findAll();
@@ -117,7 +118,7 @@ const postProperty = async (req, res) => {
       type,
       service
     );
-    res.status(200).json(newproperty);
+    res.status(201).json(newproperty);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -180,6 +181,15 @@ const postUsers = async (req, res) => {
   const { name, lastName, email, password } = req.body;
   try {
     const newPost = await signUp(name, lastName, email, password);
+    await transporter.sendMail({
+      from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address
+      to: email, // list of receivers
+      subject: `User Creation`, // Subject line
+      html: `<b> Hi, ${name}! <p> Your account has been created successfully.</p><p>  Username: ${
+        (name, lastName)
+      }</p> <p>  Password: ${password}</p></b>`, // html body
+    });
+
     res.status(201).send(newPost);
   } catch (error) {
     res.status(400).json({ Error: error.message });
@@ -190,6 +200,12 @@ const putUsers = async (req, res) => {
   const { id, name, lastName, email, password } = req.body;
   try {
     const updateuser = await updateUser(id, name, lastName, email, password);
+    await transporter.sendMail({
+      from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address
+      to: email, // list of receivers
+      subject: `User update`, // Subject line
+      html: `<b> Hi, ${name}! <p> Your account has been modified. </p><p>  name: ${name}</p><p>  lastname: ${lastName}</p><p>  email: ${email}</p><p>  password : ${password}</p></b>`, // html body
+    });
     res.status(200).send(updateuser);
   } catch (error) {
     res.status(400).json({ Error: error.message });
@@ -200,6 +216,13 @@ const deleteUser = async (req, res) => {
   const { id } = req.params;
   try {
     const deleteuser = await userDelete(id);
+    const findUser = await User.findOne({ where: { id: id } });
+    await transporter.sendMail({
+      from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address
+      to: findUser.email, // list of receivers
+      subject: `User delete`, // Subject line
+      html: `<b> Hi, ${findUser.name}! <p> Your account has been deleted.</p><p> </p></b>`, // html body
+    });
     res.status(200).json(deleteuser);
   } catch (error) {
     res.status(400).json({ Error: error.message });
@@ -220,7 +243,7 @@ const postComments = async (req, res) => {
   const { content, id_user } = req.body;
   try {
     const newComment = await newPostComment(content, id_user, id_publication);
-    res.status(200).json(newComment);
+    res.status(201).json(newComment);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
@@ -257,6 +280,13 @@ const putPublications = async (req, res) => {
       title,
       autor
     );
+    const findUser = await User.findOne({ where: { id: id_autor } });
+    await transporter.sendMail({
+      from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address
+      to: findUser.email, // list of receivers
+      subject: `Property publication modified`, // Subject line
+      html: `<b> Hi, ${findUser.name}! <p> The property ${title} has been modified.</p><p> </p></b>`, // html body
+    });
     res.status(200).send(newPublication);
   } catch (error) {
     res.status(400).json({ Error: error.message });
@@ -275,8 +305,14 @@ const postPublications = async (req, res) => {
       title,
       id_autor
     );
-    console.log(newPublication);
-    res.status(200).json(newPublication);
+    const findUser = await User.findOne({ where: { id: autor } });
+    await transporter.sendMail({
+      from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address
+      to: findUser.email, // list of receivers
+      subject: `Property publication`, // Subject line
+      html: `<b> Hi, ${findUser.name}! <p> The publication ${title} has been created and added to your property list.</p></b>`, // html body
+    });
+    res.status(201).json(newPublication);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
@@ -286,6 +322,13 @@ const deletePublication = async (req, res) => {
   const { id } = req.params;
   try {
     const deletePublic = await publicationDelete(id);
+    /* const findUser = await Property.findOne({ where: { id: id } });
+    await transporter.sendMail({
+      from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address
+      to: findUser.email, // list of receivers
+      subject: `Property publication deleted`, // Subject line
+      html: `<b> Hi, ${findUser.name}! <p> The property ${title} has been modified.</p><p> </p></b>`, // html body
+    }); */
     res.status(200).json(deletePublic);
   } catch (error) {
     res.status(400).json({ Error: error.message });
@@ -314,7 +357,7 @@ const postSale = async (req, res) => {
   const { name, sale_date, total_amount_sell } = req.body;
   try {
     const newsale = await newPostSale(name, sale_date, total_amount_sell);
-    res.status(200).json(newsale);
+    res.status(201).json(newsale);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
@@ -335,8 +378,15 @@ const postBooking = async (req, res) => {
       id_user,
       id_property
     );
+    const findUser = await User.findOne({ where: { id: id_user } });
+    await transporter.sendMail({
+      from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address
+      to: findUser.email, // list of receivers
+      subject: `Reservation `, // Subject line
+      html: `<b> Hi, ${findUser.name}! <p> we share with you some information about the reservaton just made.</p><p>${newBooking}</p></b>`, // html body
+    });
     console.log("newBooking", newBooking);
-    res.status(200).json(newBooking);
+    res.status(201).json(newBooking);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
@@ -400,7 +450,6 @@ const deleteAdmin = async (req, res) => {
     if (remove === "User") {
       const deleteuser = await userDelete(id);
       res.status(200).json(deleteuser);
-
     }
     if (remove === "Comments") {
       const commentsdelete = await CommentDelete(id);
