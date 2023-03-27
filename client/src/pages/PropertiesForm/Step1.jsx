@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useGetTypeQuery } from "../../app/api/properties";
 import { setType } from "../../app/slices/propertyToAdd";
-import { types } from "./db";
 import {
   BottomBar,
   Container,
@@ -13,6 +13,7 @@ import {
 } from "./styles";
 
 const Step1 = () => {
+  const { data: types, error, isLoading } = useGetTypeQuery();
   const { type } = useSelector((state) => state.propertyToAdd);
 
   const navigate = useNavigate();
@@ -24,15 +25,25 @@ const Step1 = () => {
         <FlexCenter>
           <h2>¿Cuál de estas opciones describe mejor tu espacio?</h2>
           <FlexGrap>
-            {types.map((el) => (
-              <Type
-                key={el.id}
-                onClick={() => dispatch(setType(el.type))}
-                style={type === el.type ? { border: "1px solid grey" } : null}
-              >
-                {el.type}
-              </Type>
-            ))}
+            {types &&
+              types.map((el) => {
+                return (
+                  <Type
+                    key={el.id}
+                    onClick={() => dispatch(setType(el.name))}
+                    style={
+                      type === el.name
+                        ? {
+                            border: "3px solid var(--color2)",
+                            borderRadius: "15px",
+                          }
+                        : null
+                    }
+                  >
+                    {el.name}
+                  </Type>
+                );
+              })}
           </FlexGrap>
         </FlexCenter>
       </Content>

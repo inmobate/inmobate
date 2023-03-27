@@ -17,7 +17,7 @@ const Landing = () => {
             <Title onS>INMOBATE</Title>
           </Logo>
           <Link to="/home">
-            <Button class="btn">Alquila ya</Button>
+            <Button className="btn">Alquila ya</Button>
             {/* Alquila ya */}
           </Link>
         </Banner>
