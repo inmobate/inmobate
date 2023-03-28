@@ -1,14 +1,15 @@
-const signUp = require("./post/postUsers.js");
+const bcrypt = require("bcrypt");
 const newPostComment = require("./post/postComments.js");
 const newPostPublication = require("./post/postPublications.js");
-const newPostProperty = require("./post/PostProperty.js");
+const jwt = require("jsonwebtoken");
+
 const newPostBooking = require("./post/postBooking.js");
 const newPostSale = require("./post/postSale.js");
 const updateUser = require("./put/UpdateUser.js");
 const updatePublication = require("./put/updatePublication.js");
-const updateProperty = require("./put/updateProperty");
+
 const bookingDelete = require("./delete/deleteBooking.js");
-const { Op, Property, Service } = require("../db");
+const { Op, Property, Service, Type, User, Booking } = require("../db");
 const { getUser, getAllUser } = require("../controller/controllerUsers");
 const {
   getComentario,
@@ -25,6 +26,7 @@ const { typeDb } = require("../controller/controllerType");
 const CommentDelete = require("../handler/delete/deleteCommit.js");
 const publicationDelete = require("../handler/delete/deletePublication.js");
 const userDelete = require("../handler/delete/deleteUser.js");
+const {where}=require("sequelize");
 
 const allProperty = async (req, res) => {
   const datos = await Property.findAll();
@@ -49,8 +51,6 @@ const allProperty = async (req, res) => {
       where: {
         city: { [Op.iLike]: `%${city}%` },
       },
-      //falta incluir los modelos servicios y tipos para cuando
-      //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
     });
     try {
       return res.status(200).json(propertyCity);
@@ -62,8 +62,6 @@ const allProperty = async (req, res) => {
       where: {
         province: { [Op.iLike]: province },
       },
-      //falta incluir los modelos servicios y tipos para cuando
-      //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
     });
     try {
       return res.status(200).json(propertyProvince);
@@ -85,46 +83,58 @@ const allPropertyById = async (req, res) => {
 
 const postProperty = async (req, res) => {
   const {
-    description,
-    area,
     price,
+    description,
     bathrooms,
-    floor,
+    room,
+    title,
     city,
     province,
     address,
-    postal_code,
-    room,
-    title,
     pictures,
     type,
     service,
   } = req.body;
   try {
-    const newproperty = await newPostProperty(
-      description,
-      area,
-      price,
-      bathrooms,
-      floor,
-      city,
-      province,
-      address,
-      postal_code,
-      room,
-      title,
-      pictures,
-      type,
-      service
-    );
-    res.status(200).json(newproperty);
+    if (
+      !description &&
+      !price &&
+      !bathrooms &&
+      !city &&
+      !province &&
+      !address &&
+      !room &&
+      !title &&
+      !pictures &&
+      !type &&
+      !service
+    ) {
+      res.status(404).json({
+        message: "falta informacion para crear una propiedad",
+      });
+    } else {
+      let newproperty = await Property.create({
+        description,
+        price,
+        bathrooms,
+        city,
+        province,
+        address,
+        room,
+        title,
+        pictures,
+      });
+      newproperty.addType(type);
+      newproperty.addService(service);
+      res.status(201).json(newproperty);
+    }
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(404).json({ error: error.message });
   }
 };
 
+
 const putProperty = async (req, res) => {
-  const { id } = req.params;
   const {
     description,
     area,
@@ -142,26 +152,34 @@ const putProperty = async (req, res) => {
     type,
     service,
   } = req.body;
+
   try {
-    const newproperty = await updateProperty(
-      id,
-      description,
-      area,
-      price,
-      bathrooms,
-      floor,
-      country,
-      city,
-      province,
-      address,
-      postal_code,
-      room,
-      title,
-      pictures,
-      type,
-      service
+    const updatedProperty = await Property.update(
+      {
+        description,
+        area,
+        price,
+        bathrooms,
+        floor,
+        country,
+        city,
+        province,
+        address,
+        postal_code,
+        room,
+        title,
+        pictures,
+        type,
+        service,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
     );
-    res.status(200).json(newproperty);
+    console.log(updatedProperty)
+    res.status(200).json(`la propiedad  fue modificada con exito`);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -179,22 +197,68 @@ const allUsers = async (req, res) => {
 const postUsers = async (req, res) => {
   const { name, lastName, email, password } = req.body;
   try {
-    const newPost = await signUp(name, lastName, email, password);
+    hash = await bcrypt.hash(password, 16);
+    const newPost = await User.create({
+      name,
+      lastName,
+      email,
+      password: hash,
+    });
+    console.log(newPost);
     res.status(201).send(newPost);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
 };
 
+// const putUsers = async (req, res) => {
+//   const { name, lastName, email, password } = req.body;
+//   const {id}=req.params
+//   try {
+//     const updateuser = await updateUser(id, name, lastName, email, password);
+//     res.status(200).send(updateuser);
+//   } catch (error) {
+//     res.status(400).json({ Error: error.message });
+//   }
+// };
+
+
 const putUsers = async (req, res) => {
-  const { id, name, lastName, email, password } = req.body;
+  const { name, lastName, email, password } = req.body;
+  console.log(req.body)
+  console.log("id del usuario ", req.params.id)
   try {
-    const updateuser = await updateUser(id, name, lastName, email, password);
-    res.status(200).send(updateuser);
+    const updatedUser = await User.update(
+      {
+        name,
+        lastName,
+        email,
+        password,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    res.status(200).json(`el usuaro fue modificada con exito`);
   } catch (error) {
-    res.status(400).json({ Error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
@@ -325,17 +389,22 @@ const allBooking = (req, res) => {
 };
 
 const postBooking = async (req, res) => {
+  const { date_of_admission, departure_date, total_price } = req.body;
   const { id_property } = req.params;
-  const { date_of_admission, departure_date, total_price, id_user } = req.body;
+
+  // Obtener el token de autenticación de los encabezados de autorización
+  const token = req.headers.authorization.split(" ")[1];
   try {
-    const newBooking = await newPostBooking(
+    // Decodificar el token para obtener la información del usuario
+    const decodedToken = jwt.verify(token, "contraseña ");
+    // Crear el registro de reserva y asignar el id del usuario autenticado
+    const newBooking = await Booking.create({
       date_of_admission,
       departure_date,
       total_price,
-      id_user,
-      id_property
-    );
-    console.log("newBooking", newBooking);
+      id_property,
+      user_id: decodedToken.id, // propiedad agregada para unificar el id del usuario
+    });
     res.status(200).json(newBooking);
   } catch (error) {
     res.status(400).json({ Error: error.message });
@@ -400,7 +469,6 @@ const deleteAdmin = async (req, res) => {
     if (remove === "User") {
       const deleteuser = await userDelete(id);
       res.status(200).json(deleteuser);
-
     }
     if (remove === "Comments") {
       const commentsdelete = await CommentDelete(id);
