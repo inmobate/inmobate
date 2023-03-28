@@ -57,7 +57,7 @@ router.post("/:id_property/booking", authenticateToken, postBooking);//lista
 router.get("/users", allUsers); //lista
 router.post("/users", postUsers); //lista
 router.put("/users/:id", putUsers); //lista
-router.delete("/:id/users", deleteUser); //lista
+router.put("/users/:id", deleteUser); //lista ruta que usara el admin
 
 router.get("/comentarios", allComments); //lista
 router.post("/:id_publication/comentarios", postComments); //lista
@@ -65,7 +65,7 @@ router.delete("/:id/comentarios", deleteComments); // no le voy a hacer, comenta
 
 router.get("/publication", allPublications); //lista
 router.post("/:id_autor/publication", postPublications); // lista
-router.put("/publication", putPublications);
+router.put("/:id/publication", putPublications);
 router.delete("/:id/publication", deletePublication);
 
 router.get("/admin/get?=", getAdmin);
