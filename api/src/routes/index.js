@@ -123,8 +123,8 @@ router.get(
   }
 );
 
-router.get("/home", redirectLogin, (req, res) => {
-  const user = users.find((user) => user.id === req.session.userId);
+router.get("/home", (req, res) => {
+  const user = User.find((user) => user.id === req.session.userId);
 
   res.send(`
       <h1>Bienvenido ${user.name}</h1>

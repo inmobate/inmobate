@@ -29,6 +29,6 @@ conn.sync({ force: true }).then(async () => {
     console.log("Api listening on http://localhost:3001"); // eslint-disable-line no-console
   });
   await property();
-  await typeDb();
-  await servicioDb();
+  //await typeDb();
+  //await servicioDb();
 });

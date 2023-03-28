@@ -7,7 +7,6 @@ const updateProperty = async (
   price,
   bathrooms,
   floor,
-  country,
   city,
   province,
   address,
@@ -16,43 +15,32 @@ const updateProperty = async (
   title,
   pictures,
   type,
-  service
+  services
 ) => {
   try {
-    const findproperty = await Property.findByPk(id);
+    const findproperty = await Property.findOne({ where: { id: id } });
     if (!findproperty) throw new Error("Property not found");
     else {
       description
-        ? await Property.update({ description: description })
+        ? (findproperty.description = description)
         : findproperty.description;
-      area ? await Property.update({ area: area }) : findproperty.area;
-      price ? await Property.update({ price: price }) : findproperty.price;
-      bathrooms
-        ? await Property.update({ bathrooms: bathrooms })
-        : findproperty.bathrooms;
-      floor ? await Property.update({ floor: floor }) : findproperty.floor;
-      city ? await Property.update({ city: city }) : findproperty.city;
-      province
-        ? await Property.update({ province: province })
-        : findproperty.province;
-      address
-        ? await Property.update({ address: address })
-        : findproperty.address;
+      area ? (findproperty.area = area) : findproperty.area;
+      price ? (findproperty.price = price) : findproperty.price;
+      bathrooms ? (findproperty.bathrooms = bathrooms) : findproperty.bathrooms;
+      floor ? (findproperty.floor = floor) : findproperty.floor;
+      city ? (findproperty.city = city) : findproperty.city;
+      province ? (findproperty.province = province) : findproperty.province;
+      address ? (findproperty.address = address) : findproperty.address;
       postal_code
-        ? await Property.update({ postal_code: postal_code })
+        ? (findproperty.postal_code = postal_code)
         : findproperty.postal_code;
-      room ? await Property.update({ room: room }) : findproperty.room;
-      title ? await Property.update({ title: title }) : findproperty.title;
-      pictures
-        ? await Property.update({ pictures: pictures })
-        : findproperty.pictures;
-      type ? await Property.update({ type: type }) : findproperty.type;
-      service
-        ? await Property.update({ service: service })
-        : findproperty.service;
+      room ? (findproperty.room = room) : findproperty.room;
+      title ? (findproperty.title = title) : findproperty.title;
+      pictures ? (findproperty.pictures = pictures) : findproperty.pictures;
+      type ? (findproperty.type = type) : findproperty.type;
+      services ? (findproperty.services = services) : findproperty.services;
     }
-
-    return newproperty;
+    return findproperty;
   } catch (error) {
     return { Error: error.message };
   }

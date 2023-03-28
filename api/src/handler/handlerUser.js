@@ -99,8 +99,11 @@ const postProperty = async (req, res) => {
     title,
     pictures,
     type,
-    service,
+    services,
   } = req.body;
+  const { id_autor } = req.params;
+
+  console.log(req.body);
   try {
     const newproperty = await newPostProperty(
       description,
@@ -116,7 +119,8 @@ const postProperty = async (req, res) => {
       title,
       pictures,
       type,
-      service
+      services,
+      id_autor
     );
     res.status(201).json(newproperty);
   } catch (error) {
@@ -141,7 +145,7 @@ const putProperty = async (req, res) => {
     title,
     pictures,
     type,
-    service,
+    services,
   } = req.body;
   try {
     const newproperty = await updateProperty(
@@ -160,7 +164,7 @@ const putProperty = async (req, res) => {
       title,
       pictures,
       type,
-      service
+      services
     );
     res.status(200).json(newproperty);
   } catch (error) {
