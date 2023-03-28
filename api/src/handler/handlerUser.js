@@ -29,18 +29,7 @@ const userDelete = require("../handler/delete/deleteUser.js");
 const {where}=require("sequelize");
 
 const allProperty = async (req, res) => {
-  const datos = await Property.findAll({
-    include: [
-      {
-        model: Service,
-        through: { attributes: [] },
-      },
-      {
-        model: Type,
-        through: { attributes: [] },
-      },
-    ],
-  });
+  const datos = await Property.findAll();
   const { city, province, page = 0, size = 12 } = req.query;
 
   if (page && size) {
