@@ -74,7 +74,7 @@
     try{    
       let user=req.user;
     //Crear el token JWT con los datos del usuario.
-      const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET_KEY,{expiresIn:"1d"})   
+      const token = jwt.sign(user, process.env.JWT_SECRET_KEY,{expiresIn:"1d"})   
       //Enviar respuesta al cliente con el access_token
         return res.json(token)
     }
