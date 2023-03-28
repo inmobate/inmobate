@@ -33,8 +33,8 @@ const { User, Sale, Publication, Comment, Booking, Property, Service, Type} = se
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-User.hasMany(Publication,{ foreignKey:"autorId", sourceKey: "id" });
-Publication.belongsTo(User, { foreignKey: "autorId", targetKey: "id" })
+User.hasMany(Publication,{ foreignKey:"autorId" });
+Publication.belongsTo(User)
 
 Publication.hasMany(Comment, { foreignKey: "publicId", sourceKey: "id" });
 Comment.belongsTo(Publication, { foreignKey: "publicId", targetKey: "id" });
