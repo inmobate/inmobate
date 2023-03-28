@@ -29,7 +29,18 @@ const userDelete = require("../handler/delete/deleteUser.js");
 const {where}=require("sequelize");
 
 const allProperty = async (req, res) => {
-  const datos = await Property.findAll();
+  const datos = await Property.findAll({
+    include: [
+      {
+        model: Service,
+        through: { attributes: [] },
+      },
+      {
+        model: Type,
+        through: { attributes: [] },
+      },
+    ],
+  });
   const { city, province, page = 0, size = 12 } = req.query;
 
   if (page && size) {
@@ -51,6 +62,8 @@ const allProperty = async (req, res) => {
       where: {
         city: { [Op.iLike]: `%${city}%` },
       },
+      //falta incluir los modelos servicios y tipos para cuando
+      //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
     });
     try {
       return res.status(200).json(propertyCity);
@@ -62,6 +75,8 @@ const allProperty = async (req, res) => {
       where: {
         province: { [Op.iLike]: province },
       },
+      //falta incluir los modelos servicios y tipos para cuando
+      //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
     });
     try {
       return res.status(200).json(propertyProvince);
@@ -74,9 +89,23 @@ const allProperty = async (req, res) => {
 const allPropertyById = async (req, res) => {
   const { id } = req.params;
   try {
-    const datos = await propertyById(id);
+    const datos = await Property.findOne({
+      where: { id },
+      include: [
+        {
+          model: Service,
+          through: { attributes: [] },
+        },
+        {
+          model: Type,
+          through: { attributes: [] },
+        },
+      ],
+    });
+
     res.status(200).json(datos);
   } catch (error) {
+    console.log(error);
     res.status(400).json({ Error: "error.id no esta" });
   }
 };
@@ -94,40 +123,43 @@ const postProperty = async (req, res) => {
     pictures,
     type,
     service,
+    beds,
   } = req.body;
+  console.log({
+    description,
+    area,
+    price,
+    bathrooms,
+    floor,
+    city,
+    province,
+    address,
+    postal_code,
+    room,
+    title,
+    pictures,
+    type,
+    service,
+    beds,
+  });
   try {
-    if (
-      !description &&
-      !price &&
-      !bathrooms &&
-      !city &&
-      !province &&
-      !address &&
-      !room &&
-      !title &&
-      !pictures &&
-      !type &&
-      !service
-    ) {
-      res.status(404).json({
-        message: "falta informacion para crear una propiedad",
-      });
-    } else {
-      let newproperty = await Property.create({
-        description,
-        price,
-        bathrooms,
-        city,
-        province,
-        address,
-        room,
-        title,
-        pictures,
-      });
-      newproperty.addType(type);
-      newproperty.addService(service);
-      res.status(201).json(newproperty);
-    }
+    const newproperty = await newPostProperty(
+      description,
+      area,
+      price,
+      bathrooms,
+      floor,
+      city,
+      province,
+      address,
+      postal_code,
+      room,
+      title,
+      pictures,
+      type,
+      service
+    );
+    res.status(200).json(newproperty);
   } catch (error) {
     res.status(404).json({ error: error.message });
   }

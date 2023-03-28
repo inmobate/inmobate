@@ -22,7 +22,7 @@ const Step3 = () => {
   function handleDisable() {
     if (!location.street) return true;
     if (!location.city) return true;
-    if (!location.state) return true;
+    if (!location.province) return true;
     if (!location.country) return true;
     return false;
   }
@@ -59,9 +59,9 @@ const Step3 = () => {
           />
           <input
             type="text"
-            name="state"
+            name="province"
             placeholder="provincia/estado"
-            value={location.state}
+            value={location.province}
             onChange={(e) => handleChange(e.target)}
           />
           <input

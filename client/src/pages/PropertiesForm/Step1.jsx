@@ -30,9 +30,9 @@ const Step1 = () => {
                 return (
                   <Type
                     key={el.id}
-                    onClick={() => dispatch(setType(el.name))}
+                    onClick={() => dispatch(setType(el.id))}
                     style={
-                      type === el.name
+                      type === el.id
                         ? {
                             border: "3px solid var(--color2)",
                             borderRadius: "15px",
