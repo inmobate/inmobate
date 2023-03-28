@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const passport = require('passport')
-
+const cookieParser = require('cookie-parser')
 const server = express();
 
 server.name = "API";
