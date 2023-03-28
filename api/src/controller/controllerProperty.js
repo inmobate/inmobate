@@ -18,10 +18,7 @@ const property = async () => {
           postal_code: e.codigo_postal,
           address : e.address,
           pictures : e.picture.map((e)=> e)
-          
         }
-        
-        
   })
   await Property.bulkCreate(info)
   return info 
@@ -29,35 +26,24 @@ const property = async () => {
   return properties
 }
 
-
 const propertyById = async (id) => {
-  let propy = await Property.findOne({
-    where:
-    {id: id},
-    include: {
-      model: Type,
-      model: Service,
-    }
-    // falta corregir el include de los modelos Service y Type no los esta incluyendo 
+  const properties = await Property.findOne({
+    where: { id: id },
+    include: [
+      {
+        model: Type,
+        attributes: ["name", "icon"],
+        through: { attributes: [] },
+      },
+      {
+        model: Service,
+        attributes: ["name", "icon"],
+        through: { attributes: [] },
+      },
+    ],
   });
-  const propiedad ={
-    id: propy.id,
-    price: propy.price,
-    description: propy.description,
-    bathrooms: propy.bathrooms,
-    room: propy.room,
-    floor: propy.floor,
-    title: propy.title,
-    area: propy.area,
-    country: propy.country,
-    city: propy.city,
-    province: propy.province,
-    postal_code: propy.postal_code,
-    address: propy.address,
-    pictures: propy.pictures,
-  }
-  return propiedad
-}
+  return properties;
+};
 
 module.exports = {
     property,

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { BottomBar, Container, Content, FlexCenter, Button } from "./styles";
+import { Container, Content, FlexCenter, Button } from "./styles";
 
 const PropertiesForm = () => {
   const navigate = useNavigate();
