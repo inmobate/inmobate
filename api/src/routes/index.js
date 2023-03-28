@@ -130,7 +130,7 @@
       res.cookie('token', token, { httpOnly: true, maxAge: 86400000 });
 
       // Redirige al usuario a la página principal de tu aplicación
-    res.redirect('/'); 
+
       
     });
     router.get('/auth/facebook',passport.authenticate('facebook', { scope: ['email'] }));
