@@ -6,13 +6,14 @@ import { Link } from "react-router-dom";
 
 import { HiOutlineUserCircle, HiMenu } from "react-icons/hi";
 import { useSelector } from "react-redux";
-import Login from "../pages/Login";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const UserButton = () => {
   const refMenu = useRef(null);
   const { logUser } = useSelector((state) => state.logUser);
   const [active, setActive] = useState(false);
-  const [login, setLogin] = useState(false);
+
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
@@ -29,35 +30,41 @@ const UserButton = () => {
 
   return (
     <Button ref={refMenu}>
-      {login && <Login active={login} setActive={setLogin} />}
       <div onClick={() => setActive(!active)}>
         <HiMenu size={25} />
         <HiOutlineUserCircle size={25} />
       </div>
 
       <MenuHidden style={active ? null : { display: "none" }}>
-        {logUser ? (
+        {isAuthenticated ? (
           <Ul>
             <Link to="/profile">
               <Li>Cuenta</Li>
             </Link>
             <hr />
             <Li>Ayuda</Li>
-            <Li>Cerrar Sesion</Li>
+            <Li
+              onClick={() => {
+                logout();
+              }}
+            >
+              Cerrar Sesion
+            </Li>
           </Ul>
         ) : (
           <Ul>
             <Li
               onClick={() => {
-                setLogin(!login);
-                setActive(!active);
+                loginWithRedirect();
               }}
             >
               Iniciar Sesion
             </Li>
             <Li>Registrarse</Li>
             <hr />
-            <Li>Ayuda</Li>
+            <Li>
+              <a href="https://inmovate.onrender.com/auth/google">Ayuda</a>{" "}
+            </Li>
           </Ul>
         )}
       </MenuHidden>

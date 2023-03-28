@@ -11,7 +11,7 @@ const Infinite = () => {
   const [totalProperties, setTotalProperties] = useState(0);
 
   async function fechProp(page) {
-    await fetch(`http://localhost:3001/property?page=${page}&size=12`)
+    await fetch(`https://inmovate.onrender.com/property?page=${page}&size=12`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data)
