@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useGetPropertiesQuery } from "../app/api/properties";
@@ -7,29 +7,33 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 const Infinite = () => {
   const [currentPage, setCurrentPage] = useState(0);
+  const [properties, setProperties] = useState([]);
+  const [totalProperties, setTotalProperties] = useState(0);
 
-  const {
-    data: properties,
-    error,
-    isLoading,
-  } = useGetPropertiesQuery(setCurrentPage);
+  async function fechProp(page) {
+    await fetch(`https://inmovate.onrender.com/property?page=${page}&size=12`)
+      .then((response) => response.json())
+      .then((data) => {
+        setProperties([...properties, ...data.properties]);
+        setTotalProperties(data.total);
+      })
+      .catch((error) => console.error(error));
+  }
 
-  const totalProperties = (properties) => {
-    if (properties) {
-      return properties.total;
-    }
-  };
+  useEffect(() => {
+    fechProp(currentPage);
+  }, [currentPage]);
 
   return (
     <InfiniteScroll
-      dataLength={totalProperties}
+      dataLength={properties.length}
       next={() => setCurrentPage(currentPage + 1)}
       hasMore={true}
-      loader={<h4>Loading...</h4>}
+      loader={properties.length >= totalProperties ? "" : <h4>Loading...</h4>}
     >
       <Container>
         {properties &&
-          properties.properties?.map((el) => (
+          properties.map((el) => (
             <Link to={`/detail/${el.id}`} key={el.id}>
               <Card key={el.id} property={el} />
             </Link>

@@ -1,4 +1,3 @@
-import { servicesDb } from "./db";
 import { useNavigate } from "react-router-dom";
 import { setServices } from "../../app/slices/propertyToAdd";
 import {
@@ -10,8 +9,10 @@ import {
   Button,
 } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
+import { useGetServiceQuery } from "../../app/api/properties";
 
 const Step5 = () => {
+  const { data: servicesDb, error, isLoading } = useGetServiceQuery();
   const { services } = useSelector((state) => state.propertyToAdd);
 
   const dispatch = useDispatch();
@@ -34,19 +35,23 @@ const Step5 = () => {
         <p>Podés agregar más servicios después de publicar el anuncio.</p>
         <div>
           <FlexGrap>
-            {servicesDb.map((el) => (
-              <Type
-                onClick={() => handleClick(el.service)}
-                key={el.id}
-                style={
-                  services.includes(el.service)
-                    ? { border: "1px solid grey" }
-                    : null
-                }
-              >
-                {el.service}
-              </Type>
-            ))}
+            {servicesDb &&
+              servicesDb.map((el) => (
+                <Type
+                  onClick={() => handleClick(el.name)}
+                  key={el.id}
+                  style={
+                    services.includes(el.name)
+                      ? {
+                          border: "3px solid var(--color2)",
+                          borderRadius: "15px",
+                        }
+                      : null
+                  }
+                >
+                  {el.name}
+                </Type>
+              ))}
           </FlexGrap>
         </div>
       </ContentColum>

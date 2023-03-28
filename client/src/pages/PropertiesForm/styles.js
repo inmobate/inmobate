@@ -56,6 +56,7 @@ export const Type = styled.div`
 
 export const Section = styled.section`
   margin: 1rem;
+  padding: 0.5rem;
   cursor: pointer;
 `;
 
@@ -71,6 +72,7 @@ export const Form = styled.form`
 `;
 
 export const Button = styled.button`
+margin: 1rem;
   text-align: center;
   width: 150px;
   height: 40px;

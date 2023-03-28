@@ -8,7 +8,6 @@ module.exports = (sequelize) => {
         type: DataTypes.UUID,
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
-        allowNull: false,
       },
       description: {
         type: DataTypes.STRING,
@@ -16,7 +15,7 @@ module.exports = (sequelize) => {
       },
       area: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       price: {
         type: DataTypes.INTEGER,
@@ -32,7 +31,7 @@ module.exports = (sequelize) => {
       },
       country: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         defaultValue: "Argentina",
       },
       city: {
@@ -49,7 +48,7 @@ module.exports = (sequelize) => {
       },
       postal_code: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       room: {
         type: DataTypes.INTEGER,
