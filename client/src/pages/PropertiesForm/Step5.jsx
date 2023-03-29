@@ -38,10 +38,10 @@ const Step5 = () => {
             {servicesDb &&
               servicesDb.map((el) => (
                 <Type
-                  onClick={() => handleClick(el.name)}
-                  key={el.name}
+                  onClick={() => handleClick(el.id)}
+                  key={el.id}
                   style={
-                    services.includes(el.name)
+                    services.includes(el.id)
                       ? {
                           border: "3px solid var(--color2)",
                           borderRadius: "15px",
