@@ -30,6 +30,7 @@ const Step9 = () => {
   function handleSubmit(property) {
     fetch(`${local}/property`, {
       method: "POST",
+      mode: "no-cors",
       headers: {
         "Content-Type": "application/json",
       },
@@ -123,7 +124,7 @@ const Step9 = () => {
               title: title,
               pictures: [images],
               type: roomType,
-              //services:
+              services: services,
               habitacion: rooms,
               beds: beds,
             })
