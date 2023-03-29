@@ -36,7 +36,7 @@ export const properties = createApi({
     }),
 
     getService: builder.query({
-      query: () => `/service`,
+      query: () => `/servicio`,
     }),
   }),
 });
