@@ -5,9 +5,9 @@ module.exports = (sequelize) => {
     "User",
     {
       id: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
+        allowNull: false
       },
       name: {
         type: DataTypes.STRING,
@@ -24,9 +24,9 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true,
       },
-      password: {
+      /*  password: {
         type: DataTypes.STRING,
-      },
+      }, */
       soft_delete: {
         type: DataTypes.BOOLEAN,
         allowNull: true,

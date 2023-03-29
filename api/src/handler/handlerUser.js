@@ -27,10 +27,21 @@ const CommentDelete = require("../handler/delete/deleteCommit.js");
 const publicationDelete = require("../handler/delete/deletePublication.js");
 const userDelete = require("../handler/delete/deleteUser.js");
 const transporter = require("./nodemailer.js");
-const {where}=require("sequelize");
+const { where } = require("sequelize");
 
 const allProperty = async (req, res) => {
-  const datos = await Property.findAll();
+  const datos = await Property.findAll({
+    include: [
+      {
+        model: Service,
+        through: { attributes: [] },
+      },
+      {
+        model: Type,
+        through: { attributes: [] },
+      },
+    ],
+  });
   const { city, province, page = 0, size = 12 } = req.query;
 
   if (page && size) {
@@ -52,6 +63,8 @@ const allProperty = async (req, res) => {
       where: {
         city: { [Op.iLike]: `%${city}%` },
       },
+      //falta incluir los modelos servicios y tipos para cuando
+      //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
     });
     try {
       return res.status(200).json(propertyCity);
@@ -63,6 +76,8 @@ const allProperty = async (req, res) => {
       where: {
         province: { [Op.iLike]: province },
       },
+      //falta incluir los modelos servicios y tipos para cuando
+      //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
     });
     try {
       return res.status(200).json(propertyProvince);
@@ -75,9 +90,23 @@ const allProperty = async (req, res) => {
 const allPropertyById = async (req, res) => {
   const { id } = req.params;
   try {
-    const datos = await propertyById(id);
+    const datos = await Property.findOne({
+      where: { id },
+      include: [
+        {
+          model: Service,
+          through: { attributes: [] },
+        },
+        {
+          model: Type,
+          through: { attributes: [] },
+        },
+      ],
+    });
+
     res.status(200).json(datos);
   } catch (error) {
+    console.log(error);
     res.status(400).json({ Error: "error.id no esta" });
   }
 };
@@ -94,11 +123,26 @@ const postProperty = async (req, res) => {
     address,
     pictures,
     type,
-    services,
+    service,
+    beds,
   } = req.body;
-  const { id_autor } = req.params;
-
-  console.log(req.body);
+  console.log({
+    description,
+    area,
+    price,
+    bathrooms,
+    floor,
+    city,
+    province,
+    address,
+    postal_code,
+    room,
+    title,
+    pictures,
+    type,
+    service,
+    beds,
+  });
   try {
     const newproperty = await newPostProperty(
       description,
@@ -114,15 +158,13 @@ const postProperty = async (req, res) => {
       title,
       pictures,
       type,
-      services,
-      id_autor
+      service
     );
-    res.status(201).json(newproperty);
+    res.status(200).json(newproperty);
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
 };
-
 
 const putProperty = async (req, res) => {
   const {
@@ -168,7 +210,7 @@ const putProperty = async (req, res) => {
         },
       }
     );
-    console.log(updatedProperty)
+    console.log(updatedProperty);
     res.status(200).json(`la propiedad  fue modificada con exito`);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -185,16 +227,16 @@ const allUsers = async (req, res) => {
 };
 
 const postUsers = async (req, res) => {
-  const { name, lastName, email, password } = req.body;
+  const { id, name, lastName, email } = req.body;
   try {
-    hash = await bcrypt.hash(password, 16);
+    //hash = await bcrypt.hash(password, 16);
     const newPost = await User.create({
+      id,
       name,
       lastName,
       email,
-      password: hash,
+      //password: hash,
     });
-    console.log(newPost);
     await transporter.sendMail({
       from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address
       to: email, // list of receivers
@@ -221,11 +263,10 @@ const postUsers = async (req, res) => {
 //   }
 // };
 
-
 const putUsers = async (req, res) => {
   const { name, lastName, email, password } = req.body;
-  console.log(req.body)
-  console.log("id del usuario ", req.params.id)
+  console.log(req.body);
+  console.log("id del usuario ", req.params.id);
   try {
     const updateuser = await updateUser(id, name, lastName, email, password);
     await transporter.sendMail({
@@ -239,19 +280,6 @@ const putUsers = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
@@ -423,8 +451,8 @@ const postBooking = async (req, res) => {
       departure_date,
       total_price,
       id_user,
-      id_property
-  })
+      id_property,
+    });
     const findUser = await User.findOne({ where: { id: id_user } });
     await transporter.sendMail({
       from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address

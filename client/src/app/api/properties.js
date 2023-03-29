@@ -5,7 +5,7 @@ export const properties = createApi({
 
   baseQuery: fetchBaseQuery({
     baseUrl: "https://inmovate.onrender.com",
-    //baseUrl: "http://localhost:3001",
+    // baseUrl: "http://localhost:3001",
   }),
 
   endpoints: (builder) => ({
@@ -36,7 +36,7 @@ export const properties = createApi({
     }),
 
     getService: builder.query({
-      query: () => `/servicio`,
+      query: () => `/service`,
     }),
   }),
 });
