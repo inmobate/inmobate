@@ -11,18 +11,18 @@ import { useNavigate } from "react-router-dom";
 import local from "../../app/api/config"
 const Step9 = () => {
   const {
-    type,
+    type,//
     roomType,
-    description,
-    title,
+    description,//
+    title,//
     location,
     travellers,
-    rooms,
-    beds,
-    bathrooms,
-    price,
-    services,
-    images,
+    rooms,//
+    beds,//
+    bathrooms,//
+    price,//
+    services,//
+    images,//
   } = useSelector((state) => state.propertyToAdd);
 
   const navigate = useNavigate();

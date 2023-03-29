@@ -14,7 +14,7 @@ const Detail = () => {
   const { id } = useParams();
 
   const { data, error, isLoading } = useGetPropertyByIdQuery(id);
-
+  
   if (isLoading) return <div>Cargando...</div>;
 
   return (
@@ -62,6 +62,14 @@ const Detail = () => {
           <div>Alojamiento {data.type}.</div>
           <div>
             {data.room} dormitorios,{data.bathrooms} baños
+          </div>
+          <div>
+            {data.Services.map((s)=>(
+              <div>
+                <p>{s.name}</p>
+                <p>{s.icon}</p>
+              </div>
+            ))} Servicios
           </div>
         </Property>
       </Main>
