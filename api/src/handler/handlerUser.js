@@ -33,10 +33,7 @@ const allProperty = async (req, res) => {
     include: [
       {
         model: Service,
-        through: { attributes: [] },
-      },
-      {
-        model: Type,
+        attributes: ["name", "icon"],
         through: { attributes: [] },
       },
     ],
@@ -88,6 +85,7 @@ const allProperty = async (req, res) => {
 };
 const allPropertyById = async (req, res) => {
   const { id } = req.params;
+  console.log(req.params)
   try {
     const datos = await Property.findOne({
       where: { id },
@@ -95,11 +93,7 @@ const allPropertyById = async (req, res) => {
         {
           model: Service,
           through: { attributes: [] },
-        },
-        {
-          model: Type,
-          through: { attributes: [] },
-        },
+        }
       ],
     });
 
@@ -123,48 +117,43 @@ const postProperty = async (req, res) => {
     pictures,
     type,
     service,
-    beds,
+    beds
   } = req.body;
-  console.log({
-    description,
-    area,
-    price,
-    bathrooms,
-    floor,
-    city,
-    province,
-    address,
-    postal_code,
-    room,
-    title,
-    pictures,
-    type,
-    service,
-    beds,
-  });
   try {
-    const newproperty = await newPostProperty(
-      description,
-      area,
-      price,
-      bathrooms,
-      floor,
-      city,
-      province,
-      address,
-      postal_code,
-      room,
-      title,
-      pictures,
-      type,
-      service
-    );
-    res.status(200).json(newproperty);
+    if (
+      !description &&
+      !price &&
+      !bathrooms &&
+      !city &&
+      !province &&
+      !address &&
+      !room &&
+      !title &&
+      !pictures &&
+      !beds
+    ) {
+      res.status(404).json({
+        message: "falta informacion para crear una propiedad",
+      });
+    } else {
+      let newproperty = await Property.create({
+        description,
+        price,
+        bathrooms,
+        city,
+        province,
+        address,
+        room,
+        title,
+        pictures,
+        beds
+      });
+      res.status(201).json(newproperty);
+    }
   } catch (error) {
     res.status(404).json({ error: error.message });
   }
 };
-
 
 const putProperty = async (req, res) => {
   const {
@@ -227,32 +216,27 @@ const allUsers = async (req, res) => {
 };
 
 const postUsers = async (req, res) => {
-  const { name, lastName, email, password } = req.body;
+  const {id, name, lastName, email } = req.body;
+  const usuario = await User.findOne({where:{email: email}})
   try {
-    hash = await bcrypt.hash(password, 16);
+  if(!usuario){
+    // hash = await bcrypt.hash(password, 16);
     const newPost = await User.create({
       name,
       lastName,
       email,
-      password: hash,
+      id
+      // password: hash,
     });
-    console.log(newPost);
+
     res.status(201).send(newPost);
+  }else{
+    res.status(200).json(usuario)
+  }
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
 };
-
-// const putUsers = async (req, res) => {
-//   const { name, lastName, email, password } = req.body;
-//   const {id}=req.params
-//   try {
-//     const updateuser = await updateUser(id, name, lastName, email, password);
-//     res.status(200).send(updateuser);
-//   } catch (error) {
-//     res.status(400).json({ Error: error.message });
-//   }
-// };
 
 
 const putUsers = async (req, res) => {
@@ -423,6 +407,7 @@ const allBooking = (req, res) => {
 const postBooking = async (req, res) => {
   const { date_of_admission, departure_date, total_price } = req.body;
   const { id_property } = req.params;
+  console.log(req.params)
 
   // Obtener el token de autenticación de los encabezados de autorización
   const token = req.headers.authorization.split(" ")[1];
@@ -430,6 +415,7 @@ const postBooking = async (req, res) => {
     // Decodificar el token para obtener la información del usuario
     const decodedToken = jwt.verify(token, "contraseña ");
     // Crear el registro de reserva y asignar el id del usuario autenticado
+    console.log(decodedToken.id)
     const newBooking = await Booking.create({
       date_of_admission,
       departure_date,

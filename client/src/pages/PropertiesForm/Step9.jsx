@@ -8,7 +8,7 @@ import {
 } from "./styles";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import local from "../../app/api/config"
 const Step9 = () => {
   const {
     type,
@@ -28,7 +28,7 @@ const Step9 = () => {
   const navigate = useNavigate();
 
   function handleSubmit(property) {
-    fetch("https://inmovate.onrender.com/property", {
+    fetch(`${local}/property`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -28,7 +28,7 @@ conn.sync({ alter: true }).then(async () => {
   server.listen(3001, () => {
     console.log("Api listening on http://localhost:3001"); // eslint-disable-line no-console
   });
-  await property();
   await typeDb();
   await servicioDb();
+  await property();
 });

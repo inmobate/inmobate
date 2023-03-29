@@ -5,14 +5,13 @@ module.exports = (sequelize) => {
     "User",
     {
       id: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
+        allowNull: false
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
+        allowNull: false
       },
       lastName: {
         type: DataTypes.STRING,
@@ -23,9 +22,6 @@ module.exports = (sequelize) => {
         validate: { isEmail: true },
         allowNull: false,
         unique: true,
-      },
-      password: {
-        type: DataTypes.STRING,
       },
       soft_delete: {
         type: DataTypes.BOOLEAN,

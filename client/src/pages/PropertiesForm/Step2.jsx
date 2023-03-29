@@ -13,6 +13,7 @@ import {
 
 const Step2 = () => {
   const { roomType } = useSelector((state) => state.propertyToAdd);
+  
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
