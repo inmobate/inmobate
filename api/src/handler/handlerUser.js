@@ -1,14 +1,15 @@
-const signUp = require("./post/postUsers.js");
+const bcrypt = require("bcrypt");
 const newPostComment = require("./post/postComments.js");
 const newPostPublication = require("./post/postPublications.js");
-const newPostProperty = require("./post/PostProperty.js");
+const jwt = require("jsonwebtoken");
+
 const newPostBooking = require("./post/postBooking.js");
 const newPostSale = require("./post/postSale.js");
 const updateUser = require("./put/UpdateUser.js");
 const updatePublication = require("./put/updatePublication.js");
-const updateProperty = require("./put/updateProperty");
+
 const bookingDelete = require("./delete/deleteBooking.js");
-const { Op, Property, Service, User } = require("../db");
+const { Op, Property, Service, Type, User, Booking } = require("../db");
 const { getUser, getAllUser } = require("../controller/controllerUsers");
 const {
   getComentario,
@@ -26,6 +27,7 @@ const CommentDelete = require("../handler/delete/deleteCommit.js");
 const publicationDelete = require("../handler/delete/deletePublication.js");
 const userDelete = require("../handler/delete/deleteUser.js");
 const transporter = require("./nodemailer.js");
+const {where}=require("sequelize");
 
 const allProperty = async (req, res) => {
   const datos = await Property.findAll();
@@ -50,8 +52,6 @@ const allProperty = async (req, res) => {
       where: {
         city: { [Op.iLike]: `%${city}%` },
       },
-      //falta incluir los modelos servicios y tipos para cuando
-      //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
     });
     try {
       return res.status(200).json(propertyCity);
@@ -63,8 +63,6 @@ const allProperty = async (req, res) => {
       where: {
         province: { [Op.iLike]: province },
       },
-      //falta incluir los modelos servicios y tipos para cuando
-      //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
     });
     try {
       return res.status(200).json(propertyProvince);
@@ -86,17 +84,14 @@ const allPropertyById = async (req, res) => {
 
 const postProperty = async (req, res) => {
   const {
-    description,
-    area,
     price,
+    description,
     bathrooms,
-    floor,
+    room,
+    title,
     city,
     province,
     address,
-    postal_code,
-    room,
-    title,
     pictures,
     type,
     services,
@@ -124,12 +119,12 @@ const postProperty = async (req, res) => {
     );
     res.status(201).json(newproperty);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(404).json({ error: error.message });
   }
 };
 
+
 const putProperty = async (req, res) => {
-  const { id } = req.params;
   const {
     description,
     area,
@@ -147,26 +142,34 @@ const putProperty = async (req, res) => {
     type,
     services,
   } = req.body;
+
   try {
-    const newproperty = await updateProperty(
-      id,
-      description,
-      area,
-      price,
-      bathrooms,
-      floor,
-      country,
-      city,
-      province,
-      address,
-      postal_code,
-      room,
-      title,
-      pictures,
-      type,
-      services
+    const updatedProperty = await Property.update(
+      {
+        description,
+        area,
+        price,
+        bathrooms,
+        floor,
+        country,
+        city,
+        province,
+        address,
+        postal_code,
+        room,
+        title,
+        pictures,
+        type,
+        service,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
     );
-    res.status(200).json(newproperty);
+    console.log(updatedProperty)
+    res.status(200).json(`la propiedad  fue modificada con exito`);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -184,7 +187,14 @@ const allUsers = async (req, res) => {
 const postUsers = async (req, res) => {
   const { name, lastName, email, password } = req.body;
   try {
-    const newPost = await signUp(name, lastName, email, password);
+    hash = await bcrypt.hash(password, 16);
+    const newPost = await User.create({
+      name,
+      lastName,
+      email,
+      password: hash,
+    });
+    console.log(newPost);
     await transporter.sendMail({
       from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address
       to: email, // list of receivers
@@ -200,8 +210,22 @@ const postUsers = async (req, res) => {
   }
 };
 
+// const putUsers = async (req, res) => {
+//   const { name, lastName, email, password } = req.body;
+//   const {id}=req.params
+//   try {
+//     const updateuser = await updateUser(id, name, lastName, email, password);
+//     res.status(200).send(updateuser);
+//   } catch (error) {
+//     res.status(400).json({ Error: error.message });
+//   }
+// };
+
+
 const putUsers = async (req, res) => {
-  const { id, name, lastName, email, password } = req.body;
+  const { name, lastName, email, password } = req.body;
+  console.log(req.body)
+  console.log("id del usuario ", req.params.id)
   try {
     const updateuser = await updateUser(id, name, lastName, email, password);
     await transporter.sendMail({
@@ -212,9 +236,22 @@ const putUsers = async (req, res) => {
     });
     res.status(200).send(updateuser);
   } catch (error) {
-    res.status(400).json({ Error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
@@ -372,16 +409,22 @@ const allBooking = (req, res) => {
 };
 
 const postBooking = async (req, res) => {
+  const { date_of_admission, departure_date, total_price } = req.body;
   const { id_property } = req.params;
-  const { date_of_admission, departure_date, total_price, id_user } = req.body;
+
+  // Obtener el token de autenticación de los encabezados de autorización
+  const token = req.headers.authorization.split(" ")[1];
   try {
-    const newBooking = await newPostBooking(
+    // Decodificar el token para obtener la información del usuario
+    const decodedToken = jwt.verify(token, "contraseña ");
+    // Crear el registro de reserva y asignar el id del usuario autenticado
+    const newBooking = await Booking.create({
       date_of_admission,
       departure_date,
       total_price,
       id_user,
       id_property
-    );
+  })
     const findUser = await User.findOne({ where: { id: id_user } });
     await transporter.sendMail({
       from: '"Inmobate" <inmobaterealestate@gmail.com>', // sender address

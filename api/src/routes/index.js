@@ -27,8 +27,16 @@ const {
   getAdmin,
   deleteAdmin,
 } = require("../handler/handlerUser.js");
-
-const { redirectHome, redirectLogin } = require("../middlewares/auth.js");
+const {
+  createOrden,
+  capturarOrden,
+  cancelarOrden,
+} = require("../metodo_de_pagos/paypal");
+const {
+  redirectHome,
+  redirectLogin,
+  authenticateToken,
+} = require("../middlewares/auth.js");
 
 const { passport, authenticate } = require("../passport.js");
 const jwt = require("jsonwebtoken");
@@ -38,21 +46,21 @@ const router = Router();
 
 router.get("/property", allProperty); //lista
 router.get("/property/:id", allPropertyById); //lista
-router.post("/property", postProperty);
-router.put("/property/:id", putProperty);
+router.post("/property", postProperty); // lista
+router.put("/property/:id", putProperty); // lista
 
 router.get("/type", alltype); //lista
 router.get("/servicio", allServicios); //lista
-
+//-------------------------------------------------
 router.get("/sale", allSale); //lista
-router.post("/sale", postSale);
-
+router.post("/sale", postSale); // ruta pendiente por revisar y definir que va hacer
+//-------------------------------------------------
 router.get("/booking", allReservas); //lista
-router.post("/:id_property/booking", postBooking);
+router.post("/:id_property/booking", authenticateToken, postBooking); //lista
 
 router.get("/users", allUsers); //lista
 router.post("/users", postUsers); //lista
-router.put("/users", putUsers); //lista
+router.put("/users/:id", putUsers); //lista
 router.delete("/:id/users", deleteUser); //lista
 
 router.get("/comentarios", allComments); //lista
@@ -72,7 +80,23 @@ router.delete("/admin/remove?=/:id", deleteAdmin);
 const { User } = require("../db.js");
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
-  res.json(req.user);
+  try {
+    let user = req.user;
+    //Crear el token JWT con los datos del usuario.
+    const payload = {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      lastName: user.lastName,
+    };
+    const token = jwt.sign(payload, "contraseña ", {
+      expiresIn: "1d",
+    });
+    //Enviar respuesta al cliente con el access_token
+    return res.json(token);
+  } catch (e) {
+    return res.status(500).json({ error: "Ha ocurrido un error." });
+  }
 });
 
 router.get("/login", (req, res) => {
@@ -90,9 +114,23 @@ router.get("/login", (req, res) => {
       <a href='/signup'>Registrarse</a>
     `);
 });
+
 router.post("/signup", (req, res) => {
   const { name, lastName, email, password } = req.body;
 
+  if (name && email && password && lastName) {
+    const exists = User.findAll((user) => user.email === email);
+    if (!exists) {
+      const user = {
+        name,
+        email,
+        password,
+      };
+      User.Create(user);
+      return res.redirect("/");
+    }
+  }
+  res.redirect("/signup");
   if (name && email && password && lastName) {
     const exists = User.findAll((user) => user.email === email);
     if (!exists) {
@@ -111,7 +149,20 @@ router.post("/signup", (req, res) => {
 router.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["email", "profile"] }),
-  (req, res) => res.send(req.user)
+  (req, res) => {
+    const user = req.user;
+    payload = {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      lastName: user.lastName,
+    };
+    token = jwt.sign(payload, "process.env.JWT_SECRET_KEY", {
+      expiresIn: "1d",
+    });
+
+    res.json(token);
+  }
 );
 
 router.get(
@@ -122,17 +173,50 @@ router.get(
     res.redirect("/");
   }
 );
+router.get("/auth/facebook", passport.authenticate("facebook"));
 
-router.get("/home", (req, res) => {
-  const user = User.find((user) => user.id === req.session.userId);
-
-  res.send(`
-      <h1>Bienvenido ${user.name}</h1>
-      <h4>${user.email}</h4>
-      <a href='/'>Inicio</a>
-    `);
+router.get(
+  "/auth/facebook/callback",
+  passport.authenticate(
+    "facebook",
+    { scope: ["email"] },
+    { failureRedirect: "/login" }
+  )
+);
+router.post("/logout", function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+  router.get("/auth/facebook", passport.authenticate("facebook"));
 });
+
+router.get(
+  "/auth/facebook/callback",
+  passport.authenticate(
+    "facebook",
+    { scope: ["email"] },
+    { failureRedirect: "/login" }
+  )
+);
+router.post("/logout", function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
+//----------------------------------------paypal-----------------------------------
+
+router.post("/create-order/:id", createOrden);
+
+router.get("/capture-order", capturarOrden);
+
+router.get("/cancel-order", cancelarOrden);
 
 module.exports = router;
 
-//,
+//

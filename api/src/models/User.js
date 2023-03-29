@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
       },
       soft_delete: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
         defaultValue: false,
       },
     },
