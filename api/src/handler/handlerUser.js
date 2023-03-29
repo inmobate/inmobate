@@ -228,7 +228,6 @@ const postUsers = async (req, res) => {
       id
       // password: hash,
     });
-
     res.status(201).send(newPost);
   }else{
     res.status(200).json(usuario)

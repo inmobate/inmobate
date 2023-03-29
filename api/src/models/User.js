@@ -23,6 +23,9 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true,
       },
+      /*  password: {
+        type: DataTypes.STRING,
+      }, */
       soft_delete: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
