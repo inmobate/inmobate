@@ -227,16 +227,16 @@ const allUsers = async (req, res) => {
 };
 
 const postUsers = async (req, res) => {
-  const { name, lastName, email, password } = req.body;
+  const { id, name, lastName, email } = req.body;
   try {
-    hash = await bcrypt.hash(password, 16);
+    //hash = await bcrypt.hash(password, 16);
     const newPost = await User.create({
+      id,
       name,
       lastName,
       email,
-      password: hash,
+      //password: hash,
     });
-    console.log(newPost);
     res.status(201).send(newPost);
   } catch (error) {
     res.status(400).json({ Error: error.message });
