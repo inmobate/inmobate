@@ -65,14 +65,7 @@ module.exports = (sequelize) => {
       beds: {
         type: DataTypes.STRING,
         allowNull: true,
-      },
-      services: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: true,
-      },
-      type: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: true,
+        defaultValue: 2,
       },
     },
     {
