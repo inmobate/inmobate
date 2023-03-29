@@ -6,9 +6,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import { Provider } from "react-redux";
 import { router } from "./router";
-import { BrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
-import App from "./App";
 
 const persistor = persistStore(store);
 
@@ -23,9 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     >
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
+          <RouterProvider router={router} />
         </PersistGate>
       </Provider>
     </Auth0Provider>
