@@ -27,7 +27,6 @@ const CommentDelete = require("../handler/delete/deleteCommit.js");
 const publicationDelete = require("../handler/delete/deletePublication.js");
 const userDelete = require("../handler/delete/deleteUser.js");
 const transporter = require("./nodemailer.js");
-const { where } = require("sequelize");
 
 const allProperty = async (req, res) => {
   const datos = await Property.findAll({

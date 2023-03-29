@@ -116,7 +116,6 @@ router.get("/login", (req, res) => {
       <a href='/signup'>Registrarse</a>
     `);
 });
-
 router.post("/signup", (req, res) => {
   const { name, lastName, email, password } = req.body;
 
@@ -176,24 +175,6 @@ router.get(
   }
 );
 router.get("/auth/facebook", passport.authenticate("facebook"));
-
-router.get(
-  "/auth/facebook/callback",
-  passport.authenticate(
-    "facebook",
-    { scope: ["email"] },
-    { failureRedirect: "/login" }
-  )
-);
-router.post("/logout", function (req, res, next) {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect("/");
-  });
-  router.get("/auth/facebook", passport.authenticate("facebook"));
-});
 
 router.get(
   "/auth/facebook/callback",
