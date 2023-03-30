@@ -22,10 +22,9 @@ const Payments = ({ price }) => {
           <span>total de noches: {countDays(entry, output)}</span>
           <span>total a pagar: {countDays(entry, output) * price}</span>
         </div>
-
-        <button onClick={() => console.log(countDays(entry, output) * price)}>
-          Pagar
-        </button>
+        <div>
+          <b>Pagar</b>
+        </div>
       </div>
     </div>
   );

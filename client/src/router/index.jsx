@@ -27,6 +27,7 @@ import Step7 from "../pages/PropertiesForm/Step7";
 import Step8 from "../pages/PropertiesForm/Step8";
 import Step9 from "../pages/PropertiesForm/Step9";
 import Profile from "../pages/Profile";
+import Perfil from "../components/Dash/Perfil";
 
 export const router = createBrowserRouter([
   {
@@ -101,7 +102,10 @@ export const router = createBrowserRouter([
         path: "/dashboard",
         element: <Profile />,
       },
-      
+      {
+        path: "/perfil",
+        element: <Perfil />,
+      }
     ],
   },
 ]);
