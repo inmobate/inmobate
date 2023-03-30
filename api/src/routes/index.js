@@ -37,7 +37,7 @@ const {
   redirectLogin,
   authenticateToken,
 } = require("../middlewares/auth.js");
-
+const { notification, orden} = require("../metodo_de_pagos/mercadoPago")
 const { passport, authenticate } = require("../passport.js");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET_KEY } = process.env;
@@ -56,7 +56,7 @@ router.get("/sale", allSale); //lista
 router.post("/sale", postSale); // ruta pendiente por revisar y definir que va hacer
 //-------------------------------------------------
 router.get("/booking", allReservas); //lista
-router.post("/:id_property/booking", authenticateToken, postBooking); //lista
+router.post("/:id_usuario/:id_property/booking", postBooking); //lista
 
 router.get("/users", allUsers); //lista
 router.post("/users", postUsers); //lista
@@ -186,6 +186,13 @@ router.post("/create-order/:id", createOrden);
 router.get("/capture-order", capturarOrden);
 
 router.get("/cancel-order", cancelarOrden);
+
+router.post("/order/:id", orden);
+
+router.post("/notificacion", notification);
+
+
+
 module.exports = router;
 
 //,

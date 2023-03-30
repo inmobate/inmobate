@@ -14,20 +14,6 @@ const createOrden = async (req, res) => {
       message: "No se encontró ninguna recervacion",
     });
   }
-  // let fecha1 = resv.departure_date;
-  // let fecha2 = resv.date_of_admission;
-
-  // // Convertir las cadenas de fecha en objetos de fecha en formato ISO 8601
-  // let fecha1_iso = fecha1.split("-").join("-");
-  // let fecha2_iso = fecha2.split("-").join("-");
-  // let date1 = new Date(fecha1_iso);
-  // let date2 = new Date(fecha2_iso);
-
-  // // Calcular la cantidad de milisegundos entre las fechas
-  // let diffMs = Math.abs(date2 - date1);
-
-  // // Convertir la cantidad de milisegundos en días
-  // let diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
   try {
     let order = {
       intent: "CAPTURE",

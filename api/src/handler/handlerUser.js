@@ -406,22 +406,29 @@ const allBooking = (req, res) => {
 const postBooking = async (req, res) => {
   const { date_of_admission, departure_date, total_price } = req.body;
   const { id_property } = req.params;
-  console.log(req.params)
 
   // Obtener el token de autenticación de los encabezados de autorización
-  const token = req.headers.authorization.split(" ")[1];
+  // const token = req.headers.authorization.split(" ")[1];
   try {
     // Decodificar el token para obtener la información del usuario
-    const decodedToken = jwt.verify(token, "contraseña ");
+    // const decodedToken = jwt.verify(token, "contraseña ");
     // Crear el registro de reserva y asignar el id del usuario autenticado
-    console.log(decodedToken.id)
-    const newBooking = await Booking.create({
-      date_of_admission,
-      departure_date,
-      total_price,
-      id_property,
-      user_id: decodedToken.id, // propiedad agregada para unificar el id del usuario
-    });
+    const newBooking = await Booking.create(
+      {
+        date_of_admission,
+        departure_date,
+        total_price,
+        id_property,
+        // user_id: usuario, // propiedad agregada para unificar el id del usuario
+      },
+      {
+        where: {
+          id: req.params,
+          id: req.params,
+        },
+      }
+    );
+      console.log(req.params)
     res.status(200).json(newBooking);
   } catch (error) {
     res.status(400).json({ Error: error.message });
