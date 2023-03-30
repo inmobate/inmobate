@@ -26,7 +26,7 @@ const { typeDb } = require("../controller/controllerType");
 const CommentDelete = require("../handler/delete/deleteCommit.js");
 const publicationDelete = require("../handler/delete/deletePublication.js");
 const userDelete = require("../handler/delete/deleteUser.js");
-const {where}=require("sequelize");
+// const {where}=require("sequelize");
 
 const allProperty = async (req, res) => {
   const datos = await Property.findAll({
@@ -106,18 +106,18 @@ const allPropertyById = async (req, res) => {
 
 const postProperty = async (req, res) => {
   const {
-    price,
-    description,
-    bathrooms,
-    room,
-    title,
+    price,//
+    description,//
+    bathrooms,//
+    room,//
+    title,//
     city,
     province,
     address,
-    pictures,
-    type,
-    service,
-    beds
+    pictures,//
+    type,//
+    service,//
+    beds//
   } = req.body;
   try {
     if (
