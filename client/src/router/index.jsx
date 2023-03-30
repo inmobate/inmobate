@@ -30,12 +30,11 @@ import Profile from "../pages/Profile";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
     element: <Layout />,
     errorElement: <NotFound />,
     children: [
       {
-        index: true,
+        path: "/",
         element: <Landing />,
       },
       {
@@ -99,9 +98,10 @@ export const router = createBrowserRouter([
         element: <Step9 />,
       },
       {
-        path: "/profile",
+        path: "/dashboard",
         element: <Profile />,
       },
+      
     ],
   },
 ]);
