@@ -5,6 +5,6 @@ export const variables={
     mdSpacing: `16px`,
     lgSpacing:`24px`,
     xlSpacing:`32px`,
-    xxlSpacing:`48px`,
+    xxlSpacing:`10px`,
     borderRadius:`6px`,
 }

@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { variables } from "../components/ItemSidebar";
+import { variables } from "../Dash/ItemSidebar";
 import {
   AiOutlineArrowsAlt,
   AiFillHome,
   AiOutlineForm,
-  AiFillCalendar,
-  AiOutlineMenu
+  AiFillCalendar
 } from "react-icons/ai";
 import { ImStatsBars } from "react-icons/im";
 import { Link } from "react-router-dom";
@@ -15,13 +14,13 @@ export default function Sidebar({ sidebarOpen, setsidebarOpen }) {
     setsidebarOpen(!sidebarOpen);
   };
   return (
-    <Container isOpen={sidebarOpen}>
+    <Container isOpen={!sidebarOpen}>
       <button className="Sidebarbutton" onClick={open}>
         <AiOutlineArrowsAlt />
       </button>
       <div className="LogoInmobate">
         <div className="imgcontent">
-          <AiOutlineMenu/>
+       
         </div>
       </div>
       {linksArray.map(({icon, label, to}) => (
@@ -48,21 +47,21 @@ const linksArray = [
     to: "/home",
   },
   {
-    label: "Users",
+    label: "Usuarios",
     icon: <ImStatsBars />,
     to: "/home",
   },
   {
-    label: "Form",
+    label: "Publicacion",
     icon: <AiOutlineForm />,
     to: "/addproperty",
   },
   {
-    label: "Imformation",
+    label: "Imformacion",
     icon: <AiFillCalendar />,
     to: "/profile",
   }, {
-    label: "Coments",
+    label: "Comentarios",
     icon: <AiFillHome />,
     to: "/home",
   },
@@ -74,10 +73,10 @@ const Container = styled.div`
   position: sticky;
   padding-top: 20px;
   .Sidebarbutton {
-    border: none;
-    position: absolute;
+    /* border: none; */
+    position: relative;
     top: ${variables.xxlSpacing};
-    right: -18px;
+    right: -15px;
     width: 32px;
     height: 32px;
     border-radius: 50%;

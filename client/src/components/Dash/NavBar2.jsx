@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 import { Link, useLocation } from "react-router-dom";
 
-import Searchbar from "./Searchbar";
+import Searchbar from "../Searchbar";
 
 
-import house from "../assets/house.svg";
+import house from "../../assets/house.svg";
 
 const Navbar2 = () => {
   const location = useLocation();
@@ -13,6 +13,7 @@ const Navbar2 = () => {
   return (
     <>
       <Nav2>
+        <Searchbar/>
         <Elements>
           <Link to="/home">
             <Brand>
@@ -28,6 +29,7 @@ const Navbar2 = () => {
 };
 
 const Nav2 = styled.nav`
+width:-150px;
   padding: 10px;
   background: #ffff;
 `;

@@ -23,9 +23,6 @@ const Navbar = () => {
           </Link>
           {isHome && <Searchbar />}
           <Items>
-            <Link to="/addProperty">
-              <Item>Publica</Item>
-            </Link>
             <UserButton />
           </Items>
         </Elements>

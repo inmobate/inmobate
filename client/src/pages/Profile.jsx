@@ -8,25 +8,27 @@ import Cards from "../components/Cards";
 
 import Footerbar from "../components/Footerbar";
 import Infinite from "../components/InfiniteScroll";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../components/Dash/Sidebar";
 import { useState } from "react";
-import Navbar2 from "../components/NavBar2";
+import Navbar2 from "../components/Dash/NavBar2";
 
 
 const Profile= () => {
    const [sidebarOpen,setsidebarOpen] =useState(true)
   return (
     <Container className={sidebarOpen?"sidebarState active":"sidebarState"}>
+   
        <Navbar2 />
       <Header>
+
         <Sidebar sidebarOpen={sidebarOpen}setsidebarOpen={setsidebarOpen}/>
-       
       </Header>
       <Main>
         {/* <Cards /> */}
         <Infinite />
       </Main>
       <Footer>
+<Filterbar/>
         <Footerbar />
       </Footer>
     </Container>
@@ -63,6 +65,7 @@ const Main = styled.main`
 const Footer = styled.footer`
   display: none;
 `;
+
 
 export default Profile;
 
