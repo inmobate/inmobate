@@ -2,18 +2,18 @@ import styled from "styled-components";
 
 import { Link, useLocation } from "react-router-dom";
 
-import Searchbar from "./Searchbar";
+import Searchbar from "../Searchbar";
 
-import UserButton from "./UserButton";
 
-import house from "../assets/house.svg";
+import house from "../../assets/house.svg";
 
-const Navbar = () => {
+const Navbar2 = () => {
   const location = useLocation();
   const isHome = location.pathname !== "/profile";
   return (
     <>
-      <Nav>
+      <Nav2>
+        <Searchbar/>
         <Elements>
           <Link to="/home">
             <Brand>
@@ -21,26 +21,23 @@ const Navbar = () => {
               <Title>INMOBATE</Title>
             </Brand>
           </Link>
-          {isHome && <Searchbar />}
-          <Items>
-            <UserButton />
-          </Items>
         </Elements>
-      </Nav>
+      </Nav2>
       <hr />
     </>
   );
 };
 
-const Nav = styled.nav`
-  padding: 1em;
+const Nav2 = styled.nav`
+width:-150px;
+  padding: 10px;
   background: #ffff;
 `;
 
 const Elements = styled.div`
   height: 60px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 `;
 
@@ -52,23 +49,13 @@ const Brand = styled.div`
 `;
 
 const Img = styled.img`
-  width: 2em;
+  width: 20px;
 `;
 
 const Title = styled.div`
   font-family: "Righteous", cursive;
-  font-size: 2em;
+  font-size: 20px;
 `;
 
-const Items = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
-`;
 
-const Item = styled.div`
-  color: #000;
-`;
-
-export default Navbar;
+export default Navbar2;

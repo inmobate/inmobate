@@ -98,9 +98,10 @@ export const router = createBrowserRouter([
         element: <Step9 />,
       },
       {
-        path: "/profile",
+        path: "/dashboard",
         element: <Profile />,
       },
+      
     ],
   },
 ]);
