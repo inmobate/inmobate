@@ -1,60 +1,71 @@
 import styled from "styled-components";
+
 import Navbar from "../components/Navbar";
 
-const Profile = () => {
+import Filterbar from "../components/Filterbar";
+
+import Cards from "../components/Cards";
+
+import Footerbar from "../components/Footerbar";
+import Infinite from "../components/InfiniteScroll";
+import Sidebar from "../components/Dash/Sidebar";
+import { useState } from "react";
+import Navbar2 from "../components/Dash/NavBar2";
+
+
+const Profile= () => {
+   const [sidebarOpen,setsidebarOpen] =useState(true)
   return (
-    <>
+    <Container className={sidebarOpen?"sidebarState active":"sidebarState"}>
+   
+       <Navbar2 />
       <Header>
-        <Navbar />
+
+        <Sidebar sidebarOpen={sidebarOpen}setsidebarOpen={setsidebarOpen}/>
       </Header>
       <Main>
-        <Options>
-          <Option>Información personal</Option>
-          <Option>Inicio de sesión y seguridad</Option>
-          <Option>Pagos y cobros</Option>
-          <Option>Impuestos</Option>
-          <Option>Notificaciones</Option>
-          <Option>Privacidad y uso compartido</Option>
-          <Option>Preferencias generales</Option>
-          <Option>Viajes de trabajo</Option>
-          <Option>Herramientas para anfitriones profesionales</Option>
-        </Options>
-        <div>¿Necesitás desactivar tu cuenta?</div>
-        <div>Resolver ahora</div>
+        {/* <Cards /> */}
+        <Infinite />
       </Main>
-      <Footer>Footer</Footer>
-    </>
+      <Footer>
+<Filterbar/>
+        <Footerbar />
+      </Footer>
+    </Container>
   );
 };
 
-const Header = styled.header``;
+const Container = styled.div`
+  min-width: 100%;
+  min-height: 100vh;
+  display:grid;
+  grid-template-columns:90px auto;
+  transition:all 0.6s;
+  &.active{
+    grid-template-columns :300px auto;
+  }
+.NavBar2{
+  position:ri;
+}
+`;
+
+const Header = styled.header`
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+`;
 
 const Main = styled.main`
   height: 100%;
   padding: 1em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 1em;
-`;
-
-const Options = styled.div`
-  height: 768px;
-  display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1em;
-  cursor: pointer;
-`;
-
-const Option = styled.div`
-  border: 1px solid black;
-  border-radius: 1em;
+  
 `;
 
 const Footer = styled.footer`
   display: none;
 `;
 
+
 export default Profile;
+

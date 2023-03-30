@@ -38,8 +38,8 @@ const UserButton = () => {
       <MenuHidden style={active ? null : { display: "none" }}>
         {isAuthenticated ? (
           <Ul>
-            <Link to="/profile">
-              <Li>Cuenta</Li>
+            <Link to="/dashboard">
+              <Li>Dashboard</Li>
             </Link>
             <hr />
             <Li>Ayuda</Li>
