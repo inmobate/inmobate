@@ -10,17 +10,17 @@ import {
 import { ImStatsBars } from "react-icons/im";
 import { Link } from "react-router-dom";
 export default function Sidebar({ sidebarOpen, setsidebarOpen }) {
-  const open = () => {
-    setsidebarOpen(!sidebarOpen);
-  };
+  // const open = () => {
+  //   setsidebarOpen(!sidebarOpen);
+  // };
   return (
     <Container isOpen={!sidebarOpen}>
-      <button className="Sidebarbutton" onClick={open}>
+      {/* <button className="Sidebarbutton" onClick={open}>
         <AiOutlineArrowsAlt />
-      </button>
+      </button> */}
       <div className="LogoInmobate">
         <div className="imgcontent">
-       
+
         </div>
       </div>
       {linksArray.map(({icon, label, to}) => (
@@ -59,11 +59,11 @@ const linksArray = [
   {
     label: "Imformacion",
     icon: <AiFillCalendar />,
-    to: "/profile",
+    to: "/perfil",
   }, {
     label: "Comentarios",
     icon: <AiFillHome />,
-    to: "/home",
+    to: "/perfil",
   },
 ];
 

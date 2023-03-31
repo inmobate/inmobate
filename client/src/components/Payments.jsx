@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState } from "react"; 
 
-const Payments = ({ price }) => {
+
+
+const Payments = ({ price, id}) => {
   const [entry, setEntry] = useState(Date().toString().slice(0, 10));
   const [output, setOutput] = useState(Date().toString().slice(0, 10));
 
@@ -12,22 +14,21 @@ const Payments = ({ price }) => {
     return Math.round(diferenciaMs / unDia);
   }
 
+
   return (
-    <div>
       <div>
-        <input type="date" onChange={(e) => setEntry(e.target.value)} />
-        <input type="date" onChange={(e) => setOutput(e.target.value)} />
+        <input type="date"value={entry} onChange={(e) => setEntry(e.target.value)} />
+        <input type="date"value={output} onChange={(e) => setOutput(e.target.value)} />
         <div>
           <span>precio por noche: {price}</span>
           <span>total de noches: {countDays(entry, output)}</span>
           <span>total a pagar: {countDays(entry, output) * price}</span>
         </div>
-
-        <button onClick={() => console.log(countDays(entry, output) * price)}>
-          Pagar
-        </button>
+        <div>
+          <button></button>
+          <b>Pagar</b>
+        </div>
       </div>
-    </div>
   );
 };
 

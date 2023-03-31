@@ -13,13 +13,13 @@ const Navbar2 = () => {
   return (
     <>
       <Nav2>
-        <Searchbar/>
+        {/* <Searchbar/> */}
         <Elements>
           <Link to="/home">
-            <Brand>
+            {/* <Brand>
               <Img src={house} alt="imagen" />
               <Title>INMOBATE</Title>
-            </Brand>
+            </Brand> */}
           </Link>
         </Elements>
       </Nav2>
