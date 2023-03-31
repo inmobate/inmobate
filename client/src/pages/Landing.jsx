@@ -1,18 +1,12 @@
 import styled from "styled-components";
-
 import { Link } from "react-router-dom";
-
 import Footerbar from "../components/Footerbar";
-
 import house from "../assets/house.svg";
-
-import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const Landing = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { logUser: globalUser } = useSelector((state) => state.logUser);
 
-  console.log(user);
   return (
     <Container>
       <main>
@@ -21,11 +15,9 @@ const Landing = () => {
             <Img src={house} alt="imagen" />
             <Title>INMOBATE</Title>
           </Logo>
-          {isAuthenticated && (
+          {globalUser && (
             <div>
-              <img src={user.picture} alt={user.name} />
-              <h2>{user.name}</h2>
-              <p>{user.email}</p>
+              <h3>Bienvenido {globalUser.name}!</h3>
             </div>
           )}
           <Link to="/home">
