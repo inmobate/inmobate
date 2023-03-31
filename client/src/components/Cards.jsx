@@ -8,7 +8,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 import { useGetPropertiesQuery } from "../app/api/properties";
 
-import Card from "./Card";
+import Card from "../components/Card";
 
 const Cards = ({ properties }) => {
   return (
