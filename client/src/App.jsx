@@ -47,27 +47,27 @@ const App = () => {
 
   return (
     <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/search/:filter" element={<Search />} />
-          <Route path="/filter/:filter" element={<Filter />} />
-          <Route path="/filterCombine" element={<FilterCombine />} />
-          <Route path="/addproperty" element={<PropertiesForm />} />
-          <Route path="/addproperty/step1" element={<Step1 />} />
-          <Route path="/addproperty/step2" element={<Step2 />} />
-          <Route path="/addproperty/step3" element={<Step3 />} />
-          <Route path="/addproperty/step4" element={<Step4 />} />
-          <Route path="/addproperty/step5" element={<Step5 />} />
-          <Route path="/addproperty/step6" element={<Step6 />} />
-          <Route path="/addproperty/step7" element={<Step7 />} />
-          <Route path="/addproperty/step8" element={<Step8 />} />
-          <Route path="/addproperty/step9" element={<Step9 />} />
-          <Route path="/dashboard" element={<Profile />} />
-        </Routes>
-      </BrowserRouter>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Landing/>}/>
+      <Route path="/home" element={<Home/>}/>
+      <Route path="/detail/:id" element={<Detail/>}/>
+      <Route path="/search/:filter" element={<Search/>}/>
+      <Route path="/filter/:filter" element={<Filter/>}/>
+      <Route path="/filterCombine" element={<FilterCombine/>}/>
+      <Route path="/addproperty" element={<PropertiesForm/>}/>
+      <Route path="/addproperty/step1" element={<Step1/>}/>
+      <Route  path="/addproperty/step2" element={<Step2/>}/>
+      <Route path="/addproperty/step3" element={<Step3/>}/>
+      <Route path="/addproperty/step4" element={<Step4/>}/>
+      <Route path="/addproperty/step5" element={<Step5/>}/>
+      <Route path="/addproperty/step6" element={<Step6/>}/>
+      <Route path="/addproperty/step7" element={<Step7/>}/>
+      <Route path="/addproperty/step8" element={<Step8/>}/>
+      <Route path="/addproperty/step9" element={<Step9/>}/>
+      <Route path="/dashboard" element={<Profile/>}/>
+    </Routes>
+    </BrowserRouter>
     </div>
   );
 };
