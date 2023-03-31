@@ -13,7 +13,7 @@ const UserButton = () => {
   const { logUser } = useSelector((state) => state.logUser);
   const [active, setActive] = useState(false);
 
-  const { user,loginWithRedirect, logout, isAuthenticated } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
@@ -21,29 +21,26 @@ const UserButton = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
   const handleClickOutside = (event) => {
     if (refMenu.current && !refMenu.current.contains(event.target)) {
       setActive(false);
     }
   };
+
   return (
     <Button ref={refMenu}>
       <div onClick={() => setActive(!active)}>
         <HiMenu size={25} />
         <HiOutlineUserCircle size={25} />
       </div>
+
       <MenuHidden style={active ? null : { display: "none" }}>
         {isAuthenticated ? (
           <Ul>
             <Link to="/dashboard">
               <Li>Dashboard</Li>
             </Link>
-            <hr />
-            <div>
-              <img src={user.picture} alt={user.given_name} />
-              <h2>{user.given_name}</h2>
-              <h2>{user.family_name}</h2>
-            </div>
             <hr />
             <Li>Ayuda</Li>
             <Li
@@ -66,7 +63,7 @@ const UserButton = () => {
             <Li>Registrarse</Li>
             <hr />
             <Li>
-              <p>Ayuda</p>
+              <a href="http://localhost:3001/auth/google">Ayuda</a>{" "}
             </Li>
           </Ul>
         )}
