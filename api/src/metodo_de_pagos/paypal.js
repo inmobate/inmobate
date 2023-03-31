@@ -3,9 +3,8 @@ const { PAYPAL_API, PAYPAL_API_SECRET, PAYPAL_API_CLIENT, URL} = process.env;
 const {Booking,Property} = require ('../db')
 
 
-
 const createOrden = async (req, res) => {
-  const resv = await Property.findOne({
+  const resv = await Booking.findOne({
     where: {
       id: req.params.id,
     },
@@ -15,6 +14,20 @@ const createOrden = async (req, res) => {
       message: "No se encontró ninguna recervacion",
     });
   }
+  let fecha1 = resv.departure_date;
+  let fecha2 = resv.date_of_admission;
+
+  // Convertir las cadenas de fecha en objetos de fecha en formato ISO 8601
+  let fecha1_iso = fecha1.split("-").join("-");
+  let fecha2_iso = fecha2.split("-").join("-");
+  let date1 = new Date(fecha1_iso);
+  let date2 = new Date(fecha2_iso);
+
+  // Calcular la cantidad de milisegundos entre las fechas
+  let diffMs = Math.abs(date2 - date1);
+
+  // Convertir la cantidad de milisegundos en días
+  let diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
   try {
     let order = {
       intent: "CAPTURE",
@@ -22,7 +35,7 @@ const createOrden = async (req, res) => {
         {
           amount: {
             currency_code: "USD",
-            value: resv.price,
+            value: resv.total_price * diffDays,
             name: "resv.title",
           },
           item_list: {
@@ -76,30 +89,25 @@ const createOrden = async (req, res) => {
     );
     res.status(200).send(response.data.links[1].href);
   } catch (error) {
-    return res.status(500).send({ error: error.message });
+    return res.status(500).send("error algo salio mal ");
   }
 };
 
 const capturarOrden = async (req, res) => {
   const { token } = req.query;
-  console.log(req.query.token);
-  try {
-    const response = await axios.post(
-      `${PAYPAL_API}/v2/checkout/order/${token}/capture`,
-      {},
-      {
-        auth: {
-          username: PAYPAL_API_CLIENT,
-          password: PAYPAL_API_SECRET,
-        },
-      }
-    );
-    res.json("pagado");
-  } catch (error) {
-    console.log(error.message);
-    return res.status(500).send({ error: error.message });
-  }
-};
+  console.log(req.query.token)
+  const response = await axios.post(
+    `${PAYPAL_API}/v2/checkout/order/${token}/capture`,
+    {},
+    {
+      auth: {
+        username:PAYPAL_API_CLIENT,
+        password:PAYPAL_API_SECRET,
+      },
+    }
+  );
+  res.json("pagado")
+}
 const cancelarOrden = (req, res) => {
   res.redirect("/booking");
 };
