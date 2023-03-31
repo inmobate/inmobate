@@ -42,6 +42,7 @@ export const properties = createApi({
   }),
 });
 
+
 export const {
   useGetPropertiesQuery,
   useGetPropertyByIdQuery,

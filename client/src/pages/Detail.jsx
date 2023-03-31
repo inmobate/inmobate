@@ -61,7 +61,7 @@ const Detail = () => {
               />
             </Images>
           </Gallery>
-          <Payments price={data.price} />
+          <Payments price={data.price}/>
           <div>Alojamiento {data.type}.</div>
           <div>
             {data.room} dormitorios,{data.bathrooms} baños

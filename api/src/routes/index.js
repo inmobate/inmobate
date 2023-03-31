@@ -187,7 +187,7 @@ router.get("/capture-order", capturarOrden);
 
 router.get("/cancel-order", cancelarOrden);
 
-router.post("/order/:id", orden);
+router.post("/orderPago/:id", orden);
 
 router.post("/notificacion", notification);
 

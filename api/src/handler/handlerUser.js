@@ -374,7 +374,7 @@ const deletePublication = async (req, res) => {
 const allReservas = async (req, res) => {
   const reserva = await getReservas();
   try {
-    res.status(200).json({ booking: reserva });
+    res.status(200).json( reserva);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
@@ -383,7 +383,7 @@ const allReservas = async (req, res) => {
 const allSale = async (req, res) => {
   const ventas = await getVentas();
   try {
-    res.status(200).json({ ventas: ventas });
+    res.status(200).json( ventas);
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }

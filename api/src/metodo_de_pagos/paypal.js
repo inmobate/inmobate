@@ -3,6 +3,7 @@ const { PAYPAL_API, PAYPAL_API_SECRET, PAYPAL_API_CLIENT, URL} = process.env;
 const {Booking,Property} = require ('../db')
 
 
+
 const createOrden = async (req, res) => {
   const resv = await Property.findOne({
     where: {
@@ -21,7 +22,7 @@ const createOrden = async (req, res) => {
         {
           amount: {
             currency_code: "USD",
-            value: resv.price ,
+            value: resv.price,
             name: "resv.title",
           },
           item_list: {
@@ -75,25 +76,30 @@ const createOrden = async (req, res) => {
     );
     res.status(200).send(response.data.links[1].href);
   } catch (error) {
-    return res.status(500).send("error algo salio mal ");
+    return res.status(500).send({ error: error.message });
   }
 };
 
 const capturarOrden = async (req, res) => {
   const { token } = req.query;
-  console.log(req.query.token)
-  const response = await axios.post(
-    `${PAYPAL_API}/v2/checkout/order/${token}/capture`,
-    {},
-    {
-      auth: {
-        username:PAYPAL_API_CLIENT,
-        password:PAYPAL_API_SECRET,
-      },
-    }
-  );
-  res.json("pagado")
-}
+  console.log(req.query.token);
+  try {
+    const response = await axios.post(
+      `${PAYPAL_API}/v2/checkout/order/${token}/capture`,
+      {},
+      {
+        auth: {
+          username: PAYPAL_API_CLIENT,
+          password: PAYPAL_API_SECRET,
+        },
+      }
+    );
+    res.json("pagado");
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send({ error: error.message });
+  }
+};
 const cancelarOrden = (req, res) => {
   res.redirect("/booking");
 };
