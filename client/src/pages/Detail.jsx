@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { useGetPropertyByIdQuery } from "../app/api/properties";
 
@@ -10,6 +10,7 @@ import Footerbar from "../components/Footerbar";
 
 import houseError from "../assets/houseError.svg";
 import Payments from "../components/Payments";
+
 
 const Detail = () => {
   const { id } = useParams();
@@ -60,7 +61,7 @@ const Detail = () => {
               />
             </Images>
           </Gallery>
-          <Payments price={data.price} />
+          <Payments price={data.price}/>
           <div>Alojamiento {data.type}.</div>
           <div>
             {data.room} dormitorios,{data.bathrooms} baños
