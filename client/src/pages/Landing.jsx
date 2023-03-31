@@ -19,7 +19,7 @@ const Landing = () => {
             <div>
               <h3>Bienvenido {globalUser.name}!</h3>
             </div>
-          )} */}
+          )}
           <Link to="/home">
             <Button className="btn">Alquila ya</Button>
             {/* Alquila ya */}
