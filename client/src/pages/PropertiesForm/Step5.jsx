@@ -39,7 +39,7 @@ const Step5 = () => {
               servicesDb.map((el) => (
                 <Type
                   onClick={() => handleClick(el.name)}
-                  key={el.name}
+                  key={el.id}
                   style={
                     services.includes(el.name)
                       ? {

@@ -5,11 +5,11 @@ module.exports = (sequelize) => {
     "Booking",
     {
       date_of_admission: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: false,
       },
       departure_date: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: false,
       },
       total_price: {

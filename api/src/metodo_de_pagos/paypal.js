@@ -3,23 +3,23 @@ const { PAYPAL_API, PAYPAL_API_SECRET, PAYPAL_API_CLIENT, URL} = process.env;
 const {Booking,Property} = require ('../db')
 
 
-const createOrden = async (req, res) => {
+const createOrden = async(req, res) => {
   const resv = await Booking.findOne({
     where: {
-      id: req.params.id,
+      id: req.params.id
     },
-  });
+  })
   if (!resv) {
     return res.status(404).send({
       message: "No se encontró ninguna recervacion",
     });
   }
-  let fecha1 = resv.departure_date;
-  let fecha2 = resv.date_of_admission;
+  let fecha1 = resv.departure_date ;
+  let fecha2 = resv.date_of_admission ;
 
   // Convertir las cadenas de fecha en objetos de fecha en formato ISO 8601
-  let fecha1_iso = fecha1.split("-").join("-");
-  let fecha2_iso = fecha2.split("-").join("-");
+  let fecha1_iso = fecha1.split("-").reverse().join("-");
+  let fecha2_iso = fecha2.split("-").reverse().join("-");
   let date1 = new Date(fecha1_iso);
   let date2 = new Date(fecha2_iso);
 
@@ -29,91 +29,89 @@ const createOrden = async (req, res) => {
   // Convertir la cantidad de milisegundos en días
   let diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
   try {
-    let order = {
-      intent: "CAPTURE",
-      purchase_units: [
+      let order = {
+        intent: "CAPTURE",
+        purchase_units: [
+          {
+            amount: {
+              currency_code: "USD",
+              value: resv.total_price * diffDays,
+            },
+            description: "alquiler de propiedad",
+          },
+        ],
+        application_context: {
+          brand_name: "inmovate",
+          landing_page: "LOGIN",
+          user_action: "PAY_NOW",
+          return_url: `${URL}/capture-order`,
+          cancel_url: `${URL}/cancel-order`,
+        },
+      };
+
+      const params = new URLSearchParams();
+      params.append("grant_type", "client_credentials");
+
+      const {
+        data: { access_token },
+      } = await axios.post(
+        "https://api-m.sandbox.paypal.com/v1/oauth2/token",
+        params,
         {
-          amount: {
-            currency_code: "USD",
-            value: resv.total_price * diffDays,
-            name: "resv.title",
+          headers: {
+            "Content-type": "application/x-www-form-urlencoded",
           },
-          item_list: {
-            items: [
-              {
-                name: "resv.title",
-                description: "resv.description",
-                quantity: 1,
-              },
-            ],
+          auth: {
+            username: PAYPAL_API_CLIENT,
+            password: PAYPAL_API_SECRET,
           },
-          description: "alquiler de propiedad",
-        },
-      ],
-      application_context: {
-        brand_name: "inmovate",
-        landing_page: "LOGIN",
-        user_action: "PAY_NOW",
-        return_url: "http://localhost:3001/capture-order",
-        cancel_url: "http://localhost:3001/cancel-order",
-      },
-    };
+        }
+      );
 
-    const params = new URLSearchParams();
-    params.append("grant_type", "client_credentials");
-
-    const {
-      data: { access_token },
-    } = await axios.post(
-      "https://api-m.sandbox.paypal.com/v1/oauth2/token",
-      params,
-      {
-        headers: {
-          "Content-type": "application/x-www-form-urlencoded",
-        },
-        auth: {
-          username: PAYPAL_API_CLIENT,
-          password: PAYPAL_API_SECRET,
-        },
-      }
-    );
-
-    const response = await axios.post(
-      "https://api-m.sandbox.paypal.com/v2/checkout/orders",
-      order,
-      {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      }
-    );
-    res.status(200).send(response.data.links[1].href);
-  } catch (error) {
-    return res.status(500).send("error algo salio mal ");
-  }
+      const response = await axios.post(
+        "https://api-m.sandbox.paypal.com/v2/checkout/orders",
+        order,
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        }
+      );
+      res.status(200).send(response.data.links[1].href);
+} catch (error) {
+  return res.status(500).send("error algo salio mal ");
+}
 };
+
+
 
 const capturarOrden = async (req, res) => {
-  const { token } = req.query;
-  console.log(req.query.token)
-  const response = await axios.post(
-    `${PAYPAL_API}/v2/checkout/order/${token}/capture`,
-    {},
-    {
-      auth: {
-        username:PAYPAL_API_CLIENT,
-        password:PAYPAL_API_SECRET,
-      },
-    }
-  );
-  res.json("pagado")
+const { token } = req.query;
+const response = await axios.post(
+`${PAYPAL_API}/v2/checkout/orders/${token}/capture`,
+{},
+{
+  auth: {
+    username: PAYPAL_API_CLIENT,
+    password: PAYPAL_API_SECRET,
+  },
 }
-const cancelarOrden = (req, res) => {
-  res.redirect("/booking");
-};
+);
+res
+.status(200)
+.send(
+  ` ${response.data.payer.name.given_name} ${response.data.payer.name.surname} el estado de su pago es  ${response.data.status}`
+      );
+  };
+  const cancelarOrden = (req, res) => {
+
+    res.redirect("/:id_property/booking");
+  };
+
+
 
 module.exports = {
-  createOrden,
-  capturarOrden,
-  cancelarOrden,
-};
+    createOrden,
+    capturarOrden,
+    cancelarOrden
+}

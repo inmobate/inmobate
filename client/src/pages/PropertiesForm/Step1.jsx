@@ -15,7 +15,6 @@ import {
 const Step1 = () => {
   const { data: types, error, isLoading } = useGetTypeQuery();
   const { type } = useSelector((state) => state.propertyToAdd);
-  console.log(type)
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,10 +29,10 @@ const Step1 = () => {
               types.map((el) => {
                 return (
                   <Type
-                    key={el.name}
-                    onClick={() => dispatch(setType(el.name))}
+                    key={el.id}
+                    onClick={() => dispatch(setType(el.id))}
                     style={
-                      type === el.name
+                      type === el.id
                         ? {
                             border: "3px solid var(--color2)",
                             borderRadius: "15px",

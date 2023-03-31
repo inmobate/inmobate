@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useGetPropertiesQuery } from "../app/api/properties";
 import Card from "./Card";
 import InfiniteScroll from "react-infinite-scroll-component";
-import local from "../app/api/config"
 
 const Infinite = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -12,7 +11,7 @@ const Infinite = () => {
   const [totalProperties, setTotalProperties] = useState(0);
 
   async function fechProp(page) {
-    await fetch(`${local}/property?page=${page}&size=12`)
+    await fetch(`https://inmovate.onrender.com/property?page=${page}&size=12`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data)

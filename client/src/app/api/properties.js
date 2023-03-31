@@ -1,12 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import local from "./config"
 
 export const properties = createApi({
   reducerPath: "properties",
 
   baseQuery: fetchBaseQuery({
-    // baseUrl: "https://inmovate.onrender.com",
-    baseUrl: `${local}`,
+    baseUrl: "https://inmovate.onrender.com",
+    // baseUrl: "http://localhost:3001",
   }),
 
   endpoints: (builder) => ({
@@ -37,7 +36,7 @@ export const properties = createApi({
     }),
 
     getService: builder.query({
-      query: () => `/servicio`,
+      query: () => `/service`,
     }),
   }),
 });
