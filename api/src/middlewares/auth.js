@@ -1,8 +1,7 @@
 const jwt = require("jsonwebtoken")
 const { JWT_SECRET_KEY } =process.env
 
-function authenticateToken(req, res, next) {
-    
+const authenticateToken = (req, res, next) => {
     
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
