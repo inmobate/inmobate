@@ -1,5 +1,4 @@
-import "./main.css";
-import React, { StrictMode } from "react";
+import "./index.css";
 import ReactDOM from "react-dom/client";
 import store from "./app/store";
 import { PersistGate } from "redux-persist/integration/react";
