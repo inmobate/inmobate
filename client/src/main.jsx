@@ -5,14 +5,13 @@ import store from "./app/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import { Provider } from "react-redux";
-import { router } from "./router";
-import { RouterProvider } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
+import App from "./App";
 
 const persistor = persistStore(store);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <StrictMode>
+
     <Auth0Provider
       domain="dev-jkdom0hu2zoe2dm8.us.auth0.com"
       clientId="jdILASD5sHvuzEUIS0pI1i0kyrRToZDV"
@@ -22,9 +21,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     >
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <RouterProvider router={router} />
+            <App />
         </PersistGate>
       </Provider>
     </Auth0Provider>
-  </StrictMode>
+
 );

@@ -9,9 +9,12 @@ import Cards from "../components/Cards";
 import Footerbar from "../components/Footerbar";
 import Infinite from "../components/InfiniteScroll";
 
+
+
 const Home = () => {
+  
   return (
-    <Container>
+    <Container >
       <Header>
         <Navbar />
         <Filterbar />
@@ -42,6 +45,7 @@ const Header = styled.header`
 const Main = styled.main`
   height: 100%;
   padding: 1em;
+  
 `;
 
 const Footer = styled.footer`
