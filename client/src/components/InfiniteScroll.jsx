@@ -15,7 +15,6 @@ const Infinite = () => {
     await fetch(`${local}/property?page=${page}&size=12`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
         setProperties([...properties, ...data.properties]);
         setTotalProperties(data.total);
       })
