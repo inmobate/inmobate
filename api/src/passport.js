@@ -54,6 +54,7 @@ passport.use(new GoogleStrategy({
             user = await User.create({
                 email,
                 name,
+                name,
                 lastName
             });
         }
