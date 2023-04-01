@@ -38,16 +38,21 @@ const allProperty = async (req, res) => {
       },
     ],
   });
-  const { city, province, page = 0, size = 12 } = req.query;
+  const { city, province, page = 0, size = 12, minPrice, maxPrice } = req.query;
+
+  if (minPrice && maxPrice) {
+    const filter = datos.filter((el) => {
+      return el.price >= minPrice && el.price <= maxPrice;
+    });
+    return res.json(filter);
+  }
 
   if (page && size) {
     let options = {
       limit: +size,
       offset: +page * +size,
     };
-
     const { count, rows } = await Property.findAndCountAll(options);
-
     return res.json({
       total: count,
       properties: rows,
@@ -62,12 +67,9 @@ const allProperty = async (req, res) => {
       //falta incluir los modelos servicios y tipos para cuando
       //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
     });
-    try {
-      return res.status(200).json(propertyCity);
-    } catch (error) {
-      res.status(400).json({ Error: error.menssage });
-    }
-  } else if (province) {
+    return res.status(200).json(propertyCity);
+  }
+  if (province) {
     let propertyProvince = await Property.findAll({
       where: {
         province: { [Op.iLike]: province },
@@ -75,17 +77,14 @@ const allProperty = async (req, res) => {
       //falta incluir los modelos servicios y tipos para cuando
       //busque una propiedad por ciudad  te muestre que tipo es y que servicios brinda
     });
-    try {
-      return res.status(200).json(propertyProvince);
-    } catch (error) {
-      res.status(400).json({ Error: error.menssage });
-    }
+    return res.status(200).json(propertyProvince);
   }
   res.status(200).json(datos);
 };
+
 const allPropertyById = async (req, res) => {
   const { id } = req.params;
-  console.log(req.params)
+  console.log(req.params);
   try {
     const datos = await Property.findOne({
       where: { id },
@@ -93,7 +92,7 @@ const allPropertyById = async (req, res) => {
         {
           model: Service,
           through: { attributes: [] },
-        }
+        },
       ],
     });
 
@@ -106,18 +105,18 @@ const allPropertyById = async (req, res) => {
 
 const postProperty = async (req, res) => {
   const {
-    price,//
-    description,//
-    bathrooms,//
-    room,//
-    title,//
+    price, //
+    description, //
+    bathrooms, //
+    room, //
+    title, //
     city,
     province,
     address,
-    pictures,//
-    type,//
-    service,//
-    beds//
+    pictures, //
+    type, //
+    service, //
+    beds, //
   } = req.body;
   try {
     if (
@@ -146,7 +145,7 @@ const postProperty = async (req, res) => {
         room,
         title,
         pictures,
-        beds
+        beds,
       });
       res.status(201).json(newproperty);
     }
@@ -199,7 +198,7 @@ const putProperty = async (req, res) => {
         },
       }
     );
-    console.log(updatedProperty)
+    console.log(updatedProperty);
     res.status(200).json(`la propiedad  fue modificada con exito`);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -216,32 +215,31 @@ const allUsers = async (req, res) => {
 };
 
 const postUsers = async (req, res) => {
-  const {id, name, lastName, email } = req.body;
-  const usuario = await User.findOne({where:{email: email}})
+  const { id, name, lastName, email } = req.body;
+  const usuario = await User.findOne({ where: { email: email } });
   try {
-  if(!usuario){
-    // hash = await bcrypt.hash(password, 16);
-    const newPost = await User.create({
-      name,
-      lastName,
-      email,
-      id
-      // password: hash,
-    });
-    res.status(201).send(newPost);
-  }else{
-    res.status(200).json(usuario)
-  }
+    if (!usuario) {
+      // hash = await bcrypt.hash(password, 16);
+      const newPost = await User.create({
+        name,
+        lastName,
+        email,
+        id,
+        // password: hash,
+      });
+      res.status(201).send(newPost);
+    } else {
+      res.status(200).json(usuario);
+    }
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
 };
 
-
 const putUsers = async (req, res) => {
   const { name, lastName, email, password } = req.body;
-  console.log(req.body)
-  console.log("id del usuario ", req.params.id)
+  console.log(req.body);
+  console.log("id del usuario ", req.params.id);
   try {
     const updatedUser = await User.update(
       {
@@ -261,19 +259,6 @@ const putUsers = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
@@ -406,7 +391,7 @@ const allBooking = (req, res) => {
 const postBooking = async (req, res) => {
   const { date_of_admission, departure_date, total_price } = req.body;
   const { id_property } = req.params;
-  console.log(req.params)
+  console.log(req.params);
 
   // Obtener el token de autenticación de los encabezados de autorización
   const token = req.headers.authorization.split(" ")[1];
@@ -414,7 +399,7 @@ const postBooking = async (req, res) => {
     // Decodificar el token para obtener la información del usuario
     const decodedToken = jwt.verify(token, "contraseña ");
     // Crear el registro de reserva y asignar el id del usuario autenticado
-    console.log(decodedToken.id)
+    console.log(decodedToken.id);
     const newBooking = await Booking.create({
       date_of_admission,
       departure_date,
